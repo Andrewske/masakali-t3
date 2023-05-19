@@ -1,0 +1,16 @@
+@import '~/styles/vars';
+
+.container {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  background-color: $purple;
+  color: $white;
+  display: inline-block;
+  min-width: max-content;
+
+  &.white {
+    background-color: $white !important;
+    color: $purple !important;
+  }
+}

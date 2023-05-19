@@ -45,6 +45,7 @@ const HeroSlideShow = () => {
         // renderArrowPrev https://github.com/leandrowd/react-responsive-carousel
         // renderArrowNext
         showStatus={false}
+        showThumbs={false}
         useKeyboardArrows={true}
       >
         {images?.map(({ src, alt }, index) => (
