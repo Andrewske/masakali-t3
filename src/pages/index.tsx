@@ -6,6 +6,18 @@ import Head from 'next/head';
 
 //import { api } from '~/utils/api';
 
+// Components
+import Header from '~/components/Header';
+import HeroSlideShow from '~/components/HeroSlideShow';
+import Availability from '~/components/Availability';
+import About from '~/components/About';
+import WhyChoose from '~/components/WhyChoose';
+import Villas from '~/components/Villas';
+import Dining from '~/components/Dining';
+import Amenities from '~/components/Amenities';
+import Location from '~/components/Location';
+import Footer from '~/components/Footer';
+
 const Home: NextPage = () => {
   //const hello = api.example.hello.useQuery({ text: 'from tRPC' });
 
@@ -23,7 +35,7 @@ const Home: NextPage = () => {
         />
       </Head>
       <main className={styles.main}>
-      <Header />
+        <Header />
         <HeroSlideShow />
         <Availability />
         <About />
