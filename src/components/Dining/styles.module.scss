@@ -1,0 +1,36 @@
+@import '~/styles/vars';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: $default-wrapper-padding;
+
+  .container {
+    height: 450px;
+    max-width: 450px;
+    min-width: calc(min(450px, 100%));
+    box-sizing: border-box;
+    background-color: $gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .title {
+      width: 90%;
+    }
+
+    .description {
+      width: 80%;
+      line-height: 1.65rem;
+    }
+  }
+}

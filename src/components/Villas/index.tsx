@@ -38,7 +38,7 @@ const Villas = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <h2 className={styles.title}>Villas</h2>
       <div className={styles.description}>
         <p>
@@ -61,8 +61,6 @@ const Villas = () => {
               src={villa.imgPath}
               alt={villa.name}
               className={styles.image}
-              width={400}
-              height={400}
             />
             <span className={styles.hoverContainer}>
               <h3 className={styles.title}>{villa.name}</h3>
@@ -76,7 +74,7 @@ const Villas = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

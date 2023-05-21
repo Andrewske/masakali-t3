@@ -25,7 +25,8 @@
     flex-wrap: wrap;
 
     .villa {
-      width: 400px;
+      min-width: calc(min(350px, 100%));
+      max-width: 400px;
       height: 400px;
       position: relative;
       z-index: 1;
@@ -33,6 +34,8 @@
 
       .image {
         object-fit: cover;
+        width: 100%;
+        height: 100%;
       }
 
       .hoverContainer {
