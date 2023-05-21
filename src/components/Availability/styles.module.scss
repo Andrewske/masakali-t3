@@ -3,7 +3,9 @@
   padding: 2rem;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   flex-wrap: wrap;
+  min-height: 350px;
 }
 
 .container {
@@ -13,6 +15,10 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  position: relative;
+  z-index: 1;
+  min-height: calc(min(350px, 100vw));
+  min-width: calc(min(350px, 100vw));
 
   &.full {
     flex: 0 0 100% !important;
