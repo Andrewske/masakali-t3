@@ -5,7 +5,10 @@ import styles from './styles.module.scss';
 
 const About = () => {
   return (
-    <section className={styles.wrapper}>
+    <section
+      id="about"
+      className={styles.wrapper}
+    >
       <div className={styles.container}>
         <div className={styles['text-container']}>
           <h1 className={styles.heading}>Masakali Retreat</h1>

@@ -38,7 +38,10 @@ const Villas = () => {
   };
 
   return (
-    <section className={styles.wrapper}>
+    <section
+      id="villas"
+      className={styles.wrapper}
+    >
       <h2 className={styles.title}>Villas</h2>
       <div className={styles.description}>
         <p>

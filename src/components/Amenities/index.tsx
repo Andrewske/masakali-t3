@@ -8,7 +8,10 @@ const Amenities = () => {
       id="amenities"
       className={styles.wrapper}
     >
-      <div className={styles.container}>
+      <div
+        id="amenities"
+        className={styles.container}
+      >
         <h2 className={styles.title}>Amenities</h2>
         <p className={styles.description}>
           At Masakali, our goal is to go above and beyond your expectations and

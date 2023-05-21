@@ -37,7 +37,10 @@ const images = [
 
 const HeroSlideShow = () => {
   return (
-    <section className={styles.wrapper}>
+    <section
+      id="home"
+      className={styles.wrapper}
+    >
       <Carousel
         className={styles.container}
         autoFocus={true}
