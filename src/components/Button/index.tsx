@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 interface ButtonStyle {
   callToAction: string;
   isWhite?: boolean;
-  handleClick: () => void;
+  handleClick: () => any;
 }
 
 const Button = ({ callToAction, isWhite, handleClick }: ButtonStyle) => {
