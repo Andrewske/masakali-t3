@@ -23,6 +23,7 @@ export const env = createEnv({
     // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
+    SMOOBU_API_URL: z.string(),
   },
 
   /**
@@ -32,6 +33,11 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+    NEXT_PUBLIC_SMOOBU_SURYA_ID: z.string(),
+    NEXT_PUBLIC_SMOOBU_CHANDRA_ID: z.string(),
+    NEXT_PUBLIC_SMOOBU_JALA_ID: z.string(),
+    NEXT_PUBLIC_SMOOBU_AKASHA_ID: z.string(),
+    NEXT_PUBLIC_SMOOBU_LAKSHMI_ID: z.string(),
   },
 
   /**
@@ -45,5 +51,11 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    NEXT_PUBLIC_SMOOBU_SURYA_ID: process.env.NEXT_PUBLIC_SMOOBU_SURYA_ID,
+    NEXT_PUBLIC_SMOOBU_CHANDRA_ID: process.env.NEXT_PUBLIC_SMOOBU_CHANDRA_ID,
+    NEXT_PUBLIC_SMOOBU_JALA_ID: process.env.NEXT_PUBLIC_SMOOBU_JALA_ID,
+    NEXT_PUBLIC_SMOOBU_AKASHA_ID: process.env.NEXT_PUBLIC_SMOOBU_AKASHA_ID,
+    NEXT_PUBLIC_SMOOBU_LAKSHMI_ID: process.env.NEXT_PUBLIC_SMOOBU_LAKSHMI_ID,
+    SMOOBU_API_URL: process.env.SMOOBU_API_URL,
   },
 });

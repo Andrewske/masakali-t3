@@ -77,12 +77,12 @@ model Reservation {
     id            String   @id @default(cuid())
     smoobuId      Int      @unique
     referenceId   String?   
-    villaId       Int?
+    villaId       Int
     channelId     Int?
     userId        String?
-    arrival       DateTime?
-    departure     DateTime?
-    createdAt     DateTime?
+    arrival       DateTime
+    departure     DateTime
+    createdAt     DateTime
     guestName     String?
     firstName     String?
     lastName      String?

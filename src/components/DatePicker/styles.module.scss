@@ -18,6 +18,10 @@
     transform-origin: top;
   }
 
+  .dayPickerDisabled {
+    color: $light-purple-5 !important;
+  }
+
   .dayPickerSelected {
     background-color: $purple;
     color: white;
