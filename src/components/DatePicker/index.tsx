@@ -5,46 +5,51 @@ import {
   type Dispatch,
 } from 'react';
 
-import { getYear, addDays, addYears, differenceInCalendarDays } from 'date-fns';
+import {
+  isBefore,
+  isAfter,
+  getYear,
+  format,
+  addYears,
+  addDays,
+  differenceInCalendarDays,
+} from 'date-fns';
 import {
   DayPicker,
   type ClassNames,
-  type DateRange,
   type DayPickerSingleProps,
-  type DayPickerRangeProps,
   type Matcher,
+  type DateAfter,
+  type DateBefore,
 } from 'react-day-picker';
 import dayPickerStyles from 'react-day-picker/dist/style.css';
 
 import styles from './styles.module.scss';
 
+import { api } from '~/utils/api';
+
 type DatePickerProps = {
   isRange: boolean;
-  date: DateRange | Date;
-  setDate: Dispatch<SetStateAction<DateRange>> | Dispatch<SetStateAction<Date>>;
-  disabled: Matcher;
+  date: Date;
+  setDate: ({
+    type,
+    date,
+  }: {
+    type: 'arrival' | 'departure';
+    date: Date;
+  }) => void;
+  type: 'arrival' | 'departure';
+  arrivalDate: Date;
 };
 
-const DatePicker = ({ isRange, date, setDate, disabled }: DatePickerProps) => {
+const DatePicker = ({ date, setDate, type, arrivalDate }: DatePickerProps) => {
   const today: Date = new Date();
   const threeYearsFromToday: Date = addYears(today, 3);
 
-  // const [selectedDate, setSelectedDate] = useState<Date>(today);
-
-  const [disabledDates, setDisabledDates] = useState<Matcher>([]);
-
-  useLayoutEffect(() => {
-    if (disabled) {
-      setDisabledDates(disabled);
-    }
-  }, [disabled]);
-
-  const defaultSelected: DateRange = {
-    from: today,
-    to: addDays(today, 4),
-  };
-  const [selectedRange, setSelectedRange] =
-    useState<DateRange>(defaultSelected);
+  const { data: disabledDates } = api.smoobu.getDisabledDates.useQuery({
+    type,
+    startDate: arrivalDate ?? today,
+  });
 
   const classNames: ClassNames = {
     ...dayPickerStyles,
@@ -53,40 +58,50 @@ const DatePicker = ({ isRange, date, setDate, disabled }: DatePickerProps) => {
     button: styles.dayPickerButton,
   };
 
-  const isPastDate = (date: Date) => {
-    return differenceInCalendarDays(date, new Date()) < 0;
+  const parseUTCDate = (date: string) => {
+    const [year, month, day] = date.split('-').map(Number) as [
+      number,
+      number,
+      number
+    ];
+
+    const utcDate = new Date(Date.UTC(year, month - 1, day));
+
+    const offset = utcDate.getTimezoneOffset();
+
+    const adjustedDate = new Date(utcDate.getTime() + offset * 60 * 1000);
+
+    return adjustedDate;
   };
 
-  let dayPickerProps;
+  const matcher = (day: Date) => {
+    day = parseUTCDate(format(day, 'yyyy-MM-dd'));
+    if (isBefore(day, addDays(arrivalDate, 0))) return true;
 
-  if (isRange) {
-    dayPickerProps = {
-      className: `${styles.dayPickerRoot ?? ''}`,
-      showOutsideDays: true,
-      fixedWeeks: true,
-      fromYear: getYear(today),
-      toYear: getYear(threeYearsFromToday),
-      mode: 'range',
-      selected: date,
-      onSelect: setDate,
-      hidden: isPastDate,
-      disabled: disabled,
-    } as DayPickerRangeProps;
-  } else {
-    dayPickerProps = {
-      className: `${styles.dayPickerRoot ?? ''}`,
-      classNames: classNames,
-      showOutsideDays: true,
-      fixedWeeks: true,
-      fromYear: getYear(today),
-      toYear: getYear(threeYearsFromToday),
-      mode: 'single',
-      selected: date,
-      onSelect: setDate,
-      disabled: disabled,
-      hidden: isPastDate,
-    } as DayPickerSingleProps;
-  }
+    if (type === 'departure') {
+      const nextDisabledDate = disabledDates?.slice(0, 1)[0];
+      if (nextDisabledDate) {
+        isAfter(day, parseUTCDate(nextDisabledDate));
+      }
+    }
+
+    return disabledDates?.includes(format(day, 'yyyy-MM-dd'));
+  };
+
+  const dayPickerProps = {
+    className: `${styles.dayPickerRoot ?? ''}`,
+    classNames: classNames,
+    showOutsideDays: true,
+    fixedWeeks: true,
+    fromYear: getYear(today),
+    toYear: getYear(threeYearsFromToday),
+    mode: 'single',
+    selected: date,
+    onSelect: (day: Date) => setDate({ type, date: day }),
+    disabled: matcher,
+    required: true,
+    //hidden: isPastDate,
+  } as DayPickerSingleProps;
 
   return (
     <div className={styles.wrapper}>

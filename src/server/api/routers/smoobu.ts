@@ -1,14 +1,16 @@
 import { z } from 'zod';
 
+import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
+import { getFutureReservations } from '~/utils/reservations';
+
 import {
-  createTRPCRouter,
-  publicProcedure,
-  protectedProcedure,
-} from '~/server/api/trpc';
-
-import { type Matcher } from 'react-day-picker';
-
-import { eachDayOfInterval, format, add, sub } from 'date-fns';
+  eachDayOfInterval,
+  format,
+  addDays,
+  isAfter,
+  areIntervalsOverlapping,
+} from 'date-fns';
+import { normalizeDate } from '~/utils';
 // date-fns eachDayOfInterval
 
 const suryaId = parseInt(process.env.NEXT_PUBLIC_SMOOBU_SURYA_ID ?? '');
@@ -20,172 +22,105 @@ const lakshmiId = parseInt(process.env.NEXT_PUBLIC_SMOOBU_LAKSHMI_ID ?? '');
 const villaIds = [suryaId, chandraId, jalaId, akashaId, lakshmiId];
 
 export const smoobuRouter = createTRPCRouter({
-  //getBlockedDates: publicProcedure.query(() => {}),
-
-  update: publicProcedure.mutation(({ ctx }) => {
-    try {
-      // const reservation = await ctx.prisma.reservation.findFirst({
-      //   where: { smoobuId: 37705951 },
-      // });
-      // console.log({ reservation });
-      return;
-    } catch (err) {
-      console.error(err);
-    }
-  }),
-
-  getAllBlockedDates: publicProcedure.query(async ({ ctx }) => {
-    // Query for all future reservations
-    const futureReservations = await ctx.prisma.reservation.findMany({
-      where: {
-        departure: {
-          gt: new Date(),
-        },
-        cancelled: false,
-      },
-      select: {
-        id: true,
-        arrival: true,
-        departure: true,
-        villaId: true,
-      },
-    });
-
-    const isArrival = true;
-
-    const allBlockedDates: { [key: number]: Set<string> } = {};
-
-    // Add each villa and their blocked dates to Object and return
-    for (const villaId of villaIds) {
-      const villaReservations = futureReservations.filter(
-        (res) => res.villaId === villaId
-      );
-
-      if (villaReservations.length > 0) {
-        allBlockedDates[villaId] = new Set(
-          getBlockedDatesFromReservations({
-            reservations: villaReservations,
-            isArrival: true,
-          })
-        );
-      } else {
-        allBlockedDates[villaId] = new Set();
-      }
-    }
-    return allBlockedDates;
-  }),
-  getDisabledDates: publicProcedure
-    .input(z.object({ startDate: z.date() }))
-    .query(async ({ input: { startDate }, ctx }) => {
+  getAllBlockedDates: publicProcedure
+    .input(z.object({ arrival: z.date(), departure: z.date() }))
+    .query(async ({ input: { arrival, departure }, ctx }) => {
       // Query for all future reservations
-      const futureReservations = await ctx.prisma.reservation.findMany({
-        where: {
-          departure: {
-            gt: startDate,
+      const futureReservations = await getFutureReservations({
+        startDate: arrival,
+        endDate: departure,
+      });
+
+      const villaBlocked = new Set<number>();
+      const allVillas = new Set(villaIds);
+
+      // Check each reservation to see if it overlaps
+      // if so, then add the villaId to blocked list
+      futureReservations.forEach((reservation) => {
+        const overlap = areIntervalsOverlapping(
+          {
+            start: normalizeDate(reservation.arrival),
+            end: normalizeDate(reservation.departure),
           },
-          cancelled: false,
-        },
-        select: {
-          id: true,
-          arrival: true,
-          departure: true,
-          villaId: true,
-        },
+          {
+            start: normalizeDate(arrival),
+            end: normalizeDate(departure),
+          }
+        );
+
+        if (overlap) {
+          villaBlocked.add(reservation.villaId);
+        }
       });
 
-      const dateHash = new Map<string, number>();
+      // Remove blocked villas from list of Ids and return the remaining list
+      for (const id of villaBlocked) {
+        allVillas.delete(id);
+      }
 
-      //const allDates = getBlockedDatesFromReservations(futureReservations);
-
-      const daysBefore = eachDayOfInterval({
-        start: sub(startDate, { years: 1 }),
-        end: startDate,
-      });
-
-      console.log({ allDates });
-
-      allDates.forEach((dateStr: string) => {
-        const value = dateHash.get(dateStr) ?? 0;
-        dateHash.set(dateStr, value + 1);
-      });
-
-      const disabledDates = [
-        ...new Set(
-          [...dateHash]
-            .filter(([date, value]) => value === villaIds.length)
-            .map(([date, value]) => new Date(date))
-        ),
-      ];
-
-      const allDisabledDates = [...new Set([...daysBefore, ...disabledDates])];
-
-      return allDisabledDates as Matcher;
+      return Array(allVillas);
     }),
-
-  getBlockedDatesForVilla: publicProcedure
-    .input(z.object({ villaId: z.number() }))
-    .query(async ({ input: { villaId }, ctx }) => {
-      const futureReservations = await ctx.prisma.reservation.findMany({
-        where: {
-          villaId,
-          departure: {
-            gt: new Date(),
-          },
-          cancelled: false,
-        },
-        select: {
-          id: true,
-          arrival: true,
-          departure: true,
-          villaId: true,
-        },
+  getDisabledDates: publicProcedure
+    .input(z.object({ type: z.string().nullable(), startDate: z.date() }))
+    .query(async ({ input: { type, startDate }, ctx }) => {
+      // Query for all future reservations
+      const futureReservations = await getFutureReservations({
+        startDate,
       });
 
-      //return getBlockedDatesFromReservations(futureReservations);
+      const occupancyMap: Record<string, Set<number>> = {};
+
+      // Create a map of all the reserved dates and number of villas with that date reserved
+      futureReservations.forEach((reservation) => {
+        const dates = eachDayOfInterval({
+          start: addDays(reservation.arrival, 1),
+          end: addDays(reservation.departure, 1),
+        });
+
+        // Remove first or last date based on the type
+        if (type && type === 'arrival') {
+          dates.pop();
+        }
+        if (type && type === 'departure') {
+          dates.shift();
+        }
+
+        dates.forEach((date) => {
+          if (isAfter(date, startDate)) {
+            const dateStr = format(date, 'yyyy-MM-dd');
+
+            if (!occupancyMap[dateStr]) {
+              occupancyMap[dateStr] = new Set();
+            }
+
+            occupancyMap[dateStr]?.add(reservation.villaId);
+          }
+        });
+      });
+
+      // Filter dates blocked by every villa and sort by date
+      const disabledDates = Object.keys(occupancyMap)
+        .filter((date) => occupancyMap[date]?.size === villaIds.length)
+        .sort((a, b) => a.localeCompare(b));
+
+      // To find the disabled departure dates
+      // find dates between the startDate and earliest date in the occupancyMap
+      if (type === 'departure') {
+        const nextDisabledDate = new Date(disabledDates[0] ?? '');
+
+        const betweenDates = [];
+
+        while (startDate.getTime() < nextDisabledDate.getTime()) {
+          const dateStr = format(startDate, 'yyyy-MM-dd');
+
+          betweenDates.push(dateStr);
+
+          startDate = addDays(startDate, 1);
+        }
+
+        return [format(nextDisabledDate, 'yyyy-MM-dd')];
+      }
+
+      return disabledDates;
     }),
 });
-
-type BlockedDate = {
-  id: string;
-  arrival: Date;
-  departure: Date;
-  villaId: number;
-};
-
-type BlockedDatesOptions = {
-  reservations: {
-    id: string;
-    villaId: number;
-    arrival: Date;
-    departure: Date;
-  }[];
-  isArrival: boolean;
-};
-
-const getBlockedDatesFromReservations = ({
-  reservations,
-  isArrival,
-}: BlockedDatesOptions) => {
-  const allBlockedDates = reservations.map((res) => {
-    // get the days between the arrival and departure and format as a string
-    const arrival = res.arrival ?? new Date();
-    const departure = res.departure ?? new Date();
-    let reservationDates = eachDayOfInterval({
-      start: add(arrival, { days: 0 }),
-      end: departure,
-    });
-
-    if (isArrival) {
-      reservationDates = reservationDates.filter(
-        (date) => date !== departure && date >= arrival
-      );
-    } else {
-      reservationDates = reservationDates.filter((date) => date > arrival);
-    }
-
-    return reservationDates.map((date) => format(date, 'yyyy-MM-dd'));
-  });
-
-  // return an array of date strings
-  return allBlockedDates.flat();
-};

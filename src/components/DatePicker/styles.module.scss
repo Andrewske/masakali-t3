@@ -23,7 +23,7 @@
   }
 
   .dayPickerSelected {
-    background-color: $purple;
+    background-color: $purple !important;
     color: white;
 
     &:hover {
