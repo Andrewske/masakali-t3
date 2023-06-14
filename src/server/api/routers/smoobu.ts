@@ -22,6 +22,9 @@ const lakshmiId = parseInt(process.env.NEXT_PUBLIC_SMOOBU_LAKSHMI_ID ?? '');
 const villaIds = [suryaId, chandraId, jalaId, akashaId, lakshmiId];
 
 export const smoobuRouter = createTRPCRouter({
+  getActiveVillaIds: publicProcedure.query(() => {
+    return villaIds ?? ([] as number[]);
+  }),
   getAllBlockedDates: publicProcedure
     .input(z.object({ arrival: z.date(), departure: z.date() }))
     .query(async ({ input: { arrival, departure }, ctx }) => {
