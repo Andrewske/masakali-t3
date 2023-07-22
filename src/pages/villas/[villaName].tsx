@@ -2,13 +2,12 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { api } from '~/utils/api';
 
-const VillaPage = ({ villaData }: { villaData: { id: string } }) => {
-  const router = useRouter();
-  const { id } = router.query;
+import { prisma } from '~/server/db';
 
+const VillaPage = ({ villaData }: { villaData: { name: string } }) => {
   return (
     <div>
-      <h1>Villa {id}</h1>
+      <h1>Villa {villaData?.name}</h1>
       <pre>{JSON.stringify(villaData, null, 2)}</pre>
     </div>
   );
@@ -16,13 +15,17 @@ const VillaPage = ({ villaData }: { villaData: { id: string } }) => {
 
 export default VillaPage;
 
-export const getStaticProps: GetStaticProps = ({ params }) => {
-  const id = params?.id as string;
-  //const villaData = await api.smoobu.getVillaData.query({ id: parseInt(id) });
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const name = params?.villaName as string;
+  const villaData = await prisma.villa.findUnique({
+    where: {
+      name,
+    },
+  });
 
   return {
     props: {
-      villaData: { id },
+      villaData,
     },
   };
 };
@@ -34,15 +37,13 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
  */
 export const getStaticPaths: GetStaticPaths = async () => {
   //const villaIds = await (api.smoobu.getActiveVillaIds.useQuery() as Promise<number[]>);
-  const { data } = await api.smoobu.getActiveVillaIds.query();
-
-  const villaIds: number[] = data ?? [];
-  const paths: { params: { id: string } }[] = villaIds.map((id) => {
-    return { params: { id: id.toString() } };
+  const villas = await prisma.villa.findMany();
+  const paths: { params: { villaName: string } }[] = villas.map(({ name }) => {
+    return { params: { villaName: name } };
   });
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
