@@ -2,8 +2,8 @@ import Image from 'next/image';
 
 import styles from './styles.module.scss';
 
-import Button from '../Button';
-import AkashaImage from '../../../public/hero-images/akasha-pool.webp';
+import Button from '~/components/Button';
+import AkashaImage from '~/../public/hero-images/akasha-pool.webp';
 
 const villas = [
   {

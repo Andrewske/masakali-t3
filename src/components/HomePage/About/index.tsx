@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import PoolImg from '../../../public/home/masakali-surya-pool-walk.webp';
+import PoolImg from '../../../../public/home/masakali-surya-pool-walk.webp';
 import styles from './styles.module.scss';
 
 const About = () => {

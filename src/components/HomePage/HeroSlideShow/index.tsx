@@ -4,13 +4,13 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import styles from './styles.module.scss';
 
-import AkashaFront from '../../../public/hero-images/akasha-front.webp';
-import AkashaPool from '../../../public/hero-images/akasha-pool.webp';
-import AkashaKitchen from '../../../public/hero-images/akasha-kitchen.webp';
-import AkashaBed from '../../../public/hero-images/akasha-bed.webp';
-import AkashaBathroom from '../../../public/hero-images/akasha-bathroom.webp';
+import AkashaFront from '~/../public/hero-images/akasha-front.webp';
+import AkashaPool from '~/../public/hero-images/akasha-pool.webp';
+import AkashaKitchen from '~/../public/hero-images/akasha-kitchen.webp';
+import AkashaBed from '~/../public/hero-images/akasha-bed.webp';
+import AkashaBathroom from '~/../public/hero-images/akasha-bathroom.webp';
 
-import Logo from '../../../public/FullOffWhiteLogo.svg';
+import Logo from '~/../public/FullOffWhiteLogo.svg';
 
 const images = [
   {

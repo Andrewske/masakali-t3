@@ -2,7 +2,7 @@ import { format, addDays } from 'date-fns';
 import { useState } from 'react';
 
 import styles from './styles.module.scss';
-import DatePicker from '../DatePicker';
+import DatePicker from '../../DatePicker';
 
 import { api } from '~/utils/api';
 
