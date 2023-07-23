@@ -1,5 +1,5 @@
 import { prisma } from '~/server/db';
-
+import NextVilla from '~/components/VillasPage/NextVilla';
 /**
  * Retrieves the data for a specific villa.
  *
@@ -20,7 +20,8 @@ export default async function VillaPage({
 
   return (
     <div>
-      <h1>Villa {villaData?.name}</h1>
+      {/* @ts-expect-error Async Server Component */}
+      <NextVilla currentVillaName={villaName} />
       <pre>{JSON.stringify(villaData, null, 2)}</pre>
     </div>
   );
