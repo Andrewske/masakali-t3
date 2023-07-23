@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 
 import PoolImg from '../../../../public/home/masakali-surya-pool-walk.webp';

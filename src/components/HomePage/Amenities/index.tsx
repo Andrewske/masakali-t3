@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import styles from './styles.module.scss';
 import DiningImage from '../../../../public/hero-images/akasha-pool.webp';
