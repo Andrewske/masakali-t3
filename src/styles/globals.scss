@@ -1,3 +1,5 @@
+@import '~/styles/vars';
+
 html,
 body {
   padding: 0;
@@ -34,6 +36,44 @@ button {
   color: inherit;
   cursor: pointer;
   outline: none;
+}
+
+.button {
+  font-family: 'Avenir Book';
+  border: none;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: Uppercase;
+  padding: 0.65rem 1.75rem;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  margin: 2rem;
+  max-height: 4rem;
+  display: grid;
+  place-items: center;
+  white-space: nowrap;
+  width: max-content;
+
+  &.wide {
+    letter-spacing: 0.5rem;
+  }
+
+  &.white {
+    color: var(--primary-color);
+    background: white;
+  }
+
+  &.purple {
+    color: white;
+    background: var(--primary-color);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    background: var(--secondary-color) !important;
+    color: white;
+  }
 }
 
 h1,
