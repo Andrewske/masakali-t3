@@ -1,0 +1,17 @@
+@import '~/styles/vars';
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  //min-height: calc(100vh - 200px);
+}
+
+.leftContainer {
+  flex: 1 1 33%;
+  min-width: 300px;
+}
+
+.rightContainer {
+  flex: 1 1 66%;
+}

@@ -21,17 +21,23 @@ type BreakPoint = 'xs' | 'sm' | 'md' | 'lg';
  * @returns The current breakpoint.
  */
 const useBreakpoint = (): BreakPoint => {
-  const [breakPoint, setBreakpoint] = useState<BreakPoint>(() =>
-    getDeviceConfig(window.innerWidth)
-  );
+  const [breakPoint, setBreakpoint] = useState<BreakPoint>('lg');
 
   useEffect(() => {
-    const calcInnerWidth = throttle(() => {
-      setBreakpoint(getDeviceConfig(window.innerWidth));
-    }, 200);
-    window.addEventListener('resize', calcInnerWidth);
+    const handleResize = () => {
+      if (typeof window !== 'undefined') {
+        setBreakpoint(getDeviceConfig(window.innerWidth));
+      }
+    };
 
-    return () => window.removeEventListener('resize', calcInnerWidth);
+    handleResize(); // Set initial breakpoint
+
+    const throttledHandleResize = throttle(handleResize, 200);
+    window.addEventListener('resize', throttledHandleResize);
+
+    return () => {
+      window.removeEventListener('resize', throttledHandleResize);
+    };
   }, []);
 
   return breakPoint;
