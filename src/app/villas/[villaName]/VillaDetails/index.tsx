@@ -2,16 +2,16 @@
 import { useState } from 'react';
 import styles from './styles.module.scss';
 
-type villaDataType = {
-  villaData: {
-    description: string;
-    amenities: string;
-  };
+export type VillaDataType = {
+  description: string;
+  amenities: string;
 };
 
 const VillaDetails = ({
   villaData: { description, amenities },
-}: villaDataType) => {
+}: {
+  villaData: VillaDataType;
+}) => {
   const headings = ['description', 'amenities', 'reviews'];
   const [activeHeading, setActiveHeading] = useState(headings[0]);
 
@@ -49,22 +49,26 @@ const VillaDetails = ({
     }
   };
 
+  const renderHeadings = () => {
+    return headings.map((heading) => (
+      <span
+        className={styles.heading}
+        key={heading}
+        onClick={() => setActiveHeading(heading)}
+      >
+        {heading}
+      </span>
+    ));
+  };
+
+  const renderContentSections = () => {
+    return headings.map((heading) => renderContent(heading));
+  };
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles.header}>
-        {headings.map((heading) => (
-          <span
-            className={styles.heading}
-            key={heading}
-            onClick={() => setActiveHeading(heading)}
-          >
-            {heading}
-          </span>
-        ))}
-      </div>
-      <div className={styles.container}>
-        {headings.map((heading) => renderContent(heading))}
-      </div>
+      <div className={styles.header}>{renderHeadings()}</div>
+      <div className={styles.container}>{renderContentSections()}</div>
     </div>
   );
 };
