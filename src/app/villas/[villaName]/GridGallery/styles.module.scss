@@ -3,13 +3,13 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); //repeat(auto-fit, minmax(20vw, 1fr));
-  grid-template-rows: repeat(3, 1fr); //33% 33% 33%;
+  grid-template-rows: repeat(3, 33.33%); //33% 33% 33%;
   // grid-auto-rows: 200px;
   grid-gap: 0rem;
   grid-auto-flow: column dense;
   padding: 0rem;
   height: 100%;
-  //max-height: calc(100vh - $header-height);
+  max-height: calc(100vh - $header-height);
 }
 
 .image {

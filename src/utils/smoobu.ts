@@ -20,5 +20,5 @@ export const activeVillaIds = () => {
     jala: jalaId,
     akasha: akashaId,
     laskshmi: lakshmiId,
-  };
+  } as const;
 };

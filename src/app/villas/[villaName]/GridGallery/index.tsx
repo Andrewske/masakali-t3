@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Image, { type StaticImageData } from 'next/image';
 import styles from './styles.module.scss';
 
@@ -8,8 +8,6 @@ import AkashaPool from '~/../public/hero-images/akasha-pool.webp';
 import AkashaKitchen from '~/../public/hero-images/akasha-kitchen.webp';
 import AkashaBed from '~/../public/hero-images/akasha-bed.webp';
 import AkashaBathroom from '~/../public/hero-images/akasha-bathroom.webp';
-
-import { wrapGrid } from 'animate-css-grid';
 
 const images = [
   {
@@ -45,22 +43,10 @@ type ImageType = {
 };
 
 const GridGallery = () => {
-  const gridRef = useRef<HTMLDivElement>(null);
   const [indexOfExpandedImage, setIndexOfExpandedImage] = useState(0);
 
-  // useEffect(() => {
-  //   const grid = gridRef.current;
-  //   if (grid) {
-  //     console.log('grid');
-  //     wrapGrid(grid, { easing: 'backOut', stagger: 10, duration: 400 });
-  //   }
-  // }, []);
-
   return (
-    <div
-      ref={gridRef}
-      className={styles.grid}
-    >
+    <div className={styles.grid}>
       {images?.map(({ src, alt }, index) => (
         <Image
           key={`villa_image_${index}`}

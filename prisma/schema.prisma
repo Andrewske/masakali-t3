@@ -68,8 +68,8 @@ model VerificationToken {
 model Villa {
     id           Int @id
     name         String  @unique
-    description  String? @db.Text
-    amenities    String? @db.Text
+    description  String  @db.Text
+    amenities    String  @db.Text
 
     images       Image[]
     reviews      Review[]

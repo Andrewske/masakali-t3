@@ -1,0 +1,63 @@
+@import '~/styles/vars';
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: max-content;
+}
+
+.container {
+  position: relative;
+
+  .content {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    height: 0px;
+    opacity: 0;
+    transition: all 0.1s ease-in-out 0.1s;
+    overflow: hidden;
+
+    &.active {
+      height: 200px;
+      overflow: hidden;
+      opacity: 1;
+    }
+
+    .description {
+      text-justify: auto;
+    }
+
+    .amenities {
+      columns: 2;
+    }
+  }
+}
+
+.transition {
+  &-enter {
+    position: absolute;
+    transform: translateX(110%);
+  }
+
+  &-enter-active {
+    transform: translateX(0%);
+    transition: transform 1s ease-in-out;
+  }
+
+  &-exit {
+    position: absolute;
+  }
+
+  &-exit-active {
+    transform: translateX(-110%);
+    transition: transform 0.5s ease-in-out;
+  }
+}

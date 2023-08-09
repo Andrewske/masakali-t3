@@ -1,10 +1,11 @@
-import { prisma } from '~/server/db';
-import NextVilla from '~/components/VillasPage/NextVilla';
-import Button from '~/components/Button';
+import NextVilla from '~/app/villas/[villaName]/NextVilla';
 import styles from './styles.module.scss';
-import { format } from 'date-fns';
-import GridGallery from '../GridGallery';
-import DateContainer from '../DateContainer';
+import GridGallery from '../[villaName]/GridGallery';
+import DateContainer from './DateContainer';
+import Link from 'next/link';
+import { prisma } from '~/server/db';
+import VillaDetails from '../[villaName]/VillaDetails';
+
 /**
  * Retrieves the data for a specific villa.
  *
@@ -12,16 +13,26 @@ import DateContainer from '../DateContainer';
  * @param {string} params.villaName - The name of the villa.
  * @return {Promise<void>} A promise that resolves when the data is retrieved.
  */
-export default function VillaPage({
+export default async function VillaPage({
   params: { villaName },
 }: {
   params: { villaName: string };
 }) {
+  const villaData = (await prisma.villa.findUnique({
+    where: { name: villaName },
+    select: { description: true, amenities: true },
+  })) ?? { description: '', amenities: '' };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftContainer}>
         <NextVilla currentVillaName={villaName} />
         <DateContainer villaName={villaName} />
+        <Link
+          href="/cart"
+          className="button purple"
+        />
+        <VillaDetails villaData={villaData} />
       </div>
       <div className={styles.rightContainer}>
         <GridGallery />
