@@ -1,14 +1,14 @@
-'use client';
 import { AiOutlineRight } from 'react-icons/ai';
 import { prisma } from '~/server/db';
 import capitalize from 'lodash/capitalize';
 import Link from 'next/link';
-export default function NextVilla({
+export default async function NextVilla({
   currentVillaName,
 }: {
   currentVillaName: string;
 }) {
-  const villaData = prisma.villa.findMany();
+  const defaultVilla = 'surya';
+  const villaData = await prisma.villa.findMany();
 
   const nextVilla = () => {
     if (villaData) {
@@ -17,9 +17,12 @@ export default function NextVilla({
       );
 
       return (
-        villaData[indexOfCurrentVilla + (1 % villaData.length)]?.name ?? 'surya'
+        villaData[indexOfCurrentVilla + (1 % villaData.length)]?.name ??
+        defaultVilla
       );
     }
+
+    return defaultVilla;
   };
 
   if (!villaData) return (<></>) as JSX.Element;

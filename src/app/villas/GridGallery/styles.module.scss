@@ -1,10 +1,15 @@
+@import '~/styles/vars';
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
-  grid-auto-rows: 200px;
+  grid-template-columns: repeat(3, 1fr); //repeat(auto-fit, minmax(20vw, 1fr));
+  grid-template-rows: repeat(3, 1fr); //33% 33% 33%;
+  // grid-auto-rows: 200px;
   grid-gap: 0rem;
-  grid-auto-flow: dense;
+  grid-auto-flow: column dense;
   padding: 0rem;
+  height: 100%;
+  //max-height: calc(100vh - $header-height);
 }
 
 .image {
@@ -16,5 +21,15 @@
   &.expanded {
     grid-column: span 2;
     grid-row: span 2;
+  }
+
+  &:nth-child(6) {
+    &.expanded {
+      /* Item starts on the second row line */
+      grid-row-start: 2;
+      grid-column-start: 2;
+      grid-row-end: 4;
+      grid-column-end: 4;
+    }
   }
 }

@@ -33,7 +33,7 @@ const images = [
     alt: 'Akasha at Masakali view of the bathroom',
   },
   {
-    src: AkashaBathroom,
+    src: AkashaBed,
     alt: 'Akasha at Masakali view of the bathroom 2',
   },
 ];
@@ -46,13 +46,15 @@ type ImageType = {
 
 const GridGallery = () => {
   const gridRef = useRef<HTMLDivElement>(null);
+  const [indexOfExpandedImage, setIndexOfExpandedImage] = useState(0);
 
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (grid) {
-      wrapGrid(grid, { easing: 'backOut', stagger: 10, duration: 400 });
-    }
-  }, []);
+  // useEffect(() => {
+  //   const grid = gridRef.current;
+  //   if (grid) {
+  //     console.log('grid');
+  //     wrapGrid(grid, { easing: 'backOut', stagger: 10, duration: 400 });
+  //   }
+  // }, []);
 
   return (
     <div
@@ -60,11 +62,16 @@ const GridGallery = () => {
       className={styles.grid}
     >
       {images?.map(({ src, alt }, index) => (
-        <GridImage
-          key={alt}
+        <Image
+          key={`villa_image_${index}`}
+          id={`grid-image-${index}`}
+          priority={index === 0}
+          className={`${styles.image ?? ''} ${
+            index === indexOfExpandedImage ? styles.expanded ?? '' : ''
+          }`}
           src={src}
           alt={alt}
-          index={index}
+          onClick={() => setIndexOfExpandedImage(index)}
         />
       ))}
     </div>
@@ -72,20 +79,3 @@ const GridGallery = () => {
 };
 
 export default GridGallery;
-
-const GridImage = ({ src, alt, index }: ImageType) => {
-  const [expanded, setExpanded] = useState(index === 0 ? true : false);
-
-  return (
-    <Image
-      id={`grid-image-${index}`}
-      priority={index === 0}
-      className={`${styles.image ?? ''} ${
-        expanded ? styles.expanded ?? '' : ''
-      }`}
-      src={src}
-      alt={alt}
-      onClick={() => setExpanded(!expanded)}
-    />
-  );
-};
