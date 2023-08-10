@@ -7,7 +7,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   scroll-behavior: smooth;
-  height: 100%;
+
+  font-family: var(--font-baskerville);
 }
 
 a {
@@ -39,7 +40,7 @@ button {
 }
 
 .button {
-  font-family: 'Avenir Book';
+  font-family: var(--font-montserrat);
   border: none;
   font-size: 1.25rem;
   line-height: 1.5rem;
@@ -60,19 +61,13 @@ button {
   }
 
   &.white {
-    color: var(--primary-color);
-    background: white;
+    color: $purple;
+    background: $white;
   }
 
   &.purple {
-    color: white;
-    background: var(--primary-color);
-  }
-
-  &:hover {
-    transform: scale(1.05);
-    background: var(--secondary-color) !important;
-    color: white;
+    color: $white;
+    background: $purple;
   }
 }
 
@@ -80,20 +75,24 @@ h1,
 h2,
 h3,
 h4 {
+  font-family: var(--font-montserrat);
+  letter-spacing: 2px;
+  line-height: 1.5rem;
+  text-transform: uppercase;
   margin: 0;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
 }
 h2 {
-  font-size: 2rem;
-}
-h3 {
   font-size: 1.5rem;
 }
+h3 {
+  font-size: 1.15rem;
+}
 h4 {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .material-symbols-outlined {

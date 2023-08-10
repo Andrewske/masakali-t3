@@ -4,10 +4,14 @@ import NextAuthProvider from '~/context/NextAuthProvider';
 import type { ReactNode } from 'react';
 import '~/styles/globals.scss';
 import styles from './styles.module.scss';
+import { montserrat, baskerville } from './fonts';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${baskerville.variable}`}
+    >
       <body>
         <NextAuthProvider>
           <div className={styles.wrapper}>

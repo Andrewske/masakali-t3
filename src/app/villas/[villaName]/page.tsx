@@ -13,6 +13,11 @@ import VillaDetails from '../[villaName]/VillaDetails';
  * @param {string} params.villaName - The name of the villa.
  * @return {Promise<void>} A promise that resolves when the data is retrieved.
  */
+
+type VillaDataType = {
+  description: string;
+  amenities: string;
+};
 export default async function VillaPage({
   params: { villaName },
 }: {
@@ -21,17 +26,18 @@ export default async function VillaPage({
   const villaData = (await prisma.villa.findUnique({
     where: { name: villaName },
     select: { description: true, amenities: true },
-  })) ?? { description: '', amenities: '' };
+  })) as VillaDataType;
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftContainer}>
+        <DateContainer villaName={villaName} />
         <NextVilla currentVillaName={villaName} />
         <DateContainer villaName={villaName} />
         <Link
           href="/cart"
           className="button purple"
-        />
+        >{`Book ${villaName}`}</Link>
         <VillaDetails villaData={villaData} />
       </div>
       <div className={styles.rightContainer}>

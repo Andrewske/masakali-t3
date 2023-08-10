@@ -2,6 +2,7 @@ import { AiOutlineRight } from 'react-icons/ai';
 import capitalize from 'lodash/capitalize';
 import Link from 'next/link';
 import { activeVillaIds } from '~/utils/smoobu';
+import styles from './styles.module.scss';
 
 export default function NextVilla({
   currentVillaName,
@@ -10,9 +11,7 @@ export default function NextVilla({
 }) {
   return (
     <Link href={`/villas/${nextVilla(currentVillaName)}`}>
-      <h1>
-        {capitalize(currentVillaName)} Villa <AiOutlineRight />
-      </h1>
+      <h1 className={styles.title}>{capitalize(currentVillaName)} Villa</h1>
     </Link>
   );
 }

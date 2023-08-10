@@ -51,13 +51,15 @@ const VillaDetails = ({
 
   const renderHeadings = () => {
     return headings.map((heading) => (
-      <span
-        className={styles.heading}
+      <h4
+        className={`${styles.heading ?? ''} ${
+          activeHeading === heading ? styles.active ?? '' : ''
+        }`}
         key={heading}
         onClick={() => setActiveHeading(heading)}
       >
         {heading}
-      </span>
+      </h4>
     ));
   };
 
