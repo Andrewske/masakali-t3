@@ -1,19 +1,23 @@
 'use client';
 import { useState } from 'react';
 import styles from './styles.module.scss';
+import { prisma } from '~/app/api/db';
 
 export type VillaDataType = {
   description: string;
   amenities: string;
 };
 
-const VillaDetails = ({
-  villaData: { description, amenities },
-}: {
-  villaData: VillaDataType;
-}) => {
+import { type VillaName } from '~/utils/smoobu';
+
+const VillaDetails = async ({ villaName }: { villaName: VillaName }) => {
   const headings = ['description', 'amenities', 'reviews'];
   const [activeHeading, setActiveHeading] = useState(headings[0]);
+
+  const { description, amenities } = (await prisma.villa.findUnique({
+    where: { name: villaName },
+    select: { description: true, amenities: true },
+  })) as VillaDataType;
 
   const renderContent = (heading: string) => {
     const isActive = activeHeading === heading;
@@ -24,23 +28,37 @@ const VillaDetails = ({
     switch (heading) {
       case 'description':
         return (
-          <div className={contentStyles}>
+          <div
+            key={heading}
+            className={contentStyles}
+          >
             <p className={styles.description}>{description}</p>
           </div>
         );
       case 'amenities':
         return (
-          <div className={contentStyles}>
+          <div
+            key={heading}
+            className={contentStyles}
+          >
             <ul className={styles.amenities}>
-              {amenities.split(',').map((item) => (
-                <li key={item}>{item}</li>
+              {amenities.split(',').map((item, index) => (
+                <li
+                  key={`${item}-${index}`}
+                  className={item}
+                >
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
         );
       case 'reviews':
         return (
-          <div className={contentStyles}>
+          <div
+            key={heading}
+            className={contentStyles}
+          >
             <p className={styles.reviews}>These are some reviews</p>
           </div>
         );
@@ -50,12 +68,12 @@ const VillaDetails = ({
   };
 
   const renderHeadings = () => {
-    return headings.map((heading) => (
+    return headings.map((heading, index) => (
       <h4
         className={`${styles.heading ?? ''} ${
           activeHeading === heading ? styles.active ?? '' : ''
         }`}
-        key={heading}
+        key={`${heading}-${index}`}
         onClick={() => setActiveHeading(heading)}
       >
         {heading}

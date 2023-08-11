@@ -3,18 +3,22 @@ import styles from './styles.module.scss';
 import dayPickerStyles from 'react-day-picker/dist/style.module.css';
 
 import { DayPicker, type DateRange, type ClassNames } from 'react-day-picker';
-import { addDays } from 'date-fns';
+
 import useOnClickOutside from '~/hooks/useOnClickOutside';
+
+import { villas, type VillaName } from '~/utils/smoobu';
+import { getDatesBetweenDates } from '~/utils';
+import { prisma } from '~/app/api/db';
 
 const today = new Date();
 
 type DateRangePickerProps = {
   isActive: boolean;
   setIsActive: Dispatch<SetStateAction<boolean>>;
-  villaName?: string;
+  villaName: VillaName;
 };
 
-const DateRangePicker = ({
+const DateRangePicker = async ({
   isActive,
   setIsActive,
   villaName,
@@ -36,13 +40,28 @@ const DateRangePicker = ({
     }`,
   };
 
-  const disabledDays = [
-    addDays(today, 2),
-    addDays(today, 4),
-    { from: addDays(today, 7), to: addDays(today, 9) },
-  ];
+  const disabledDays = await prisma.reservation
+    .findMany({
+      where: {
+        villaId: villas[villaName],
+        departure: {
+          gte: today,
+        },
+      },
+      select: {
+        arrival: true,
+        departure: true,
+      },
+    })
+    .then((reservations) => {
+      return reservations
+        .map(({ arrival, departure }) => {
+          return getDatesBetweenDates(arrival, departure);
+        })
+        .flat();
+    });
 
-  return (
+  return disabledDays?.length > 0 ? (
     <div
       className={`${styles.wrapper ?? ''} ${
         isActive ? styles.active ?? '' : ''
@@ -56,10 +75,12 @@ const DateRangePicker = ({
           selected={range}
           onSelect={setRange}
           classNames={classNames}
-          disabled={disabledDays}
+          disabled={disabledDays ?? null}
         />
       </span>
     </div>
+  ) : (
+    <></>
   );
 };
 

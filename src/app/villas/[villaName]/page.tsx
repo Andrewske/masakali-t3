@@ -3,31 +3,10 @@ import styles from './styles.module.scss';
 import GridGallery from '../[villaName]/GridGallery';
 import DateContainer from './DateContainer';
 import Link from 'next/link';
-import { prisma } from '~/app/api/db';
 import VillaDetails from '../[villaName]/VillaDetails';
+import { type VillaName } from '~/utils/smoobu';
 
-/**
- * Retrieves the data for a specific villa.
- *
- * @param {object} params - The parameters object.
- * @param {string} params.villaName - The name of the villa.
- * @return {Promise<void>} A promise that resolves when the data is retrieved.
- */
-
-type VillaDataType = {
-  description: string;
-  amenities: string;
-};
-export default async function VillaPage({
-  params: { villaName },
-}: {
-  params: { villaName: string };
-}) {
-  const villaData = (await prisma.villa.findUnique({
-    where: { name: villaName },
-    select: { description: true, amenities: true },
-  })) as VillaDataType;
-
+function Page({ params: { villaName } }: { params: { villaName: VillaName } }) {
   return (
     <main className={styles.wrapper}>
       <section
@@ -39,8 +18,8 @@ export default async function VillaPage({
         <Link
           href="/cart"
           className="button purple"
-        >{`Book ${villaName}`}</Link>
-        <VillaDetails villaData={villaData} />
+        >{`Book ${villaName.toString()}`}</Link>
+        <VillaDetails villaName={villaName} />
       </section>
       <section className={styles.rightContainer}>
         <GridGallery />
@@ -48,3 +27,5 @@ export default async function VillaPage({
     </main>
   );
 }
+
+export default Page;

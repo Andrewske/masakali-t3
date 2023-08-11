@@ -1,4 +1,3 @@
-'use client';
 import { api } from '~/utils/api';
 import styles from './styles.module.scss';
 

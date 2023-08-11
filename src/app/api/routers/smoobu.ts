@@ -10,7 +10,9 @@ import {
   isAfter,
   areIntervalsOverlapping,
 } from 'date-fns';
-import { normalizeDate } from '~/utils';
+import { normalizeDate, getDatesBetweenDates } from '~/utils';
+import { villas, type VillaName } from '~/utils/smoobu';
+import { prisma } from '~/app/api/db';
 // date-fns eachDayOfInterval
 
 const suryaId = parseInt(process.env.NEXT_PUBLIC_SMOOBU_SURYA_ID ?? '');
@@ -125,5 +127,37 @@ export const smoobuRouter = createTRPCRouter({
       }
 
       return disabledDates;
+    }),
+  getVillaDisabledDates: publicProcedure
+    .input(z.object({ villaName: z.string().nullable() }))
+    .query(async ({ input: { villaName } }) => {
+      const today = normalizeDate(new Date());
+
+      const villaFilter = villaName
+        ? {
+            where: {
+              villaId: villas[villaName as VillaName],
+            },
+          }
+        : undefined;
+
+      const reservations = await prisma.reservation.findMany({
+        ...villaFilter,
+        where: {
+          departure: {
+            gte: today,
+          },
+        },
+        select: {
+          arrival: true,
+          departure: true,
+        },
+      });
+
+      const blockedDates = reservations.map(({ arrival, departure }) => {
+        return getDatesBetweenDates(arrival, departure);
+      });
+
+      return blockedDates.flat();
     }),
 });

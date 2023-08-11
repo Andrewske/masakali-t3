@@ -1,6 +1,7 @@
 import { prisma } from '~/app/api/db';
+import { api } from '~/utils/api';
 
-export default async function Page() {
+async function Page() {
   const villas = await prisma.villa.findMany();
 
   return (
@@ -11,3 +12,4 @@ export default async function Page() {
     </main>
   );
 }
+export default api.withTRPC(Page);

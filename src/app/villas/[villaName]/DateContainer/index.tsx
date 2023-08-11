@@ -2,20 +2,21 @@
 import { useState } from 'react';
 import styles from './styles.module.scss';
 import { format } from 'date-fns';
-import { createPortal } from 'react-dom';
-import DateRangePicker from '~/components/DateRangePicker';
-import { prisma } from '~/app/api/db';
 
-const DateContainer = ({ villaName }: { villaName: string }) => {
+import DateRangePicker from '~/components/DateRangePicker';
+
+import { type VillaName } from '~/utils/smoobu';
+
+const DateContainer = ({ villaName }: { villaName: VillaName }) => {
   const [dates, setDates] = useState({ from: new Date(), to: new Date() });
   const [isActive, setIsActive] = useState(false);
 
-  const villaDetails = document.getElementById('villa-info');
+  //const villaDetails = document ? document.getElementById('villa-info') : null;
 
   return (
     <div className={styles.wrapper}>
       {/* <DatePicker isRange={true} date={date}  /> */}
-      {villaDetails &&
+      {/* {villaDetails &&
         createPortal(
           <DateRangePicker
             isActive={isActive}
@@ -23,7 +24,12 @@ const DateContainer = ({ villaName }: { villaName: string }) => {
             villaName={villaName}
           />,
           villaDetails
-        )}
+        )} */}
+      <DateRangePicker
+        isActive={isActive}
+        setIsActive={setIsActive}
+        villaName={villaName}
+      />
       <span
         className={styles.container}
         onClick={() => setIsActive(true)}
