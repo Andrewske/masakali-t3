@@ -6,7 +6,7 @@ import type {
   smoobuReservationsResponse,
 } from '~/types/smoobu';
 import { getErrorMessage, reportError } from '~/utils/errors';
-import { prisma } from '~/server/db';
+import { prisma } from '~/app/api/db';
 
 // type ReservationCreateInput = {
 //   smoobuId: number;

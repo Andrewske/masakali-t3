@@ -3,7 +3,7 @@ import Footer from '~/components/Footer';
 import NextAuthProvider from '~/context/NextAuthProvider';
 import type { ReactNode } from 'react';
 import '~/styles/globals.scss';
-import styles from './styles.module.scss';
+import 'react-day-picker/dist/style.css';
 import { montserrat, baskerville } from './fonts';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -14,11 +14,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <body>
         <NextAuthProvider>
-          <div className={styles.wrapper}>
-            <Header />
-            <main className={styles.main}>{children}</main>
-            <Footer />
-          </div>
+          <Header />
+
+          {children}
+          <Footer />
         </NextAuthProvider>
       </body>
     </html>

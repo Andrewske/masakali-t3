@@ -1,4 +1,4 @@
-import { prisma } from '~/server/db';
+import { prisma } from '~/app/api/db';
 
 // Query for all future reservations
 export const getFutureReservations = async ({

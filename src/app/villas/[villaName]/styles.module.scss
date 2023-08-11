@@ -16,6 +16,7 @@
   gap: 1rem;
   min-height: calc(100vh - 200px);
   min-width: calc(min(100vw, 350px));
+  position: relative;
 }
 
 .rightContainer {

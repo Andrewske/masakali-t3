@@ -1,5 +1,6 @@
 'use client';
 import { api } from '~/utils/api';
+import styles from './styles.module.scss';
 
 // Components
 
@@ -14,7 +15,7 @@ import Location from '~/components/HomePage/Location';
 
 const Page = () => {
   return (
-    <>
+    <main className={styles.main}>
       <HeroSlideShow />
       <Availability />
       <About />
@@ -23,7 +24,7 @@ const Page = () => {
       <Dining />
       <Amenities />
       <Location />
-    </>
+    </main>
   );
 };
 

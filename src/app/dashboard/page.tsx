@@ -1,9 +1,9 @@
-import styles from './index.module.scss';
+'use client';
+import styles from './styles.module.scss';
 import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Header from '~/components/Header';
 import Button from '~/components/Button';
 import UpdateReservations from '~/components/Dashboard/UpdateReservations';
 import jurassicParkGif from '~/../public/jurassicParkGif.gif';
@@ -37,7 +37,6 @@ const Dashboard: NextPage = () => {
 
   return (
     <main className={styles.main}>
-      <Header />
       <UpdateReservations />
     </main>
   );

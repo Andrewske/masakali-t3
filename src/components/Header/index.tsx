@@ -12,7 +12,7 @@ import useBreakpoint from '~/hooks/useBreakpoint';
 
 const HeaderLinks = () => {
   return (
-    <>
+    <nav>
       <Link
         className={styles.link}
         href="#home"
@@ -46,7 +46,7 @@ const HeaderLinks = () => {
       >
         Retreats
       </Link>
-    </>
+    </nav>
   );
 };
 

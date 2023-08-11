@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import GridGallery from '../[villaName]/GridGallery';
 import DateContainer from './DateContainer';
 import Link from 'next/link';
-import { prisma } from '~/server/db';
+import { prisma } from '~/app/api/db';
 import VillaDetails from '../[villaName]/VillaDetails';
 
 /**
@@ -29,9 +29,11 @@ export default async function VillaPage({
   })) as VillaDataType;
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.leftContainer}>
-        <DateContainer villaName={villaName} />
+    <main className={styles.wrapper}>
+      <section
+        className={styles.leftContainer}
+        id="villa-info"
+      >
         <NextVilla currentVillaName={villaName} />
         <DateContainer villaName={villaName} />
         <Link
@@ -39,10 +41,10 @@ export default async function VillaPage({
           className="button purple"
         >{`Book ${villaName}`}</Link>
         <VillaDetails villaData={villaData} />
-      </div>
-      <div className={styles.rightContainer}>
+      </section>
+      <section className={styles.rightContainer}>
         <GridGallery />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

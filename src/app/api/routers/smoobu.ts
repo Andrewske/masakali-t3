@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
+import { createTRPCRouter, publicProcedure } from '~/app/api/trpc';
 import { getFutureReservations } from '~/utils/reservations';
 
 import {
