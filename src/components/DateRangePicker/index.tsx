@@ -1,3 +1,4 @@
+'use client';
 import { useState, useRef, type SetStateAction, type Dispatch } from 'react';
 import styles from './styles.module.scss';
 import dayPickerStyles from 'react-day-picker/dist/style.module.css';
@@ -15,13 +16,15 @@ const today = new Date();
 type DateRangePickerProps = {
   isActive: boolean;
   setIsActive: Dispatch<SetStateAction<boolean>>;
-  villaName: VillaName;
+  disabledDates: Date[];
+  setDates: Dispatch<SetStateAction<DateRange | undefined>>;
 };
 
-const DateRangePicker = async ({
+const DateRangePicker = ({
   isActive,
   setIsActive,
-  villaName,
+  disabledDates,
+  setDates,
 }: DateRangePickerProps) => {
   const defaultSelected: DateRange = {
     from: today,
@@ -40,28 +43,7 @@ const DateRangePicker = async ({
     }`,
   };
 
-  const disabledDays = await prisma.reservation
-    .findMany({
-      where: {
-        villaId: villas[villaName],
-        departure: {
-          gte: today,
-        },
-      },
-      select: {
-        arrival: true,
-        departure: true,
-      },
-    })
-    .then((reservations) => {
-      return reservations
-        .map(({ arrival, departure }) => {
-          return getDatesBetweenDates(arrival, departure);
-        })
-        .flat();
-    });
-
-  return disabledDays?.length > 0 ? (
+  return (
     <div
       className={`${styles.wrapper ?? ''} ${
         isActive ? styles.active ?? '' : ''
@@ -75,12 +57,10 @@ const DateRangePicker = async ({
           selected={range}
           onSelect={setRange}
           classNames={classNames}
-          disabled={disabledDays ?? null}
+          disabled={disabledDates}
         />
       </span>
     </div>
-  ) : (
-    <></>
   );
 };
 

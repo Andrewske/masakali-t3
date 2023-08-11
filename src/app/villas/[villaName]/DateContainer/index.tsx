@@ -2,47 +2,39 @@
 import { useState } from 'react';
 import styles from './styles.module.scss';
 import { format } from 'date-fns';
-
+import { type DateRange } from 'react-day-picker';
 import DateRangePicker from '~/components/DateRangePicker';
 
-import { type VillaName } from '~/utils/smoobu';
-
-const DateContainer = ({ villaName }: { villaName: VillaName }) => {
-  const [dates, setDates] = useState({ from: new Date(), to: new Date() });
+const DateContainer = ({ disabledDates }: { disabledDates: Date[] }) => {
+  const [dates, setDates] = useState<DateRange | undefined>({
+    from: new Date(),
+    to: new Date(),
+  });
   const [isActive, setIsActive] = useState(false);
 
   //const villaDetails = document ? document.getElementById('villa-info') : null;
 
   return (
     <div className={styles.wrapper}>
-      {/* <DatePicker isRange={true} date={date}  /> */}
-      {/* {villaDetails &&
-        createPortal(
-          <DateRangePicker
-            isActive={isActive}
-            setIsActive={setIsActive}
-            villaName={villaName}
-          />,
-          villaDetails
-        )} */}
       <DateRangePicker
         isActive={isActive}
         setIsActive={setIsActive}
-        villaName={villaName}
+        disabledDates={disabledDates}
+        setDates={setDates}
       />
       <span
         className={styles.container}
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Arrival Date</h3>
-        <p>{format(dates.from, 'MMM d, yyyy')}</p>
+        <p>{format(dates?.from ?? new Date(), 'MMM d, yyyy')}</p>
       </span>
       <span
         className={styles.container}
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Departure Date</h3>
-        <p>{format(dates.to, 'MMM d, yyyy')}</p>
+        <p>{format(dates?.to ?? new Date(), 'MMM d, yyyy')}</p>
       </span>
       <div className={styles.container}>
         <h3 className={styles.title}>Guests</h3>

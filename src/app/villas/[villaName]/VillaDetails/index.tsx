@@ -1,23 +1,19 @@
 'use client';
 import { useState } from 'react';
 import styles from './styles.module.scss';
-import { prisma } from '~/app/api/db';
 
 export type VillaDataType = {
   description: string;
   amenities: string;
 };
 
-import { type VillaName } from '~/utils/smoobu';
-
-const VillaDetails = async ({ villaName }: { villaName: VillaName }) => {
+const VillaDetails = ({
+  villaData: { description, amenities },
+}: {
+  villaData: VillaDataType;
+}) => {
   const headings = ['description', 'amenities', 'reviews'];
   const [activeHeading, setActiveHeading] = useState(headings[0]);
-
-  const { description, amenities } = (await prisma.villa.findUnique({
-    where: { name: villaName },
-    select: { description: true, amenities: true },
-  })) as VillaDataType;
 
   const renderContent = (heading: string) => {
     const isActive = activeHeading === heading;
