@@ -4,7 +4,7 @@ import NextAuthProvider from '~/context/NextAuthProvider';
 import type { ReactNode } from 'react';
 import '~/styles/globals.scss';
 import 'react-day-picker/dist/style.css';
-import { montserrat, baskerville } from './fonts';
+import { montserrat, baskerville } from '~/fonts';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -15,7 +15,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <NextAuthProvider>
           <Header />
-
           {children}
           <Footer />
         </NextAuthProvider>

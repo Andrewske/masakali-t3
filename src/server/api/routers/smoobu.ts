@@ -12,7 +12,7 @@ import {
 } from 'date-fns';
 import { normalizeDate, getDatesBetweenDates } from '~/utils';
 import { villas, type VillaName } from '~/utils/smoobu';
-import { prisma } from '~/app/api/db';
+import { prisma } from '~/server/api/db';
 // date-fns eachDayOfInterval
 
 const suryaId = parseInt(process.env.NEXT_PUBLIC_SMOOBU_SURYA_ID ?? '');

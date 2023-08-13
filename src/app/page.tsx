@@ -1,6 +1,5 @@
-import { api } from '~/utils/api';
 import styles from './styles.module.scss';
-
+import { prisma } from '~/server/api/db';
 // Components
 
 import HeroSlideShow from '~/components/HomePage/HeroSlideShow';
@@ -12,11 +11,19 @@ import Dining from '~/components/HomePage/Dining';
 import Amenities from '~/components/HomePage/Amenities';
 import Location from '~/components/HomePage/Location';
 
-const Page = () => {
+const Page = async () => {
+  const reservations = await prisma.reservation.findMany({
+    where: {
+      arrival: {
+        gt: new Date(),
+      },
+    },
+  });
+
   return (
     <main className={styles.main}>
       <HeroSlideShow />
-      <Availability />
+      <Availability reservations={reservations} />
       <About />
       <WhyChoose />
       <Villas />
@@ -27,4 +34,4 @@ const Page = () => {
   );
 };
 
-export default api.withTRPC(Page);
+export default Page;

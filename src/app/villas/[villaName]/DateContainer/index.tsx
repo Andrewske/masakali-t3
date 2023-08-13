@@ -6,13 +6,11 @@ import { type DateRange } from 'react-day-picker';
 import DateRangePicker from '~/components/DateRangePicker';
 
 const DateContainer = ({ disabledDates }: { disabledDates: Date[] }) => {
-  const [dates, setDates] = useState<DateRange | undefined>({
+  const [range, setRange] = useState<DateRange | undefined>({
     from: new Date(),
-    to: new Date(),
+    to: undefined,
   });
   const [isActive, setIsActive] = useState(false);
-
-  //const villaDetails = document ? document.getElementById('villa-info') : null;
 
   return (
     <div className={styles.wrapper}>
@@ -20,21 +18,22 @@ const DateContainer = ({ disabledDates }: { disabledDates: Date[] }) => {
         isActive={isActive}
         setIsActive={setIsActive}
         disabledDates={disabledDates}
-        setDates={setDates}
+        range={range}
+        setRange={setRange}
       />
       <span
         className={styles.container}
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Arrival Date</h3>
-        <p>{format(dates?.from ?? new Date(), 'MMM d, yyyy')}</p>
+        <p>{range?.from && format(range.from, 'MMM d, yyyy')}</p>
       </span>
       <span
         className={styles.container}
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Departure Date</h3>
-        <p>{format(dates?.to ?? new Date(), 'MMM d, yyyy')}</p>
+        <p>{range?.to && format(range.to, 'MMM d, yyyy')}</p>
       </span>
       <div className={styles.container}>
         <h3 className={styles.title}>Guests</h3>

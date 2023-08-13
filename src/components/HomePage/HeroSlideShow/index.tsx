@@ -1,7 +1,4 @@
-'use client';
 import Image from 'next/image';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import styles from './styles.module.scss';
 
@@ -12,6 +9,8 @@ import AkashaBed from '~/../public/hero-images/akasha-bed.webp';
 import AkashaBathroom from '~/../public/hero-images/akasha-bathroom.webp';
 
 import Logo from '~/../public/FullOffWhiteLogo.svg';
+
+import HeroCarousel from '~/components/HomePage/HeroSlideShow/Carousel';
 
 const images = [
   {
@@ -36,33 +35,25 @@ const images = [
   },
 ];
 
+const renderImages = () => {
+  return images.map(({ src, alt }, index) => (
+    <Image
+      priority={index === 0}
+      className={styles.image}
+      key={alt}
+      src={src}
+      alt={alt}
+    />
+  ));
+};
+
 const HeroSlideShow = () => {
   return (
     <section
       id="home"
       className={styles.wrapper}
     >
-      <Carousel
-        className={styles.container}
-        autoFocus={true}
-        infiniteLoop={true}
-        // renderArrowPrev https://github.com/leandrowd/react-responsive-carousel
-        // renderArrowNext
-        showStatus={false}
-        showThumbs={false}
-        useKeyboardArrows={true}
-      >
-        {images?.map(({ src, alt }, index) => (
-          <Image
-            priority={index === 0}
-            className={styles.image}
-            key={alt}
-            src={src}
-            alt={alt}
-          />
-        ))}
-      </Carousel>
-
+      <HeroCarousel>{renderImages()}</HeroCarousel>
       <div className={styles.logoContainer}>
         <Image
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

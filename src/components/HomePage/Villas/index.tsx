@@ -1,9 +1,8 @@
-'use client';
 import Image from 'next/image';
 
 import styles from './styles.module.scss';
 
-import Button from '~/components/Button';
+import { GoToPageButton } from '~/components/Button';
 import AkashaImage from '~/../public/hero-images/akasha-pool.webp';
 
 const villas = [
@@ -34,10 +33,6 @@ const villas = [
 ];
 
 const Villas = () => {
-  const handleClick = (villaName: string) => {
-    console.log(villaName);
-  };
-
   return (
     <section
       id="villas"
@@ -69,10 +64,10 @@ const Villas = () => {
             <span className={styles.hoverContainer}>
               <h3 className={styles.title}>{villa.name}</h3>
               <p className={styles.text}>{villa.description}</p>
-              <Button
+              <GoToPageButton
                 callToAction="View Details"
-                handleClick={() => handleClick(villa.name)}
                 isWhite={false}
+                path={`/villas/${villa.name}`}
               />
             </span>
           </div>

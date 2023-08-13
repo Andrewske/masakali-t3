@@ -1,5 +1,5 @@
-import { prisma } from '~/app/api/db';
-import { api } from '~/utils/api';
+import { prisma } from '~/server/api/db';
+//import { api } from '~/utils/api';
 
 async function Page() {
   const villas = await prisma.villa.findMany();
@@ -12,4 +12,4 @@ async function Page() {
     </main>
   );
 }
-export default api.withTRPC(Page);
+export default Page;

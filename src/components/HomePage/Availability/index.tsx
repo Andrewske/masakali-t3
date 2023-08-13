@@ -4,83 +4,82 @@ import { format, addDays } from 'date-fns';
 import { useState } from 'react';
 
 import styles from './styles.module.scss';
-import DatePicker from '../../DatePicker';
 
-import { api } from '~/utils/api';
+import { type Reservation } from '@prisma/client';
+import { getAvailableVillas, getDisabledDates } from '~/utils/reservations';
+import DateRangePicker from '~/components/DateRangePicker';
+import { type DateRange } from 'react-day-picker';
+import useDisabledDates from '~/hooks/useDisabledDates';
 
-const Availability = () => {
-  const [arrivalDate, setArrivalDate] = useState(new Date());
-  const [departureDate, setDepartureDate] = useState(addDays(new Date(), 1));
+const today = new Date();
+const nextDay = addDays(today, 1);
 
-  const setDate = ({
-    type,
-    date,
-  }: {
-    type: 'arrival' | 'departure';
-    date: Date;
-  }) => {
-    if (type === 'arrival') {
-      setArrivalDate(date);
-      setDepartureDate(addDays(date, 1));
-    }
-
-    if (type === 'departure') {
-      setDepartureDate(date);
-    }
-  };
-
-  const { data: villasAvailable } = api.smoobu.getAllBlockedDates.useQuery({
-    arrival: arrivalDate,
-    departure: departureDate,
+const Availability = ({ reservations }: { reservations: Reservation[] }) => {
+  const [datePickerActive, setDatePickerActive] = useState(true);
+  const [range, setRange] = useState<DateRange | undefined>({
+    from: today,
+    to: nextDay,
   });
+
+  const villasAvailable = getAvailableVillas({
+    reservations,
+    arrivalDate: range?.from ?? today,
+    departureDate: range?.to ?? nextDay,
+  });
+
+  // const disabledDates = getDisabledDates({ reservations });
+  const disabledDates = useDisabledDates(reservations);
 
   return (
     <section
       id="availability"
-      className={styles.wrapper}
+      className={styles.main}
     >
       <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <DatePicker
-            isRange={false}
-            date={arrivalDate}
-            setDate={setDate}
-            type={'arrival'}
-            arrivalDate={new Date()}
-          />
+        <DateRangePicker
+          isActive={datePickerActive}
+          setIsActive={setDatePickerActive}
+          disabledDates={disabledDates}
+          range={range}
+          setRange={setRange}
+        />
+        <div
+          className={styles.container}
+          onClick={() => setDatePickerActive(!datePickerActive)}
+        >
           <h3 className={styles.dateTitle}>ARRIVAL DATE</h3>
-          <span className={styles.dateContainer}>
-            <p className={styles.dateDayLarge}>{format(arrivalDate, 'dd')}</p>
-            <span>
-              <p>
-                {format(arrivalDate, 'MMM')}, {format(arrivalDate, 'yyyy')}
-                <br />
-                {format(arrivalDate, 'EEEE')}
-              </p>
+          {range?.from && (
+            <span className={styles.dateContainer}>
+              <p className={styles.dateDayLarge}>{format(range.from, 'dd')}</p>
+              <span>
+                <p>
+                  {format(range.from, 'MMM')}, {format(range.from, 'yyyy')}
+                  <br />
+                  {format(range.from, 'EEEE')}
+                </p>
+              </span>
             </span>
-          </span>
+          )}
         </div>
-        <div className={styles.container}>
-          <DatePicker
-            isRange={false}
-            arrivalDate={arrivalDate}
-            date={departureDate}
-            setDate={setDate}
-            type={'departure'}
-          />
+        <div
+          className={styles.container}
+          onClick={() => setDatePickerActive(!datePickerActive)}
+        >
           <h3 className={styles.dateTitle}>DEPARTURE DATE</h3>
-          <span className={styles.dateContainer}>
-            <span className={styles.dateDayLarge}>
-              {format(departureDate, 'dd')}
+          {range?.to && (
+            <span className={styles.dateContainer}>
+              <span className={styles.dateDayLarge}>
+                {format(range.to, 'dd')}
+              </span>
+              <span className={styles.dateInfo}>
+                <p>
+                  {format(range.to, 'MMM')}, {format(range.to, 'yyyy')}
+                  <br />
+                  {format(range.to, 'EEEE')}
+                </p>
+              </span>
             </span>
-            <span className={styles.dateInfo}>
-              <p>
-                {format(departureDate, 'MMM')}, {format(departureDate, 'yyyy')}
-                <br />
-                {format(departureDate, 'EEEE')}
-              </p>
-            </span>
-          </span>
+          )}
         </div>
       </div>
 

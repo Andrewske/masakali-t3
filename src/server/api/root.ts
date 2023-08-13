@@ -1,5 +1,5 @@
-import { createTRPCRouter } from '~/app/api/trpc';
-import { smoobuRouter } from '~/app/api/routers/smoobu';
+import { createTRPCRouter } from '~/server/api/trpc';
+import { smoobuRouter } from '~/server/api/routers/smoobu';
 
 /**
  * This is the primary router for your server.

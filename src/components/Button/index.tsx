@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import styles from './styles.module.scss';
 
 interface ButtonStyle {
@@ -21,3 +22,26 @@ const Button = ({ callToAction, isWhite, handleClick }: ButtonStyle) => {
 };
 
 export default Button;
+
+type GoToPageButtonProps = {
+  callToAction: string;
+  isWhite: boolean;
+  path: string;
+};
+
+export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
+  callToAction,
+  isWhite,
+  path,
+}) => {
+  return (
+    <Link
+      className={`${styles.container ?? ''} ${
+        isWhite ? `${styles.white ?? ''}` : ''
+      }`}
+      href={path}
+    >
+      {callToAction}
+    </Link>
+  );
+};

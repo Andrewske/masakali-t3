@@ -6,7 +6,7 @@ import Link from 'next/link';
 import VillaDetails from '../[villaName]/VillaDetails';
 import { villas, type VillaName } from '~/utils/smoobu';
 import { getDatesBetweenDates } from '~/utils';
-import { prisma } from '~/app/api/db';
+import { prisma } from '~/server/api/db';
 
 export type VillaDataType = {
   description: string;

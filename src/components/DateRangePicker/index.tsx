@@ -6,25 +6,22 @@ import dayPickerStyles from 'react-day-picker/dist/style.module.css';
 import { DayPicker, type DateRange, type ClassNames } from 'react-day-picker';
 
 import useOnClickOutside from '~/hooks/useOnClickOutside';
-
-import { villas, type VillaName } from '~/utils/smoobu';
-import { getDatesBetweenDates } from '~/utils';
-import { prisma } from '~/app/api/db';
-
 const today = new Date();
 
 type DateRangePickerProps = {
   isActive: boolean;
   setIsActive: Dispatch<SetStateAction<boolean>>;
   disabledDates: Date[];
-  setDates: Dispatch<SetStateAction<DateRange | undefined>>;
+  range: DateRange | undefined;
+  setRange: Dispatch<SetStateAction<DateRange | undefined>>;
 };
 
 const DateRangePicker = ({
   isActive,
   setIsActive,
   disabledDates,
-  setDates,
+  range,
+  setRange,
 }: DateRangePickerProps) => {
   const defaultSelected: DateRange = {
     from: today,
@@ -33,14 +30,41 @@ const DateRangePicker = ({
 
   const dayPickerRef = useRef(null);
   useOnClickOutside(dayPickerRef, () => setIsActive(false));
-  const [range, setRange] = useState<DateRange | undefined>(defaultSelected);
+  //const [range, setRange] = useState<DateRange | undefined>(defaultSelected);
 
   const classNames: ClassNames = {
     ...dayPickerStyles,
-    // day_disabled:`${dayPickerStyles.day_disabled} ${ styles.dayPickerDisabled ?? ''}`,
     day_selected: `${dayPickerStyles.day_selected} ${
       styles.dayPickerSelected ?? ''
     }`,
+  };
+
+  const isDateInRange = (
+    date: Date,
+    start: Date | undefined,
+    end: Date | undefined
+  ): boolean => {
+    return (start && date >= start && end && date <= end) ?? false;
+  };
+
+  const rangeIncludesDisabledDate = (
+    range: DateRange | undefined,
+    disabledDates: Date[]
+  ): boolean => {
+    if (!range) return false;
+    const { from, to } = range;
+    return disabledDates.some((date) => isDateInRange(date, from, to));
+  };
+
+  const handleSelect = (newRange: DateRange | undefined) => {
+    if (!rangeIncludesDisabledDate(newRange, disabledDates)) {
+      setRange(newRange);
+    } else {
+      setRange({
+        from: newRange?.to ?? newRange?.from ?? undefined,
+        to: undefined,
+      });
+    }
   };
 
   return (
@@ -55,13 +79,12 @@ const DateRangePicker = ({
           mode="range"
           defaultMonth={today}
           selected={range}
-          onSelect={setRange}
+          onSelect={handleSelect}
           classNames={classNames}
-          disabled={disabledDates}
+          disabled={[...disabledDates]}
         />
       </span>
     </div>
   );
 };
-
 export default DateRangePicker;

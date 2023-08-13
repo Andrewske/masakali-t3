@@ -12,6 +12,7 @@
   background: rgba(243, 243, 243, 0.9);
   display: grid;
   place-items: center;
+  z-index: 100;
 
   &.active {
     transform: translateX(0%);

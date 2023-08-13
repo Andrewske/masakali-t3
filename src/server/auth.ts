@@ -1,5 +1,15 @@
+// import NextAuth from 'next-auth';
+// import { authOptions } from '~/lib/auth';
+
+// // const handler: unknown = NextAuth(authOptions);
+
+// // export { handler as GET, handler as POST };
+// export const {
+//   handlers: { GET, POST },
+// } = NextAuth(authOptions);
+
 import { type GetServerSidePropsContext } from 'next';
-import {
+import NextAuth, {
   getServerSession,
   type NextAuthOptions,
   type DefaultSession,
@@ -9,6 +19,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { env } from '~/env.mjs';
 import { prisma } from '~/server/api/db';
+
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -77,6 +88,8 @@ export const authOptions: NextAuthOptions = {
   ],
 };
 
+export const { GET, POST } = NextAuth(authOptions);
+
 /**
  * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
  *
@@ -88,3 +101,6 @@ export const getServerAuthSession = (ctx: {
 }) => {
   return getServerSession(ctx.req, ctx.res, authOptions);
 };
+
+export const getServerAuthSession = () =>
+  auth() as unknown as Promise<Session | null>;
