@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 
-import facebookIcon from '../../../public/icons/icons8-facebook-50.png';
-import instagramIcon from '../../../public/icons/icons8-instagram-50.png';
-import emailIcon from '../../../public/icons/icons8-email-50.png';
+import facebookIcon from '~/../public/icons/icons8-facebook-50.png';
+import instagramIcon from '~/../public/icons/icons8-instagram-50.png';
+import emailIcon from '~/../public/icons/icons8-email-50.png';
 
 const sectionLinks = [
   'home',

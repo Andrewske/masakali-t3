@@ -10,7 +10,7 @@ import AkashaBathroom from '~/../public/hero-images/akasha-bathroom.webp';
 
 import Logo from '~/../public/FullOffWhiteLogo.svg';
 
-import HeroCarousel from '~/components/HomePage/HeroSlideShow/Carousel';
+import HeroCarousel from './Carousel';
 
 const images = [
   {

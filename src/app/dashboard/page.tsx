@@ -4,8 +4,8 @@ import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Button from '~/components/Button';
-import UpdateReservations from '~/components/Dashboard/UpdateReservations';
+import { GoToPageButton } from '~/components/Button';
+import UpdateReservations from '~/app/dashboard/UpdateReservations';
 import jurassicParkGif from '~/../public/jurassicParkGif.gif';
 
 const Dashboard: NextPage = () => {
@@ -22,13 +22,13 @@ const Dashboard: NextPage = () => {
           alt="jurassic park dennis ah ah ah gif"
         />
 
-        <Button
-          handleClick={() => router.push('/')}
+        <GoToPageButton
+          path={'/'}
           callToAction="Go to Homepage"
         />
 
-        <Button
-          handleClick={() => router.push('/api/auth/signin')}
+        <GoToPageButton
+          path={'/api/auth/signin'}
           callToAction="Sign In"
         />
       </main>

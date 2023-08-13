@@ -25,13 +25,13 @@ export default Button;
 
 type GoToPageButtonProps = {
   callToAction: string;
-  isWhite: boolean;
+  isWhite?: boolean;
   path: string;
 };
 
 export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
   callToAction,
-  isWhite,
+  isWhite = true,
   path,
 }) => {
   return (
