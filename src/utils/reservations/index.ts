@@ -1,7 +1,6 @@
 import { type Reservation } from '@prisma/client';
 import { villas } from '~/utils/smoobu';
 import { addDays, eachDayOfInterval, isBefore } from 'date-fns';
-// Query for all future reservations
 
 type getBlockedDatesAllVillasType = {
   reservations: Reservation[];
@@ -15,7 +14,7 @@ export const getAvailableVillas = ({
   departureDate,
 }: getBlockedDatesAllVillasType): number[] => {
   const blockedVillasSet = new Set<number>();
-  const allVillas = Object.values(villas);
+  const allVillas = [...villas].map(([, { id }]) => id);
 
   reservations.forEach((reservation) => {
     if (
