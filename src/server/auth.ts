@@ -9,7 +9,7 @@
 // } = NextAuth(authOptions);
 
 import { type GetServerSidePropsContext } from 'next';
-import NextAuth, {
+import {
   getServerSession,
   type NextAuthOptions,
   type DefaultSession,
@@ -88,8 +88,6 @@ export const authOptions: NextAuthOptions = {
   ],
 };
 
-export const { GET, POST } = NextAuth(authOptions);
-
 /**
  * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
  *
@@ -101,6 +99,3 @@ export const getServerAuthSession = (ctx: {
 }) => {
   return getServerSession(ctx.req, ctx.res, authOptions);
 };
-
-export const getServerAuthSession = () =>
-  auth() as unknown as Promise<Session | null>;

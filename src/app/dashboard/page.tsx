@@ -4,7 +4,7 @@ import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { GoToPageButton } from '~/components/Button';
+import { GoToPageButton, LoginButton } from '~/components/Button';
 import UpdateReservations from '~/app/dashboard/UpdateReservations';
 import jurassicParkGif from '~/../public/jurassicParkGif.gif';
 
@@ -27,10 +27,7 @@ const Dashboard: NextPage = () => {
           callToAction="Go to Homepage"
         />
 
-        <GoToPageButton
-          path={'/api/auth/signin'}
-          callToAction="Sign In"
-        />
+        <LoginButton />
       </main>
     );
   }
