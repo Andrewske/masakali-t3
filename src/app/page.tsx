@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { prisma } from '~/server/api/db';
+import { prisma } from '~/app/api/db';
 // Components
 
 import HeroSlideShow from '~/app/(home)/HeroSlideShow';
@@ -15,7 +15,7 @@ const Page = async () => {
   const reservations = await prisma.reservation.findMany({
     where: {
       arrival: {
-        gt: new Date(),
+        gt: new Date().toISOString(),
       },
     },
   });

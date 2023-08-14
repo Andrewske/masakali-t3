@@ -2,7 +2,7 @@
 import { useState, useRef, type SetStateAction, type Dispatch } from 'react';
 import styles from './styles.module.scss';
 import dayPickerStyles from 'react-day-picker/dist/style.module.css';
-
+import { addDays, isBefore } from 'date-fns';
 import { DayPicker, type DateRange, type ClassNames } from 'react-day-picker';
 
 import useOnClickOutside from '~/hooks/useOnClickOutside';
@@ -23,11 +23,6 @@ const DateRangePicker = ({
   range,
   setRange,
 }: DateRangePickerProps) => {
-  const defaultSelected: DateRange = {
-    from: today,
-    to: undefined,
-  };
-
   const dayPickerRef = useRef(null);
   useOnClickOutside(dayPickerRef, () => setIsActive(false));
   //const [range, setRange] = useState<DateRange | undefined>(defaultSelected);
@@ -81,7 +76,8 @@ const DateRangePicker = ({
           selected={range}
           onSelect={handleSelect}
           classNames={classNames}
-          disabled={[...disabledDates]}
+          disabled={disabledDates}
+          hidden={(day) => isBefore(day, addDays(today, -1))}
         />
       </span>
     </div>

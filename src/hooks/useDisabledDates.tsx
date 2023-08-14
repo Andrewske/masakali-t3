@@ -1,11 +1,11 @@
 import { type Reservation } from '@prisma/client';
 import { villas } from '~/utils/smoobu';
-import { addDays, eachDayOfInterval, isBefore } from 'date-fns';
+import { addDays, eachDayOfInterval, isBefore, parseISO } from 'date-fns';
 
 const useDisabledDates = (reservations: Reservation[], villaId?: number) => {
-  console.log('useDisabledDates');
   let filteredReservations = reservations;
 
+  //console.log('useDisabledDates', { reservations });
   // Filter by villaId if provided
   if (villaId) {
     filteredReservations = reservations.filter(
@@ -17,14 +17,14 @@ const useDisabledDates = (reservations: Reservation[], villaId?: number) => {
   const disabledDates = new Set<Date>();
 
   filteredReservations.forEach((reservation) => {
-    const startDate = addDays(reservation.arrival, 1); // Start from the day after arrival
-    const endDate = addDays(reservation.departure, -1); // End a day before the departure
+    const arrival: Date = parseISO(reservation.arrival) ?? new Date();
+    const departure: Date = parseISO(reservation.departure) ?? new Date();
+
+    const startDate = addDays(arrival, 1); // Start from the day after arrival
+    const endDate = addDays(departure, -1); // End a day before the departure
 
     // If it's a two-night stay, only block the day after arrival
-    if (
-      isBefore(startDate, reservation.departure) &&
-      isBefore(reservation.arrival, endDate)
-    ) {
+    if (isBefore(startDate, departure) && isBefore(arrival, endDate)) {
       disabledDates.add(startDate);
     } else if (isBefore(startDate, endDate)) {
       // For longer stays, block the interval
@@ -44,7 +44,8 @@ const useDisabledDates = (reservations: Reservation[], villaId?: number) => {
       villaCount.set(date, count + 1);
     });
 
-    const allVillasCount = Object.keys(villas).length; // Assuming `villas` is defined in the outer scope
+    const allVillasCount = Object.keys(villas).length;
+    console.log(villaCount); // Assuming `villas` is defined in the outer scope
     disabledDates.forEach((date) => {
       if (villaCount.get(date) !== allVillasCount) {
         disabledDates.delete(date);

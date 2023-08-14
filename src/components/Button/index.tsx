@@ -59,3 +59,26 @@ export const LoginButton = ({ isWhite }: { isWhite?: boolean }) => {
     </button>
   );
 };
+
+export const UpdateReservationsButton = ({
+  isWhite,
+}: {
+  isWhite?: boolean;
+}) => {
+  const handleClick = async () => {
+    console.log('updating reservations');
+    const data = await fetch('/api/smoobu/manuallyUpdateReservations');
+    console.log({ data });
+  };
+
+  return (
+    <button
+      className={`${styles.container ?? ''} ${
+        isWhite ? `${styles.white ?? ''}` : ''
+      }`}
+      onClick={() => handleClick}
+    >
+      Log In
+    </button>
+  );
+};

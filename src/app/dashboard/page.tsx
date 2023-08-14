@@ -2,15 +2,14 @@
 import styles from './styles.module.scss';
 import { type NextPage } from 'next';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { GoToPageButton, LoginButton } from '~/components/Button';
-import UpdateReservations from '~/app/dashboard/UpdateReservations';
+
 import jurassicParkGif from '~/../public/jurassicParkGif.gif';
+import { UpdateReservationsButton } from '~/components/Button';
 
 const Dashboard: NextPage = () => {
   const { data: session } = useSession();
-  const router = useRouter();
 
   if (!session?.user?.admin) {
     return (
@@ -34,7 +33,7 @@ const Dashboard: NextPage = () => {
 
   return (
     <main className={styles.main}>
-      <UpdateReservations />
+      <UpdateReservationsButton />
     </main>
   );
 };

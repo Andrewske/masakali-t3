@@ -1,4 +1,4 @@
-export type smoobuReservation = {
+export type SmoobuReservation = {
   id: number;
   'reference-id': string;
   type: string;
@@ -38,10 +38,10 @@ export type smoobuReservation = {
   guestId: number;
 };
 
-export type smoobuReservationsResponse = {
+export type SmoobuReservationsResponse = {
   page_count: number;
   page_size: number;
   total_items: number;
   page: 1;
-  bookings: smoobuReservation[];
+  bookings: SmoobuReservation[];
 };

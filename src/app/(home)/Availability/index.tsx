@@ -29,7 +29,7 @@ const Availability = ({ reservations }: { reservations: Reservation[] }) => {
 
   // const disabledDates = getDisabledDates({ reservations });
   const disabledDates = useDisabledDates(reservations);
-
+  console.log(disabledDates);
   return (
     <section
       id="availability"
