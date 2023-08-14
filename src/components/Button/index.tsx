@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import { useSession, signIn } from 'next-auth/react';
 import styles from './styles.module.scss';
 
 interface ButtonStyle {
@@ -53,7 +52,7 @@ export const LoginButton = ({ isWhite }: { isWhite?: boolean }) => {
       className={`${styles.container ?? ''} ${
         isWhite ? `${styles.white ?? ''}` : ''
       }`}
-      onClick={() => void signIn('google')}
+      // onClick={() => void signIn('google')}
     >
       Log In
     </button>

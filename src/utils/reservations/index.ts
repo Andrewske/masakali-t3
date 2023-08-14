@@ -18,8 +18,8 @@ export const getAvailableVillas = ({
 
   reservations.forEach((reservation) => {
     if (
-      isBefore(reservation.arrival, departureDate) &&
-      isBefore(arrivalDate, reservation.departure)
+      isBefore(new Date(reservation.arrival), departureDate) &&
+      isBefore(arrivalDate, new Date(reservation.departure))
     ) {
       blockedVillasSet.add(reservation.villaId);
     }
@@ -50,13 +50,13 @@ export const getDisabledDates = ({
   const disabledDates = new Set<Date>();
 
   filteredReservations.forEach((reservation) => {
-    const startDate = addDays(reservation.arrival, 1); // Start from the day after arrival
-    const endDate = addDays(reservation.departure, -1); // End a day before the departure
+    const startDate = addDays(new Date(reservation.arrival), 1); // Start from the day after arrival
+    const endDate = addDays(new Date(reservation.departure), -1); // End a day before the departure
 
     // If it's a two-night stay, only block the day after arrival
     if (
-      isBefore(startDate, reservation.departure) &&
-      isBefore(reservation.arrival, endDate)
+      isBefore(startDate, new Date(reservation.departure)) &&
+      isBefore(new Date(reservation.arrival), endDate)
     ) {
       disabledDates.add(startDate);
     } else if (isBefore(startDate, endDate)) {
