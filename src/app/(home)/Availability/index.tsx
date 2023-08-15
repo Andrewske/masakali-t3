@@ -1,6 +1,6 @@
 'use client';
 
-import { format, addDays } from 'date-fns';
+import { format, addDays, parse } from 'date-fns';
 import { useState } from 'react';
 
 import styles from './styles.module.scss';
@@ -9,7 +9,6 @@ import { type Reservation } from '@prisma/client';
 import { getAvailableVillas, getDisabledDates } from '~/utils/reservations';
 import DateRangePicker from '~/components/DateRangePicker';
 import { type DateRange } from 'react-day-picker';
-import useDisabledDates from '~/hooks/useDisabledDates';
 
 const today = new Date();
 const nextDay = addDays(today, 1);
@@ -27,9 +26,12 @@ const Availability = ({ reservations }: { reservations: Reservation[] }) => {
     departureDate: range?.to ?? nextDay,
   });
 
-  // const disabledDates = getDisabledDates({ reservations });
-  const disabledDates = useDisabledDates(reservations);
-  console.log(disabledDates);
+  // const disabledDates = useDisabledDates(reservations);
+  const disabledDates = getDisabledDates(reservations);
+
+  const parsedDates = disabledDates.map((d) =>
+    parse(d, 'yyyy-MM-dd', new Date())
+  );
   return (
     <section
       id="availability"
@@ -39,7 +41,7 @@ const Availability = ({ reservations }: { reservations: Reservation[] }) => {
         <DateRangePicker
           isActive={datePickerActive}
           setIsActive={setDatePickerActive}
-          disabledDates={disabledDates}
+          disabledDates={parsedDates}
           range={range}
           setRange={setRange}
         />

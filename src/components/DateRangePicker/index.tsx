@@ -1,12 +1,15 @@
 'use client';
-import { useState, useRef, type SetStateAction, type Dispatch } from 'react';
+import { useRef, type SetStateAction, type Dispatch } from 'react';
 import styles from './styles.module.scss';
 import dayPickerStyles from 'react-day-picker/dist/style.module.css';
 import { addDays, isBefore } from 'date-fns';
 import { DayPicker, type DateRange, type ClassNames } from 'react-day-picker';
 
 import useOnClickOutside from '~/hooks/useOnClickOutside';
-const today = new Date();
+import { getCurrentDateInBali } from '~/utils';
+
+const today = getCurrentDateInBali();
+console.log({ today });
 
 type DateRangePickerProps = {
   isActive: boolean;
@@ -25,7 +28,6 @@ const DateRangePicker = ({
 }: DateRangePickerProps) => {
   const dayPickerRef = useRef(null);
   useOnClickOutside(dayPickerRef, () => setIsActive(false));
-  //const [range, setRange] = useState<DateRange | undefined>(defaultSelected);
 
   const classNames: ClassNames = {
     ...dayPickerStyles,
@@ -56,7 +58,7 @@ const DateRangePicker = ({
       setRange(newRange);
     } else {
       setRange({
-        from: newRange?.to ?? newRange?.from ?? undefined,
+        from: undefined,
         to: undefined,
       });
     }
@@ -78,6 +80,7 @@ const DateRangePicker = ({
           classNames={classNames}
           disabled={disabledDates}
           hidden={(day) => isBefore(day, addDays(today, -1))}
+          min={2}
         />
       </span>
     </div>

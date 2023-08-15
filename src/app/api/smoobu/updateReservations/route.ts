@@ -41,7 +41,7 @@ export async function GET() {
     transformedData.map((data) => upsertReservationToDatabase(data))
   );
 
-  //   return NextResponse.json(response);
+  return NextResponse.json(response);
 }
 
 type SmoobuReservationsResponse = {

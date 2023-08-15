@@ -10,13 +10,20 @@ import Villas from '~/app/(home)/Villas';
 import Dining from '~/app/(home)/Dining';
 import Amenities from '~/app/(home)/Amenities';
 import Location from '~/app/(home)/Location';
+import { addDays } from 'date-fns';
+import { getCurrentDateInBali } from '~/utils';
+
+const today = getCurrentDateInBali();
+const twoDaysAgo: string = addDays(today, -2).toISOString();
 
 const Page = async () => {
   const reservations = await prisma.reservation.findMany({
     where: {
       arrival: {
-        gt: new Date().toISOString(),
+        gt: twoDaysAgo,
+        lt: '2023-10-01',
       },
+      cancelled: false,
     },
   });
 

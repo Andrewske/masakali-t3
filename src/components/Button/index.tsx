@@ -1,6 +1,9 @@
 'use client';
 import Link from 'next/link';
 import styles from './styles.module.scss';
+import { signIn } from 'next-auth/react';
+
+import { UpdateReservationsResponse } from '~/types/smoobu';
 
 interface ButtonStyle {
   callToAction: string;
@@ -52,7 +55,7 @@ export const LoginButton = ({ isWhite }: { isWhite?: boolean }) => {
       className={`${styles.container ?? ''} ${
         isWhite ? `${styles.white ?? ''}` : ''
       }`}
-      // onClick={() => void signIn('google')}
+      onClick={() => void signIn('email')}
     >
       Log In
     </button>
@@ -65,9 +68,14 @@ export const UpdateReservationsButton = ({
   isWhite?: boolean;
 }) => {
   const handleClick = async () => {
-    console.log('updating reservations');
-    const data = await fetch('/api/smoobu/manuallyUpdateReservations');
-    console.log({ data });
+    const response = await fetch('/api/smoobu/updateReservations');
+    if (response.ok) {
+      const data =
+        (await response?.json()) as typeof UpdateReservationsResponse;
+      console.log(data);
+    } else {
+      console.log('Error fetching data:', response.statusText);
+    }
   };
 
   return (
@@ -75,9 +83,9 @@ export const UpdateReservationsButton = ({
       className={`${styles.container ?? ''} ${
         isWhite ? `${styles.white ?? ''}` : ''
       }`}
-      onClick={() => handleClick}
+      onClick={() => void handleClick()}
     >
-      Log In
+      Update Reservations
     </button>
   );
 };

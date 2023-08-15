@@ -1,3 +1,5 @@
+import { number } from 'zod';
+
 export type SmoobuReservation = {
   id: number;
   'reference-id': string;
@@ -45,3 +47,9 @@ export type SmoobuReservationsResponse = {
   page: 1;
   bookings: SmoobuReservation[];
 };
+
+export const UpdateReservationsResponse = [
+  {
+    smoobuId: number,
+  },
+];

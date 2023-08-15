@@ -19,3 +19,18 @@ export function getDatesBetweenDates(startDate: Date, endDate: Date): Date[] {
 
   return dates;
 }
+
+export function getCurrentDateInBali(): Date {
+  const localNow: Date = new Date();
+
+  // Get the local timezone offset in minutes and convert it to milliseconds
+  const localOffset: number = localNow.getTimezoneOffset() * 60000;
+
+  // Bali, Indonesia is in the UTC+8 time zone (480 minutes ahead of UTC)
+  const baliOffset: number = 480 * 60000;
+
+  // Calculate the Bali time in milliseconds
+  const baliNow: number = localNow.getTime() + localOffset + baliOffset;
+
+  return new Date(baliNow);
+}
