@@ -1,12 +1,7 @@
 import { type Reservation } from '@prisma/client';
-import { villas } from '~/utils/smoobu';
-import {
-  addDays,
-  eachDayOfInterval,
-  isBefore,
-  format,
-  parseISO,
-} from 'date-fns';
+import { villaIds } from '~/utils/smoobu';
+import { format, parseISO } from 'date-fns';
+import { getDatesBetweenDates } from '..';
 
 type getBlockedDatesAllVillasType = {
   reservations: Reservation[];
@@ -20,7 +15,6 @@ export const getAvailableVillas = ({
   departureDate,
 }: getBlockedDatesAllVillasType): number[] => {
   const blockedVillasSet = new Set<number>();
-  const allVillas = [...villas].map(([, { id }]) => id);
 
   const formattedArrivalDate = format(arrivalDate, 'yyyy-MM-dd');
   const formattedDepartureDate = format(departureDate, 'yyyy-MM-dd');
@@ -34,132 +28,71 @@ export const getAvailableVillas = ({
     }
   });
 
-  return allVillas.filter((villaId) => !blockedVillasSet.has(villaId));
+  return [...villaIds].filter((villaId) => !blockedVillasSet.has(villaId));
 };
-
-// type getDisabledDatesParams = {
-//   reservations: Reservation[];
-//   villaId?: number;
-// };
-
-// export const getDisabledDates = ({
-//   reservations,
-//   villaId,
-// }: getDisabledDatesParams): Date[] => {
-//   let filteredReservations = reservations;
-
-//   // Filter by villaId if provided
-//   if (villaId) {
-//     filteredReservations = reservations.filter(
-//       (res) => res.villaId === villaId
-//     );
-//   }
-
-//   // Extract the blocked dates from the filtered reservations
-//   const disabledDates = new Set<Date>();
-
-//   filteredReservations.forEach((reservation) => {
-//     const startDate = addDays(new Date(reservation.arrival), 1); // Start from the day after arrival
-//     const endDate = addDays(new Date(reservation.departure), -1); // End a day before the departure
-
-//     // If it's a two-night stay, only block the day after arrival
-//     if (
-//       isBefore(startDate, new Date(reservation.departure)) &&
-//       isBefore(new Date(reservation.arrival), endDate)
-//     ) {
-//       disabledDates.add(startDate);
-//     } else if (isBefore(startDate, endDate)) {
-//       // For longer stays, block the interval
-//       const intervalDates = eachDayOfInterval({
-//         start: startDate,
-//         end: endDate,
-//       });
-//       intervalDates.forEach((date) => disabledDates.add(date));
-//     }
-//   });
-
-//   // If no villaId is provided, filter dates that are blocked across all villas
-//   if (!villaId) {
-//     const villaCount = new Map<Date, number>();
-//     disabledDates.forEach((date) => {
-//       const count = villaCount.get(date) || 0;
-//       villaCount.set(date, count + 1);
-//     });
-
-//     const allVillasCount = Object.keys(villas).length; // Assuming `villas` is defined in the outer scope
-//     disabledDates.forEach((date) => {
-//       if (villaCount.get(date) !== allVillasCount) {
-//         disabledDates.delete(date);
-//       }
-//     });
-//   }
-
-//   return [...disabledDates];
-
-// };
-
-// import { villas } from '~/utils/smoobu';
 
 export const getDisabledDates = (
   reservations: Reservation[],
   villaId?: number
 ) => {
-  const villas = villaId
-    ? new Set([villaId])
-    : new Set(reservations.map((r) => r.villaId));
+  // This map gives a date and the count of villaIds that have reservations on that date
+  const dateCounts = new Map<string, Set<number>>();
 
-  // Okay so I recieve the reservations. If there is a villa id then I filter the reservations
+  // Loop through each reservation
+  for (const reservation of reservations) {
+    // If a villaId is given and the reservation doesn't match, skip it
+    if (villaId && reservation.villaId !== villaId) {
+      continue;
+    }
 
-  const dateCounts = new Map<string, Reservation[]>();
+    // Create a function to add to dateCounts to limit code duplication
+    const setDateCounts = (dateString: string, villaId: number) => {
+      const ids = dateCounts.get(dateString) || new Set();
+      dateCounts.set(dateString, ids.add(villaId));
+    };
 
-  // okay so what if for each villa I consider blocked dates to be arrival to day before departure
-  // that way if that villa has a departure and arrival on the same day it is still blocked.
-
-  // I only want arrival dates if there is another reservation with a departure date
-
-  for (const villaId of villas.values()) {
-    const filteredReservations = reservations.filter(
-      (res) => res.villaId === villaId
+    // Get each day between the arrival and departure not inclusive.
+    const betweenDates = getDatesBetweenDates(
+      parseISO(reservation.arrival),
+      parseISO(reservation.departure)
     );
 
-    const arrivalDates = filteredReservations.map((res) => res.arrival);
-    const departureDates = filteredReservations.map((res) => res.departure);
+    // For each date in between Dates add the villaId
+    for (const date of betweenDates) {
+      const dateString = format(date, 'yyyy-MM-dd');
+      setDateCounts(dateString, reservation.villaId);
+    }
 
-    filteredReservations.forEach((reservation) => {
-      const blockedArrival = departureDates.includes(reservation.arrival);
-      const blockedDeparture = arrivalDates.includes(reservation.departure);
-      const arrival = parseISO(reservation.arrival);
-      const departure = parseISO(reservation.departure);
-      const dates = new Set(
-        eachDayOfInterval({ start: arrival, end: departure }).map((date) =>
-          format(date, 'yyyy-MM-dd')
-        )
-      );
+    // check if the reserations arrival date is in the list of depature dates
+    const hasArrival = reservations.some(
+      (r) =>
+        r.departure === reservation.arrival && r.villaId === reservation.villaId
+    );
 
-      if (!blockedArrival) {
-        dates.delete(reservation.arrival);
-      }
-      if (!blockedDeparture) {
-        dates.delete(reservation.departure);
-      }
+    if (hasArrival) {
+      setDateCounts(reservation.arrival, reservation.villaId);
+    }
 
-      dates.forEach((date) => {
-        const ids = dateCounts.get(date) || [];
-        dateCounts.set(date, [...ids, reservation]);
-      });
-    });
+    // check if the reservations departure date is in the list of arrival dates
+    const hasDeparture = reservations.some(
+      (r) =>
+        r.arrival === reservation.departure && r.villaId === reservation.villaId
+    );
+
+    if (hasDeparture) {
+      setDateCounts(reservation.departure, reservation.villaId);
+    }
   }
-
-  // If no villaId is provided, filter the dates to only include those that are blocked for every villa
 
   const disabledDates = new Set<string>();
 
-  dateCounts.forEach((reservations, date) => {
-    const villaIds = new Set(reservations.map((r) => r.villaId));
-    if (villaIds.size === villas.size) {
+  for (const [date, villas] of dateCounts.entries()) {
+    if (!villaId && villaIds.size === villas.size) {
+      disabledDates.add(date);
+    } else if (villaId && villaIds.has(villaId)) {
       disabledDates.add(date);
     }
-  });
+  }
 
-  return [...disabledDates];
+  return disabledDates;
 };

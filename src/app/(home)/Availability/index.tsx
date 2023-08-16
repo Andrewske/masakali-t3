@@ -1,6 +1,6 @@
 'use client';
 
-import { format, addDays, parse } from 'date-fns';
+import { format, addDays, parseISO } from 'date-fns';
 import { useState } from 'react';
 
 import styles from './styles.module.scss';
@@ -20,18 +20,16 @@ const Availability = ({ reservations }: { reservations: Reservation[] }) => {
     to: nextDay,
   });
 
-  const villasAvailable = getAvailableVillas({
-    reservations,
-    arrivalDate: range?.from ?? today,
-    departureDate: range?.to ?? nextDay,
-  });
+  const villasAvailable =
+    range?.to &&
+    getAvailableVillas({
+      reservations,
+      arrivalDate: range?.from ?? today,
+      departureDate: range.to,
+    });
 
-  // const disabledDates = useDisabledDates(reservations);
   const disabledDates = getDisabledDates(reservations);
 
-  const parsedDates = disabledDates.map((d) =>
-    parse(d, 'yyyy-MM-dd', new Date())
-  );
   return (
     <section
       id="availability"
@@ -41,7 +39,7 @@ const Availability = ({ reservations }: { reservations: Reservation[] }) => {
         <DateRangePicker
           isActive={datePickerActive}
           setIsActive={setDatePickerActive}
-          disabledDates={parsedDates}
+          disabledDates={disabledDates}
           range={range}
           setRange={setRange}
         />

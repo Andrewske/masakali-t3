@@ -2,7 +2,7 @@
 import { useRef, type SetStateAction, type Dispatch } from 'react';
 import styles from './styles.module.scss';
 import dayPickerStyles from 'react-day-picker/dist/style.module.css';
-import { addDays, isBefore } from 'date-fns';
+import { addDays, isBefore, format } from 'date-fns';
 import { DayPicker, type DateRange, type ClassNames } from 'react-day-picker';
 
 import useOnClickOutside from '~/hooks/useOnClickOutside';
@@ -14,7 +14,7 @@ console.log({ today });
 type DateRangePickerProps = {
   isActive: boolean;
   setIsActive: Dispatch<SetStateAction<boolean>>;
-  disabledDates: Date[];
+  disabledDates: Set<string>;
   range: DateRange | undefined;
   setRange: Dispatch<SetStateAction<DateRange | undefined>>;
 };
@@ -28,6 +28,13 @@ const DateRangePicker = ({
 }: DateRangePickerProps) => {
   const dayPickerRef = useRef(null);
   useOnClickOutside(dayPickerRef, () => setIsActive(false));
+
+  console.log(
+    'DateRangePicker',
+    [...disabledDates].sort(
+      (a, b) => new Date(a).getTime() - new Date(b).getTime()
+    )
+  );
 
   const classNames: ClassNames = {
     ...dayPickerStyles,
@@ -46,11 +53,14 @@ const DateRangePicker = ({
 
   const rangeIncludesDisabledDate = (
     range: DateRange | undefined,
-    disabledDates: Date[]
+    disabledDates: Set<string>
   ): boolean => {
     if (!range) return false;
     const { from, to } = range;
-    return disabledDates.some((date) => isDateInRange(date, from, to));
+
+    return [...disabledDates].some((date) =>
+      isDateInRange(new Date(date), from, to)
+    );
   };
 
   const handleSelect = (newRange: DateRange | undefined) => {
@@ -62,6 +72,10 @@ const DateRangePicker = ({
         to: undefined,
       });
     }
+  };
+
+  const dayIsDisabled = (day: Date) => {
+    return disabledDates.has(format(day, 'yyyy-MM-dd'));
   };
 
   return (
@@ -78,7 +92,7 @@ const DateRangePicker = ({
           selected={range}
           onSelect={handleSelect}
           classNames={classNames}
-          disabled={disabledDates}
+          disabled={(day) => dayIsDisabled(day)}
           hidden={(day) => isBefore(day, addDays(today, -1))}
           min={2}
         />

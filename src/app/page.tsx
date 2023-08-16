@@ -19,9 +19,9 @@ const twoDaysAgo: string = addDays(today, -2).toISOString();
 const Page = async () => {
   const reservations = await prisma.reservation.findMany({
     where: {
-      arrival: {
+      departure: {
         gt: twoDaysAgo,
-        lt: '2023-10-01',
+        lt: '2023-12-01',
       },
       cancelled: false,
     },

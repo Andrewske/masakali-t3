@@ -1,11 +1,11 @@
 'use client';
 import { useState } from 'react';
 import styles from './styles.module.scss';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { type DateRange } from 'react-day-picker';
 import DateRangePicker from '~/components/DateRangePicker';
 
-const DateContainer = ({ disabledDates }: { disabledDates: Date[] }) => {
+const DateContainer = ({ disabledDates }: { disabledDates: string[] }) => {
   const [range, setRange] = useState<DateRange | undefined>({
     from: new Date(),
     to: undefined,
@@ -17,7 +17,7 @@ const DateContainer = ({ disabledDates }: { disabledDates: Date[] }) => {
       <DateRangePicker
         isActive={isActive}
         setIsActive={setIsActive}
-        disabledDates={disabledDates}
+        disabledDates={disabledDates.map(date => parseISO(date))}
         range={range}
         setRange={setRange}
       />

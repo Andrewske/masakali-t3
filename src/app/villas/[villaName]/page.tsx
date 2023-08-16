@@ -4,44 +4,41 @@ import GridGallery from '../[villaName]/GridGallery';
 import DateContainer from './DateContainer';
 import Link from 'next/link';
 import VillaDetails from '../[villaName]/VillaDetails';
-import { villas, type VillaName } from '~/utils/smoobu';
-import { getDatesBetweenDates } from '~/utils';
+import { villas } from '~/utils/smoobu';
 import { prisma } from '~/app/api/db';
+import { getDisabledDates } from '~/utils/reservations';
 
 export type VillaDataType = {
+  name: string;
   description: string;
   amenities: string;
 };
 
+const today = new Date();
+
 async function Page({
   params: { villaName },
 }: {
-  params: { villaName: VillaName };
+  params: { villaName: string };
 }) {
   const villaData = (await prisma.villa.findUnique({
     where: { name: villaName },
     select: { description: true, amenities: true },
   })) as VillaDataType;
 
+  const villaId = villas.get(villaName)?.id;
+
   const disabledDates = await prisma.reservation
     .findMany({
       where: {
-        villaId: villas[villaName],
+        villaId,
         departure: {
-          gte: new Date(),
+          gte: today.toISOString(),
         },
-      },
-      select: {
-        arrival: true,
-        departure: true,
       },
     })
     .then((reservations) => {
-      return reservations
-        .map(({ arrival, departure }) => {
-          return getDatesBetweenDates(arrival, departure);
-        })
-        .flat();
+      return getDisabledDates(reservations, villaId);
     });
 
   return (

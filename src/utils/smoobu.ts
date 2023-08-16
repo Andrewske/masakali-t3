@@ -6,5 +6,8 @@ export const villas = new Map<string, { id: number }>([
   ['lakshmi', { id: 1587920 }],
 ]);
 
+// Turn the map above into a list of ids
+export const villaIds = new Set([...villas].map(([, { id }]) => id));
+
 export type VillaName = keyof typeof villas;
 export type VillaId = (typeof villas)[VillaName];

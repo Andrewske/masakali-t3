@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 export default function NextVilla({
   currentVillaName,
 }: {
-  currentVillaName: VillaName;
+  currentVillaName: string;
 }) {
   return (
     <Link href={`/villas/${nextVilla(currentVillaName)}`}>
@@ -15,7 +15,7 @@ export default function NextVilla({
   );
 }
 
-const nextVilla = (currentVillaName: VillaName) => {
+const nextVilla = (currentVillaName: string) => {
   const villaNames = Object.keys(villas);
 
   const indexOfCurrentVilla = villaNames.findIndex(
