@@ -1,0 +1,90 @@
+@import '~/styles/vars';
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: $default-wrapper-padding;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: calc(min(350px, 85vw));
+}
+
+.label {
+  font-size: 0.85rem;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  height: 2rem;
+  border-radius: 0.25rem;
+  padding: 0rem 0.75rem;
+  font-size: 1rem;
+  box-shadow: $light-purple-5 0px 1px 2px, $light-purple-5 0px 0px 0px 2px;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.error {
+  border: none;
+  box-shadow: rgba($red, 0.5) 0px 1px 4px, rgba($red, 0.5) 0px 0px 0px 3px;
+}
+
+.phoneInputContainer {
+  @extend .input;
+
+  input {
+    font-size: 1rem;
+  }
+}
+
+.autoCompleteContainer {
+  position: relative;
+  @extend .input;
+  padding: 0rem;
+  padding-top: 3rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .address {
+    @extend .input;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: none !important;
+  }
+
+  .prediction {
+    flex: 1;
+
+    cursor: pointer;
+    width: 100%;
+    padding: 0.25rem 1rem;
+
+    &:hover {
+      background-color: $light-purple-5;
+    }
+  }
+}
+
+.address {
+  @extend .input;
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

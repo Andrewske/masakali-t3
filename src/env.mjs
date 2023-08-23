@@ -43,6 +43,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SMOOBU_JALA_ID: z.string(),
     NEXT_PUBLIC_SMOOBU_AKASHA_ID: z.string(),
     NEXT_PUBLIC_SMOOBU_LAKSHMI_ID: z.string(),
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string(),
   },
 
   /**
@@ -56,6 +57,8 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:
+      process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     NEXT_PUBLIC_SMOOBU_SURYA_ID: process.env.NEXT_PUBLIC_SMOOBU_SURYA_ID,
     NEXT_PUBLIC_SMOOBU_CHANDRA_ID: process.env.NEXT_PUBLIC_SMOOBU_CHANDRA_ID,
     NEXT_PUBLIC_SMOOBU_JALA_ID: process.env.NEXT_PUBLIC_SMOOBU_JALA_ID,
