@@ -26,6 +26,8 @@ export default function CartForm() {
     control,
     register,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
@@ -99,6 +101,8 @@ export default function CartForm() {
         <AddressForm
           register={register}
           errors={errors}
+          setValue={setValue}
+          getValues={getValues}
         />
       </span>
       <span className={styles.button}>

@@ -1,15 +1,23 @@
 'use client';
-import { useState } from 'react';
-import type { UseFormRegister, FieldErrors } from 'react-hook-form';
+import { useRef } from 'react';
+import type {
+  UseFormRegister,
+  FieldErrors,
+  UseFormSetValue,
+  UseFormGetValues,
+} from 'react-hook-form';
 import { type FormData } from '../index';
 import styles from './styles.module.scss';
 import usePlacesAutocompleteService from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
 import { env } from '~/env.mjs';
 import { addressComponentsToAddressObject } from '~/utils/googlePlaces';
+import useKeyDown from '~/hooks/useKeyDown';
 
 type AddressFormProps = {
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
+  setValue: UseFormSetValue<FormData>;
+  getValues: UseFormGetValues<FormData>;
 };
 
 const initialAddressState = {
@@ -21,9 +29,12 @@ const initialAddressState = {
   zip_code: '',
 };
 
-export default function AddressForm({ register, errors }: AddressFormProps) {
-  const [address, setAddress] = useState(initialAddressState);
-
+export default function AddressForm({
+  register,
+  errors,
+  setValue,
+  getValues,
+}: AddressFormProps) {
   const {
     placePredictions,
     getPlacePredictions,
@@ -32,6 +43,25 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
   } = usePlacesAutocompleteService({
     apiKey: env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
   });
+
+  /**
+   * Moves the focus down to the next list item.
+   * @param listId - The id of the unordered list.
+   */
+  const moveFocusDown = (): void => {
+    const listItems = document?.querySelector(`#predictions`)?.childNodes ?? [];
+    const activeItem = document.activeElement as HTMLElement;
+
+    for (let i = 0; i < listItems.length ?? 0; i++) {
+      const listLength = listItems.length;
+      if (
+        activeItem === listItems[i] &&
+        activeItem !== listItems[listLength - 1]
+      ) {
+        (listItems[i + 1] as HTMLElement).focus();
+      }
+    }
+  };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //const result = getPlacePredictions({ input: value });
@@ -48,10 +78,39 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
 
   const handleKeyDown = (
     event: React.KeyboardEvent<HTMLLIElement>,
-    place_id: string
+    place_id?: string
   ) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && place_id) {
       handleClick(place_id);
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      const listItem = document.activeElement?.nextSibling as HTMLElement;
+      if (listItem) {
+        console.log('down');
+        listItem.focus();
+      }
+    }
+    // if (event.key === 'ArrowUp') {
+    //   event.currentTarget.previousSibling &&
+    //     event.currentTarget.previousSibling.focus();
+    // }
+  };
+
+  /**
+   * Moves the focus up to the previous item in the menu.
+   *
+   * @param menuId - The ID of the menu element.
+   */
+  const moveFocusUp = (): void => {
+    const listItems: NodeListOf<HTMLElement> =
+      document.querySelectorAll(`#predictions`) ?? [];
+    const activeItem: HTMLElement | null =
+      document.activeElement as HTMLElement;
+    for (let i = 0; i < listItems.length; i++) {
+      if (activeItem === listItems[i] && activeItem !== listItems[0]) {
+        (listItems[i - 1] as HTMLElement).focus();
+      }
     }
   };
 
@@ -62,12 +121,26 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
           details.address_components
         );
 
-        setAddress({
-          ...address,
-          ...addressObj,
-        });
+        setValue('address.address1', addressObj.address1);
+        setValue('address.city', addressObj.city);
+        setValue('address.state', addressObj.state);
+        setValue('address.country', addressObj.country);
+        setValue('address.zip_code', addressObj.zip_code);
+        getPlacePredictions({ input: '' });
       }
     });
+  };
+
+  const predictionValue = () => {
+    if (placePredictions.length > 0) {
+      let prediction = placePredictions[0]?.description ?? '';
+      const inputValue = getValues('address.address1');
+      return prediction.replace(
+        inputValue,
+        new Array(inputValue.length + 1).join(' ')
+      );
+    }
+    return '';
   };
 
   return (
@@ -90,10 +163,22 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
             styles.address ?? ''
           }`}
           onChange={(value) => onChange(value)}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            handleKeyDown(e)
+          }
         />
-        <ul>
-          {placePredictions &&
-            placePredictions.map(({ description, place_id }, index) => (
+        {/* <input
+          type="text"
+          className={styles.autocomplete}
+          disabled
+          value={predictionValue()}
+        /> */}
+        {placePredictions.length > 0 && (
+          <ul
+            id="predictions"
+            className={styles.predictions}
+          >
+            {placePredictions.map(({ description, place_id }, index) => (
               <li
                 className={styles.prediction}
                 key={place_id}
@@ -107,7 +192,8 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
                 {description}
               </li>
             ))}
-        </ul>
+          </ul>
+        )}
       </span>
       <label
         className={styles.label}
@@ -125,7 +211,7 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
         className={`${errors.email ? styles.error ?? '' : ''} ${
           styles.address ?? ''
         }`}
-        onChange={(value) => onChange(value)}
+        // onChange={(value) => onChange(value)}
       />
       <label
         className={styles.label ?? ''}
@@ -143,7 +229,7 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
         className={`${errors.email ? styles.error ?? '' : ''} ${
           styles.address ?? ''
         }`}
-        onChange={(value) => onChange(value)}
+        // onChange={(value) => onChange(value)}
       />
       <label
         className={styles.label ?? ''}
@@ -160,7 +246,7 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
         className={`${errors.email ? styles.error ?? '' : ''} ${
           styles.address ?? ''
         }`}
-        onChange={(value) => onChange(value)}
+        // onChange={(value) => onChange(value)}
       />
       <label
         className={styles.label ?? ''}
@@ -177,7 +263,7 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
         className={`${errors.email ? styles.error ?? '' : ''} ${
           styles.address ?? ''
         }`}
-        onChange={(value) => onChange(value)}
+        // onChange={(value) => onChange(value)}
       />
       <label
         className={styles.label ?? ''}
@@ -194,7 +280,7 @@ export default function AddressForm({ register, errors }: AddressFormProps) {
         className={`${errors.email ? styles.error ?? '' : ''} ${
           styles.address ?? ''
         }`}
-        onChange={(value) => onChange(value)}
+        // onChange={(value) => onChange(value)}
       />
     </>
   );

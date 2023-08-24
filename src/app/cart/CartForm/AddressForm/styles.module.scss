@@ -1,1 +1,50 @@
 @import '../styles.module.scss';
+
+.address {
+  @extend .input;
+}
+
+.autoCompleteContainer {
+  position: relative;
+  @extend .input;
+  padding: 0rem;
+
+  .address {
+    @extend .input;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: none !important;
+    background-color: transparent;
+  }
+
+  .autocomplete {
+    @extend .address;
+    z-index: 1;
+    color: silver;
+  }
+
+  .predictions {
+    @extend .input;
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    cursor: pointer;
+    width: 100%;
+    height: max-content;
+    padding: 0.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    background: $white;
+    gap: 0.25rem;
+    margin: 0 !important;
+  }
+
+  .prediction {
+    list-style-type: none;
+    &:focus-visible {
+      background-color: $light-purple-5;
+    }
+  }
+}
