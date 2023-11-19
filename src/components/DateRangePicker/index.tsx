@@ -84,7 +84,7 @@ const DateRangePicker = ({
         isActive ? styles.active ?? '' : ''
       }`}
     >
-      <span ref={dayPickerRef}>
+      <div ref={dayPickerRef}>
         <DayPicker
           id="date-range-picker"
           mode="range"
@@ -96,7 +96,7 @@ const DateRangePicker = ({
           hidden={(day) => isBefore(day, addDays(today, -1))}
           min={2}
         />
-      </span>
+      </div>
     </div>
   );
 };

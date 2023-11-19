@@ -1,0 +1,25 @@
+@import '~/styles/vars';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: 0.85rem;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  height: 2rem;
+  border-radius: 0.25rem;
+  padding: 0rem 0.75rem;
+  font-size: 1rem;
+  box-shadow: $light-purple-5 0px 1px 2px, $light-purple-5 0px 0px 0px 2px;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
