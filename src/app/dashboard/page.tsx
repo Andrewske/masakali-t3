@@ -1,40 +1,35 @@
+'use client';
 import styles from './styles.module.scss';
-// import { type NextPage } from 'next';
-// import { useSession } from 'next-auth/react';
-import Image from 'next/image';
-import { GoToPageButton, LoginButton } from '~/components/Button';
 
-import jurassicParkGif from '~/../public/jurassicParkGif.gif';
-import { UpdateReservationsButton } from '~/components/Button';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '~/utils/authOptions';
+import Button from '~/components/Button';
+import { UpdateReservationsButton } from '~/components/Button/UpdateReservations';
 
-export default async function Page() {
-  const session = await getServerSession(authOptions);
+import { getPricing } from '~/actions/smoobu';
+import { suryaId } from '~/utils/smoobu';
 
-  if (!session?.user?.admin) {
-    return (
-      <main className={styles.main}>
-        <Image
-          src={jurassicParkGif}
-          width="480"
-          height="372"
-          alt="jurassic park dennis ah ah ah gif"
-        />
-
-        <GoToPageButton
-          path={'/'}
-          callToAction="Go to Homepage"
-        />
-
-        <LoginButton />
-      </main>
-    );
-  }
+export default function Page() {
+  const handleButtonClick = async () => {
+    try {
+      const response = await getPricing({
+        villaId: suryaId,
+        checkIn: '2023-11-01',
+        checkOut: '2023-11-05',
+      });
+      console.log(response);
+      return;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <main className={styles.main}>
       <UpdateReservationsButton />
+      <Button
+        isWhite={false}
+        callToAction={'Click Me'}
+        handleClick={handleButtonClick}
+      />
     </main>
   );
 }

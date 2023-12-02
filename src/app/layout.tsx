@@ -1,7 +1,6 @@
 import Header from '~/components/layout/Header';
 import Footer from '~/components/layout/Footer';
-import NextAuthProvider from '~/context/NextAuthProvider';
-import ReservationContextProvider from '~/context/ReservationContextProvider';
+
 import type { ReactNode } from 'react';
 import '~/styles/globals.scss';
 import 'react-day-picker/dist/style.css';
@@ -21,13 +20,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       /> */}
 
       <body>
-        <NextAuthProvider>
-          {/* <ReservationContextProvider> */}
-          <Header />
-          {children}
-          <Footer />
-          {/* </ReservationContextProvider> */}
-        </NextAuthProvider>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
