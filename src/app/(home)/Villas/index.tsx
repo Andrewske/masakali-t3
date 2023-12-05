@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import styles from './styles.module.scss';
 
-import { GoToPageButton } from '~/components/Button';
+import { GoToPageButton } from '~/components/Button/GoToPageButton';
 import AkashaImage from '~/../public/hero-images/akasha-pool.webp';
 
 const villas = [

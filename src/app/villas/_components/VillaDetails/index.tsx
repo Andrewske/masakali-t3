@@ -7,11 +7,7 @@ export type VillaDataType = {
   amenities: string;
 };
 
-const VillaDetails = ({
-  villaData: { description, amenities },
-}: {
-  villaData: VillaDataType;
-}) => {
+const VillaDetails = ({ description, amenities }: VillaDataType) => {
   const headings = ['description', 'amenities', 'reviews'];
   const [activeHeading, setActiveHeading] = useState(headings[0]);
 

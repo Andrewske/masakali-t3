@@ -5,3 +5,4 @@ Currently working on:
    [] Add stripe
    [] Add functionality for submitting
    [] Show details of the reservation
+   [] PostHog for analytics

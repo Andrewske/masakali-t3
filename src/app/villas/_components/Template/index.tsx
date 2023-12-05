@@ -1,31 +1,22 @@
-import NextVilla from '~/app/villas/[villaName]/NextVilla';
+import NextVilla from '~/app/villas/_components/NextVilla';
 import styles from './styles.module.scss';
-import GridGallery from '../[villaName]/GridGallery';
-import DateContainer from './DateContainer';
+import GridGallery from '~/app/villas/_components/GridGallery';
+import DateContainer from '~/app/villas/_components/DateContainer';
 import Link from 'next/link';
-import VillaDetails from '../[villaName]/VillaDetails';
+import VillaDetails from '~/app/villas/_components/VillaDetails';
 import { villas } from '~/utils/smoobu';
 import { prisma } from '~/app/api/db';
 import { getDisabledDates } from '~/utils/reservations';
 
 export type VillaDataType = {
-  name: string;
+  villaName: string;
   description: string;
   amenities: string;
 };
 
 const today = new Date();
 
-async function Page({
-  params: { villaName },
-}: {
-  params: { villaName: string };
-}) {
-  const villaData = (await prisma.villa.findUnique({
-    where: { name: villaName },
-    select: { description: true, amenities: true },
-  })) as VillaDataType;
-
+async function Template({ villaName, description, amenities }: VillaDataType) {
   const villaId = villas.get(villaName)?.id;
 
   const disabledDates = await prisma.reservation
@@ -53,7 +44,10 @@ async function Page({
           href="/cart"
           className="button purple"
         >{`Book ${villaName.toString()}`}</Link>
-        <VillaDetails villaData={villaData} />
+        <VillaDetails
+          description={description}
+          amenities={amenities}
+        />
       </section>
       <section className={styles.rightContainer}>
         <GridGallery />
@@ -62,4 +56,4 @@ async function Page({
   );
 }
 
-export default Page;
+export default Template;

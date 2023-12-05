@@ -10,9 +10,6 @@ const config = {
   images: {
     domains: ['imgur.com'],
   },
-  experimental: {
-    serverActions: true,
-  },
   /**
    * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config
    * out.
