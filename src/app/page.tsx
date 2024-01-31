@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { prisma } from '~/app/api/db';
+import { prisma } from '~/db/prisma';
 // Components
 
 import HeroSlideShow from '~/app/(home)/HeroSlideShow';

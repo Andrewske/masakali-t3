@@ -73,6 +73,7 @@ model Villa {
     images       Image[]
     reviews      Review[]
     reservations Reservation[]
+    pricing      VillaPricing[]
     
 }
 
@@ -126,4 +127,18 @@ model Reservation {
 
     villa         Villa  @relation(fields: [villaId], references: [id], onDelete: Cascade)
     @@index([villaId])
+}
+
+
+model VillaPricing {
+    id            String    @id @default(cuid())
+    villaId       Int
+    date          DateTime
+    price         Float?
+    currency      String?   @default("IDR")
+    available     Boolean   @default(true)
+
+    villa         Villa  @relation(fields: [villaId], references: [id], onDelete: Cascade)
+    @@index([villaId])
+    @@unique([villaId, date])
 }

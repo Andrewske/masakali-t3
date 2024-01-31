@@ -1,7 +1,8 @@
 import { type Reservation } from '@prisma/client';
-import { villaIds } from '~/utils/smoobu';
+import { villaIdsArray, villaIdsType } from '~/utils/smoobu';
 import { format, parseISO } from 'date-fns';
 import { getDatesBetweenDates } from '..';
+import { prisma } from '~/db/prisma';
 
 type getBlockedDatesAllVillasType = {
   reservations: Reservation[];
@@ -28,10 +29,48 @@ export const getAvailableVillas = ({
     }
   });
 
-  return [...villaIds].filter((villaId) => !blockedVillasSet.has(villaId));
+  return villaIdsArray.filter((villaId) => !blockedVillasSet.has(villaId));
 };
 
-export const getDisabledDates = (
+export const getDisabledDates = async (villaId?: number) => {
+  const disabledDates = await prisma.villaPricing.groupBy({
+    by: ['date'],
+    where: {
+      villaId: villaId,
+      available: false,
+    },
+    _count: {
+      villaId: true,
+    },
+    having: {
+      villaId: {
+        _count: {
+          equals: villaId ? 1 : villaIdsArray.length,
+        },
+      },
+    },
+  });
+
+  const dateCounts = new Map<string, Set<number>>();
+
+  for (const item of disabledDates) {
+    const date = item.date.toISOString().split('T')[0] ?? null;
+    const count = item._count.villaId;
+
+    if (date) {
+      const dateSet = dateCounts.get(date);
+      if (dateSet) {
+        dateSet.add(count);
+      } else {
+        dateCounts.set(date, new Set());
+      }
+    }
+  }
+
+  return dateCounts;
+};
+
+export const getDisabledDatesOld = (
   reservations: Reservation[],
   villaId?: number
 ) => {
@@ -87,9 +126,9 @@ export const getDisabledDates = (
   const disabledDates = new Set<string>();
 
   for (const [date, villas] of dateCounts.entries()) {
-    if (!villaId && villaIds.size === villas.size) {
+    if (!villaId && villaIdsArray.length === villas.size) {
       disabledDates.add(date);
-    } else if (villaId && villaIds.has(villaId)) {
+    } else if (villaId && villaIdsArray.includes(villaId as villaIdsType)) {
       disabledDates.add(date);
     }
   }

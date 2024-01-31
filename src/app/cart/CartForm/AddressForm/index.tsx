@@ -84,8 +84,8 @@ export default function AddressForm({
   };
 
   const addressFormInputs = [
-    { type: 'address.address1', label: 'Address' },
-    { type: 'address.address2', label: 'Apartment, suite, ect.' },
+    { type: 'address.address1', label: 'Address', size: 'lg' },
+    { type: 'address.address2', label: 'Apartment, suite, ect.', size: 'lg' },
     { type: 'address.city', label: 'City' },
     { type: 'address.state', label: 'State' },
     { type: 'address.country', label: 'Country/region' },
@@ -102,27 +102,9 @@ export default function AddressForm({
           type={input.type as keyof FormData}
           label={input.label}
           onChange={onChange}
+          size={input?.size ?? 'sm'}
         />
       ))}
-      {placePredictions.length > 0 && (
-        <ul
-          id="predictions"
-          className={styles.predictions}
-        >
-          {placePredictions.map(({ description, place_id }, index) => (
-            <li
-              className={styles.prediction}
-              key={place_id}
-              onKeyDown={(e: React.KeyboardEvent<HTMLLIElement>) =>
-                handleKeyDown(e, place_id)
-              }
-              onClick={() => handleClick(place_id)}
-            >
-              {description}
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }

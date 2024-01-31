@@ -1,7 +1,11 @@
 import Template from '../_components/Template';
+import { suryaId } from '~/utils/smoobu';
 
-function Page() {
-  const villaName = 'surya';
+function Page({
+  searchParams,
+}: {
+  searchParams: { checkIn: string; checkOut: string };
+}) {
   const description = 'description';
   const amenities = 'amenities';
 
@@ -9,7 +13,9 @@ function Page() {
     <Template
       description={description}
       amenities={amenities}
-      villaName={villaName}
+      villaId={suryaId}
+      checkIn={searchParams.checkIn}
+      checkOut={searchParams.checkOut}
     />
   );
 }

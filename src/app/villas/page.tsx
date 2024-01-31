@@ -1,4 +1,4 @@
-import { prisma } from '~/app/api/db';
+import { prisma } from '~/db/prisma';
 //import { api } from '~/utils/api';
 
 async function Page() {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import type { SmoobuReservation } from '~/types/smoobu';
-import { prisma } from '~/app/api/db';
+import { prisma } from '~/db/prisma';
 import { NextResponse } from 'next/server';
 type TransformedReservation = {
   smoobuId: number;

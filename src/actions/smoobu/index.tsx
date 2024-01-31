@@ -1,6 +1,20 @@
 'use server';
-import axios from 'axios';
+import { getVillaName } from '~/utils/smoobu';
 import type { villaIdsType } from '~/utils/smoobu';
+import { prisma } from '~/db/prisma';
+
+export type PricingDataType = {
+  villaName: string;
+  checkIn: string;
+  checkOut: string;
+  numNights: number;
+  pricing: {
+    pricePerNight: number;
+    discount: number;
+    taxes: number;
+    total: number;
+  };
+};
 
 export const getPricing = async ({
   villaId,
@@ -10,21 +24,60 @@ export const getPricing = async ({
   villaId: villaIdsType;
   checkIn: string;
   checkOut: string;
-}) => {
-  const apiKey = process.env.SMOOBU_API_KEY;
+}): Promise<PricingDataType> => {
+  const checkInDate = new Date(checkIn);
+  const checkOutDate = new Date(checkOut);
+
+  const diffInTime = checkOutDate.getTime() - checkInDate.getTime();
+  const numNights = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
+
   try {
-    const response = await axios.get('/api/smoobu/pricing', {
-      params: {
-        start_date: checkIn,
-        end_date: checkOut,
-        apartments: [villaId],
+    const villaPricing = (await prisma.villaPricing.findMany({
+      where: {
+        villaId: Number(villaId),
+        date: {
+          gte: new Date(checkIn),
+          lt: new Date(checkOut),
+        },
+        price: {
+          not: null,
+        },
+        available: true,
       },
-      headers: {
-        'Api-Key': apiKey,
+      select: {
+        date: true,
+        price: true,
+        available: true,
       },
-    });
-    return response;
+    })) as { date: Date; price: number; available: boolean }[];
+
+    if (villaPricing.length !== numNights)
+      throw new Error('Villa not available');
+
+    const pricePerNight =
+      villaPricing.reduce((acc, curr) => acc + curr.price, 0) || 0;
+    const discountRate = parseFloat(process.env.WEBSITE_DISCOUNT ?? '0');
+    const discountPerNight = pricePerNight * discountRate;
+    const subTotal = (pricePerNight - discountPerNight) * numNights;
+    const taxRate = parseFloat(process.env.WEBSITE_TAX ?? '0');
+    const taxes = subTotal * taxRate;
+
+    return {
+      villaName: getVillaName(villaId),
+      checkIn: checkIn,
+      checkOut: checkOut,
+      numNights: numNights,
+      pricing: {
+        pricePerNight: pricePerNight,
+        discount: discountPerNight,
+        taxes: taxes,
+        total: subTotal + taxes,
+      },
+    };
   } catch (error) {
-    console.error(error);
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    throw error;
   }
 };

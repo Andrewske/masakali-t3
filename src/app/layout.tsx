@@ -5,8 +5,9 @@ import type { ReactNode } from 'react';
 import '~/styles/globals.scss';
 import 'react-day-picker/dist/style.css';
 import { montserrat, baskerville } from '~/fonts';
-import Script from 'next/script';
-import { env } from '~/env.mjs';
+// import Script from 'next/script';
+// import { env } from '~/env.mjs';
+import ReactQueryProvider from '~/context/ReactQueryProvider';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -20,9 +21,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       /> */}
 
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <ReactQueryProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ReactQueryProvider>
       </body>
     </html>
   );

@@ -1,11 +1,12 @@
 'use client';
 import { useState } from 'react';
 import styles from './styles.module.scss';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 import { type DateRange } from 'react-day-picker';
 import DateRangePicker from '~/components/DateRangePicker';
 
 const DateContainer = ({ disabledDates }: { disabledDates: Set<string> }) => {
+  // TODO: set range needs to set the searchParams of the page.
   const [range, setRange] = useState<DateRange | undefined>({
     from: new Date(),
     to: undefined,

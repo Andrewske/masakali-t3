@@ -8,6 +8,7 @@ type FormInputProps = {
   type: keyof FormData;
   label: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  size: string;
 };
 
 const FormInput = ({
@@ -16,10 +17,11 @@ const FormInput = ({
   type,
   label,
   onChange,
+  size,
 }: FormInputProps) => {
   const name = type.replace('address.', '');
   return (
-    <span className={styles.wrapper}>
+    <span className={`${styles?.wrapper ?? ''} ${styles[size] ?? ''}`}>
       <label
         className={styles.label}
         htmlFor={type}
