@@ -81,3 +81,38 @@ export const getPricing = async ({
     throw error;
   }
 };
+
+export const getAllDisabledDates = async (): Promise<
+  Set<string | undefined>
+> => {
+  const disabledDates = await prisma.villaPricing.findMany({
+    where: {
+      available: false,
+    },
+    select: {
+      date: true,
+    },
+  });
+
+  return new Set([
+    ...disabledDates.map((date) => date.date.toISOString().split('T')[0]),
+  ]);
+};
+
+export const getDisabledDatesForVilla = async (
+  villaId: number
+): Promise<Set<string | undefined>> => {
+  const disabledDates = await prisma.villaPricing.findMany({
+    where: {
+      villaId: villaId,
+      available: false,
+    },
+    select: {
+      date: true,
+    },
+  });
+
+  return new Set([
+    ...disabledDates.map((date) => date.date.toISOString().split('T')[0]),
+  ]);
+};

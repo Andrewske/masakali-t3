@@ -12,6 +12,7 @@ import Amenities from '~/app/(home)/Amenities';
 import Location from '~/app/(home)/Location';
 import { addDays } from 'date-fns';
 import { getCurrentDateInBali } from '~/utils';
+import { getAllDisabledDates } from '~/actions/smoobu';
 
 const today = getCurrentDateInBali();
 const twoDaysAgo: string = addDays(today, -2).toISOString();
@@ -27,10 +28,15 @@ const Page = async () => {
     },
   });
 
+  const disabledDates = await getAllDisabledDates();
+
   return (
     <main className={styles.main}>
       <HeroSlideShow />
-      <Availability reservations={reservations} />
+      <Availability
+        reservations={reservations}
+        disabledDates={disabledDates}
+      />
       <About />
       <WhyChoose />
       <Villas />

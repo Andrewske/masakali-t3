@@ -26,8 +26,6 @@ import dayPickerStyles from 'react-day-picker/dist/style.css';
 
 import styles from './styles.module.scss';
 
-import { api } from '~/utils/api';
-
 type DatePickerProps = {
   isRange: boolean;
   date: Date;
@@ -42,15 +40,16 @@ type DatePickerProps = {
   arrivalDate: Date;
 };
 
-const DatePicker = ({ date, setDate, type, arrivalDate }: DatePickerProps) => {
+const DatePicker = async ({
+  date,
+  setDate,
+  type,
+  arrivalDate,
+}: DatePickerProps) => {
   const today: Date = new Date();
   const threeYearsFromToday: Date = addYears(today, 3);
 
-  const { data: disabledDates } = api.smoobu.getDisabledDates.useQuery({
-    type,
-    startDate: arrivalDate ?? today,
-  });
-
+  const disabledDates = await getDisabledDates();
   const classNames: ClassNames = {
     ...dayPickerStyles,
     day_disabled: styles.dayPickerDisabled,

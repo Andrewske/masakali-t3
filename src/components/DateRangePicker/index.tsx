@@ -9,12 +9,11 @@ import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { getCurrentDateInBali } from '~/utils';
 
 const today = getCurrentDateInBali();
-console.log({ today });
 
 type DateRangePickerProps = {
   isActive: boolean;
   setIsActive: Dispatch<SetStateAction<boolean>>;
-  disabledDates: Set<string>;
+  disabledDates: Set<string | undefined>;
   range: DateRange | undefined;
   setRange: Dispatch<SetStateAction<DateRange | undefined>>;
 };
@@ -28,13 +27,6 @@ const DateRangePicker = ({
 }: DateRangePickerProps) => {
   const dayPickerRef = useRef(null);
   useOnClickOutside(dayPickerRef, () => setIsActive(false));
-
-  console.log(
-    'DateRangePicker',
-    [...disabledDates].sort(
-      (a, b) => new Date(a).getTime() - new Date(b).getTime()
-    )
-  );
 
   const classNames: ClassNames = {
     ...dayPickerStyles,
@@ -53,13 +45,13 @@ const DateRangePicker = ({
 
   const rangeIncludesDisabledDate = (
     range: DateRange | undefined,
-    disabledDates: Set<string>
+    disabledDates: Set<string | undefined>
   ): boolean => {
     if (!range) return false;
     const { from, to } = range;
 
-    return [...disabledDates].some((date) =>
-      isDateInRange(new Date(date), from, to)
+    return [...disabledDates].some(
+      (date) => date && isDateInRange(new Date(date), from, to)
     );
   };
 

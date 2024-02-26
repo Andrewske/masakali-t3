@@ -1,17 +1,42 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 import styles from './styles.module.scss';
 import { format } from 'date-fns';
 import { type DateRange } from 'react-day-picker';
 import DateRangePicker from '~/components/DateRangePicker';
+import { useRouter } from 'next/navigation';
+import { fr } from 'date-fns/locale';
 
-const DateContainer = ({ disabledDates }: { disabledDates: Set<string> }) => {
+const DateContainer = ({
+  disabledDates,
+  checkIn,
+  checkOut,
+}: {
+  disabledDates: Set<string | undefined>;
+  checkIn: string;
+  checkOut: string;
+}) => {
   // TODO: set range needs to set the searchParams of the page.
   const [range, setRange] = useState<DateRange | undefined>({
-    from: new Date(),
-    to: undefined,
+    from: new Date(checkIn ?? new Date()),
+    to: new Date(checkOut ?? new Date()),
   });
   const [isActive, setIsActive] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const setQueryParams = (newRange: DateRange | undefined) => {
+      const { from, to } = newRange || {};
+
+      if (from && to) {
+        const checkIn = format(from, 'yyyy-MM-dd');
+        const checkOut = format(to, 'yyyy-MM-dd');
+
+        router.push(`?checkIn=${checkIn}&checkOut=${checkOut}`);
+      }
+    };
+    setQueryParams(range);
+  }, [range]);
 
   return (
     <div className={styles.wrapper}>

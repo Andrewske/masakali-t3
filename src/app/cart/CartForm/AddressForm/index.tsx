@@ -1,110 +1,134 @@
-'use client';
-import { useRef } from 'react';
-import type {
-  UseFormRegister,
-  FieldErrors,
-  UseFormSetValue,
-  UseFormGetValues,
-} from 'react-hook-form';
-import { type FormData } from '../index';
-import styles from './styles.module.scss';
-import usePlacesAutocompleteService from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
-import { env } from '~/env.mjs';
-import { addressComponentsToAddressObject } from '~/utils/googlePlaces';
-import useKeyDown from '~/hooks/useKeyDown';
-import FormInput from '../FormInput';
+import { type UseFormReturn } from 'react-hook-form';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '~/components/ui/form';
+import { Input } from '~/components/ui/input';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import type { FormData, FieldName } from '../getFormSchema';
+interface AddressFormProps {
+  form: UseFormReturn<FormData>;
+}
 
-type AddressFormProps = {
-  register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
-  setValue: UseFormSetValue<FormData>;
-  getValues: UseFormGetValues<FormData>;
-};
+interface FieldProps {
+  name: FieldName;
+  label: string;
+  placeholder: string;
+  value: string | undefined;
+  setValue: (name: FieldName, value: string | undefined) => void;
+}
 
-const initialAddressState = {
-  address1: '',
-  address2: '',
-  city: '',
-  state: '',
-  country: '',
-  zip_code: '',
-};
+const Field = ({ name, label, placeholder, value, setValue }: FieldProps) => (
+  <FormField
+    name={name}
+    render={() => (
+      <FormItem>
+        <FormLabel className="font-montserrat uppercase">{label}</FormLabel>
+        <FormControl>
+          <Input
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => setValue(name, e.target.value)}
+          />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+);
 
-export default function AddressForm({
-  register,
-  errors,
-  setValue,
-}: AddressFormProps) {
-  const {
-    placePredictions,
-    getPlacePredictions,
-    isPlacePredictionsLoading,
-    placesService,
-  } = usePlacesAutocompleteService({
-    apiKey: env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-  });
+const AddressForm = ({ form }: AddressFormProps) => {
+  const { watch } = form;
+  const setValue: (name: FieldName, value: string | undefined) => void =
+    form.setValue;
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //const result = getPlacePredictions({ input: value });
-    const target = event.target as HTMLInputElement;
-    const value = target.value;
-
-    if (!isPlacePredictionsLoading) {
-      getPlacePredictions({ input: value });
-    } else {
-      console.log('loading', value);
-    }
-  };
-
-  const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLLIElement>,
-    place_id?: string
-  ) => {
-    if (event.key === 'Enter' && place_id) {
-      handleClick(place_id);
-    }
-  };
-
-  const handleClick = (place_id: string) => {
-    placesService?.getDetails({ placeId: place_id }, (details) => {
-      if (details?.address_components) {
-        console.log(details.address_components);
-        const addressObj = addressComponentsToAddressObject(
-          details.address_components
-        );
-
-        setValue('address.address1', addressObj.address1);
-        setValue('address.city', addressObj.city);
-        setValue('address.state', addressObj.state);
-        setValue('address.country', addressObj.country);
-        setValue('address.zip_code', addressObj.zip_code);
-        getPlacePredictions({ input: '' });
-      }
-    });
-  };
-
-  const addressFormInputs = [
-    { type: 'address.address1', label: 'Address', size: 'lg' },
-    { type: 'address.address2', label: 'Apartment, suite, ect.', size: 'lg' },
-    { type: 'address.city', label: 'City' },
-    { type: 'address.state', label: 'State' },
-    { type: 'address.country', label: 'Country/region' },
-    { type: 'address.zip_code', label: 'Zip code' },
-  ];
+  const address1 = watch('address.address1');
+  const address2 = watch('address.address2');
+  const city = watch('address.city');
+  const country = watch('address.country');
+  const region = watch('address.region');
+  const zip_code = watch('address.zip_code');
 
   return (
-    <div className={styles.wrapper}>
-      {addressFormInputs.map((input) => (
-        <FormInput
-          key={input.type}
-          register={register}
-          errors={errors}
-          type={input.type as keyof FormData}
-          label={input.label}
-          onChange={onChange}
-          size={input?.size ?? 'sm'}
+    <div>
+      <Field
+        name="address.address1"
+        label="Address 1"
+        placeholder="Address 1"
+        value={address1}
+        setValue={setValue}
+      />
+      <Field
+        name="address.address2"
+        label="Apt/Suite/etc (optional)"
+        placeholder="Apt/Suite/Other"
+        value={address2}
+        setValue={setValue}
+      />
+      <span className="grid grid-cols-2 gap-1 py-2">
+        <Field
+          name="address.city"
+          label="City"
+          placeholder="City"
+          value={city}
+          setValue={setValue}
         />
-      ))}
+        <FormField
+          name="address.region"
+          render={() => (
+            <FormItem className="col-span-1">
+              <FormLabel className="font-montserrat uppercase">
+                Region
+              </FormLabel>
+              <FormControl>
+                <RegionDropdown
+                  countryValueType="short"
+                  country={country}
+                  value={region}
+                  classes="w-full border-0 rounded p-2"
+                  onChange={(val: string) => setValue('address.region', val)}
+                />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </span>
+      <span className="grid grid-cols-2 gap-1 py-2">
+        <FormField
+          name="address.country"
+          render={() => (
+            <FormItem className="col-span-1">
+              <FormLabel className="font-montserrat uppercase">
+                Country
+              </FormLabel>
+              <FormControl>
+                <CountryDropdown
+                  valueType="short"
+                  value={country}
+                  classes="w-full border-0 rounded p-2"
+                  onChange={(val: string) => setValue('address.country', val)}
+                />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Field
+          name="address.zip_code"
+          label="Zip Code"
+          placeholder="Zip Code"
+          value={zip_code}
+          setValue={setValue}
+        />
+      </span>
     </div>
   );
-}
+};
+
+export default AddressForm;

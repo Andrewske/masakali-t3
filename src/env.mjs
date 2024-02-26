@@ -9,17 +9,6 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
     NODE_ENV: z.enum(['development', 'test', 'production']),
-    NEXTAUTH_SECRET:
-      process.env.NODE_ENV === 'production'
-        ? z.string().min(1)
-        : z.string().min(1).optional(),
-    NEXTAUTH_URL: z.preprocess(
-      // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
-      // Since NextAuth.js automatically uses the VERCEL_URL if present.
-      (str) => process.env.VERCEL_URL ?? str,
-      // VERCEL_URL doesn't include `https` so it cant be validated as a URL
-      process.env.VERCEL ? z.string().min(1) : z.string().url()
-    ),
     // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
@@ -29,6 +18,8 @@ export const env = createEnv({
     EMAIL_SERVER_HOST: z.string(),
     EMAIL_SERVER_PORT: z.string(),
     EMAIL_FROM: z.string(),
+    STRIPE_TEST_KEY: z.string(),
+    STRIPE_LOCAL_SECRET: z.string(),
   },
 
   /**
@@ -44,6 +35,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SMOOBU_AKASHA_ID: z.string(),
     NEXT_PUBLIC_SMOOBU_LAKSHMI_ID: z.string(),
     NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string(),
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
   },
 
   /**
@@ -70,5 +62,8 @@ export const env = createEnv({
     EMAIL_SERVER_HOST: process.env.EMAIL_SERVER_HOST,
     EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT,
     EMAIL_FROM: process.env.EMAIL_FROM,
+    STRIPE_TEST_KEY: process.env.STRIPE_TEST_KEY,
+    STRIPE_LOCAL_SECRET: process.env.STRIPE_LOCAL_SECRET,
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
   },
 });

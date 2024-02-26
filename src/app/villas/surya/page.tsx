@@ -1,7 +1,8 @@
+import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import Template from '../_components/Template';
 import { suryaId } from '~/utils/smoobu';
 
-function Page({
+async function Page({
   searchParams,
 }: {
   searchParams: { checkIn: string; checkOut: string };

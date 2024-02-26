@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styles from './styles.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
-import { signIn, signOut, useSession } from 'next-auth/react';
+
 
 import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 
@@ -103,20 +103,3 @@ const Header = () => {
 
 export default Header;
 
-// const AuthShowcase = () => {
-//   const { data: sessionData } = useSession();
-
-//   return (
-//     <div className={styles.authContainer}>
-//       <p className={styles.showcaseText}>
-//         {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-//       </p>
-//       <button
-//         className={styles.loginButton}
-//         onClick={sessionData ? () => void signOut() : () => void signIn()}
-//       >
-//         {sessionData ? 'Sign out' : 'Sign in'}
-//       </button>
-//     </div>
-//   );
-// };

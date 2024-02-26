@@ -25,14 +25,14 @@ const CartDetails = ({ checkIn, checkOut, villaId }: CartDetailsProps) => {
 
   return (
     <>
-      <section className={styles.wrapper}>
-        <div className={styles.header}>
+      <section className="w-full bg-gray">
+        <div className="p-4 text-center bg-purple text-white w-100">
           <h2>{data?.villaName}</h2>
         </div>
-        <div className={styles.container}>
+        <div className="flex flex-col gap-2 p-4 text-sm">
           <span
             id="checkIn"
-            className={styles.line}
+            className="py-2"
           >
             <h3>Arrival Date</h3>
             <p>{data?.checkIn}</p>

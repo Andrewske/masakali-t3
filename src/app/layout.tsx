@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import '~/styles/globals.scss';
 import 'react-day-picker/dist/style.css';
 import { montserrat, baskerville } from '~/fonts';
+
 // import Script from 'next/script';
 // import { env } from '~/env.mjs';
 import ReactQueryProvider from '~/context/ReactQueryProvider';

@@ -6,8 +6,8 @@ import Link from 'next/link';
 import VillaDetails from '~/app/villas/_components/VillaDetails';
 import { getVillaName, type villaIdsType } from '~/utils/smoobu';
 import { prisma } from '~/db/prisma';
-import { getDisabledDates } from '~/utils/reservations';
 import { redirect } from 'next/navigation';
+import { getDisabledDatesForVilla } from '~/actions/smoobu';
 
 export type VillaDataType = {
   villaId: villaIdsType;
@@ -27,20 +27,10 @@ async function Template({
   villaId,
 }: VillaDataType) {
   const villaName = getVillaName(villaId);
-  // const disabledDates = await prisma.reservation
-  //   .findMany({
-  //     where: {
-  //       villaId: parseInt(villaId),
-  //       departure: {
-  //         gte: today.toISOString(),
-  //       },
-  //     },
-  //   })
-  //   .then((reservations) => {
-  //     return getDisabledDates(reservations, villaId);
-  //   });
 
-  const disabledDates = await Promise.resolve(new Set(''));
+  const disabledDates = await getDisabledDatesForVilla(villaId);
+
+  console.log(checkIn, checkOut, villaId, villaName);
 
   return (
     <main className={styles.wrapper}>
@@ -49,7 +39,11 @@ async function Template({
         id="villa-info"
       >
         <NextVilla currentVillaName={villaName} />
-        <DateContainer disabledDates={disabledDates} />
+        <DateContainer
+          disabledDates={disabledDates}
+          checkIn={checkIn}
+          checkOut={checkOut}
+        />
         <Link
           href={`/cart?checkIn=${checkIn}&checkOut=${checkOut}&villaId=${villaId}`}
           className="button purple"
