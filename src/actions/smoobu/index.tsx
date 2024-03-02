@@ -2,6 +2,8 @@
 import { getVillaName } from '~/utils/smoobu';
 import type { villaIdsType } from '~/utils/smoobu';
 import { prisma } from '~/db/prisma';
+import { getConversionRate } from '../currencyApi';
+import { env } from '~/env.mjs';
 
 export type PricingDataType = {
   villaName: string;
@@ -20,10 +22,14 @@ export const getPricing = async ({
   villaId,
   checkIn,
   checkOut,
+  conversionRate,
+  currency = 'USD',
 }: {
   villaId: villaIdsType;
   checkIn: string;
   checkOut: string;
+  conversionRate: number;
+  currency?: string;
 }): Promise<PricingDataType> => {
   const checkInDate = new Date(checkIn);
   const checkOutDate = new Date(checkOut);
@@ -54,12 +60,15 @@ export const getPricing = async ({
     if (villaPricing.length !== numNights)
       throw new Error('Villa not available');
 
+    // const conversionRate = await getConversionRate(currency);
+
+    // console.log(conversionRate);
     const pricePerNight =
       villaPricing.reduce((acc, curr) => acc + curr.price, 0) || 0;
-    const discountRate = parseFloat(process.env.WEBSITE_DISCOUNT ?? '0');
+    const discountRate = parseFloat(env.WEBSITE_DISCOUNT ?? '0');
     const discountPerNight = pricePerNight * discountRate;
     const subTotal = (pricePerNight - discountPerNight) * numNights;
-    const taxRate = parseFloat(process.env.WEBSITE_TAX ?? '0');
+    const taxRate = parseFloat(env.WEBSITE_TAX ?? '0');
     const taxes = subTotal * taxRate;
 
     return {
@@ -68,10 +77,10 @@ export const getPricing = async ({
       checkOut: checkOut,
       numNights: numNights,
       pricing: {
-        pricePerNight: pricePerNight,
-        discount: discountPerNight,
-        taxes: taxes,
-        total: subTotal + taxes,
+        pricePerNight: pricePerNight / conversionRate,
+        discount: discountPerNight / conversionRate,
+        taxes: taxes / conversionRate,
+        total: (subTotal + taxes) / conversionRate,
       },
     };
   } catch (error) {

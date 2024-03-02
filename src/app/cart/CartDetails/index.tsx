@@ -5,6 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import styles from './styles.module.scss';
 import { getPricing } from '~/actions/smoobu';
 import type { villaIdsType } from '~/utils/smoobu';
+import useCurrency from '~/hooks/useCurrency';
+import { useMemo } from 'react';
+import { formatCurrency } from '~/utils/helpers';
+import { Skeleton } from '~/components/ui/skeleton';
 
 type CartDetailsProps = {
   checkIn: string;
@@ -13,85 +17,72 @@ type CartDetailsProps = {
 };
 
 const CartDetails = ({ checkIn, checkOut, villaId }: CartDetailsProps) => {
-  const { data, error } = useQuery({
-    queryFn: () => getPricing({ checkIn, checkOut, villaId }),
-    queryKey: ['cart', checkIn, checkOut, villaId],
+  const { currency, conversionRate, CountryDropdown } = useCurrency();
+  const { data, error, isLoading, isFetching } = useQuery({
+    queryFn: () => getPricing({ checkIn, checkOut, villaId, conversionRate }),
+    queryKey: ['cart', checkIn, checkOut, villaId, conversionRate],
+    staleTime: 1000,
   });
+
+  console.log({ conversionRate, data });
+
+  const convertAmount = useMemo(
+    () => (amount: number) => {
+      return amount;
+    },
+    [conversionRate]
+  );
 
   if (error) {
     console.error(error);
-    return <div>Something went wrong</div>;
+    return <div>Something went wrong. Please try again later.</div>;
   }
 
+  const renderDetail = (label: string, value: string | number | null) => (
+    <span
+      className={styles.line}
+      key={label}
+    >
+      <h3>{label}</h3>
+      <p>{value}</p>
+    </span>
+  );
+
+  const renderConvertedAmount = (label: string, amount: number) => (
+    <span
+      className={styles.line}
+      key={label}
+    >
+      <h3>{label}</h3>
+      <p>
+        {isFetching || isLoading ? (
+          <Skeleton className="w-[100px] h-6 rounded-full bg-light-purple-7" />
+        ) : (
+          formatCurrency(amount, currency)
+        )}
+      </p>
+    </span>
+  );
+
   return (
-    <>
-      <section className="w-full bg-gray">
-        <div className="p-4 text-center bg-purple text-white w-100">
-          <h2>{data?.villaName}</h2>
-        </div>
-        <div className="flex flex-col gap-2 p-4 text-sm">
-          <span
-            id="checkIn"
-            className="py-2"
-          >
-            <h3>Arrival Date</h3>
-            <p>{data?.checkIn}</p>
-          </span>
-          <span
-            id="checkOut"
-            className={styles.line}
-          >
-            <h3>departure date</h3>
-            <p>{data?.checkOut}</p>
-          </span>
-          {/* 
-        TODO: Figure out how I want to handle guests
-        <span
-          id="numGuests"
-          className={styles.line}
-        >
-          <h3>Number of Guests</h3>
-          <p>{numGuests}</p>
-        </span> */}
-          <span
-            id="numNights"
-            className={styles.line}
-          >
-            <h3>Number of Nights</h3>
-            <p>{data?.numNights}</p>
-          </span>
-          <span
-            id="price"
-            className={styles.line}
-          >
-            <h3>Price Per Night</h3>
-            <p>{data?.pricing?.pricePerNight}</p>
-          </span>
-          <span
-            id="discount"
-            className={styles.line}
-          >
-            <h3>Discount</h3>
-            <p>{data?.pricing?.discount}</p>
-          </span>
-          <span
-            id="taxes"
-            className={styles.line}
-          >
-            <h3>Taxes</h3>
-            <p>{data?.pricing?.taxes}</p>
-          </span>
-          <span
-            id="total"
-            className={styles.line}
-          >
-            <h3>Total</h3>
-            <p>{data?.pricing?.total}</p>
-            {/* TODO: Need to implement a currency selector here */}
-          </span>
-        </div>
-      </section>
-    </>
+    <section className="w-full h-full bg-gray items-center">
+      <div className="p-4 text-center bg-purple text-white w-100">
+        <h2>{data?.villaName}</h2>
+      </div>
+      <div className="flex flex-col gap-2 p-4 text-sm">
+        {renderDetail('Arrival Date', data?.checkIn ?? '')}
+        {renderDetail('Departure Date', data?.checkOut ?? '')}
+        {renderDetail('Number of Nights', data?.numNights ?? 1)}
+        {renderConvertedAmount(
+          'Price Per Night',
+          data?.pricing?.pricePerNight ?? 0
+        )}
+        {renderConvertedAmount('Discount', data?.pricing?.discount ?? 0)}
+        {renderConvertedAmount('Taxes', data?.pricing?.taxes ?? 0)}
+        {renderConvertedAmount('Total', data?.pricing?.total ?? 0)}
+        <CountryDropdown />
+      </div>
+    </section>
   );
 };
 

@@ -5,8 +5,6 @@ import DateContainer from '~/app/villas/_components/DateContainer';
 import Link from 'next/link';
 import VillaDetails from '~/app/villas/_components/VillaDetails';
 import { getVillaName, type villaIdsType } from '~/utils/smoobu';
-import { prisma } from '~/db/prisma';
-import { redirect } from 'next/navigation';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
 
 export type VillaDataType = {
@@ -16,8 +14,6 @@ export type VillaDataType = {
   checkIn: string;
   checkOut: string;
 };
-
-const today = new Date();
 
 async function Template({
   description,

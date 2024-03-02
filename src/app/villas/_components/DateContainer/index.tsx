@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import { type DateRange } from 'react-day-picker';
 import DateRangePicker from '~/components/DateRangePicker';
 import { useRouter } from 'next/navigation';
-import { fr } from 'date-fns/locale';
 
 const DateContainer = ({
   disabledDates,

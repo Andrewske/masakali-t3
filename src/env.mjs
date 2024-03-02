@@ -20,6 +20,9 @@ export const env = createEnv({
     EMAIL_FROM: z.string(),
     STRIPE_TEST_KEY: z.string(),
     STRIPE_LOCAL_SECRET: z.string(),
+    CURRENCY_API_KEY: z.string(),
+    WEBSITE_DISCOUNT: z.string(),
+    WEBSITE_TAX: z.string(),
   },
 
   /**
@@ -65,5 +68,8 @@ export const env = createEnv({
     STRIPE_TEST_KEY: process.env.STRIPE_TEST_KEY,
     STRIPE_LOCAL_SECRET: process.env.STRIPE_LOCAL_SECRET,
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    CURRENCY_API_KEY: process.env.CURRENCY_API_KEY,
+    WEBSITE_DISCOUNT: process.env.WEBSITE_DISCOUNT,
+    WEBSITE_TAX: process.env.WEBSITE_TAX,
   },
 });

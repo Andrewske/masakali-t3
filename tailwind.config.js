@@ -23,6 +23,7 @@ module.exports = {
         'gray': '#f2f2f2',
         'light-purple-5': 'rgba(163, 143, 159, 0.5)',
         'light-purple-7': 'rgba(163, 143, 159, 0.7)'
+
       },
       boxShadow: {
         'error': 'rgba(255, 0, 0, 0.5) 0px 1px 4px, rgba(255, 0, 0, 0.5) 0px 0px 0px 3px',

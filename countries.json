@@ -1,0 +1,5246 @@
+{
+  "data": {
+    "AD": {
+      "alpha2": "AD",
+      "alpha3": "AND",
+      "calling_codes": ["+376"],
+      "currencies": ["EUR"],
+      "emoji": "🇦🇩",
+      "ioc": "AND",
+      "languages": [
+        {
+          "name": "Catalan",
+          "name_native": "Català"
+        }
+      ],
+      "name": "Andorra",
+      "name_translated": "Andorra",
+      "timezones": ["Europe/Andorra"],
+      "is_in_european_union": false,
+      "tld": "ad"
+    },
+    "AE": {
+      "alpha2": "AE",
+      "alpha3": "ARE",
+      "calling_codes": ["+971"],
+      "currencies": ["AED"],
+      "emoji": "🇦🇪",
+      "ioc": "UAE",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "United Arab Emirates",
+      "name_translated": "United Arab Emirates",
+      "timezones": ["Asia/Dubai"],
+      "is_in_european_union": false,
+      "tld": "ae"
+    },
+    "AF": {
+      "alpha2": "AF",
+      "alpha3": "AFG",
+      "calling_codes": ["+93"],
+      "currencies": ["AFN"],
+      "emoji": "🇦🇫",
+      "ioc": "AFG",
+      "languages": [
+        {
+          "name": "Pashto",
+          "name_native": "Pashto"
+        }
+      ],
+      "name": "Afghanistan",
+      "name_translated": "Afghanistan",
+      "timezones": ["Asia/Kabul"],
+      "is_in_european_union": false,
+      "tld": "af"
+    },
+    "AG": {
+      "alpha2": "AG",
+      "alpha3": "ATG",
+      "calling_codes": ["+1 268"],
+      "currencies": ["XCD"],
+      "emoji": "🇦🇬",
+      "ioc": "ANT",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Antigua & Barbuda",
+      "name_translated": "Antigua & Barbuda",
+      "timezones": ["America/Antigua"],
+      "is_in_european_union": false,
+      "tld": "ag"
+    },
+    "AI": {
+      "alpha2": "AI",
+      "alpha3": "AIA",
+      "calling_codes": ["+1 264"],
+      "currencies": ["XCD"],
+      "emoji": "🇦🇮",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Anguilla",
+      "name_translated": "Anguilla",
+      "timezones": ["America/Anguilla"],
+      "is_in_european_union": false,
+      "tld": "ai"
+    },
+    "AL": {
+      "alpha2": "AL",
+      "alpha3": "ALB",
+      "calling_codes": ["+355"],
+      "currencies": ["ALL"],
+      "emoji": "🇦🇱",
+      "ioc": "ALB",
+      "languages": [
+        {
+          "name": "Albanian",
+          "name_native": "Shqip"
+        }
+      ],
+      "name": "Albania",
+      "name_translated": "Albania",
+      "timezones": ["Europe/Tirane"],
+      "is_in_european_union": false,
+      "tld": "al"
+    },
+    "AM": {
+      "alpha2": "AM",
+      "alpha3": "ARM",
+      "calling_codes": ["+374"],
+      "currencies": ["AMD"],
+      "emoji": "🇦🇲",
+      "ioc": "ARM",
+      "languages": [
+        {
+          "name": "Armenian",
+          "name_native": "Հայերեն"
+        },
+        {
+          "name": "Russian",
+          "name_native": "русский язык"
+        }
+      ],
+      "name": "Armenia",
+      "name_translated": "Armenia",
+      "timezones": ["Asia/Yerevan"],
+      "is_in_european_union": false,
+      "tld": "am"
+    },
+    "AO": {
+      "alpha2": "AO",
+      "alpha3": "AGO",
+      "calling_codes": ["+244"],
+      "currencies": ["AOA"],
+      "emoji": "🇦🇴",
+      "ioc": "ANG",
+      "languages": [
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "Angola",
+      "name_translated": "Angola",
+      "timezones": ["Africa/Luanda"],
+      "is_in_european_union": false,
+      "tld": "ao"
+    },
+    "AQ": {
+      "alpha2": "AQ",
+      "alpha3": "ATA",
+      "calling_codes": ["+672"],
+      "currencies": [],
+      "emoji": "🇦🇶",
+      "ioc": "",
+      "languages": [],
+      "name": "Antarctica",
+      "name_translated": "Antarctica",
+      "timezones": [
+        "Antarctica/McMurdo",
+        "Antarctica/Casey",
+        "Antarctica/Davis",
+        "Antarctica/DumontDUrville",
+        "Antarctica/Mawson",
+        "Antarctica/Palmer",
+        "Antarctica/Rothera",
+        "Antarctica/Syowa",
+        "Antarctica/Troll",
+        "Antarctica/Vostok"
+      ],
+      "is_in_european_union": false,
+      "tld": "aq"
+    },
+    "AR": {
+      "alpha2": "AR",
+      "alpha3": "ARG",
+      "calling_codes": ["+54"],
+      "currencies": ["ARS"],
+      "emoji": "🇦🇷",
+      "ioc": "ARG",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Argentina",
+      "name_translated": "Argentina",
+      "timezones": [
+        "America/Argentina/Buenos_Aires",
+        "America/Argentina/Cordoba",
+        "America/Argentina/Salta",
+        "America/Argentina/Jujuy",
+        "America/Argentina/Tucuman",
+        "America/Argentina/Catamarca",
+        "America/Argentina/La_Rioja",
+        "America/Argentina/San_Juan",
+        "America/Argentina/Mendoza",
+        "America/Argentina/San_Luis",
+        "America/Argentina/Rio_Gallegos",
+        "America/Argentina/Ushuaia"
+      ],
+      "is_in_european_union": false,
+      "tld": "ar"
+    },
+    "AS": {
+      "alpha2": "AS",
+      "alpha3": "ASM",
+      "calling_codes": ["+1 684"],
+      "currencies": ["USD"],
+      "emoji": "🇦🇸",
+      "ioc": "ASA",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Samoan",
+          "name_native": "Gagana Faa Samoa"
+        }
+      ],
+      "name": "American Samoa",
+      "name_translated": "American Samoa",
+      "timezones": ["Pacific/Pago_Pago"],
+      "is_in_european_union": false,
+      "tld": "as"
+    },
+    "AT": {
+      "alpha2": "AT",
+      "alpha3": "AUT",
+      "calling_codes": ["+43"],
+      "currencies": ["EUR"],
+      "emoji": "🇦🇹",
+      "ioc": "AUT",
+      "languages": [
+        {
+          "name": "German",
+          "name_native": "Deutsch"
+        }
+      ],
+      "name": "Austria",
+      "name_translated": "Austria",
+      "timezones": ["Europe/Vienna"],
+      "is_in_european_union": true,
+      "tld": "at"
+    },
+    "AU": {
+      "alpha2": "AU",
+      "alpha3": "AUS",
+      "calling_codes": ["+61"],
+      "currencies": ["AUD"],
+      "emoji": "🇦🇺",
+      "ioc": "AUS",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Australia",
+      "name_translated": "Australia",
+      "timezones": [
+        "Australia/Lord_Howe",
+        "Antarctica/Macquarie",
+        "Australia/Hobart",
+        "Australia/Currie",
+        "Australia/Melbourne",
+        "Australia/Sydney",
+        "Australia/Broken_Hill",
+        "Australia/Brisbane",
+        "Australia/Lindeman",
+        "Australia/Adelaide",
+        "Australia/Darwin",
+        "Australia/Perth",
+        "Australia/Eucla"
+      ],
+      "is_in_european_union": false,
+      "tld": "au"
+    },
+    "AW": {
+      "alpha2": "AW",
+      "alpha3": "ABW",
+      "calling_codes": ["+297"],
+      "currencies": ["AWG"],
+      "emoji": "🇦🇼",
+      "ioc": "ARU",
+      "languages": [
+        {
+          "name": "Dutch",
+          "name_native": "Dutch"
+        }
+      ],
+      "name": "Aruba",
+      "name_translated": "Aruba",
+      "timezones": ["America/Aruba"],
+      "is_in_european_union": false,
+      "tld": "aw"
+    },
+    "AX": {
+      "alpha2": "AX",
+      "alpha3": "ALA",
+      "calling_codes": ["+358"],
+      "currencies": ["EUR"],
+      "emoji": "🇦🇽",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "Swedish",
+          "name_native": "Svenska"
+        }
+      ],
+      "name": "Åland Islands",
+      "name_translated": "Åland Islands",
+      "timezones": ["Europe/Mariehamn"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "AZ": {
+      "alpha2": "AZ",
+      "alpha3": "AZE",
+      "calling_codes": ["+994"],
+      "currencies": ["AZN"],
+      "emoji": "🇦🇿",
+      "ioc": "AZE",
+      "languages": [
+        {
+          "name": "Azerbaijani",
+          "name_native": "Azərbaycan Dili"
+        }
+      ],
+      "name": "Azerbaijan",
+      "name_translated": "Azerbaijan",
+      "timezones": ["Asia/Baku"],
+      "is_in_european_union": false,
+      "tld": "az"
+    },
+    "BA": {
+      "alpha2": "BA",
+      "alpha3": "BIH",
+      "calling_codes": ["+387"],
+      "currencies": ["BAM"],
+      "emoji": "🇧🇦",
+      "ioc": "BIH",
+      "languages": [
+        {
+          "name": "Bosnian",
+          "name_native": "Bosanski Jezik"
+        },
+        {
+          "name": "Cree",
+          "name_native": "ᓀᐦᐃᔭᐍᐏᐣ"
+        },
+        {
+          "name": "Serbian",
+          "name_native": "српски језик"
+        }
+      ],
+      "name": "Bosnia & Herzegovina",
+      "name_translated": "Bosnia & Herzegovina",
+      "timezones": ["Europe/Sarajevo"],
+      "is_in_european_union": false,
+      "tld": "ba"
+    },
+    "BB": {
+      "alpha2": "BB",
+      "alpha3": "BRB",
+      "calling_codes": ["+1 246"],
+      "currencies": ["BBD"],
+      "emoji": "🇧🇧",
+      "ioc": "BAR",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Barbados",
+      "name_translated": "Barbados",
+      "timezones": ["America/Barbados"],
+      "is_in_european_union": false,
+      "tld": "bb"
+    },
+    "BD": {
+      "alpha2": "BD",
+      "alpha3": "BGD",
+      "calling_codes": ["+880"],
+      "currencies": ["BDT"],
+      "emoji": "🇧🇩",
+      "ioc": "BAN",
+      "languages": [
+        {
+          "name": "Bengali",
+          "name_native": "বাংলা"
+        }
+      ],
+      "name": "Bangladesh",
+      "name_translated": "Bangladesh",
+      "timezones": ["Asia/Dhaka"],
+      "is_in_european_union": false,
+      "tld": "bd"
+    },
+    "BE": {
+      "alpha2": "BE",
+      "alpha3": "BEL",
+      "calling_codes": ["+32"],
+      "currencies": ["EUR"],
+      "emoji": "🇧🇪",
+      "ioc": "BEL",
+      "languages": [
+        {
+          "name": "Dutch",
+          "name_native": "Dutch"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "German",
+          "name_native": "Deutsch"
+        }
+      ],
+      "name": "Belgium",
+      "name_translated": "Belgium",
+      "timezones": ["Europe/Brussels"],
+      "is_in_european_union": true,
+      "tld": "be"
+    },
+    "BF": {
+      "alpha2": "BF",
+      "alpha3": "BFA",
+      "calling_codes": ["+226"],
+      "currencies": ["XOF"],
+      "emoji": "🇧🇫",
+      "ioc": "BUR",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Burkina Faso",
+      "name_translated": "Burkina Faso",
+      "timezones": ["Africa/Ouagadougou"],
+      "is_in_european_union": false,
+      "tld": "bf"
+    },
+    "BG": {
+      "alpha2": "BG",
+      "alpha3": "BGR",
+      "calling_codes": ["+359"],
+      "currencies": ["BGN"],
+      "emoji": "🇧🇬",
+      "ioc": "BUL",
+      "languages": [
+        {
+          "name": "Bulgarian",
+          "name_native": "български език"
+        }
+      ],
+      "name": "Bulgaria",
+      "name_translated": "Bulgaria",
+      "timezones": ["Europe/Sofia"],
+      "is_in_european_union": true,
+      "tld": "bg"
+    },
+    "BH": {
+      "alpha2": "BH",
+      "alpha3": "BHR",
+      "calling_codes": ["+973"],
+      "currencies": ["BHD"],
+      "emoji": "🇧🇭",
+      "ioc": "BRN",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Bahrain",
+      "name_translated": "Bahrain",
+      "timezones": ["Asia/Bahrain"],
+      "is_in_european_union": false,
+      "tld": "bh"
+    },
+    "BI": {
+      "alpha2": "BI",
+      "alpha3": "BDI",
+      "calling_codes": ["+257"],
+      "currencies": ["BIF"],
+      "emoji": "🇧🇮",
+      "ioc": "BDI",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Burundi",
+      "name_translated": "Burundi",
+      "timezones": ["Africa/Bujumbura"],
+      "is_in_european_union": false,
+      "tld": "bi"
+    },
+    "BJ": {
+      "alpha2": "BJ",
+      "alpha3": "BEN",
+      "calling_codes": ["+229"],
+      "currencies": ["XOF"],
+      "emoji": "🇧🇯",
+      "ioc": "BEN",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Benin",
+      "name_translated": "Benin",
+      "timezones": ["Africa/Porto-Novo"],
+      "is_in_european_union": false,
+      "tld": "bj"
+    },
+    "BL": {
+      "alpha2": "BL",
+      "alpha3": "BLM",
+      "calling_codes": ["+590"],
+      "currencies": ["EUR"],
+      "emoji": "🇧🇱",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "St. Barthélemy",
+      "name_translated": "St. Barthélemy",
+      "timezones": ["America/St_Barthelemy"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "BM": {
+      "alpha2": "BM",
+      "alpha3": "BMU",
+      "calling_codes": ["+1 441"],
+      "currencies": ["BMD"],
+      "emoji": "🇧🇲",
+      "ioc": "BER",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Bermuda",
+      "name_translated": "Bermuda",
+      "timezones": ["Atlantic/Bermuda"],
+      "is_in_european_union": false,
+      "tld": "bm"
+    },
+    "BN": {
+      "alpha2": "BN",
+      "alpha3": "BRN",
+      "calling_codes": ["+673"],
+      "currencies": ["BND"],
+      "emoji": "🇧🇳",
+      "ioc": "BRU",
+      "languages": [
+        {
+          "name": "Malay",
+          "name_native": "Bahasa Melayu"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Brunei",
+      "name_translated": "Brunei",
+      "timezones": ["Asia/Brunei"],
+      "is_in_european_union": false,
+      "tld": "bn"
+    },
+    "BO": {
+      "alpha2": "BO",
+      "alpha3": "BOL",
+      "calling_codes": ["+591"],
+      "currencies": ["BOB", "BOV"],
+      "emoji": "🇧🇴",
+      "ioc": "BOL",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        },
+        {
+          "name": "Aymara",
+          "name_native": "Aymar Aru"
+        },
+        {
+          "name": "Quechua",
+          "name_native": "Kichwa"
+        }
+      ],
+      "name": "Bolivia",
+      "name_translated": "Bolivia",
+      "timezones": ["America/La_Paz"],
+      "is_in_european_union": false,
+      "tld": "bo"
+    },
+    "BQ": {
+      "alpha2": "BQ",
+      "alpha3": "BES",
+      "calling_codes": ["+599"],
+      "currencies": ["USD"],
+      "emoji": "🇧🇶",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "Dutch",
+          "name_native": "Dutch"
+        }
+      ],
+      "name": "Caribbean Netherlands",
+      "name_translated": "Caribbean Netherlands",
+      "timezones": ["America/Kralendijk"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "BR": {
+      "alpha2": "BR",
+      "alpha3": "BRA",
+      "calling_codes": ["+55"],
+      "currencies": ["BRL"],
+      "emoji": "🇧🇷",
+      "ioc": "BRA",
+      "languages": [
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "Brazil",
+      "name_translated": "Brazil",
+      "timezones": [
+        "America/Noronha",
+        "America/Belem",
+        "America/Fortaleza",
+        "America/Recife",
+        "America/Araguaina",
+        "America/Maceio",
+        "America/Bahia",
+        "America/Sao_Paulo",
+        "America/Campo_Grande",
+        "America/Cuiaba",
+        "America/Santarem",
+        "America/Porto_Velho",
+        "America/Boa_Vista",
+        "America/Manaus",
+        "America/Eirunepe",
+        "America/Rio_Branco"
+      ],
+      "is_in_european_union": false,
+      "tld": "br"
+    },
+    "BS": {
+      "alpha2": "BS",
+      "alpha3": "BHS",
+      "calling_codes": ["+1 242"],
+      "currencies": ["BSD"],
+      "emoji": "🇧🇸",
+      "ioc": "BAH",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Bahamas",
+      "name_translated": "Bahamas",
+      "timezones": ["America/Nassau"],
+      "is_in_european_union": false,
+      "tld": "bs"
+    },
+    "BT": {
+      "alpha2": "BT",
+      "alpha3": "BTN",
+      "calling_codes": ["+975"],
+      "currencies": ["INR", "BTN"],
+      "emoji": "🇧🇹",
+      "ioc": "BHU",
+      "languages": [
+        {
+          "name": "Dzongkha",
+          "name_native": "Dzongkha"
+        }
+      ],
+      "name": "Bhutan",
+      "name_translated": "Bhutan",
+      "timezones": ["Asia/Thimphu"],
+      "is_in_european_union": false,
+      "tld": "bt"
+    },
+    "BV": {
+      "alpha2": "BV",
+      "alpha3": "BVT",
+      "calling_codes": [],
+      "currencies": ["NOK"],
+      "emoji": "🇧🇻",
+      "ioc": "",
+      "languages": [],
+      "name": "BV",
+      "name_translated": "BV",
+      "timezones": ["Europe/Oslo"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "BW": {
+      "alpha2": "BW",
+      "alpha3": "BWA",
+      "calling_codes": ["+267"],
+      "currencies": ["BWP"],
+      "emoji": "🇧🇼",
+      "ioc": "BOT",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Tswana",
+          "name_native": "Setswana"
+        }
+      ],
+      "name": "Botswana",
+      "name_translated": "Botswana",
+      "timezones": ["Africa/Gaborone"],
+      "is_in_european_union": false,
+      "tld": "bw"
+    },
+    "BY": {
+      "alpha2": "BY",
+      "alpha3": "BLR",
+      "calling_codes": ["+375"],
+      "currencies": ["BYR"],
+      "emoji": "🇧🇾",
+      "ioc": "BLR",
+      "languages": [
+        {
+          "name": "Belarusian",
+          "name_native": "Беларуская"
+        },
+        {
+          "name": "Russian",
+          "name_native": "русский язык"
+        }
+      ],
+      "name": "Belarus",
+      "name_translated": "Belarus",
+      "timezones": ["Europe/Minsk"],
+      "is_in_european_union": false,
+      "tld": "by"
+    },
+    "BZ": {
+      "alpha2": "BZ",
+      "alpha3": "BLZ",
+      "calling_codes": ["+501"],
+      "currencies": ["BZD"],
+      "emoji": "🇧🇿",
+      "ioc": "BIZ",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Belize",
+      "name_translated": "Belize",
+      "timezones": ["America/Belize"],
+      "is_in_european_union": false,
+      "tld": "bz"
+    },
+    "CA": {
+      "alpha2": "CA",
+      "alpha3": "CAN",
+      "calling_codes": ["+1"],
+      "currencies": ["CAD"],
+      "emoji": "🇨🇦",
+      "ioc": "CAN",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Canada",
+      "name_translated": "Canada",
+      "timezones": [
+        "America/St_Johns",
+        "America/Halifax",
+        "America/Glace_Bay",
+        "America/Moncton",
+        "America/Goose_Bay",
+        "America/Blanc-Sablon",
+        "America/Toronto",
+        "America/Nipigon",
+        "America/Thunder_Bay",
+        "America/Iqaluit",
+        "America/Pangnirtung",
+        "America/Atikokan",
+        "America/Winnipeg",
+        "America/Rainy_River",
+        "America/Resolute",
+        "America/Rankin_Inlet",
+        "America/Regina",
+        "America/Swift_Current",
+        "America/Edmonton",
+        "America/Cambridge_Bay",
+        "America/Yellowknife",
+        "America/Inuvik",
+        "America/Creston",
+        "America/Dawson_Creek",
+        "America/Fort_Nelson",
+        "America/Vancouver",
+        "America/Whitehorse",
+        "America/Dawson"
+      ],
+      "is_in_european_union": false,
+      "tld": "ca"
+    },
+    "CC": {
+      "alpha2": "CC",
+      "alpha3": "CCK",
+      "calling_codes": ["+61"],
+      "currencies": ["AUD"],
+      "emoji": "🇨🇨",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Cocos (Keeling) Islands",
+      "name_translated": "Cocos (Keeling) Islands",
+      "timezones": ["Indian/Cocos"],
+      "is_in_european_union": false,
+      "tld": "cc"
+    },
+    "CD": {
+      "alpha2": "CD",
+      "alpha3": "COD",
+      "calling_codes": ["+243"],
+      "currencies": ["CDF"],
+      "emoji": "🇨🇩",
+      "ioc": "COD",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "Lingala",
+          "name_native": "Lingála"
+        },
+        {
+          "name": "Kongo",
+          "name_native": "KiKongo"
+        },
+        {
+          "name": "Swahili",
+          "name_native": "Kiswahili"
+        }
+      ],
+      "name": "Congo - Kinshasa",
+      "name_translated": "Congo - Kinshasa",
+      "timezones": ["Africa/Kinshasa", "Africa/Lubumbashi"],
+      "is_in_european_union": false,
+      "tld": "cd"
+    },
+    "CF": {
+      "alpha2": "CF",
+      "alpha3": "CAF",
+      "calling_codes": ["+236"],
+      "currencies": ["XAF"],
+      "emoji": "🇨🇫",
+      "ioc": "CAF",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "Sango",
+          "name_native": "Yângâ Tî Sängö"
+        }
+      ],
+      "name": "Central African Republic",
+      "name_translated": "Central African Republic",
+      "timezones": ["Africa/Bangui"],
+      "is_in_european_union": false,
+      "tld": "cf"
+    },
+    "CG": {
+      "alpha2": "CG",
+      "alpha3": "COG",
+      "calling_codes": ["+242"],
+      "currencies": ["XAF"],
+      "emoji": "🇨🇬",
+      "ioc": "CGO",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "Lingala",
+          "name_native": "Lingála"
+        }
+      ],
+      "name": "Congo - Brazzaville",
+      "name_translated": "Congo - Brazzaville",
+      "timezones": ["Africa/Brazzaville"],
+      "is_in_european_union": false,
+      "tld": "cg"
+    },
+    "CH": {
+      "alpha2": "CH",
+      "alpha3": "CHE",
+      "calling_codes": ["+41"],
+      "currencies": ["CHF", "CHE", "CHW"],
+      "emoji": "🇨🇭",
+      "ioc": "SUI",
+      "languages": [
+        {
+          "name": "German",
+          "name_native": "Deutsch"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "Italian",
+          "name_native": "Italiano"
+        },
+        {
+          "name": "Romansh",
+          "name_native": "Rumantsch Grischun"
+        }
+      ],
+      "name": "Switzerland",
+      "name_translated": "Switzerland",
+      "timezones": ["Europe/Zurich"],
+      "is_in_european_union": false,
+      "tld": "ch"
+    },
+    "CI": {
+      "alpha2": "CI",
+      "alpha3": "CIV",
+      "calling_codes": ["+225"],
+      "currencies": ["XOF"],
+      "emoji": "🇨🇮",
+      "ioc": "CIV",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Côte d’Ivoire",
+      "name_translated": "Côte d’Ivoire",
+      "timezones": ["Africa/Abidjan"],
+      "is_in_european_union": false,
+      "tld": "ci"
+    },
+    "CK": {
+      "alpha2": "CK",
+      "alpha3": "COK",
+      "calling_codes": ["+682"],
+      "currencies": ["NZD"],
+      "emoji": "🇨🇰",
+      "ioc": "COK",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Maori",
+          "name_native": "Maori"
+        }
+      ],
+      "name": "Cook Islands",
+      "name_translated": "Cook Islands",
+      "timezones": ["Pacific/Rarotonga"],
+      "is_in_european_union": false,
+      "tld": "ck"
+    },
+    "CL": {
+      "alpha2": "CL",
+      "alpha3": "CHL",
+      "calling_codes": ["+56"],
+      "currencies": ["CLP", "CLF"],
+      "emoji": "🇨🇱",
+      "ioc": "CHI",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Chile",
+      "name_translated": "Chile",
+      "timezones": [
+        "America/Santiago",
+        "America/Punta_Arenas",
+        "Pacific/Easter"
+      ],
+      "is_in_european_union": false,
+      "tld": "cl"
+    },
+    "CM": {
+      "alpha2": "CM",
+      "alpha3": "CMR",
+      "calling_codes": ["+237"],
+      "currencies": ["XAF"],
+      "emoji": "🇨🇲",
+      "ioc": "CMR",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Cameroon",
+      "name_translated": "Cameroon",
+      "timezones": ["Africa/Douala"],
+      "is_in_european_union": false,
+      "tld": "cm"
+    },
+    "CN": {
+      "alpha2": "CN",
+      "alpha3": "CHN",
+      "calling_codes": ["+86"],
+      "currencies": ["CNY"],
+      "emoji": "🇨🇳",
+      "ioc": "CHN",
+      "languages": [
+        {
+          "name": "Chinese",
+          "name_native": "中文 (Zhōngwén)"
+        }
+      ],
+      "name": "China",
+      "name_translated": "China",
+      "timezones": ["Asia/Shanghai", "Asia/Urumqi"],
+      "is_in_european_union": false,
+      "tld": "cn"
+    },
+    "CO": {
+      "alpha2": "CO",
+      "alpha3": "COL",
+      "calling_codes": ["+57"],
+      "currencies": ["COP", "COU"],
+      "emoji": "🇨🇴",
+      "ioc": "COL",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Colombia",
+      "name_translated": "Colombia",
+      "timezones": ["America/Bogota"],
+      "is_in_european_union": false,
+      "tld": "co"
+    },
+    "CR": {
+      "alpha2": "CR",
+      "alpha3": "CRI",
+      "calling_codes": ["+506"],
+      "currencies": ["CRC"],
+      "emoji": "🇨🇷",
+      "ioc": "CRC",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Costa Rica",
+      "name_translated": "Costa Rica",
+      "timezones": ["America/Costa_Rica"],
+      "is_in_european_union": false,
+      "tld": "cr"
+    },
+    "CU": {
+      "alpha2": "CU",
+      "alpha3": "CUB",
+      "calling_codes": ["+53"],
+      "currencies": ["CUP", "CUC"],
+      "emoji": "🇨🇺",
+      "ioc": "CUB",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Cuba",
+      "name_translated": "Cuba",
+      "timezones": ["America/Havana"],
+      "is_in_european_union": false,
+      "tld": "cu"
+    },
+    "CV": {
+      "alpha2": "CV",
+      "alpha3": "CPV",
+      "calling_codes": ["+238"],
+      "currencies": ["CVE"],
+      "emoji": "🇨🇻",
+      "ioc": "CPV",
+      "languages": [
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "Cape Verde",
+      "name_translated": "Cape Verde",
+      "timezones": ["Atlantic/Cape_Verde"],
+      "is_in_european_union": false,
+      "tld": "cv"
+    },
+    "CW": {
+      "alpha2": "CW",
+      "alpha3": "CUW",
+      "calling_codes": ["+599"],
+      "currencies": ["ANG"],
+      "emoji": "🇨🇼",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "Dutch",
+          "name_native": "Dutch"
+        }
+      ],
+      "name": "Curaçao",
+      "name_translated": "Curaçao",
+      "timezones": ["America/Curacao"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "CX": {
+      "alpha2": "CX",
+      "alpha3": "CXR",
+      "calling_codes": ["+61"],
+      "currencies": ["AUD"],
+      "emoji": "🇨🇽",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Christmas Island",
+      "name_translated": "Christmas Island",
+      "timezones": ["Indian/Christmas"],
+      "is_in_european_union": false,
+      "tld": "cx"
+    },
+    "CY": {
+      "alpha2": "CY",
+      "alpha3": "CYP",
+      "calling_codes": ["+357"],
+      "currencies": ["EUR"],
+      "emoji": "🇨🇾",
+      "ioc": "CYP",
+      "languages": [
+        {
+          "name": "Greek Modern (1453-)",
+          "name_native": "Greek Modern (1453-)"
+        },
+        {
+          "name": "Turkish",
+          "name_native": "Türkçe"
+        }
+      ],
+      "name": "Cyprus",
+      "name_translated": "Cyprus",
+      "timezones": ["Asia/Nicosia", "Asia/Famagusta"],
+      "is_in_european_union": true,
+      "tld": "cy"
+    },
+    "CZ": {
+      "alpha2": "CZ",
+      "alpha3": "CZE",
+      "calling_codes": ["+420"],
+      "currencies": ["CZK"],
+      "emoji": "🇨🇿",
+      "ioc": "CZE",
+      "languages": [
+        {
+          "name": "Czech",
+          "name_native": "česky"
+        }
+      ],
+      "name": "Czechia",
+      "name_translated": "Czechia",
+      "timezones": ["Europe/Prague"],
+      "is_in_european_union": true,
+      "tld": "cz"
+    },
+    "DE": {
+      "alpha2": "DE",
+      "alpha3": "DEU",
+      "calling_codes": ["+49"],
+      "currencies": ["EUR"],
+      "emoji": "🇩🇪",
+      "ioc": "GER",
+      "languages": [
+        {
+          "name": "German",
+          "name_native": "Deutsch"
+        }
+      ],
+      "name": "Germany",
+      "name_translated": "Germany",
+      "timezones": ["Europe/Berlin", "Europe/Busingen"],
+      "is_in_european_union": true,
+      "tld": "de"
+    },
+    "DJ": {
+      "alpha2": "DJ",
+      "alpha3": "DJI",
+      "calling_codes": ["+253"],
+      "currencies": ["DJF"],
+      "emoji": "🇩🇯",
+      "ioc": "DJI",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Djibouti",
+      "name_translated": "Djibouti",
+      "timezones": ["Africa/Djibouti"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "DK": {
+      "alpha2": "DK",
+      "alpha3": "DNK",
+      "calling_codes": ["+45"],
+      "currencies": ["DKK"],
+      "emoji": "🇩🇰",
+      "ioc": "DEN",
+      "languages": [
+        {
+          "name": "Danish",
+          "name_native": "Dansk"
+        }
+      ],
+      "name": "Denmark",
+      "name_translated": "Denmark",
+      "timezones": ["Europe/Copenhagen"],
+      "is_in_european_union": true,
+      "tld": "dk"
+    },
+    "DM": {
+      "alpha2": "DM",
+      "alpha3": "DMA",
+      "calling_codes": ["+1 767"],
+      "currencies": ["XCD"],
+      "emoji": "🇩🇲",
+      "ioc": "DMA",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Dominica",
+      "name_translated": "Dominica",
+      "timezones": ["America/Dominica"],
+      "is_in_european_union": false,
+      "tld": "dm"
+    },
+    "DO": {
+      "alpha2": "DO",
+      "alpha3": "DOM",
+      "calling_codes": ["+1 809", "+1 829", "+1 849"],
+      "currencies": ["DOP"],
+      "emoji": "🇩🇴",
+      "ioc": "DOM",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Dominican Republic",
+      "name_translated": "Dominican Republic",
+      "timezones": ["America/Santo_Domingo"],
+      "is_in_european_union": false,
+      "tld": "do"
+    },
+    "DZ": {
+      "alpha2": "DZ",
+      "alpha3": "DZA",
+      "calling_codes": ["+213"],
+      "currencies": ["DZD"],
+      "emoji": "🇩🇿",
+      "ioc": "ALG",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Algeria",
+      "name_translated": "Algeria",
+      "timezones": ["Africa/Algiers"],
+      "is_in_european_union": false,
+      "tld": "dz"
+    },
+    "EC": {
+      "alpha2": "EC",
+      "alpha3": "ECU",
+      "calling_codes": ["+593"],
+      "currencies": ["USD"],
+      "emoji": "🇪🇨",
+      "ioc": "ECU",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        },
+        {
+          "name": "Quechua",
+          "name_native": "Kichwa"
+        }
+      ],
+      "name": "Ecuador",
+      "name_translated": "Ecuador",
+      "timezones": ["America/Guayaquil", "Pacific/Galapagos"],
+      "is_in_european_union": false,
+      "tld": "ec"
+    },
+    "EE": {
+      "alpha2": "EE",
+      "alpha3": "EST",
+      "calling_codes": ["+372"],
+      "currencies": ["EUR"],
+      "emoji": "🇪🇪",
+      "ioc": "EST",
+      "languages": [
+        {
+          "name": "Estonian",
+          "name_native": "Eesti"
+        }
+      ],
+      "name": "Estonia",
+      "name_translated": "Estonia",
+      "timezones": ["Europe/Tallinn"],
+      "is_in_european_union": true,
+      "tld": "ee"
+    },
+    "EG": {
+      "alpha2": "EG",
+      "alpha3": "EGY",
+      "calling_codes": ["+20"],
+      "currencies": ["EGP"],
+      "emoji": "🇪🇬",
+      "ioc": "EGY",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Egypt",
+      "name_translated": "Egypt",
+      "timezones": ["Africa/Cairo"],
+      "is_in_european_union": false,
+      "tld": "eg"
+    },
+    "EH": {
+      "alpha2": "EH",
+      "alpha3": "ESH",
+      "calling_codes": ["+212"],
+      "currencies": ["MAD"],
+      "emoji": "🇪🇭",
+      "ioc": "",
+      "languages": [],
+      "name": "Western Sahara",
+      "name_translated": "Western Sahara",
+      "timezones": ["Africa/El_Aaiun"],
+      "is_in_european_union": false,
+      "tld": "eh"
+    },
+    "ER": {
+      "alpha2": "ER",
+      "alpha3": "ERI",
+      "calling_codes": ["+291"],
+      "currencies": ["ERN"],
+      "emoji": "🇪🇷",
+      "ioc": "ERI",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        },
+        {
+          "name": "Tigrinya",
+          "name_native": "ትግርኛ"
+        }
+      ],
+      "name": "Eritrea",
+      "name_translated": "Eritrea",
+      "timezones": ["Africa/Asmara"],
+      "is_in_european_union": false,
+      "tld": "er"
+    },
+    "ES": {
+      "alpha2": "ES",
+      "alpha3": "ESP",
+      "calling_codes": ["+34"],
+      "currencies": ["EUR"],
+      "emoji": "🇪🇸",
+      "ioc": "ESP",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Spain",
+      "name_translated": "Spain",
+      "timezones": ["Europe/Madrid", "Africa/Ceuta", "Atlantic/Canary"],
+      "is_in_european_union": true,
+      "tld": "es"
+    },
+    "ET": {
+      "alpha2": "ET",
+      "alpha3": "ETH",
+      "calling_codes": ["+251"],
+      "currencies": ["ETB"],
+      "emoji": "🇪🇹",
+      "ioc": "ETH",
+      "languages": [
+        {
+          "name": "Amharic",
+          "name_native": "አማርኛ"
+        }
+      ],
+      "name": "Ethiopia",
+      "name_translated": "Ethiopia",
+      "timezones": ["Africa/Addis_Ababa"],
+      "is_in_european_union": false,
+      "tld": "et"
+    },
+    "FI": {
+      "alpha2": "FI",
+      "alpha3": "FIN",
+      "calling_codes": ["+358"],
+      "currencies": ["EUR"],
+      "emoji": "🇫🇮",
+      "ioc": "FIN",
+      "languages": [
+        {
+          "name": "Finnish",
+          "name_native": "Suomen Kieli"
+        },
+        {
+          "name": "Swedish",
+          "name_native": "Svenska"
+        }
+      ],
+      "name": "Finland",
+      "name_translated": "Finland",
+      "timezones": ["Europe/Helsinki"],
+      "is_in_european_union": true,
+      "tld": "fi"
+    },
+    "FJ": {
+      "alpha2": "FJ",
+      "alpha3": "FJI",
+      "calling_codes": ["+679"],
+      "currencies": ["FJD"],
+      "emoji": "🇫🇯",
+      "ioc": "FIJ",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Fijian",
+          "name_native": "Vosa Vakaviti"
+        }
+      ],
+      "name": "Fiji",
+      "name_translated": "Fiji",
+      "timezones": ["Pacific/Fiji"],
+      "is_in_european_union": false,
+      "tld": "fj"
+    },
+    "FK": {
+      "alpha2": "FK",
+      "alpha3": "FLK",
+      "calling_codes": ["+500"],
+      "currencies": ["FKP"],
+      "emoji": "🇫🇰",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Falkland Islands",
+      "name_translated": "Falkland Islands",
+      "timezones": ["Atlantic/Stanley"],
+      "is_in_european_union": false,
+      "tld": "fk"
+    },
+    "FM": {
+      "alpha2": "FM",
+      "alpha3": "FSM",
+      "calling_codes": ["+691"],
+      "currencies": ["USD"],
+      "emoji": "🇫🇲",
+      "ioc": "FSM",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Micronesia",
+      "name_translated": "Micronesia",
+      "timezones": ["Pacific/Chuuk", "Pacific/Pohnpei", "Pacific/Kosrae"],
+      "is_in_european_union": false,
+      "tld": "fm"
+    },
+    "FO": {
+      "alpha2": "FO",
+      "alpha3": "FRO",
+      "calling_codes": ["+298"],
+      "currencies": ["DKK"],
+      "emoji": "🇫🇴",
+      "ioc": "FAI",
+      "languages": [
+        {
+          "name": "Faroese",
+          "name_native": "Føroyskt"
+        },
+        {
+          "name": "Danish",
+          "name_native": "Dansk"
+        }
+      ],
+      "name": "Faroe Islands",
+      "name_translated": "Faroe Islands",
+      "timezones": ["Atlantic/Faroe"],
+      "is_in_european_union": false,
+      "tld": "fo"
+    },
+    "FR": {
+      "alpha2": "FR",
+      "alpha3": "FRA",
+      "calling_codes": ["+33"],
+      "currencies": ["EUR"],
+      "emoji": "🇫🇷",
+      "ioc": "FRA",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "France",
+      "name_translated": "France",
+      "timezones": ["Europe/Paris"],
+      "is_in_european_union": true,
+      "tld": "fr"
+    },
+    "GA": {
+      "alpha2": "GA",
+      "alpha3": "GAB",
+      "calling_codes": ["+241"],
+      "currencies": ["XAF"],
+      "emoji": "🇬🇦",
+      "ioc": "GAB",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Gabon",
+      "name_translated": "Gabon",
+      "timezones": ["Africa/Libreville"],
+      "is_in_european_union": false,
+      "tld": "ga"
+    },
+    "GB": {
+      "alpha2": "GB",
+      "alpha3": "GBR",
+      "calling_codes": ["+44"],
+      "currencies": ["GBP"],
+      "emoji": "🇬🇧",
+      "ioc": "GBR",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Cornish",
+          "name_native": "Kernewek"
+        },
+        {
+          "name": "Irish",
+          "name_native": "Gaeilge"
+        },
+        {
+          "name": "Gaelic",
+          "name_native": "Gaelic"
+        },
+        {
+          "name": "Welsh",
+          "name_native": "Cymraeg"
+        }
+      ],
+      "name": "United Kingdom",
+      "name_translated": "United Kingdom",
+      "timezones": ["Europe/London"],
+      "is_in_european_union": false,
+      "tld": "uk"
+    },
+    "GD": {
+      "alpha2": "GD",
+      "alpha3": "GRD",
+      "calling_codes": ["+473"],
+      "currencies": ["XCD"],
+      "emoji": "🇬🇩",
+      "ioc": "GRN",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Grenada",
+      "name_translated": "Grenada",
+      "timezones": ["America/Grenada"],
+      "is_in_european_union": false,
+      "tld": "gd"
+    },
+    "GE": {
+      "alpha2": "GE",
+      "alpha3": "GEO",
+      "calling_codes": ["+995"],
+      "currencies": ["GEL"],
+      "emoji": "🇬🇪",
+      "ioc": "GEO",
+      "languages": [
+        {
+          "name": "Georgian",
+          "name_native": "ქართული"
+        }
+      ],
+      "name": "Georgia",
+      "name_translated": "Georgia",
+      "timezones": ["Asia/Tbilisi"],
+      "is_in_european_union": false,
+      "tld": "ge"
+    },
+    "GF": {
+      "alpha2": "GF",
+      "alpha3": "GUF",
+      "calling_codes": ["+594"],
+      "currencies": ["EUR"],
+      "emoji": "🇬🇫",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "French Guiana",
+      "name_translated": "French Guiana",
+      "timezones": ["America/Cayenne"],
+      "is_in_european_union": false,
+      "tld": "gf"
+    },
+    "GG": {
+      "alpha2": "GG",
+      "alpha3": "GGY",
+      "calling_codes": ["+44"],
+      "currencies": ["GBP"],
+      "emoji": "🇬🇬",
+      "ioc": "GCI",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Guernsey",
+      "name_translated": "Guernsey",
+      "timezones": ["Europe/Guernsey"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "GH": {
+      "alpha2": "GH",
+      "alpha3": "GHA",
+      "calling_codes": ["+233"],
+      "currencies": ["GHS"],
+      "emoji": "🇬🇭",
+      "ioc": "GHA",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Ghana",
+      "name_translated": "Ghana",
+      "timezones": ["Africa/Accra"],
+      "is_in_european_union": false,
+      "tld": "gh"
+    },
+    "GI": {
+      "alpha2": "GI",
+      "alpha3": "GIB",
+      "calling_codes": ["+350"],
+      "currencies": ["GIP"],
+      "emoji": "🇬🇮",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Gibraltar",
+      "name_translated": "Gibraltar",
+      "timezones": ["Europe/Gibraltar"],
+      "is_in_european_union": false,
+      "tld": "gi"
+    },
+    "GL": {
+      "alpha2": "GL",
+      "alpha3": "GRL",
+      "calling_codes": ["+299"],
+      "currencies": ["DKK"],
+      "emoji": "🇬🇱",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "Greenlandic",
+          "name_native": "Greenlandic"
+        }
+      ],
+      "name": "Greenland",
+      "name_translated": "Greenland",
+      "timezones": [
+        "America/Godthab",
+        "America/Danmarkshavn",
+        "America/Scoresbysund",
+        "America/Thule"
+      ],
+      "is_in_european_union": false,
+      "tld": "gl"
+    },
+    "GM": {
+      "alpha2": "GM",
+      "alpha3": "GMB",
+      "calling_codes": ["+220"],
+      "currencies": ["GMD"],
+      "emoji": "🇬🇲",
+      "ioc": "GAM",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Gambia",
+      "name_translated": "Gambia",
+      "timezones": ["Africa/Banjul"],
+      "is_in_european_union": false,
+      "tld": "gm"
+    },
+    "GN": {
+      "alpha2": "GN",
+      "alpha3": "GIN",
+      "calling_codes": ["+224"],
+      "currencies": ["GNF"],
+      "emoji": "🇬🇳",
+      "ioc": "GUI",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Guinea",
+      "name_translated": "Guinea",
+      "timezones": ["Africa/Conakry"],
+      "is_in_european_union": false,
+      "tld": "gn"
+    },
+    "GP": {
+      "alpha2": "GP",
+      "alpha3": "GLP",
+      "calling_codes": ["+590"],
+      "currencies": ["EUR"],
+      "emoji": "🇬🇵",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Guadeloupe",
+      "name_translated": "Guadeloupe",
+      "timezones": ["America/Guadeloupe"],
+      "is_in_european_union": false,
+      "tld": "gp"
+    },
+    "GQ": {
+      "alpha2": "GQ",
+      "alpha3": "GNQ",
+      "calling_codes": ["+240"],
+      "currencies": ["XAF"],
+      "emoji": "🇬🇶",
+      "ioc": "GEQ",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "Equatorial Guinea",
+      "name_translated": "Equatorial Guinea",
+      "timezones": ["Africa/Malabo"],
+      "is_in_european_union": false,
+      "tld": "gq"
+    },
+    "GR": {
+      "alpha2": "GR",
+      "alpha3": "GRC",
+      "calling_codes": ["+30"],
+      "currencies": ["EUR"],
+      "emoji": "🇬🇷",
+      "ioc": "GRE",
+      "languages": [
+        {
+          "name": "Greek Modern (1453-)",
+          "name_native": "Greek Modern (1453-)"
+        }
+      ],
+      "name": "Greece",
+      "name_translated": "Greece",
+      "timezones": ["Europe/Athens"],
+      "is_in_european_union": true,
+      "tld": "gr"
+    },
+    "GS": {
+      "alpha2": "GS",
+      "alpha3": "SGS",
+      "calling_codes": [],
+      "currencies": ["GBP"],
+      "emoji": "🇬🇸",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "South Georgia & South Sandwich Islands",
+      "name_translated": "South Georgia & South Sandwich Islands",
+      "timezones": ["Atlantic/South_Georgia"],
+      "is_in_european_union": false,
+      "tld": "gs"
+    },
+    "GT": {
+      "alpha2": "GT",
+      "alpha3": "GTM",
+      "calling_codes": ["+502"],
+      "currencies": ["GTQ"],
+      "emoji": "🇬🇹",
+      "ioc": "GUA",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Guatemala",
+      "name_translated": "Guatemala",
+      "timezones": ["America/Guatemala"],
+      "is_in_european_union": false,
+      "tld": "gt"
+    },
+    "GU": {
+      "alpha2": "GU",
+      "alpha3": "GUM",
+      "calling_codes": ["+1 671"],
+      "currencies": ["USD"],
+      "emoji": "🇬🇺",
+      "ioc": "GUM",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Guam",
+      "name_translated": "Guam",
+      "timezones": ["Pacific/Guam"],
+      "is_in_european_union": false,
+      "tld": "gu"
+    },
+    "GW": {
+      "alpha2": "GW",
+      "alpha3": "GNB",
+      "calling_codes": ["+245"],
+      "currencies": ["XOF"],
+      "emoji": "🇬🇼",
+      "ioc": "GBS",
+      "languages": [
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "Guinea-Bissau",
+      "name_translated": "Guinea-Bissau",
+      "timezones": ["Africa/Bissau"],
+      "is_in_european_union": false,
+      "tld": "gw"
+    },
+    "GY": {
+      "alpha2": "GY",
+      "alpha3": "GUY",
+      "calling_codes": ["+592"],
+      "currencies": ["GYD"],
+      "emoji": "🇬🇾",
+      "ioc": "GUY",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Guyana",
+      "name_translated": "Guyana",
+      "timezones": ["America/Guyana"],
+      "is_in_european_union": false,
+      "tld": "gy"
+    },
+    "HK": {
+      "alpha2": "HK",
+      "alpha3": "HKG",
+      "calling_codes": ["+852"],
+      "currencies": ["HKD"],
+      "emoji": "🇭🇰",
+      "ioc": "HKG",
+      "languages": [
+        {
+          "name": "Chinese",
+          "name_native": "中文 (Zhōngwén)"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Hong Kong SAR China",
+      "name_translated": "Hong Kong SAR China",
+      "timezones": ["Asia/Hong_Kong"],
+      "is_in_european_union": false,
+      "tld": "hk"
+    },
+    "HM": {
+      "alpha2": "HM",
+      "alpha3": "HMD",
+      "calling_codes": [],
+      "currencies": ["AUD"],
+      "emoji": "🇭🇲",
+      "ioc": "",
+      "languages": [],
+      "name": "HM",
+      "name_translated": "HM",
+      "timezones": ["Indian/Kerguelen"],
+      "is_in_european_union": false,
+      "tld": "hm"
+    },
+    "HN": {
+      "alpha2": "HN",
+      "alpha3": "HND",
+      "calling_codes": ["+504"],
+      "currencies": ["HNL"],
+      "emoji": "🇭🇳",
+      "ioc": "HON",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Honduras",
+      "name_translated": "Honduras",
+      "timezones": ["America/Tegucigalpa"],
+      "is_in_european_union": false,
+      "tld": "hn"
+    },
+    "HR": {
+      "alpha2": "HR",
+      "alpha3": "HRV",
+      "calling_codes": ["+385"],
+      "currencies": ["HRK"],
+      "emoji": "🇭🇷",
+      "ioc": "CRO",
+      "languages": [
+        {
+          "name": "Croatian",
+          "name_native": "Hrvatski"
+        }
+      ],
+      "name": "Croatia",
+      "name_translated": "Croatia",
+      "timezones": ["Europe/Zagreb"],
+      "is_in_european_union": true,
+      "tld": "hr"
+    },
+    "HT": {
+      "alpha2": "HT",
+      "alpha3": "HTI",
+      "calling_codes": ["+509"],
+      "currencies": ["HTG", "USD"],
+      "emoji": "🇭🇹",
+      "ioc": "HAI",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "Haitian",
+          "name_native": "Kreyòl Ayisyen"
+        }
+      ],
+      "name": "Haiti",
+      "name_translated": "Haiti",
+      "timezones": ["America/Port-au-Prince"],
+      "is_in_european_union": false,
+      "tld": "ht"
+    },
+    "HU": {
+      "alpha2": "HU",
+      "alpha3": "HUN",
+      "calling_codes": ["+36"],
+      "currencies": ["HUF"],
+      "emoji": "🇭🇺",
+      "ioc": "HUN",
+      "languages": [
+        {
+          "name": "Hungarian",
+          "name_native": "Magyar"
+        }
+      ],
+      "name": "Hungary",
+      "name_translated": "Hungary",
+      "timezones": ["Europe/Budapest"],
+      "is_in_european_union": true,
+      "tld": "hu"
+    },
+    "ID": {
+      "alpha2": "ID",
+      "alpha3": "IDN",
+      "calling_codes": ["+62"],
+      "currencies": ["IDR"],
+      "emoji": "🇮🇩",
+      "ioc": "INA",
+      "languages": [
+        {
+          "name": "Indonesian",
+          "name_native": "Bahasa Indonesia"
+        }
+      ],
+      "name": "Indonesia",
+      "name_translated": "Indonesia",
+      "timezones": [
+        "Asia/Jakarta",
+        "Asia/Pontianak",
+        "Asia/Makassar",
+        "Asia/Jayapura"
+      ],
+      "is_in_european_union": false,
+      "tld": "id"
+    },
+    "IE": {
+      "alpha2": "IE",
+      "alpha3": "IRL",
+      "calling_codes": ["+353"],
+      "currencies": ["EUR"],
+      "emoji": "🇮🇪",
+      "ioc": "IRL",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Irish",
+          "name_native": "Gaeilge"
+        }
+      ],
+      "name": "Ireland",
+      "name_translated": "Ireland",
+      "timezones": ["Europe/Dublin"],
+      "is_in_european_union": true,
+      "tld": "ie"
+    },
+    "IL": {
+      "alpha2": "IL",
+      "alpha3": "ISR",
+      "calling_codes": ["+972"],
+      "currencies": ["ILS"],
+      "emoji": "🇮🇱",
+      "ioc": "ISR",
+      "languages": [
+        {
+          "name": "Hebrew",
+          "name_native": "Hebrew"
+        },
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Israel",
+      "name_translated": "Israel",
+      "timezones": ["Asia/Jerusalem"],
+      "is_in_european_union": false,
+      "tld": "il"
+    },
+    "IM": {
+      "alpha2": "IM",
+      "alpha3": "IMN",
+      "calling_codes": ["+44"],
+      "currencies": ["GBP"],
+      "emoji": "🇮🇲",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Manx",
+          "name_native": "Gaelg"
+        }
+      ],
+      "name": "Isle of Man",
+      "name_translated": "Isle of Man",
+      "timezones": ["Europe/Isle_of_Man"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "IN": {
+      "alpha2": "IN",
+      "alpha3": "IND",
+      "calling_codes": ["+91"],
+      "currencies": ["INR"],
+      "emoji": "🇮🇳",
+      "ioc": "IND",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Hindi",
+          "name_native": "हिंदी"
+        }
+      ],
+      "name": "India",
+      "name_translated": "India",
+      "timezones": ["Asia/Kolkata"],
+      "is_in_european_union": false,
+      "tld": "in"
+    },
+    "IO": {
+      "alpha2": "IO",
+      "alpha3": "IOT",
+      "calling_codes": ["+246"],
+      "currencies": ["USD"],
+      "emoji": "🇮🇴",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "British Indian Ocean Territory",
+      "name_translated": "British Indian Ocean Territory",
+      "timezones": ["Indian/Chagos"],
+      "is_in_european_union": false,
+      "tld": "io"
+    },
+    "IQ": {
+      "alpha2": "IQ",
+      "alpha3": "IRQ",
+      "calling_codes": ["+964"],
+      "currencies": ["IQD"],
+      "emoji": "🇮🇶",
+      "ioc": "IRQ",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        },
+        {
+          "name": "Kurdish",
+          "name_native": "Kurdî"
+        }
+      ],
+      "name": "Iraq",
+      "name_translated": "Iraq",
+      "timezones": ["Asia/Baghdad"],
+      "is_in_european_union": false,
+      "tld": "iq"
+    },
+    "IR": {
+      "alpha2": "IR",
+      "alpha3": "IRN",
+      "calling_codes": ["+98"],
+      "currencies": ["IRR"],
+      "emoji": "🇮🇷",
+      "ioc": "IRI",
+      "languages": [
+        {
+          "name": "Persian",
+          "name_native": "فارسی"
+        }
+      ],
+      "name": "Iran",
+      "name_translated": "Iran",
+      "timezones": ["Asia/Tehran"],
+      "is_in_european_union": false,
+      "tld": "ir"
+    },
+    "IS": {
+      "alpha2": "IS",
+      "alpha3": "ISL",
+      "calling_codes": ["+354"],
+      "currencies": ["ISK"],
+      "emoji": "🇮🇸",
+      "ioc": "ISL",
+      "languages": [
+        {
+          "name": "Icelandic",
+          "name_native": "Íslenska"
+        }
+      ],
+      "name": "Iceland",
+      "name_translated": "Iceland",
+      "timezones": ["Atlantic/Reykjavik"],
+      "is_in_european_union": false,
+      "tld": "is"
+    },
+    "IT": {
+      "alpha2": "IT",
+      "alpha3": "ITA",
+      "calling_codes": ["+39"],
+      "currencies": ["EUR"],
+      "emoji": "🇮🇹",
+      "ioc": "ITA",
+      "languages": [
+        {
+          "name": "Italian",
+          "name_native": "Italiano"
+        }
+      ],
+      "name": "Italy",
+      "name_translated": "Italy",
+      "timezones": ["Europe/Rome"],
+      "is_in_european_union": true,
+      "tld": "it"
+    },
+    "JE": {
+      "alpha2": "JE",
+      "alpha3": "JEY",
+      "calling_codes": ["+44"],
+      "currencies": ["GBP"],
+      "emoji": "🇯🇪",
+      "ioc": "JCI",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Jersey",
+      "name_translated": "Jersey",
+      "timezones": ["Europe/Jersey"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "JM": {
+      "alpha2": "JM",
+      "alpha3": "JAM",
+      "calling_codes": ["+1 876"],
+      "currencies": ["JMD"],
+      "emoji": "🇯🇲",
+      "ioc": "JAM",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Jamaica",
+      "name_translated": "Jamaica",
+      "timezones": ["America/Jamaica"],
+      "is_in_european_union": false,
+      "tld": "jm"
+    },
+    "JO": {
+      "alpha2": "JO",
+      "alpha3": "JOR",
+      "calling_codes": ["+962"],
+      "currencies": ["JOD"],
+      "emoji": "🇯🇴",
+      "ioc": "JOR",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Jordan",
+      "name_translated": "Jordan",
+      "timezones": ["Asia/Amman"],
+      "is_in_european_union": false,
+      "tld": "jo"
+    },
+    "JP": {
+      "alpha2": "JP",
+      "alpha3": "JPN",
+      "calling_codes": ["+81"],
+      "currencies": ["JPY"],
+      "emoji": "🇯🇵",
+      "ioc": "JPN",
+      "languages": [
+        {
+          "name": "Japanese",
+          "name_native": "日本語 (にほんご／にっぽんご)"
+        }
+      ],
+      "name": "Japan",
+      "name_translated": "Japan",
+      "timezones": ["Asia/Tokyo"],
+      "is_in_european_union": false,
+      "tld": "jp"
+    },
+    "KE": {
+      "alpha2": "KE",
+      "alpha3": "KEN",
+      "calling_codes": ["+254"],
+      "currencies": ["KES"],
+      "emoji": "🇰🇪",
+      "ioc": "KEN",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Swahili",
+          "name_native": "Kiswahili"
+        }
+      ],
+      "name": "Kenya",
+      "name_translated": "Kenya",
+      "timezones": ["Africa/Nairobi"],
+      "is_in_european_union": false,
+      "tld": "ke"
+    },
+    "KG": {
+      "alpha2": "KG",
+      "alpha3": "KGZ",
+      "calling_codes": ["+996"],
+      "currencies": ["KGS"],
+      "emoji": "🇰🇬",
+      "ioc": "KGZ",
+      "languages": [
+        {
+          "name": "Russian",
+          "name_native": "русский язык"
+        }
+      ],
+      "name": "Kyrgyzstan",
+      "name_translated": "Kyrgyzstan",
+      "timezones": ["Asia/Bishkek"],
+      "is_in_european_union": false,
+      "tld": "kg"
+    },
+    "KH": {
+      "alpha2": "KH",
+      "alpha3": "KHM",
+      "calling_codes": ["+855"],
+      "currencies": ["KHR"],
+      "emoji": "🇰🇭",
+      "ioc": "CAM",
+      "languages": [
+        {
+          "name": "Central Khmer",
+          "name_native": "Central Khmer"
+        }
+      ],
+      "name": "Cambodia",
+      "name_translated": "Cambodia",
+      "timezones": ["Asia/Phnom_Penh"],
+      "is_in_european_union": false,
+      "tld": "kh"
+    },
+    "KI": {
+      "alpha2": "KI",
+      "alpha3": "KIR",
+      "calling_codes": ["+686"],
+      "currencies": ["AUD"],
+      "emoji": "🇰🇮",
+      "ioc": "KIR",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Kiribati",
+      "name_translated": "Kiribati",
+      "timezones": [
+        "Pacific/Tarawa",
+        "Pacific/Enderbury",
+        "Pacific/Kiritimati"
+      ],
+      "is_in_european_union": false,
+      "tld": "ki"
+    },
+    "KM": {
+      "alpha2": "KM",
+      "alpha3": "COM",
+      "calling_codes": ["+269"],
+      "currencies": ["KMF"],
+      "emoji": "🇰🇲",
+      "ioc": "COM",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Comoros",
+      "name_translated": "Comoros",
+      "timezones": ["Indian/Comoro"],
+      "is_in_european_union": false,
+      "tld": "km"
+    },
+    "KN": {
+      "alpha2": "KN",
+      "alpha3": "KNA",
+      "calling_codes": ["+1 869"],
+      "currencies": ["XCD"],
+      "emoji": "🇰🇳",
+      "ioc": "SKN",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "St. Kitts & Nevis",
+      "name_translated": "St. Kitts & Nevis",
+      "timezones": ["America/St_Kitts"],
+      "is_in_european_union": false,
+      "tld": "kn"
+    },
+    "KP": {
+      "alpha2": "KP",
+      "alpha3": "PRK",
+      "calling_codes": ["+850"],
+      "currencies": ["KPW"],
+      "emoji": "🇰🇵",
+      "ioc": "PRK",
+      "languages": [
+        {
+          "name": "Korean",
+          "name_native": "조선말 (朝鮮語)"
+        }
+      ],
+      "name": "North Korea",
+      "name_translated": "North Korea",
+      "timezones": ["Asia/Pyongyang"],
+      "is_in_european_union": false,
+      "tld": "kp"
+    },
+    "KR": {
+      "alpha2": "KR",
+      "alpha3": "KOR",
+      "calling_codes": ["+82"],
+      "currencies": ["KRW"],
+      "emoji": "🇰🇷",
+      "ioc": "KOR",
+      "languages": [
+        {
+          "name": "Korean",
+          "name_native": "조선말 (朝鮮語)"
+        }
+      ],
+      "name": "South Korea",
+      "name_translated": "South Korea",
+      "timezones": ["Asia/Seoul"],
+      "is_in_european_union": false,
+      "tld": "kr"
+    },
+    "KW": {
+      "alpha2": "KW",
+      "alpha3": "KWT",
+      "calling_codes": ["+965"],
+      "currencies": ["KWD"],
+      "emoji": "🇰🇼",
+      "ioc": "KUW",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Kuwait",
+      "name_translated": "Kuwait",
+      "timezones": ["Asia/Kuwait"],
+      "is_in_european_union": false,
+      "tld": "kw"
+    },
+    "KY": {
+      "alpha2": "KY",
+      "alpha3": "CYM",
+      "calling_codes": ["+1 345"],
+      "currencies": ["KYD"],
+      "emoji": "🇰🇾",
+      "ioc": "CAY",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Cayman Islands",
+      "name_translated": "Cayman Islands",
+      "timezones": ["America/Cayman"],
+      "is_in_european_union": false,
+      "tld": "ky"
+    },
+    "KZ": {
+      "alpha2": "KZ",
+      "alpha3": "KAZ",
+      "calling_codes": ["+7", "+7 6", "+7 7"],
+      "currencies": ["KZT"],
+      "emoji": "🇰🇿",
+      "ioc": "KAZ",
+      "languages": [
+        {
+          "name": "Kazakh",
+          "name_native": "Қазақ тілі"
+        },
+        {
+          "name": "Russian",
+          "name_native": "русский язык"
+        }
+      ],
+      "name": "Kazakhstan",
+      "name_translated": "Kazakhstan",
+      "timezones": [
+        "Asia/Almaty",
+        "Asia/Qyzylorda",
+        "Asia/Aqtobe",
+        "Asia/Aqtau",
+        "Asia/Atyrau",
+        "Asia/Oral"
+      ],
+      "is_in_european_union": false,
+      "tld": "kz"
+    },
+    "LA": {
+      "alpha2": "LA",
+      "alpha3": "LAO",
+      "calling_codes": ["+856"],
+      "currencies": ["LAK"],
+      "emoji": "🇱🇦",
+      "ioc": "LAO",
+      "languages": [
+        {
+          "name": "Lao",
+          "name_native": "ພາສາລາວ"
+        }
+      ],
+      "name": "Laos",
+      "name_translated": "Laos",
+      "timezones": ["Asia/Vientiane"],
+      "is_in_european_union": false,
+      "tld": "la"
+    },
+    "LB": {
+      "alpha2": "LB",
+      "alpha3": "LBN",
+      "calling_codes": ["+961"],
+      "currencies": ["LBP"],
+      "emoji": "🇱🇧",
+      "ioc": "LIB",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        },
+        {
+          "name": "Armenian",
+          "name_native": "Հայերեն"
+        }
+      ],
+      "name": "Lebanon",
+      "name_translated": "Lebanon",
+      "timezones": ["Asia/Beirut"],
+      "is_in_european_union": false,
+      "tld": "lb"
+    },
+    "LC": {
+      "alpha2": "LC",
+      "alpha3": "LCA",
+      "calling_codes": ["+1 758"],
+      "currencies": ["XCD"],
+      "emoji": "🇱🇨",
+      "ioc": "LCA",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "St. Lucia",
+      "name_translated": "St. Lucia",
+      "timezones": ["America/St_Lucia"],
+      "is_in_european_union": false,
+      "tld": "lc"
+    },
+    "LI": {
+      "alpha2": "LI",
+      "alpha3": "LIE",
+      "calling_codes": ["+423"],
+      "currencies": ["CHF"],
+      "emoji": "🇱🇮",
+      "ioc": "LIE",
+      "languages": [
+        {
+          "name": "German",
+          "name_native": "Deutsch"
+        }
+      ],
+      "name": "Liechtenstein",
+      "name_translated": "Liechtenstein",
+      "timezones": ["Europe/Vaduz"],
+      "is_in_european_union": false,
+      "tld": "li"
+    },
+    "LK": {
+      "alpha2": "LK",
+      "alpha3": "LKA",
+      "calling_codes": ["+94"],
+      "currencies": ["LKR"],
+      "emoji": "🇱🇰",
+      "ioc": "SRI",
+      "languages": [
+        {
+          "name": "Sinhala",
+          "name_native": "Sinhala"
+        },
+        {
+          "name": "Tamil",
+          "name_native": "தமிழ்"
+        }
+      ],
+      "name": "Sri Lanka",
+      "name_translated": "Sri Lanka",
+      "timezones": ["Asia/Colombo"],
+      "is_in_european_union": false,
+      "tld": "lk"
+    },
+    "LR": {
+      "alpha2": "LR",
+      "alpha3": "LBR",
+      "calling_codes": ["+231"],
+      "currencies": ["LRD"],
+      "emoji": "🇱🇷",
+      "ioc": "LBR",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Liberia",
+      "name_translated": "Liberia",
+      "timezones": ["Africa/Monrovia"],
+      "is_in_european_union": false,
+      "tld": "lr"
+    },
+    "LS": {
+      "alpha2": "LS",
+      "alpha3": "LSO",
+      "calling_codes": ["+266"],
+      "currencies": ["LSL", "ZAR"],
+      "emoji": "🇱🇸",
+      "ioc": "LES",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Sotho",
+          "name_native": "Sotho"
+        }
+      ],
+      "name": "Lesotho",
+      "name_translated": "Lesotho",
+      "timezones": ["Africa/Maseru"],
+      "is_in_european_union": false,
+      "tld": "ls"
+    },
+    "LT": {
+      "alpha2": "LT",
+      "alpha3": "LTU",
+      "calling_codes": ["+370"],
+      "currencies": ["EUR"],
+      "emoji": "🇱🇹",
+      "ioc": "LTU",
+      "languages": [
+        {
+          "name": "Lithuanian",
+          "name_native": "Lietuvių Kalba"
+        }
+      ],
+      "name": "Lithuania",
+      "name_translated": "Lithuania",
+      "timezones": ["Europe/Vilnius"],
+      "is_in_european_union": true,
+      "tld": "lt"
+    },
+    "LU": {
+      "alpha2": "LU",
+      "alpha3": "LUX",
+      "calling_codes": ["+352"],
+      "currencies": ["EUR"],
+      "emoji": "🇱🇺",
+      "ioc": "LUX",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "German",
+          "name_native": "Deutsch"
+        },
+        {
+          "name": "Letzeburgesch",
+          "name_native": "Letzeburgesch"
+        }
+      ],
+      "name": "Luxembourg",
+      "name_translated": "Luxembourg",
+      "timezones": ["Europe/Luxembourg"],
+      "is_in_european_union": true,
+      "tld": "lu"
+    },
+    "LV": {
+      "alpha2": "LV",
+      "alpha3": "LVA",
+      "calling_codes": ["+371"],
+      "currencies": ["EUR"],
+      "emoji": "🇱🇻",
+      "ioc": "LAT",
+      "languages": [
+        {
+          "name": "Latvian",
+          "name_native": "Latviešu Valoda"
+        }
+      ],
+      "name": "Latvia",
+      "name_translated": "Latvia",
+      "timezones": ["Europe/Riga"],
+      "is_in_european_union": true,
+      "tld": "lv"
+    },
+    "LY": {
+      "alpha2": "LY",
+      "alpha3": "LBY",
+      "calling_codes": ["+218"],
+      "currencies": ["LYD"],
+      "emoji": "🇱🇾",
+      "ioc": "LBA",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Libya",
+      "name_translated": "Libya",
+      "timezones": ["Africa/Tripoli"],
+      "is_in_european_union": false,
+      "tld": "ly"
+    },
+    "MA": {
+      "alpha2": "MA",
+      "alpha3": "MAR",
+      "calling_codes": ["+212"],
+      "currencies": ["MAD"],
+      "emoji": "🇲🇦",
+      "ioc": "MAR",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Morocco",
+      "name_translated": "Morocco",
+      "timezones": ["Africa/Casablanca"],
+      "is_in_european_union": false,
+      "tld": "ma"
+    },
+    "MC": {
+      "alpha2": "MC",
+      "alpha3": "MCO",
+      "calling_codes": ["+377"],
+      "currencies": ["EUR"],
+      "emoji": "🇲🇨",
+      "ioc": "MON",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Monaco",
+      "name_translated": "Monaco",
+      "timezones": ["Europe/Monaco"],
+      "is_in_european_union": false,
+      "tld": "mc"
+    },
+    "MD": {
+      "alpha2": "MD",
+      "alpha3": "MDA",
+      "calling_codes": ["+373"],
+      "currencies": ["MDL"],
+      "emoji": "🇲🇩",
+      "ioc": "MDA",
+      "languages": [
+        {
+          "name": "Moldavian",
+          "name_native": "Moldavian"
+        }
+      ],
+      "name": "Moldova",
+      "name_translated": "Moldova",
+      "timezones": ["Europe/Chisinau"],
+      "is_in_european_union": false,
+      "tld": "md"
+    },
+    "ME": {
+      "alpha2": "ME",
+      "alpha3": "MNE",
+      "calling_codes": ["+382"],
+      "currencies": ["EUR"],
+      "emoji": "🇲🇪",
+      "ioc": "MNE",
+      "languages": [],
+      "name": "Montenegro",
+      "name_translated": "Montenegro",
+      "timezones": ["Europe/Podgorica"],
+      "is_in_european_union": false,
+      "tld": "me"
+    },
+    "MF": {
+      "alpha2": "MF",
+      "alpha3": "MAF",
+      "calling_codes": ["+590"],
+      "currencies": ["EUR"],
+      "emoji": "🇲🇫",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "St. Martin",
+      "name_translated": "St. Martin",
+      "timezones": ["America/Marigot"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "MG": {
+      "alpha2": "MG",
+      "alpha3": "MDG",
+      "calling_codes": ["+261"],
+      "currencies": ["MGA"],
+      "emoji": "🇲🇬",
+      "ioc": "MAD",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "Malagasy",
+          "name_native": "Malagasy Fiteny"
+        }
+      ],
+      "name": "Madagascar",
+      "name_translated": "Madagascar",
+      "timezones": ["Indian/Antananarivo"],
+      "is_in_european_union": false,
+      "tld": "mg"
+    },
+    "MH": {
+      "alpha2": "MH",
+      "alpha3": "MHL",
+      "calling_codes": ["+692"],
+      "currencies": ["USD"],
+      "emoji": "🇲🇭",
+      "ioc": "MHL",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Marshallese",
+          "name_native": "Kajin M̧ajeļ"
+        }
+      ],
+      "name": "Marshall Islands",
+      "name_translated": "Marshall Islands",
+      "timezones": ["Pacific/Majuro", "Pacific/Kwajalein"],
+      "is_in_european_union": false,
+      "tld": "mh"
+    },
+    "MK": {
+      "alpha2": "MK",
+      "alpha3": "MKD",
+      "calling_codes": ["+389"],
+      "currencies": ["MKD"],
+      "emoji": "🇲🇰",
+      "ioc": "MKD",
+      "languages": [
+        {
+          "name": "Macedonian",
+          "name_native": "македонски јазик"
+        }
+      ],
+      "name": "Macedonia",
+      "name_translated": "Macedonia",
+      "timezones": ["Europe/Skopje"],
+      "is_in_european_union": false,
+      "tld": "mk"
+    },
+    "ML": {
+      "alpha2": "ML",
+      "alpha3": "MLI",
+      "calling_codes": ["+223"],
+      "currencies": ["XOF"],
+      "emoji": "🇲🇱",
+      "ioc": "MLI",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Mali",
+      "name_translated": "Mali",
+      "timezones": ["Africa/Bamako"],
+      "is_in_european_union": false,
+      "tld": "ml"
+    },
+    "MM": {
+      "alpha2": "MM",
+      "alpha3": "MMR",
+      "calling_codes": ["+95"],
+      "currencies": ["MMK"],
+      "emoji": "🇲🇲",
+      "ioc": "MYA",
+      "languages": [
+        {
+          "name": "Burmese",
+          "name_native": "ဗမာစာ"
+        }
+      ],
+      "name": "Myanmar (Burma)",
+      "name_translated": "Myanmar (Burma)",
+      "timezones": ["Asia/Yangon"],
+      "is_in_european_union": false,
+      "tld": "mm"
+    },
+    "MN": {
+      "alpha2": "MN",
+      "alpha3": "MNG",
+      "calling_codes": ["+976"],
+      "currencies": ["MNT"],
+      "emoji": "🇲🇳",
+      "ioc": "MGL",
+      "languages": [
+        {
+          "name": "Mongolian",
+          "name_native": "монгол"
+        }
+      ],
+      "name": "Mongolia",
+      "name_translated": "Mongolia",
+      "timezones": ["Asia/Ulaanbaatar", "Asia/Hovd", "Asia/Choibalsan"],
+      "is_in_european_union": false,
+      "tld": "mn"
+    },
+    "MO": {
+      "alpha2": "MO",
+      "alpha3": "MAC",
+      "calling_codes": ["+853"],
+      "currencies": ["MOP"],
+      "emoji": "🇲🇴",
+      "ioc": "MAC",
+      "languages": [
+        {
+          "name": "Chinese",
+          "name_native": "中文 (Zhōngwén)"
+        },
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "Macau SAR China",
+      "name_translated": "Macau SAR China",
+      "timezones": ["Asia/Macau"],
+      "is_in_european_union": false,
+      "tld": "mo"
+    },
+    "MP": {
+      "alpha2": "MP",
+      "alpha3": "MNP",
+      "calling_codes": ["+1 670"],
+      "currencies": ["USD"],
+      "emoji": "🇲🇵",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Northern Mariana Islands",
+      "name_translated": "Northern Mariana Islands",
+      "timezones": ["Pacific/Saipan"],
+      "is_in_european_union": false,
+      "tld": "mp"
+    },
+    "MQ": {
+      "alpha2": "MQ",
+      "alpha3": "MTQ",
+      "calling_codes": ["+596"],
+      "currencies": ["EUR"],
+      "emoji": "🇲🇶",
+      "ioc": "",
+      "languages": [],
+      "name": "Martinique",
+      "name_translated": "Martinique",
+      "timezones": ["America/Martinique"],
+      "is_in_european_union": false,
+      "tld": "mq"
+    },
+    "MR": {
+      "alpha2": "MR",
+      "alpha3": "MRT",
+      "calling_codes": ["+222"],
+      "currencies": ["MRO"],
+      "emoji": "🇲🇷",
+      "ioc": "MTN",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Mauritania",
+      "name_translated": "Mauritania",
+      "timezones": ["Africa/Nouakchott"],
+      "is_in_european_union": false,
+      "tld": "mr"
+    },
+    "MS": {
+      "alpha2": "MS",
+      "alpha3": "MSR",
+      "calling_codes": ["+1 664"],
+      "currencies": ["XCD"],
+      "emoji": "🇲🇸",
+      "ioc": "",
+      "languages": [],
+      "name": "Montserrat",
+      "name_translated": "Montserrat",
+      "timezones": ["America/Montserrat"],
+      "is_in_european_union": false,
+      "tld": "ms"
+    },
+    "MT": {
+      "alpha2": "MT",
+      "alpha3": "MLT",
+      "calling_codes": ["+356"],
+      "currencies": ["EUR"],
+      "emoji": "🇲🇹",
+      "ioc": "MLT",
+      "languages": [
+        {
+          "name": "Maltese",
+          "name_native": "Malti"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Malta",
+      "name_translated": "Malta",
+      "timezones": ["Europe/Malta"],
+      "is_in_european_union": true,
+      "tld": "mt"
+    },
+    "MU": {
+      "alpha2": "MU",
+      "alpha3": "MUS",
+      "calling_codes": ["+230"],
+      "currencies": ["MUR"],
+      "emoji": "🇲🇺",
+      "ioc": "MRI",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Mauritius",
+      "name_translated": "Mauritius",
+      "timezones": ["Indian/Mauritius"],
+      "is_in_european_union": false,
+      "tld": "mu"
+    },
+    "MV": {
+      "alpha2": "MV",
+      "alpha3": "MDV",
+      "calling_codes": ["+960"],
+      "currencies": ["MVR"],
+      "emoji": "🇲🇻",
+      "ioc": "MDV",
+      "languages": [
+        {
+          "name": "Dhivehi",
+          "name_native": "Dhivehi"
+        }
+      ],
+      "name": "Maldives",
+      "name_translated": "Maldives",
+      "timezones": ["Indian/Maldives"],
+      "is_in_european_union": false,
+      "tld": "mv"
+    },
+    "MW": {
+      "alpha2": "MW",
+      "alpha3": "MWI",
+      "calling_codes": ["+265"],
+      "currencies": ["MWK"],
+      "emoji": "🇲🇼",
+      "ioc": "MAW",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Chewa",
+          "name_native": "ChiCheŵa"
+        }
+      ],
+      "name": "Malawi",
+      "name_translated": "Malawi",
+      "timezones": ["Africa/Blantyre"],
+      "is_in_european_union": false,
+      "tld": "mw"
+    },
+    "MX": {
+      "alpha2": "MX",
+      "alpha3": "MEX",
+      "calling_codes": ["+52"],
+      "currencies": ["MXN", "MXV"],
+      "emoji": "🇲🇽",
+      "ioc": "MEX",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Mexico",
+      "name_translated": "Mexico",
+      "timezones": [
+        "America/Mexico_City",
+        "America/Cancun",
+        "America/Merida",
+        "America/Monterrey",
+        "America/Matamoros",
+        "America/Mazatlan",
+        "America/Chihuahua",
+        "America/Ojinaga",
+        "America/Hermosillo",
+        "America/Tijuana",
+        "America/Bahia_Banderas"
+      ],
+      "is_in_european_union": false,
+      "tld": "mx"
+    },
+    "MY": {
+      "alpha2": "MY",
+      "alpha3": "MYS",
+      "calling_codes": ["+60"],
+      "currencies": ["MYR"],
+      "emoji": "🇲🇾",
+      "ioc": "MAS",
+      "languages": [
+        {
+          "name": "Malay",
+          "name_native": "Bahasa Melayu"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Malaysia",
+      "name_translated": "Malaysia",
+      "timezones": ["Asia/Kuala_Lumpur", "Asia/Kuching"],
+      "is_in_european_union": false,
+      "tld": "my"
+    },
+    "MZ": {
+      "alpha2": "MZ",
+      "alpha3": "MOZ",
+      "calling_codes": ["+258"],
+      "currencies": ["MZN"],
+      "emoji": "🇲🇿",
+      "ioc": "MOZ",
+      "languages": [
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "Mozambique",
+      "name_translated": "Mozambique",
+      "timezones": ["Africa/Maputo"],
+      "is_in_european_union": false,
+      "tld": "mz"
+    },
+    "NA": {
+      "alpha2": "NA",
+      "alpha3": "NAM",
+      "calling_codes": ["+264"],
+      "currencies": ["NAD", "ZAR"],
+      "emoji": "🇳🇦",
+      "ioc": "NAM",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Namibia",
+      "name_translated": "Namibia",
+      "timezones": ["Africa/Windhoek"],
+      "is_in_european_union": false,
+      "tld": "na"
+    },
+    "NC": {
+      "alpha2": "NC",
+      "alpha3": "NCL",
+      "calling_codes": ["+687"],
+      "currencies": ["XPF"],
+      "emoji": "🇳🇨",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "New Caledonia",
+      "name_translated": "New Caledonia",
+      "timezones": ["Pacific/Noumea"],
+      "is_in_european_union": false,
+      "tld": "nc"
+    },
+    "NE": {
+      "alpha2": "NE",
+      "alpha3": "NER",
+      "calling_codes": ["+227"],
+      "currencies": ["XOF"],
+      "emoji": "🇳🇪",
+      "ioc": "NIG",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Niger",
+      "name_translated": "Niger",
+      "timezones": ["Africa/Niamey"],
+      "is_in_european_union": false,
+      "tld": "ne"
+    },
+    "NF": {
+      "alpha2": "NF",
+      "alpha3": "NFK",
+      "calling_codes": ["+672"],
+      "currencies": ["AUD"],
+      "emoji": "🇳🇫",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Norfolk Island",
+      "name_translated": "Norfolk Island",
+      "timezones": ["Pacific/Norfolk"],
+      "is_in_european_union": false,
+      "tld": "nf"
+    },
+    "NG": {
+      "alpha2": "NG",
+      "alpha3": "NGA",
+      "calling_codes": ["+234"],
+      "currencies": ["NGN"],
+      "emoji": "🇳🇬",
+      "ioc": "NGR",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Nigeria",
+      "name_translated": "Nigeria",
+      "timezones": ["Africa/Lagos"],
+      "is_in_european_union": false,
+      "tld": "ng"
+    },
+    "NI": {
+      "alpha2": "NI",
+      "alpha3": "NIC",
+      "calling_codes": ["+505"],
+      "currencies": ["NIO"],
+      "emoji": "🇳🇮",
+      "ioc": "NCA",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Nicaragua",
+      "name_translated": "Nicaragua",
+      "timezones": ["America/Managua"],
+      "is_in_european_union": false,
+      "tld": "ni"
+    },
+    "NL": {
+      "alpha2": "NL",
+      "alpha3": "NLD",
+      "calling_codes": ["+31"],
+      "currencies": ["EUR"],
+      "emoji": "🇳🇱",
+      "ioc": "NED",
+      "languages": [
+        {
+          "name": "Dutch",
+          "name_native": "Dutch"
+        }
+      ],
+      "name": "Netherlands",
+      "name_translated": "Netherlands",
+      "timezones": ["Europe/Amsterdam"],
+      "is_in_european_union": true,
+      "tld": "nl"
+    },
+    "NO": {
+      "alpha2": "NO",
+      "alpha3": "NOR",
+      "calling_codes": ["+47"],
+      "currencies": ["NOK"],
+      "emoji": "🇳🇴",
+      "ioc": "NOR",
+      "languages": [
+        {
+          "name": "Norwegian",
+          "name_native": "Norsk"
+        }
+      ],
+      "name": "Norway",
+      "name_translated": "Norway",
+      "timezones": ["Europe/Oslo"],
+      "is_in_european_union": false,
+      "tld": "no"
+    },
+    "NP": {
+      "alpha2": "NP",
+      "alpha3": "NPL",
+      "calling_codes": ["+977"],
+      "currencies": ["NPR"],
+      "emoji": "🇳🇵",
+      "ioc": "NEP",
+      "languages": [
+        {
+          "name": "Nepali",
+          "name_native": "नेपाली"
+        }
+      ],
+      "name": "Nepal",
+      "name_translated": "Nepal",
+      "timezones": ["Asia/Kathmandu"],
+      "is_in_european_union": false,
+      "tld": "np"
+    },
+    "NR": {
+      "alpha2": "NR",
+      "alpha3": "NRU",
+      "calling_codes": ["+674"],
+      "currencies": ["AUD"],
+      "emoji": "🇳🇷",
+      "ioc": "NRU",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Nauru",
+          "name_native": "Ekakairũ Naoero"
+        }
+      ],
+      "name": "Nauru",
+      "name_translated": "Nauru",
+      "timezones": ["Pacific/Nauru"],
+      "is_in_european_union": false,
+      "tld": "nr"
+    },
+    "NU": {
+      "alpha2": "NU",
+      "alpha3": "NIU",
+      "calling_codes": ["+683"],
+      "currencies": ["NZD"],
+      "emoji": "🇳🇺",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Niue",
+      "name_translated": "Niue",
+      "timezones": ["Pacific/Niue"],
+      "is_in_european_union": false,
+      "tld": "nu"
+    },
+    "NZ": {
+      "alpha2": "NZ",
+      "alpha3": "NZL",
+      "calling_codes": ["+64"],
+      "currencies": ["NZD"],
+      "emoji": "🇳🇿",
+      "ioc": "NZL",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "New Zealand",
+      "name_translated": "New Zealand",
+      "timezones": ["Pacific/Auckland", "Pacific/Chatham"],
+      "is_in_european_union": false,
+      "tld": "nz"
+    },
+    "OM": {
+      "alpha2": "OM",
+      "alpha3": "OMN",
+      "calling_codes": ["+968"],
+      "currencies": ["OMR"],
+      "emoji": "🇴🇲",
+      "ioc": "OMA",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Oman",
+      "name_translated": "Oman",
+      "timezones": ["Asia/Muscat"],
+      "is_in_european_union": false,
+      "tld": "om"
+    },
+    "PA": {
+      "alpha2": "PA",
+      "alpha3": "PAN",
+      "calling_codes": ["+507"],
+      "currencies": ["PAB", "USD"],
+      "emoji": "🇵🇦",
+      "ioc": "PAN",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Panama",
+      "name_translated": "Panama",
+      "timezones": ["America/Panama"],
+      "is_in_european_union": false,
+      "tld": "pa"
+    },
+    "PE": {
+      "alpha2": "PE",
+      "alpha3": "PER",
+      "calling_codes": ["+51"],
+      "currencies": ["PEN"],
+      "emoji": "🇵🇪",
+      "ioc": "PER",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        },
+        {
+          "name": "Aymara",
+          "name_native": "Aymar Aru"
+        },
+        {
+          "name": "Quechua",
+          "name_native": "Kichwa"
+        }
+      ],
+      "name": "Peru",
+      "name_translated": "Peru",
+      "timezones": ["America/Lima"],
+      "is_in_european_union": false,
+      "tld": "pe"
+    },
+    "PF": {
+      "alpha2": "PF",
+      "alpha3": "PYF",
+      "calling_codes": ["+689"],
+      "currencies": ["XPF"],
+      "emoji": "🇵🇫",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "French Polynesia",
+      "name_translated": "French Polynesia",
+      "timezones": ["Pacific/Tahiti", "Pacific/Marquesas", "Pacific/Gambier"],
+      "is_in_european_union": false,
+      "tld": "pf"
+    },
+    "PG": {
+      "alpha2": "PG",
+      "alpha3": "PNG",
+      "calling_codes": ["+675"],
+      "currencies": ["PGK"],
+      "emoji": "🇵🇬",
+      "ioc": "PNG",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Papua New Guinea",
+      "name_translated": "Papua New Guinea",
+      "timezones": ["Pacific/Port_Moresby", "Pacific/Bougainville"],
+      "is_in_european_union": false,
+      "tld": "pg"
+    },
+    "PH": {
+      "alpha2": "PH",
+      "alpha3": "PHL",
+      "calling_codes": ["+63"],
+      "currencies": ["PHP"],
+      "emoji": "🇵🇭",
+      "ioc": "PHI",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Philippines",
+      "name_translated": "Philippines",
+      "timezones": ["Asia/Manila"],
+      "is_in_european_union": false,
+      "tld": "ph"
+    },
+    "PK": {
+      "alpha2": "PK",
+      "alpha3": "PAK",
+      "calling_codes": ["+92"],
+      "currencies": ["PKR"],
+      "emoji": "🇵🇰",
+      "ioc": "PAK",
+      "languages": [
+        {
+          "name": "Urdu",
+          "name_native": "اردو"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Pakistan",
+      "name_translated": "Pakistan",
+      "timezones": ["Asia/Karachi"],
+      "is_in_european_union": false,
+      "tld": "pk"
+    },
+    "PL": {
+      "alpha2": "PL",
+      "alpha3": "POL",
+      "calling_codes": ["+48"],
+      "currencies": ["PLN"],
+      "emoji": "🇵🇱",
+      "ioc": "POL",
+      "languages": [
+        {
+          "name": "Polish",
+          "name_native": "Polski"
+        }
+      ],
+      "name": "Poland",
+      "name_translated": "Poland",
+      "timezones": ["Europe/Warsaw"],
+      "is_in_european_union": true,
+      "tld": "pl"
+    },
+    "PM": {
+      "alpha2": "PM",
+      "alpha3": "SPM",
+      "calling_codes": ["+508"],
+      "currencies": ["EUR"],
+      "emoji": "🇵🇲",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "St. Pierre & Miquelon",
+      "name_translated": "St. Pierre & Miquelon",
+      "timezones": ["America/Miquelon"],
+      "is_in_european_union": false,
+      "tld": "pm"
+    },
+    "PN": {
+      "alpha2": "PN",
+      "alpha3": "PCN",
+      "calling_codes": ["+872"],
+      "currencies": ["NZD"],
+      "emoji": "🇵🇳",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Pitcairn Islands",
+      "name_translated": "Pitcairn Islands",
+      "timezones": ["Pacific/Pitcairn"],
+      "is_in_european_union": false,
+      "tld": "pn"
+    },
+    "PR": {
+      "alpha2": "PR",
+      "alpha3": "PRI",
+      "calling_codes": ["+1 787", "+1 939"],
+      "currencies": ["USD"],
+      "emoji": "🇵🇷",
+      "ioc": "PUR",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Puerto Rico",
+      "name_translated": "Puerto Rico",
+      "timezones": ["America/Puerto_Rico"],
+      "is_in_european_union": false,
+      "tld": "pr"
+    },
+    "PS": {
+      "alpha2": "PS",
+      "alpha3": "PSE",
+      "calling_codes": ["+970"],
+      "currencies": ["JOD", "EGP", "ILS"],
+      "emoji": "🇵🇸",
+      "ioc": "PLE",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Palestinian Territories",
+      "name_translated": "Palestinian Territories",
+      "timezones": ["Asia/Gaza", "Asia/Hebron"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "PT": {
+      "alpha2": "PT",
+      "alpha3": "PRT",
+      "calling_codes": ["+351"],
+      "currencies": ["EUR"],
+      "emoji": "🇵🇹",
+      "ioc": "POR",
+      "languages": [
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "Portugal",
+      "name_translated": "Portugal",
+      "timezones": ["Europe/Lisbon", "Atlantic/Madeira", "Atlantic/Azores"],
+      "is_in_european_union": true,
+      "tld": "pt"
+    },
+    "PW": {
+      "alpha2": "PW",
+      "alpha3": "PLW",
+      "calling_codes": ["+680"],
+      "currencies": ["USD"],
+      "emoji": "🇵🇼",
+      "ioc": "PLW",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Palau",
+      "name_translated": "Palau",
+      "timezones": ["Pacific/Palau"],
+      "is_in_european_union": false,
+      "tld": "pw"
+    },
+    "PY": {
+      "alpha2": "PY",
+      "alpha3": "PRY",
+      "calling_codes": ["+595"],
+      "currencies": ["PYG"],
+      "emoji": "🇵🇾",
+      "ioc": "PAR",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Paraguay",
+      "name_translated": "Paraguay",
+      "timezones": ["America/Asuncion"],
+      "is_in_european_union": false,
+      "tld": "py"
+    },
+    "QA": {
+      "alpha2": "QA",
+      "alpha3": "QAT",
+      "calling_codes": ["+974"],
+      "currencies": ["QAR"],
+      "emoji": "🇶🇦",
+      "ioc": "QAT",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Qatar",
+      "name_translated": "Qatar",
+      "timezones": ["Asia/Qatar"],
+      "is_in_european_union": false,
+      "tld": "qa"
+    },
+    "RE": {
+      "alpha2": "RE",
+      "alpha3": "REU",
+      "calling_codes": ["+262"],
+      "currencies": ["EUR"],
+      "emoji": "🇷🇪",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Réunion",
+      "name_translated": "Réunion",
+      "timezones": ["Indian/Reunion"],
+      "is_in_european_union": false,
+      "tld": "re"
+    },
+    "RO": {
+      "alpha2": "RO",
+      "alpha3": "ROU",
+      "calling_codes": ["+40"],
+      "currencies": ["RON"],
+      "emoji": "🇷🇴",
+      "ioc": "ROU",
+      "languages": [
+        {
+          "name": "Moldavian",
+          "name_native": "Moldavian"
+        }
+      ],
+      "name": "Romania",
+      "name_translated": "Romania",
+      "timezones": ["Europe/Bucharest"],
+      "is_in_european_union": true,
+      "tld": "ro"
+    },
+    "RS": {
+      "alpha2": "RS",
+      "alpha3": "SRB",
+      "calling_codes": ["+381"],
+      "currencies": ["RSD"],
+      "emoji": "🇷🇸",
+      "ioc": "SRB",
+      "languages": [
+        {
+          "name": "Serbian",
+          "name_native": "српски језик"
+        }
+      ],
+      "name": "Serbia",
+      "name_translated": "Serbia",
+      "timezones": ["Europe/Belgrade"],
+      "is_in_european_union": false,
+      "tld": "rs"
+    },
+    "RU": {
+      "alpha2": "RU",
+      "alpha3": "RUS",
+      "calling_codes": ["+7", "+7 3", "+7 4", "+7 8"],
+      "currencies": ["RUB"],
+      "emoji": "🇷🇺",
+      "ioc": "RUS",
+      "languages": [
+        {
+          "name": "Russian",
+          "name_native": "русский язык"
+        }
+      ],
+      "name": "Russia",
+      "name_translated": "Russia",
+      "timezones": [
+        "Europe/Kaliningrad",
+        "Europe/Moscow",
+        "Europe/Simferopol",
+        "Europe/Volgograd",
+        "Europe/Kirov",
+        "Europe/Astrakhan",
+        "Europe/Saratov",
+        "Europe/Ulyanovsk",
+        "Europe/Samara",
+        "Asia/Yekaterinburg",
+        "Asia/Omsk",
+        "Asia/Novosibirsk",
+        "Asia/Barnaul",
+        "Asia/Tomsk",
+        "Asia/Novokuznetsk",
+        "Asia/Krasnoyarsk",
+        "Asia/Irkutsk",
+        "Asia/Chita",
+        "Asia/Yakutsk",
+        "Asia/Khandyga",
+        "Asia/Vladivostok",
+        "Asia/Ust-Nera",
+        "Asia/Magadan",
+        "Asia/Sakhalin",
+        "Asia/Srednekolymsk",
+        "Asia/Kamchatka",
+        "Asia/Anadyr"
+      ],
+      "is_in_european_union": false,
+      "tld": "ru"
+    },
+    "RW": {
+      "alpha2": "RW",
+      "alpha3": "RWA",
+      "calling_codes": ["+250"],
+      "currencies": ["RWF"],
+      "emoji": "🇷🇼",
+      "ioc": "RWA",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        },
+        {
+          "name": "Kinyarwanda",
+          "name_native": "Ikinyarwanda"
+        }
+      ],
+      "name": "Rwanda",
+      "name_translated": "Rwanda",
+      "timezones": ["Africa/Kigali"],
+      "is_in_european_union": false,
+      "tld": "rw"
+    },
+    "SA": {
+      "alpha2": "SA",
+      "alpha3": "SAU",
+      "calling_codes": ["+966"],
+      "currencies": ["SAR"],
+      "emoji": "🇸🇦",
+      "ioc": "KSA",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Saudi Arabia",
+      "name_translated": "Saudi Arabia",
+      "timezones": ["Asia/Riyadh"],
+      "is_in_european_union": false,
+      "tld": "sa"
+    },
+    "SB": {
+      "alpha2": "SB",
+      "alpha3": "SLB",
+      "calling_codes": ["+677"],
+      "currencies": ["SBD"],
+      "emoji": "🇸🇧",
+      "ioc": "SOL",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Solomon Islands",
+      "name_translated": "Solomon Islands",
+      "timezones": ["Pacific/Guadalcanal"],
+      "is_in_european_union": false,
+      "tld": "sb"
+    },
+    "SC": {
+      "alpha2": "SC",
+      "alpha3": "SYC",
+      "calling_codes": ["+248"],
+      "currencies": ["SCR"],
+      "emoji": "🇸🇨",
+      "ioc": "SEY",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Seychelles",
+      "name_translated": "Seychelles",
+      "timezones": ["Indian/Mahe"],
+      "is_in_european_union": false,
+      "tld": "sc"
+    },
+    "SD": {
+      "alpha2": "SD",
+      "alpha3": "SDN",
+      "calling_codes": ["+249"],
+      "currencies": ["SDG"],
+      "emoji": "🇸🇩",
+      "ioc": "SUD",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Sudan",
+      "name_translated": "Sudan",
+      "timezones": ["Africa/Khartoum"],
+      "is_in_european_union": false,
+      "tld": "sd"
+    },
+    "SE": {
+      "alpha2": "SE",
+      "alpha3": "SWE",
+      "calling_codes": ["+46"],
+      "currencies": ["SEK"],
+      "emoji": "🇸🇪",
+      "ioc": "SWE",
+      "languages": [
+        {
+          "name": "Swedish",
+          "name_native": "Svenska"
+        }
+      ],
+      "name": "Sweden",
+      "name_translated": "Sweden",
+      "timezones": ["Europe/Stockholm"],
+      "is_in_european_union": true,
+      "tld": "se"
+    },
+    "SG": {
+      "alpha2": "SG",
+      "alpha3": "SGP",
+      "calling_codes": ["+65"],
+      "currencies": ["SGD"],
+      "emoji": "🇸🇬",
+      "ioc": "SIN",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Chinese",
+          "name_native": "中文 (Zhōngwén)"
+        },
+        {
+          "name": "Malay",
+          "name_native": "Bahasa Melayu"
+        },
+        {
+          "name": "Tamil",
+          "name_native": "தமிழ்"
+        }
+      ],
+      "name": "Singapore",
+      "name_translated": "Singapore",
+      "timezones": ["Asia/Singapore"],
+      "is_in_european_union": false,
+      "tld": "sg"
+    },
+    "SH": {
+      "alpha2": "SH",
+      "alpha3": "SHN",
+      "calling_codes": ["+290"],
+      "currencies": ["SHP"],
+      "emoji": "🇸🇭",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "St. Helena",
+      "name_translated": "St. Helena",
+      "timezones": ["Atlantic/St_Helena"],
+      "is_in_european_union": false,
+      "tld": "sh"
+    },
+    "SI": {
+      "alpha2": "SI",
+      "alpha3": "SVN",
+      "calling_codes": ["+386"],
+      "currencies": ["EUR"],
+      "emoji": "🇸🇮",
+      "ioc": "SLO",
+      "languages": [
+        {
+          "name": "Slovenian",
+          "name_native": "Slovenian"
+        }
+      ],
+      "name": "Slovenia",
+      "name_translated": "Slovenia",
+      "timezones": ["Europe/Ljubljana"],
+      "is_in_european_union": true,
+      "tld": "si"
+    },
+    "SJ": {
+      "alpha2": "SJ",
+      "alpha3": "SJM",
+      "calling_codes": ["+47"],
+      "currencies": ["NOK"],
+      "emoji": "🇸🇯",
+      "ioc": "",
+      "languages": [],
+      "name": "Svalbard & Jan Mayen",
+      "name_translated": "Svalbard & Jan Mayen",
+      "timezones": ["Arctic/Longyearbyen"],
+      "is_in_european_union": false,
+      "tld": "sj"
+    },
+    "SK": {
+      "alpha2": "SK",
+      "alpha3": "SVK",
+      "calling_codes": ["+421"],
+      "currencies": ["EUR"],
+      "emoji": "🇸🇰",
+      "ioc": "SVK",
+      "languages": [
+        {
+          "name": "Slovak",
+          "name_native": "Slovenčina"
+        }
+      ],
+      "name": "Slovakia",
+      "name_translated": "Slovakia",
+      "timezones": ["Europe/Bratislava"],
+      "is_in_european_union": true,
+      "tld": "sk"
+    },
+    "SL": {
+      "alpha2": "SL",
+      "alpha3": "SLE",
+      "calling_codes": ["+232"],
+      "currencies": ["SLL"],
+      "emoji": "🇸🇱",
+      "ioc": "SLE",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Sierra Leone",
+      "name_translated": "Sierra Leone",
+      "timezones": ["Africa/Freetown"],
+      "is_in_european_union": false,
+      "tld": "sl"
+    },
+    "SM": {
+      "alpha2": "SM",
+      "alpha3": "SMR",
+      "calling_codes": ["+378"],
+      "currencies": ["EUR"],
+      "emoji": "🇸🇲",
+      "ioc": "SMR",
+      "languages": [
+        {
+          "name": "Italian",
+          "name_native": "Italiano"
+        }
+      ],
+      "name": "San Marino",
+      "name_translated": "San Marino",
+      "timezones": ["Europe/San_Marino"],
+      "is_in_european_union": false,
+      "tld": "sm"
+    },
+    "SN": {
+      "alpha2": "SN",
+      "alpha3": "SEN",
+      "calling_codes": ["+221"],
+      "currencies": ["XOF"],
+      "emoji": "🇸🇳",
+      "ioc": "SEN",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Senegal",
+      "name_translated": "Senegal",
+      "timezones": ["Africa/Dakar"],
+      "is_in_european_union": false,
+      "tld": "sn"
+    },
+    "SO": {
+      "alpha2": "SO",
+      "alpha3": "SOM",
+      "calling_codes": ["+252"],
+      "currencies": ["SOS"],
+      "emoji": "🇸🇴",
+      "ioc": "SOM",
+      "languages": [
+        {
+          "name": "Somali",
+          "name_native": "Af Soomaali"
+        }
+      ],
+      "name": "Somalia",
+      "name_translated": "Somalia",
+      "timezones": ["Africa/Mogadishu"],
+      "is_in_european_union": false,
+      "tld": "so"
+    },
+    "SR": {
+      "alpha2": "SR",
+      "alpha3": "SUR",
+      "calling_codes": ["+597"],
+      "currencies": ["SRD"],
+      "emoji": "🇸🇷",
+      "ioc": "SUR",
+      "languages": [
+        {
+          "name": "Dutch",
+          "name_native": "Dutch"
+        }
+      ],
+      "name": "Suriname",
+      "name_translated": "Suriname",
+      "timezones": ["America/Paramaribo"],
+      "is_in_european_union": false,
+      "tld": "sr"
+    },
+    "SS": {
+      "alpha2": "SS",
+      "alpha3": "SSD",
+      "calling_codes": ["+211"],
+      "currencies": ["SSP"],
+      "emoji": "🇸🇸",
+      "ioc": "SSD",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "South Sudan",
+      "name_translated": "South Sudan",
+      "timezones": ["Africa/Juba"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "ST": {
+      "alpha2": "ST",
+      "alpha3": "STP",
+      "calling_codes": ["+239"],
+      "currencies": ["STD"],
+      "emoji": "🇸🇹",
+      "ioc": "STP",
+      "languages": [
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "São Tomé & Príncipe",
+      "name_translated": "São Tomé & Príncipe",
+      "timezones": ["Africa/Sao_Tome"],
+      "is_in_european_union": false,
+      "tld": "st"
+    },
+    "SV": {
+      "alpha2": "SV",
+      "alpha3": "SLV",
+      "calling_codes": ["+503"],
+      "currencies": ["USD"],
+      "emoji": "🇸🇻",
+      "ioc": "ESA",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "El Salvador",
+      "name_translated": "El Salvador",
+      "timezones": ["America/El_Salvador"],
+      "is_in_european_union": false,
+      "tld": "sv"
+    },
+    "SX": {
+      "alpha2": "SX",
+      "alpha3": "SXM",
+      "calling_codes": ["+1 721"],
+      "currencies": ["ANG"],
+      "emoji": "🇸🇽",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "Dutch",
+          "name_native": "Dutch"
+        }
+      ],
+      "name": "Sint Maarten",
+      "name_translated": "Sint Maarten",
+      "timezones": ["America/Lower_Princes"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "SY": {
+      "alpha2": "SY",
+      "alpha3": "SYR",
+      "calling_codes": ["+963"],
+      "currencies": ["SYP"],
+      "emoji": "🇸🇾",
+      "ioc": "SYR",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Syria",
+      "name_translated": "Syria",
+      "timezones": ["Asia/Damascus"],
+      "is_in_european_union": false,
+      "tld": "sy"
+    },
+    "SZ": {
+      "alpha2": "SZ",
+      "alpha3": "SWZ",
+      "calling_codes": ["+268"],
+      "currencies": ["SZL"],
+      "emoji": "🇸🇿",
+      "ioc": "SWZ",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Swati",
+          "name_native": "SiSwati"
+        }
+      ],
+      "name": "Swaziland",
+      "name_translated": "Swaziland",
+      "timezones": ["Africa/Mbabane"],
+      "is_in_european_union": false,
+      "tld": "sz"
+    },
+    "TC": {
+      "alpha2": "TC",
+      "alpha3": "TCA",
+      "calling_codes": ["+1 649"],
+      "currencies": ["USD"],
+      "emoji": "🇹🇨",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Turks & Caicos Islands",
+      "name_translated": "Turks & Caicos Islands",
+      "timezones": ["America/Grand_Turk"],
+      "is_in_european_union": false,
+      "tld": "tc"
+    },
+    "TD": {
+      "alpha2": "TD",
+      "alpha3": "TCD",
+      "calling_codes": ["+235"],
+      "currencies": ["XAF"],
+      "emoji": "🇹🇩",
+      "ioc": "CHA",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Chad",
+      "name_translated": "Chad",
+      "timezones": ["Africa/Ndjamena"],
+      "is_in_european_union": false,
+      "tld": "td"
+    },
+    "TF": {
+      "alpha2": "TF",
+      "alpha3": "ATF",
+      "calling_codes": [],
+      "currencies": ["EUR"],
+      "emoji": "🇹🇫",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "French Southern Territories",
+      "name_translated": "French Southern Territories",
+      "timezones": ["Indian/Kerguelen"],
+      "is_in_european_union": false,
+      "tld": null
+    },
+    "TG": {
+      "alpha2": "TG",
+      "alpha3": "TGO",
+      "calling_codes": ["+228"],
+      "currencies": ["XOF"],
+      "emoji": "🇹🇬",
+      "ioc": "TOG",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Togo",
+      "name_translated": "Togo",
+      "timezones": ["Africa/Lome"],
+      "is_in_european_union": false,
+      "tld": "tg"
+    },
+    "TH": {
+      "alpha2": "TH",
+      "alpha3": "THA",
+      "calling_codes": ["+66"],
+      "currencies": ["THB"],
+      "emoji": "🇹🇭",
+      "ioc": "THA",
+      "languages": [
+        {
+          "name": "Thai",
+          "name_native": "ไทย"
+        }
+      ],
+      "name": "Thailand",
+      "name_translated": "Thailand",
+      "timezones": ["Asia/Bangkok"],
+      "is_in_european_union": false,
+      "tld": "th"
+    },
+    "TJ": {
+      "alpha2": "TJ",
+      "alpha3": "TJK",
+      "calling_codes": ["+992"],
+      "currencies": ["TJS"],
+      "emoji": "🇹🇯",
+      "ioc": "TJK",
+      "languages": [
+        {
+          "name": "Tajik",
+          "name_native": "Toğikī"
+        },
+        {
+          "name": "Russian",
+          "name_native": "русский язык"
+        }
+      ],
+      "name": "Tajikistan",
+      "name_translated": "Tajikistan",
+      "timezones": ["Asia/Dushanbe"],
+      "is_in_european_union": false,
+      "tld": "tj"
+    },
+    "TK": {
+      "alpha2": "TK",
+      "alpha3": "TKL",
+      "calling_codes": ["+690"],
+      "currencies": ["NZD"],
+      "emoji": "🇹🇰",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Tokelau",
+      "name_translated": "Tokelau",
+      "timezones": ["Pacific/Fakaofo"],
+      "is_in_european_union": false,
+      "tld": "tk"
+    },
+    "TL": {
+      "alpha2": "TL",
+      "alpha3": "TLS",
+      "calling_codes": ["+670"],
+      "currencies": ["USD"],
+      "emoji": "🇹🇱",
+      "ioc": "TLS",
+      "languages": [
+        {
+          "name": "Portuguese",
+          "name_native": "Português"
+        }
+      ],
+      "name": "Timor-Leste",
+      "name_translated": "Timor-Leste",
+      "timezones": ["Asia/Dili"],
+      "is_in_european_union": false,
+      "tld": "tl"
+    },
+    "TM": {
+      "alpha2": "TM",
+      "alpha3": "TKM",
+      "calling_codes": ["+993"],
+      "currencies": ["TMT"],
+      "emoji": "🇹🇲",
+      "ioc": "TKM",
+      "languages": [
+        {
+          "name": "Turkmen",
+          "name_native": "Türkmen"
+        },
+        {
+          "name": "Russian",
+          "name_native": "русский язык"
+        }
+      ],
+      "name": "Turkmenistan",
+      "name_translated": "Turkmenistan",
+      "timezones": ["Asia/Ashgabat"],
+      "is_in_european_union": false,
+      "tld": "tm"
+    },
+    "TN": {
+      "alpha2": "TN",
+      "alpha3": "TUN",
+      "calling_codes": ["+216"],
+      "currencies": ["TND"],
+      "emoji": "🇹🇳",
+      "ioc": "TUN",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Tunisia",
+      "name_translated": "Tunisia",
+      "timezones": ["Africa/Tunis"],
+      "is_in_european_union": false,
+      "tld": "tn"
+    },
+    "TO": {
+      "alpha2": "TO",
+      "alpha3": "TON",
+      "calling_codes": ["+676"],
+      "currencies": ["TOP"],
+      "emoji": "🇹🇴",
+      "ioc": "TGA",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Tonga",
+      "name_translated": "Tonga",
+      "timezones": ["Pacific/Tongatapu"],
+      "is_in_european_union": false,
+      "tld": "to"
+    },
+    "TR": {
+      "alpha2": "TR",
+      "alpha3": "TUR",
+      "calling_codes": ["+90"],
+      "currencies": ["TRY"],
+      "emoji": "🇹🇷",
+      "ioc": "TUR",
+      "languages": [
+        {
+          "name": "Turkish",
+          "name_native": "Türkçe"
+        }
+      ],
+      "name": "Turkey",
+      "name_translated": "Turkey",
+      "timezones": ["Europe/Istanbul"],
+      "is_in_european_union": false,
+      "tld": "tr"
+    },
+    "TT": {
+      "alpha2": "TT",
+      "alpha3": "TTO",
+      "calling_codes": ["+1 868"],
+      "currencies": ["TTD"],
+      "emoji": "🇹🇹",
+      "ioc": "TTO",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Trinidad & Tobago",
+      "name_translated": "Trinidad & Tobago",
+      "timezones": ["America/Port_of_Spain"],
+      "is_in_european_union": false,
+      "tld": "tt"
+    },
+    "TV": {
+      "alpha2": "TV",
+      "alpha3": "TUV",
+      "calling_codes": ["+688"],
+      "currencies": ["AUD"],
+      "emoji": "🇹🇻",
+      "ioc": "TUV",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Tuvalu",
+      "name_translated": "Tuvalu",
+      "timezones": ["Pacific/Funafuti"],
+      "is_in_european_union": false,
+      "tld": "tv"
+    },
+    "TW": {
+      "alpha2": "TW",
+      "alpha3": "TWN",
+      "calling_codes": ["+886"],
+      "currencies": ["TWD"],
+      "emoji": "🇹🇼",
+      "ioc": "TPE",
+      "languages": [
+        {
+          "name": "Chinese",
+          "name_native": "中文 (Zhōngwén)"
+        }
+      ],
+      "name": "Taiwan",
+      "name_translated": "Taiwan",
+      "timezones": ["Asia/Taipei"],
+      "is_in_european_union": false,
+      "tld": "tw"
+    },
+    "TZ": {
+      "alpha2": "TZ",
+      "alpha3": "TZA",
+      "calling_codes": ["+255"],
+      "currencies": ["TZS"],
+      "emoji": "🇹🇿",
+      "ioc": "TAN",
+      "languages": [
+        {
+          "name": "Swahili",
+          "name_native": "Kiswahili"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Tanzania",
+      "name_translated": "Tanzania",
+      "timezones": ["Africa/Dar_es_Salaam"],
+      "is_in_european_union": false,
+      "tld": "tz"
+    },
+    "UA": {
+      "alpha2": "UA",
+      "alpha3": "UKR",
+      "calling_codes": ["+380"],
+      "currencies": ["UAH"],
+      "emoji": "🇺🇦",
+      "ioc": "UKR",
+      "languages": [
+        {
+          "name": "Ukrainian",
+          "name_native": "українська"
+        },
+        {
+          "name": "Russian",
+          "name_native": "русский язык"
+        }
+      ],
+      "name": "Ukraine",
+      "name_translated": "Ukraine",
+      "timezones": ["Europe/Kiev", "Europe/Uzhgorod", "Europe/Zaporozhye"],
+      "is_in_european_union": false,
+      "tld": "ua"
+    },
+    "UG": {
+      "alpha2": "UG",
+      "alpha3": "UGA",
+      "calling_codes": ["+256"],
+      "currencies": ["UGX"],
+      "emoji": "🇺🇬",
+      "ioc": "UGA",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Swahili",
+          "name_native": "Kiswahili"
+        }
+      ],
+      "name": "Uganda",
+      "name_translated": "Uganda",
+      "timezones": ["Africa/Kampala"],
+      "is_in_european_union": false,
+      "tld": "ug"
+    },
+    "UM": {
+      "alpha2": "UM",
+      "alpha3": "UMI",
+      "calling_codes": ["+1"],
+      "currencies": ["USD"],
+      "emoji": "🇺🇲",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "U.S. Outlying Islands",
+      "name_translated": "U.S. Outlying Islands",
+      "timezones": ["Pacific/Midway", "Pacific/Wake"],
+      "is_in_european_union": false,
+      "tld": "um"
+    },
+    "US": {
+      "alpha2": "US",
+      "alpha3": "USA",
+      "calling_codes": ["+1"],
+      "currencies": ["USD"],
+      "emoji": "🇺🇸",
+      "ioc": "USA",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "United States",
+      "name_translated": "United States",
+      "timezones": [
+        "America/New_York",
+        "America/Detroit",
+        "America/Kentucky/Louisville",
+        "America/Kentucky/Monticello",
+        "America/Indiana/Indianapolis",
+        "America/Indiana/Vincennes",
+        "America/Indiana/Winamac",
+        "America/Indiana/Marengo",
+        "America/Indiana/Petersburg",
+        "America/Indiana/Vevay",
+        "America/Chicago",
+        "America/Indiana/Tell_City",
+        "America/Indiana/Knox",
+        "America/Menominee",
+        "America/North_Dakota/Center",
+        "America/North_Dakota/New_Salem",
+        "America/North_Dakota/Beulah",
+        "America/Denver",
+        "America/Boise",
+        "America/Phoenix",
+        "America/Los_Angeles",
+        "America/Anchorage",
+        "America/Juneau",
+        "America/Sitka",
+        "America/Metlakatla",
+        "America/Yakutat",
+        "America/Nome",
+        "America/Adak",
+        "Pacific/Honolulu"
+      ],
+      "is_in_european_union": false,
+      "tld": "us"
+    },
+    "UY": {
+      "alpha2": "UY",
+      "alpha3": "URY",
+      "calling_codes": ["+598"],
+      "currencies": ["UYU", "UYI"],
+      "emoji": "🇺🇾",
+      "ioc": "URU",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Uruguay",
+      "name_translated": "Uruguay",
+      "timezones": ["America/Montevideo"],
+      "is_in_european_union": false,
+      "tld": "uy"
+    },
+    "UZ": {
+      "alpha2": "UZ",
+      "alpha3": "UZB",
+      "calling_codes": ["+998"],
+      "currencies": ["UZS"],
+      "emoji": "🇺🇿",
+      "ioc": "UZB",
+      "languages": [
+        {
+          "name": "Uzbek",
+          "name_native": "Zbek"
+        },
+        {
+          "name": "Russian",
+          "name_native": "русский язык"
+        }
+      ],
+      "name": "Uzbekistan",
+      "name_translated": "Uzbekistan",
+      "timezones": ["Asia/Samarkand", "Asia/Tashkent"],
+      "is_in_european_union": false,
+      "tld": "uz"
+    },
+    "VA": {
+      "alpha2": "VA",
+      "alpha3": "VAT",
+      "calling_codes": ["+379", "+39"],
+      "currencies": ["EUR"],
+      "emoji": "🇻🇦",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "Italian",
+          "name_native": "Italiano"
+        }
+      ],
+      "name": "Vatican City",
+      "name_translated": "Vatican City",
+      "timezones": ["Europe/Vatican"],
+      "is_in_european_union": false,
+      "tld": "va"
+    },
+    "VC": {
+      "alpha2": "VC",
+      "alpha3": "VCT",
+      "calling_codes": ["+1 784"],
+      "currencies": ["XCD"],
+      "emoji": "🇻🇨",
+      "ioc": "VIN",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "St. Vincent & Grenadines",
+      "name_translated": "St. Vincent & Grenadines",
+      "timezones": ["America/St_Vincent"],
+      "is_in_european_union": false,
+      "tld": "vc"
+    },
+    "VE": {
+      "alpha2": "VE",
+      "alpha3": "VEN",
+      "calling_codes": ["+58"],
+      "currencies": ["VEF"],
+      "emoji": "🇻🇪",
+      "ioc": "VEN",
+      "languages": [
+        {
+          "name": "Castilian",
+          "name_native": "Castellano"
+        }
+      ],
+      "name": "Venezuela",
+      "name_translated": "Venezuela",
+      "timezones": ["America/Caracas"],
+      "is_in_european_union": false,
+      "tld": "ve"
+    },
+    "VG": {
+      "alpha2": "VG",
+      "alpha3": "VGB",
+      "calling_codes": ["+1 284"],
+      "currencies": ["USD"],
+      "emoji": "🇻🇬",
+      "ioc": "IVB",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "British Virgin Islands",
+      "name_translated": "British Virgin Islands",
+      "timezones": ["America/Tortola"],
+      "is_in_european_union": false,
+      "tld": "vg"
+    },
+    "VI": {
+      "alpha2": "VI",
+      "alpha3": "VIR",
+      "calling_codes": ["+1 340"],
+      "currencies": ["USD"],
+      "emoji": "🇻🇮",
+      "ioc": "ISV",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "U.S. Virgin Islands",
+      "name_translated": "U.S. Virgin Islands",
+      "timezones": ["America/St_Thomas"],
+      "is_in_european_union": false,
+      "tld": "vi"
+    },
+    "VN": {
+      "alpha2": "VN",
+      "alpha3": "VNM",
+      "calling_codes": ["+84"],
+      "currencies": ["VND"],
+      "emoji": "🇻🇳",
+      "ioc": "VIE",
+      "languages": [
+        {
+          "name": "Vietnamese",
+          "name_native": "Tiếng Việt"
+        }
+      ],
+      "name": "Vietnam",
+      "name_translated": "Vietnam",
+      "timezones": ["Asia/Ho_Chi_Minh"],
+      "is_in_european_union": false,
+      "tld": "vn"
+    },
+    "VU": {
+      "alpha2": "VU",
+      "alpha3": "VUT",
+      "calling_codes": ["+678"],
+      "currencies": ["VUV"],
+      "emoji": "🇻🇺",
+      "ioc": "VAN",
+      "languages": [
+        {
+          "name": "Bislama",
+          "name_native": "Bislama"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Vanuatu",
+      "name_translated": "Vanuatu",
+      "timezones": ["Pacific/Efate"],
+      "is_in_european_union": false,
+      "tld": "vu"
+    },
+    "WF": {
+      "alpha2": "WF",
+      "alpha3": "WLF",
+      "calling_codes": ["+681"],
+      "currencies": ["XPF"],
+      "emoji": "🇼🇫",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Wallis & Futuna",
+      "name_translated": "Wallis & Futuna",
+      "timezones": ["Pacific/Wallis"],
+      "is_in_european_union": false,
+      "tld": "wf"
+    },
+    "WS": {
+      "alpha2": "WS",
+      "alpha3": "WSM",
+      "calling_codes": ["+685"],
+      "currencies": ["WST"],
+      "emoji": "🇼🇸",
+      "ioc": "SAM",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Samoan",
+          "name_native": "Gagana Faa Samoa"
+        }
+      ],
+      "name": "Samoa",
+      "name_translated": "Samoa",
+      "timezones": ["Pacific/Apia"],
+      "is_in_european_union": false,
+      "tld": "ws"
+    },
+    "YE": {
+      "alpha2": "YE",
+      "alpha3": "YEM",
+      "calling_codes": ["+967"],
+      "currencies": ["YER"],
+      "emoji": "🇾🇪",
+      "ioc": "YEM",
+      "languages": [
+        {
+          "name": "Arabic",
+          "name_native": "العربية"
+        }
+      ],
+      "name": "Yemen",
+      "name_translated": "Yemen",
+      "timezones": ["Asia/Aden"],
+      "is_in_european_union": false,
+      "tld": "ye"
+    },
+    "YT": {
+      "alpha2": "YT",
+      "alpha3": "MYT",
+      "calling_codes": ["+262"],
+      "currencies": ["EUR"],
+      "emoji": "🇾🇹",
+      "ioc": "",
+      "languages": [
+        {
+          "name": "French",
+          "name_native": "Français"
+        }
+      ],
+      "name": "Mayotte",
+      "name_translated": "Mayotte",
+      "timezones": ["Indian/Mayotte"],
+      "is_in_european_union": false,
+      "tld": "yt"
+    },
+    "ZA": {
+      "alpha2": "ZA",
+      "alpha3": "ZAF",
+      "calling_codes": ["+27"],
+      "currencies": ["ZAR"],
+      "emoji": "🇿🇦",
+      "ioc": "RSA",
+      "languages": [
+        {
+          "name": "Afrikaans",
+          "name_native": "Afrikaans"
+        },
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Ndebele",
+          "name_native": "Ndebele"
+        },
+        {
+          "name": "Somali",
+          "name_native": "Af Soomaali"
+        },
+        {
+          "name": "Tsonga",
+          "name_native": "Xitsonga"
+        },
+        {
+          "name": "Venda",
+          "name_native": "Tshivenḓa"
+        },
+        {
+          "name": "Xhosa",
+          "name_native": "IsiXhosa"
+        },
+        {
+          "name": "Zulu",
+          "name_native": "Zulu"
+        }
+      ],
+      "name": "South Africa",
+      "name_translated": "South Africa",
+      "timezones": ["Africa/Johannesburg"],
+      "is_in_european_union": false,
+      "tld": "za"
+    },
+    "ZM": {
+      "alpha2": "ZM",
+      "alpha3": "ZMB",
+      "calling_codes": ["+260"],
+      "currencies": ["ZMW"],
+      "emoji": "🇿🇲",
+      "ioc": "ZAM",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        }
+      ],
+      "name": "Zambia",
+      "name_translated": "Zambia",
+      "timezones": ["Africa/Lusaka"],
+      "is_in_european_union": false,
+      "tld": "zm"
+    },
+    "ZW": {
+      "alpha2": "ZW",
+      "alpha3": "ZWE",
+      "calling_codes": ["+263"],
+      "currencies": ["USD", "ZAR", "BWP", "GBP", "EUR"],
+      "emoji": "🇿🇼",
+      "ioc": "ZIM",
+      "languages": [
+        {
+          "name": "English",
+          "name_native": "English"
+        },
+        {
+          "name": "Shona",
+          "name_native": "ChiShona"
+        },
+        {
+          "name": "Ndebele",
+          "name_native": "Ndebele"
+        }
+      ],
+      "name": "Zimbabwe",
+      "name_translated": "Zimbabwe",
+      "timezones": ["Africa/Harare"],
+      "is_in_european_union": false,
+      "tld": "zw"
+    }
+  }
+}
