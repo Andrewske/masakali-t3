@@ -28,6 +28,7 @@ async function Template({
 
   console.log(checkIn, checkOut, villaId, villaName);
 
+  // fix styling with tailwind
   return (
     <main className={styles.wrapper}>
       <section

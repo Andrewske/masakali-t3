@@ -39,6 +39,7 @@
     "fs": "0.0.1-security",
     "lodash": "^4.17.21",
     "lucide-react": "^0.340.0",
+    "masakali-t3": "link:",
     "next": "^14.0.3",
     "node": "18.17",
     "nodemailer": "^6.9.3",

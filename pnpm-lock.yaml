@@ -89,6 +89,9 @@ dependencies:
   lucide-react:
     specifier: ^0.340.0
     version: 0.340.0(react@18.2.0)
+  masakali-t3:
+    specifier: 'link:'
+    version: 'link:'
   next:
     specifier: ^14.0.3
     version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.1)

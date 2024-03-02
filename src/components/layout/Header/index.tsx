@@ -23,6 +23,7 @@ import LinkWithUnderline from './LinkWithUnderline';
 //     transition: transform 250ms ease-in-out;
 //   }
 
+// TODO: Links need to keep the search params that's if I stay with search params over zustand
 const HeaderLinks = () => {
   return (
     <nav className="flex flex-grow flex-wrap items-center gap-4 text-center justify-center">

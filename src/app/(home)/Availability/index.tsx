@@ -34,6 +34,7 @@ const Availability = ({
       departureDate: range.to,
     });
 
+  // TODO: Add the villas cards for when they are available. Also check logic
   return (
     <section
       id="availability"

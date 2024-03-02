@@ -5,6 +5,8 @@ import styles from './styles.module.scss';
 import { GoToPageButton } from '~/components/Button/GoToPageButton';
 import AkashaImage from '~/../public/hero-images/akasha-pool.webp';
 
+// TODO - Get other villa photos
+
 const villas = [
   {
     name: 'surya',

@@ -1,5 +1,7 @@
 import styles from './styles.module.scss';
 
+// TODO - Formatting and icons
+
 const WhyChoose = () => {
   return (
     <div className={styles.wrapper}>

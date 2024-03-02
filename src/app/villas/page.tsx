@@ -1,6 +1,7 @@
 import { prisma } from '~/db/prisma';
 //import { api } from '~/utils/api';
 
+// TODO: Add villas cards
 async function Page() {
   const villas = await prisma.villa.findMany();
 
