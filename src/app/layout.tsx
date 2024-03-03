@@ -11,6 +11,7 @@ import { montserrat, baskerville } from '~/fonts';
 // import Script from 'next/script';
 // import { env } from '~/env.mjs';
 import ReactQueryProvider from '~/context/ReactQueryProvider';
+import { ReservationStoreProvider } from '~/providers/ReservationStoreProvider/index';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -25,7 +26,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
       <body className="h-full flex flex-col">
         <ReactQueryProvider>
-          <main className="flex-grow">{children}</main>
+          <ReservationStoreProvider>
+            <main className="flex-grow">{children}</main>
+          </ReservationStoreProvider>
         </ReactQueryProvider>
       </body>
     </html>

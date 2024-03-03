@@ -2,13 +2,12 @@
 import { getVillaName } from '~/lib/villas';
 import type { VillaIdsType } from '~/lib/villas';
 import { prisma } from '~/db/prisma';
-import { getConversionRate } from '../currencyApi';
 import { env } from '~/env.mjs';
 
 export type PricingDataType = {
   villaName: string;
-  checkIn: string;
-  checkOut: string;
+  checkIn: Date;
+  checkOut: Date;
   numNights: number;
   pricing: {
     pricePerNight: number;
@@ -23,18 +22,14 @@ export const getPricing = async ({
   checkIn,
   checkOut,
   conversionRate,
-  currency = 'USD',
 }: {
   villaId: VillaIdsType;
-  checkIn: string;
-  checkOut: string;
+  checkIn: Date;
+  checkOut: Date;
   conversionRate: number;
   currency?: string;
 }): Promise<PricingDataType> => {
-  const checkInDate = new Date(checkIn);
-  const checkOutDate = new Date(checkOut);
-
-  const diffInTime = checkOutDate.getTime() - checkInDate.getTime();
+  const diffInTime = checkOut.getTime() - checkIn.getTime();
   const numNights = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
 
   try {
@@ -42,8 +37,8 @@ export const getPricing = async ({
       where: {
         villaId: Number(villaId),
         date: {
-          gte: new Date(checkIn),
-          lt: new Date(checkOut),
+          gte: checkIn,
+          lt: checkOut,
         },
         price: {
           not: null,

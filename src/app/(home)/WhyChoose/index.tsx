@@ -1,5 +1,5 @@
 import Image from 'next/image';
-// TODO - Formatting and icons
+
 
 type FeatureProps = {
   iconSrc: string;
