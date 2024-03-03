@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
-import { villaIdsArray } from '~/utils/smoobu';
+import { villaIdsArray } from '~/lib/villas';
 import { prisma } from '~/db/prisma';
 
 export async function GET() {

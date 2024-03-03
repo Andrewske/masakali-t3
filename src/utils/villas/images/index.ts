@@ -1,4 +1,4 @@
-import { getVillaName, villaIdsType } from '~/utils/smoobu';
+import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import AkashaFront from '~/../public/hero-images/akasha-front.webp';
 import AkashaPool from '~/../public/hero-images/akasha-pool.webp';
 import AkashaKitchen from '~/../public/hero-images/akasha-kitchen.webp';
@@ -40,7 +40,7 @@ const villaImages = {
   },
 };
 
-export const getMainImage = (villaId: villaIdsType) => {
+export const getMainImage = (villaId: VillaIdsType) => {
   const villaName = getVillaName(villaId) as keyof typeof villaImages;
 
   return villaImages[villaName].mainImgage;

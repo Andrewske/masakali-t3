@@ -9,7 +9,7 @@ import {
 } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 import GuestsForm from './GuestsForm';
-import { VillaNamesType } from '~/utils/smoobu';
+import { VillaNamesType } from '~/lib/villas';
 
 interface GuestsDetailsFormProps {
   form: UseFormReturn<any>;

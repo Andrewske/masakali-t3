@@ -2,22 +2,25 @@ import Image from 'next/image';
 import styles from './styles.module.scss';
 import DiningImage from '~/../public/hero-images/akasha-pool.webp';
 
+import ScrollOffset from '~/components/ScrollOffset';
+
 const Dining = () => {
   return (
     <section
-      id="dining"
-      className={styles.wrapper}
+      id="diningWrapper"
+      className="relative flex items-center flex-wrap p-8"
     >
-      <div className={styles.container}>
+      <ScrollOffset id="dining" />
+      <div className="h-[450px] w-full md:max-w-[450px] bg-gray flex  flex-wrap items-center">
         <Image
-          className={styles.image}
+          className="object-cover w-full h-full"
           src={DiningImage}
           alt="Photo of breakfast on Surya's porch"
         />
       </div>
-      <div className={styles.container}>
-        <h2 className={styles.title}>Dining</h2>
-        <p className={styles.description}>
+      <div className="h-[450px]  w-full md:max-w-[450px] bg-gray flex flex-col gap-4 flex-wrap p-8 ">
+        <h2 className="">Dining</h2>
+        <p className="w-full leading-relaxed">
           Masakali offers a full range of options for dining, all with the taste
           and charm of fresh Balinese ingredients. Our curated selection of
           savory cuisine includes many local Balinese dishes as well as

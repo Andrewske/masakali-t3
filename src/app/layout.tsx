@@ -1,5 +1,7 @@
 import Header from '~/components/layout/Header';
 import Footer from '~/components/layout/Footer';
+import HideHeader from '~/components/layout/HideHeader';
+import { Suspense } from 'react';
 
 import type { ReactNode } from 'react';
 import '~/styles/globals.scss';
@@ -21,11 +23,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         async
       /> */}
 
-      <body>
+      <body className="h-full flex flex-col">
         <ReactQueryProvider>
-          <Header />
-          {children}
-          <Footer />
+          <main className="flex-grow">{children}</main>
         </ReactQueryProvider>
       </body>
     </html>

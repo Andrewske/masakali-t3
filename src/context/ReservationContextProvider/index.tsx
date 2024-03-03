@@ -1,13 +1,13 @@
 'use client';
 import { createContext, useContext, useState } from 'react';
-import { type villaIdsType } from '~/utils/smoobu';
+import { type VillaIdsType } from '~/lib/villas';
 
 type ReservationContextProviderProps = {
   children: React.ReactNode;
 };
 
 type ReservationContext = {
-  villaId: villaIdsType | null;
+  villaId: VillaIdsType | null;
   setVillaId: React.Dispatch<React.SetStateAction<number | null>>;
   range: Range | null;
   setRange: React.Dispatch<React.SetStateAction<Range | null>>;

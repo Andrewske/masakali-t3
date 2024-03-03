@@ -1,5 +1,5 @@
 import { type Reservation } from '@prisma/client';
-import { villaIdsArray, villaIdsType } from '~/utils/smoobu';
+import { VillaIdsType, villaIdsArray } from '~/lib/villas';
 import { format, parseISO } from 'date-fns';
 import { getDatesBetweenDates } from '..';
 
@@ -13,8 +13,8 @@ export const getAvailableVillas = ({
   reservations,
   arrivalDate,
   departureDate,
-}: getBlockedDatesAllVillasType): number[] => {
-  const blockedVillasSet = new Set<number>();
+}: getBlockedDatesAllVillasType): VillaIdsType[] => {
+  const blockedVillasSet = new Set<VillaIdsType>();
 
   const formattedArrivalDate = format(arrivalDate, 'yyyy-MM-dd');
   const formattedDepartureDate = format(departureDate, 'yyyy-MM-dd');
@@ -22,9 +22,9 @@ export const getAvailableVillas = ({
   reservations.forEach((reservation) => {
     const arrival = reservation?.arrival;
     const departure = reservation?.departure;
-
+    const resVillaId = reservation?.villaId as VillaIdsType;
     if (arrival < formattedDepartureDate && formattedArrivalDate < departure) {
-      blockedVillasSet.add(reservation.villaId);
+      blockedVillasSet.add(resVillaId);
     }
   });
 
@@ -33,20 +33,21 @@ export const getAvailableVillas = ({
 
 export const getDisabledDatesOld = (
   reservations: Reservation[],
-  villaId?: number
+  villaId?: VillaIdsType
 ) => {
   // This map gives a date and the count of villaIds that have reservations on that date
-  const dateCounts = new Map<string, Set<number>>();
+  const dateCounts = new Map<string, Set<VillaIdsType>>();
 
   // Loop through each reservation
   for (const reservation of reservations) {
+    const resVillaId = reservation.villaId as VillaIdsType;
     // If a villaId is given and the reservation doesn't match, skip it
     if (villaId && reservation.villaId !== villaId) {
       continue;
     }
 
     // Create a function to add to dateCounts to limit code duplication
-    const setDateCounts = (dateString: string, villaId: number) => {
+    const setDateCounts = (dateString: string, villaId: VillaIdsType) => {
       const ids = dateCounts.get(dateString) || new Set();
       dateCounts.set(dateString, ids.add(villaId));
     };
@@ -60,27 +61,25 @@ export const getDisabledDatesOld = (
     // For each date in between Dates add the villaId
     for (const date of betweenDates) {
       const dateString = format(date, 'yyyy-MM-dd');
-      setDateCounts(dateString, reservation.villaId);
+      setDateCounts(dateString, resVillaId);
     }
 
     // check if the reserations arrival date is in the list of depature dates
     const hasArrival = reservations.some(
-      (r) =>
-        r.departure === reservation.arrival && r.villaId === reservation.villaId
+      (r) => r.departure === reservation.arrival && r.villaId === resVillaId
     );
 
     if (hasArrival) {
-      setDateCounts(reservation.arrival, reservation.villaId);
+      setDateCounts(reservation.arrival, resVillaId);
     }
 
     // check if the reservations departure date is in the list of arrival dates
     const hasDeparture = reservations.some(
-      (r) =>
-        r.arrival === reservation.departure && r.villaId === reservation.villaId
+      (r) => r.arrival === reservation.departure && r.villaId === resVillaId
     );
 
     if (hasDeparture) {
-      setDateCounts(reservation.departure, reservation.villaId);
+      setDateCounts(reservation.departure, resVillaId);
     }
   }
 
@@ -89,7 +88,7 @@ export const getDisabledDatesOld = (
   for (const [date, villas] of dateCounts.entries()) {
     if (!villaId && villaIdsArray.length === villas.size) {
       disabledDates.add(date);
-    } else if (villaId && villaIdsArray.includes(villaId as villaIdsType)) {
+    } else if (villaId && villaIdsArray.includes(villaId)) {
       disabledDates.add(date);
     }
   }

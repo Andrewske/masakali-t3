@@ -1,14 +1,16 @@
 'use client';
 
-import { format, addDays, parseISO } from 'date-fns';
+import Image from 'next/image';
 import { useState } from 'react';
+import { format, addDays } from 'date-fns';
+import { type DateRange } from 'react-day-picker';
+import { type Reservation } from '@prisma/client';
 
 import styles from './styles.module.scss';
-
-import { type Reservation } from '@prisma/client';
 import { getAvailableVillas } from '~/utils/reservations';
 import DateRangePicker from '~/components/DateRangePicker';
-import { type DateRange } from 'react-day-picker';
+import { getVillaName, villaDetails } from '~/lib/villas';
+import { GoToPageButton } from '~/components/Button/GoToPageButton';
 
 const today = new Date();
 const nextDay = addDays(today, 1);
@@ -34,7 +36,7 @@ const Availability = ({
       departureDate: range.to,
     });
 
-  // TODO: Add the villas cards for when they are available. Also check logic
+  // TODO: Work on availability logic
   return (
     <section
       id="availability"
@@ -88,11 +90,37 @@ const Availability = ({
         </div>
       </div>
 
-      <div className={styles.wrapper}>
+      <div className="flex flex-wrap gap-4 transition-all duration-300 ease-in-out justify-evenly w-full">
         {villasAvailable &&
-          villasAvailable.map((villaId) => (
-            <div key={villaId.toString()}>{villaId}</div>
-          ))}
+          villasAvailable.map((villaId) => {
+            const villaName = getVillaName(villaId);
+            const villa = villaDetails[villaName];
+            return (
+              <div
+                key={villaId}
+                className=" w-[350px] h-[350px] relative z-10 shadow-light-purple"
+              >
+                <Image
+                  src={villa.defaultImage}
+                  alt={villa.name}
+                  width={300}
+                  height={300}
+                  className="relative object-cover w-full h-full z-0"
+                />
+                <span className="absolute top-0 left-0  h-full z-20 p-4">
+                  <span className="bg-white bg-opacity-80 p-4 w-full h-full grid grid-col-1 place-items-center">
+                    <h3 className="uppercase text-2xl">{villa.name}</h3>
+                    <p className="text-sm">{villa.shortDescription}</p>
+                    <GoToPageButton
+                      callToAction="Book Now"
+                      isWhite={false}
+                      path={`/villas/${villa.name}`}
+                    />
+                  </span>
+                </span>
+              </div>
+            );
+          })}
       </div>
     </section>
   );

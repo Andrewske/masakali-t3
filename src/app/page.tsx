@@ -13,6 +13,9 @@ import Location from '~/app/(home)/Location';
 import { addDays } from 'date-fns';
 import { getCurrentDateInBali } from '~/utils';
 import { getAllDisabledDates } from '~/actions/smoobu';
+import Footer from '~/components/layout/Footer';
+import Header from '~/components/layout/Header';
+import HideHeader from '~/components/layout/HideHeader';
 
 const today = getCurrentDateInBali();
 const twoDaysAgo: string = addDays(today, -2).toISOString();
@@ -31,7 +34,10 @@ const Page = async () => {
   const disabledDates = await getAllDisabledDates();
 
   return (
-    <main className={styles.main}>
+    <>
+      <HideHeader>
+        <Header />
+      </HideHeader>
       <HeroSlideShow />
       <Availability
         reservations={reservations}
@@ -43,7 +49,8 @@ const Page = async () => {
       <Dining />
       <Amenities />
       <Location />
-    </main>
+      <Footer />
+    </>
   );
 };
 

@@ -1,12 +1,12 @@
 import capitalize from 'lodash/capitalize';
 import Link from 'next/link';
-import { villas, type VillaName } from '~/utils/smoobu';
+import { villas, type VillaNamesType } from '~/lib/villas';
 import styles from './styles.module.scss';
 
 export default function NextVilla({
   currentVillaName,
 }: {
-  currentVillaName: string;
+  currentVillaName: VillaNamesType;
 }) {
   return (
     <Link href={`/villas/${nextVilla(currentVillaName)}`}>
@@ -15,8 +15,8 @@ export default function NextVilla({
   );
 }
 
-const nextVilla = (currentVillaName: string) => {
-  const villaNames = Object.keys(villas);
+const nextVilla = (currentVillaName: VillaNamesType) => {
+  const villaNames = Array.from(villas.keys()) as VillaNamesType[];
 
   const indexOfCurrentVilla = villaNames.findIndex(
     (villa) => villa === currentVillaName

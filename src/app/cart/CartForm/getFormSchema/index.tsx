@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { type VillaNamesType } from '~/utils/smoobu';
-import { villaGuestLimits } from '~/lib/villas';
+import { type VillaNamesType } from '~/lib/villas';
+import { villaDetails } from '~/lib/villas';
 
 const formSchema = z.object({
   fullName: z.string().min(1, 'Full name is required'),
@@ -38,12 +38,15 @@ const getFormSchema = (villaName: VillaNamesType) => {
   return formSchema.refine(
     (data) => {
       // Look up the limits for the selected villa
-      const limits = villaGuestLimits[villaName];
+      const {
+        maxGuests: { adults: maxAdults, children: maxChildren },
+      } = villaDetails[villaName];
+
       // Validate the total number of guests, adults, and children against the limits
       return (
-        data.adults + data.children <= limits.maxGuests &&
-        data.adults <= limits.maxAdults &&
-        data.children <= limits.maxChildren
+        data.adults + data.children <= maxAdults + maxChildren &&
+        data.adults <= maxAdults &&
+        data.children <= maxChildren
       );
     },
     {

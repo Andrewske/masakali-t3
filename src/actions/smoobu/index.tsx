@@ -1,6 +1,6 @@
 'use server';
-import { getVillaName } from '~/utils/smoobu';
-import type { villaIdsType } from '~/utils/smoobu';
+import { getVillaName } from '~/lib/villas';
+import type { VillaIdsType } from '~/lib/villas';
 import { prisma } from '~/db/prisma';
 import { getConversionRate } from '../currencyApi';
 import { env } from '~/env.mjs';
@@ -25,7 +25,7 @@ export const getPricing = async ({
   conversionRate,
   currency = 'USD',
 }: {
-  villaId: villaIdsType;
+  villaId: VillaIdsType;
   checkIn: string;
   checkOut: string;
   conversionRate: number;

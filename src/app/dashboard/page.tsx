@@ -5,7 +5,7 @@ import Button from '~/components/Button';
 import { UpdateReservationsButton } from '~/components/Button/UpdateReservations';
 
 import { getPricing } from '~/actions/smoobu';
-import { suryaId } from '~/utils/smoobu';
+import { suryaId } from '~/lib/villas';
 
 export default function Page() {
   const handleButtonClick = async () => {

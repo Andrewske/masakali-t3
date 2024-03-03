@@ -3,30 +3,26 @@
 import Image from 'next/image';
 import styles from './styles.module.scss';
 import DiningImage from '../../../../public/hero-images/akasha-pool.webp';
+import ScrollOffset from '~/components/ScrollOffset';
 
 const Amenities = () => {
   return (
-    <section
-      id="amenities"
-      className={styles.wrapper}
-    >
-      <div
-        id="amenities"
-        className={styles.container}
-      >
-        <h2 className={styles.title}>Amenities</h2>
-        <p className={styles.description}>
+    <section className="relative flex items-center flex-wrap p-8 justify-center">
+      <ScrollOffset id="amenities" />
+      <div className="h-[600px] w-full md:max-w-[450px] bg-gray flex flex-col gap-4 flex-wrap p-8 ">
+        <h2 className="">Amenities</h2>
+        <p className="w-full leading-relaxed">
           At Masakali, our goal is to go above and beyond your expectations and
           to make your stay exceptional. The owner put her heart and soul into
           every aspect of this place and her vision is to share this gift with
           the rest of the world and it is truly our honor to offer our guests
           the best experience imaginable.
         </p>
-        <p className={styles.subText}>
+        <p className="w-full leading-relaxed">
           That’s why we are offering a full range of services and amenities such
           as:
         </p>
-        <ul className={styles.list}>
+        <ul className="list-disc list-inside columns-2 text-sm w-full leading-relaxed">
           <li>Private infinity pool</li>
           <li>Kitchenette</li>
           <li>Ensuite bathrooms</li>
@@ -45,9 +41,9 @@ const Amenities = () => {
           <li>Room service</li>
         </ul>
       </div>
-      <div className={styles.container}>
+      <div className="h-[600px] w-full md:max-w-[450px] bg-gray flex  flex-wrap items-center">
         <Image
-          className={styles.image}
+          className="object-cover w-full h-full"
           src={DiningImage}
           alt="Photo of breakfast on Surya's porch"
         />

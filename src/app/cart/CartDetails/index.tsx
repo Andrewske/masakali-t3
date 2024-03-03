@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import styles from './styles.module.scss';
 import { getPricing } from '~/actions/smoobu';
-import type { villaIdsType } from '~/utils/smoobu';
+import type { VillaIdsType } from '~/lib/villas';
 import useCurrency from '~/hooks/useCurrency';
 import { useMemo } from 'react';
 import { formatCurrency } from '~/utils/helpers';
@@ -13,7 +13,7 @@ import { Skeleton } from '~/components/ui/skeleton';
 type CartDetailsProps = {
   checkIn: string;
   checkOut: string;
-  villaId: villaIdsType;
+  villaId: VillaIdsType;
 };
 
 const CartDetails = ({ checkIn, checkOut, villaId }: CartDetailsProps) => {
@@ -54,13 +54,12 @@ const CartDetails = ({ checkIn, checkOut, villaId }: CartDetailsProps) => {
       key={label}
     >
       <h3>{label}</h3>
-      <p>
-        {isFetching || isLoading ? (
-          <Skeleton className="w-[100px] h-6 rounded-full bg-light-purple-7" />
-        ) : (
-          formatCurrency(amount, currency)
-        )}
-      </p>
+
+      {isFetching || isLoading ? (
+        <Skeleton className="w-[100px] h-6 rounded-full bg-light-purple-7" />
+      ) : (
+        <p>{formatCurrency(amount, currency)}</p>
+      )}
     </span>
   );
 

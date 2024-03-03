@@ -4,11 +4,11 @@ import GridGallery from '~/app/villas/_components/GridGallery';
 import DateContainer from '~/app/villas/_components/DateContainer';
 import Link from 'next/link';
 import VillaDetails from '~/app/villas/_components/VillaDetails';
-import { getVillaName, type villaIdsType } from '~/utils/smoobu';
+import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
 
 export type VillaDataType = {
-  villaId: villaIdsType;
+  villaId: VillaIdsType;
   description: string;
   amenities: string;
   checkIn: string;
@@ -26,13 +26,11 @@ async function Template({
 
   const disabledDates = await getDisabledDatesForVilla(villaId);
 
-  console.log(checkIn, checkOut, villaId, villaName);
-
   // fix styling with tailwind
   return (
-    <main className={styles.wrapper}>
+    <main className="w-full flex-grow flex flex-wrap">
       <section
-        className={styles.leftContainer}
+        className="flex w-1/3 p-8 flex-col gap-4 justify-center items-center relative"
         id="villa-info"
       >
         <NextVilla currentVillaName={villaName} />

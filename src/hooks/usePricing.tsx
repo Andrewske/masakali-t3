@@ -4,7 +4,7 @@ import getPricePerNight from '~/actions/smoobu/getPricePerNight';
 
 // This is a hook to manage the pricing of the reservation
 
-import type { villaIdsType } from '~/types/smoobu';
+import type { VillaIdsType } from '~/types/smoobu';
 import { daysBetweenDates } from '~/utils/calculations';
 import logError from '~/utils/logError';
 
@@ -16,7 +16,7 @@ const usePricing = ({
 }: {
   checkIn: string;
   checkOut: string;
-  villaId: villaIdsType;
+  villaId: VillaIdsType;
 }) => {
   const [pricePerNight, setPricePerNight] = useState<number | null>(null);
   const [numDays, setNumDays] = useState<number | null>(null);

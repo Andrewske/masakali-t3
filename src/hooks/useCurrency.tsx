@@ -140,7 +140,7 @@ const useCurrency = () => {
               src={`data:image/png;base64,${country.flag}`}
               alt={country.name}
               width={20}
-              height="auto"
+              height={20}
             />
           </Button>
         </PopoverTrigger>
@@ -162,7 +162,7 @@ const useCurrency = () => {
                     src={`data:image/png;base64,${country.flag}`}
                     alt={country.name}
                     width={20}
-                    height="auto"
+                    height={20}
                   />
                 </CommandItem>
               ))}

@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
-import type { VillaNamesType } from '~/utils/smoobu';
+import type { VillaNamesType } from '~/lib/villas';
 import { villaGuestLimits } from '~/lib/villas';
 import { capitalize } from 'lodash';
 

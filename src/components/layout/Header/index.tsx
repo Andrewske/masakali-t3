@@ -1,48 +1,12 @@
-'use client';
-
-import { useState } from 'react';
-import styles from './styles.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
-
-import useBreakpoint from '~/hooks/useBreakpoint';
-import LinkWithUnderline from './LinkWithUnderline';
-
-// .link {
-//   color: $white;
-//   width: max-content;
-//   text-align: center;
-
-//   &:after {
-//     display: block;
-//     content: '';
-//     border-bottom: 1px solid white;
-//     transform: scaleX(0);
-//     transition: transform 250ms ease-in-out;
-//   }
-
-// TODO: Links need to keep the search params that's if I stay with search params over zustand
-const HeaderLinks = () => {
-  return (
-    <nav className="flex flex-grow flex-wrap items-center gap-4 text-center justify-center">
-      <LinkWithUnderline href="#home">Home</LinkWithUnderline>
-      <LinkWithUnderline href="#villas">Villas</LinkWithUnderline>
-      <LinkWithUnderline href="#dining">Dining</LinkWithUnderline>
-      <LinkWithUnderline href="#amenities">Amenities</LinkWithUnderline>
-      <LinkWithUnderline href="/retreats">Retreats</LinkWithUnderline>
-    </nav>
-  );
-};
+import HeaderLinks from '~/components/layout/Header/Links';
 
 const Header = () => {
-  const size = useBreakpoint();
-  const [isExpanded, setExpanded] = useState(false);
-
   return (
-    <nav className="fixed w-full flex flex-col z-50">
-      <div className="flex flex-col md:flex-row md:justify-between bg-purple w-full relative min-h-[200px] flex-wrap h-auto ">
+    <nav className="relative w-full flex flex-col z-50">
+      <div className="z-50 flex flex-col md:flex-row md:justify-between bg-purple w-full relative min-h-[200px] flex-wrap h-auto ">
         <span className="flex flex-wrap justify-center items-center p-4">
           <Image
             src="/FullWhiteLogo_TransparentBackground.png"

@@ -15,8 +15,8 @@ import { stripeCheckout } from '~/actions/stripe';
 import {
   getVillaName,
   type VillaNamesType,
-  type villaIdsType,
-} from '~/utils/smoobu';
+  type VillaIdsType,
+} from '~/lib/villas';
 import GuestDetailsForm from './GuestDetailsForm';
 import PaymentForm from './PaymentForm';
 
@@ -29,7 +29,7 @@ export default function CartForm({
   checkIn,
   checkOut,
 }: {
-  villaId: villaIdsType;
+  villaId: VillaIdsType;
   checkIn: string;
   checkOut: string;
 }) {
@@ -43,9 +43,14 @@ export default function CartForm({
 
   const { data: pricingData, error } = useQuery({
     // Provide proper typings for the variables
-    queryFn: () => getPricing({ checkIn, checkOut, villaId }),
+    queryFn: () =>
+      getPricing({ checkIn, checkOut, villaId, conversionRate: 1 }),
     queryKey: ['cart', checkIn, checkOut, villaId],
   });
+
+  if (error) {
+    throw error;
+  }
 
   const nextStep = () => {
     setStep(step + 1);

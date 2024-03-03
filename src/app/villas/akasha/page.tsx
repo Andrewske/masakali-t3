@@ -1,7 +1,11 @@
 import Template from '../_components/Template';
+import { akashaId } from '~/lib/villas';
 
-function Page() {
-  const villaName = 'akasha';
+function Page({
+  searchParams,
+}: {
+  searchParams: { checkIn: string; checkOut: string };
+}) {
   const description = 'description';
   const amenities = 'amenities';
 
@@ -9,7 +13,9 @@ function Page() {
     <Template
       description={description}
       amenities={amenities}
-      villaName={villaName}
+      villaId={akashaId}
+      checkIn={searchParams.checkIn}
+      checkOut={searchParams.checkOut}
     />
   );
 }

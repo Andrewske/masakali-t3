@@ -3,45 +3,20 @@ import Image from 'next/image';
 import styles from './styles.module.scss';
 
 import { GoToPageButton } from '~/components/Button/GoToPageButton';
-import AkashaImage from '~/../public/hero-images/akasha-pool.webp';
+import { villaDetails } from '~/lib/villas';
+import ScrollOffset from '~/components/ScrollOffset';
 
 // TODO - Get other villa photos
-
-const villas = [
-  {
-    name: 'surya',
-    description:
-      'Our largest villa is a warm and elegant choice with ample space to rest and recharge. It has an ensuite breakfast table and features a hand-carved outdoor dining table that can seat larger groups on the private patio. Inside you’ll find a luxury king-sized mattress with high-quality bedding as well as a couch that can serve as an additional bed for an additional guest.',
-    imgPath: AkashaImage,
-  },
-  {
-    name: 'chandra',
-    description:
-      'One of our more popular villas for romantic getaways and honeymooners offers an enchanting sentiment. In addition to the luxury outdoor shower, this villa features a spacious and comfortable bath. A favorite place to relax is the outdoor hammock that hangs over the rice fields, with a perfect view of the stars at night. This villa also offers a work area with a beautiful antique desk for those who need it.',
-    imgPath: AkashaImage,
-  },
-  {
-    name: 'jala',
-    description:
-      'This traditional Joglo villa is the perfect fit for a cozy stay. With personal charm and attention to detail, this alluring villa has an irresistible appeal. Jala offers a workstation with a large desk, comfy outdoor lounging areas, and a full private ensuite bathroom. The luxury bedding and linens offer a comfortable and restful sleep while the beautiful, handcrafted furniture and amenities will leave you in awe of the craftsmanship and detail.',
-    imgPath: AkashaImage,
-  },
-  {
-    name: 'akasha',
-    description:
-      'Luxury meets comfort in our newest villa, Akasha. With 3 bedrooms and 3.5 baths, this spacious home is great for families or couples traveling. This villa features a beautiful waterfall pool, large deck, full kitchen and bar, entertainment room, outdoor living room, large dining area, and breathtaking views. This space is also great for hosting celebrations such as weddings and birthday parties.',
-    imgPath: AkashaImage,
-  },
-];
 
 const Villas = () => {
   return (
     <section
-      id="villas"
-      className={styles.wrapper}
+      id="villasWrapper"
+      className="relative flex flex-col items-center justify-center w-full h-auto p-4 gap-8"
     >
+      <ScrollOffset id="villas" />
       <h2 className={styles.title}>Villas</h2>
-      <div className={styles.description}>
+      <div className="w-full max-w-[600px]">
         <p>
           All the villas have their own private infinity pools overlooking the
           Balinese rice fields, fully equipped kitchenettes, luxurious outdoor
@@ -52,25 +27,29 @@ const Villas = () => {
           villas have bathtubs.
         </p>
       </div>
-      <div className={styles.container}>
-        {villas.map((villa) => (
+      <div className="flex flex-wrap justify-evenly w-full gap-4">
+        {Object.values(villaDetails).map((villa) => (
           <div
-            key={villa.name}
-            className={styles.villa}
+            key={villa.id}
+            className=" w-[450px] h-[450px] relative z-10 shadow-light-purple m-4"
           >
             <Image
-              src={villa.imgPath}
+              src={villa.defaultImage}
               alt={villa.name}
-              className={styles.image}
+              width={300}
+              height={300}
+              className="relative object-cover w-full h-full z-0"
             />
-            <span className={styles.hoverContainer}>
-              <h3 className={styles.title}>{villa.name}</h3>
-              <p className={styles.text}>{villa.description}</p>
-              <GoToPageButton
-                callToAction="View Details"
-                isWhite={false}
-                path={`/villas/${villa.name}`}
-              />
+            <span className="absolute top-0 left-0  h-full z-20 p-4">
+              <span className="bg-white bg-opacity-80 p-4 w-full h-full grid grid-col-1 place-items-center">
+                <h3 className="uppercase text-2xl">{villa.name}</h3>
+                <p className="text-sm">{villa.description}</p>
+                <GoToPageButton
+                  callToAction="Book Now"
+                  isWhite={false}
+                  path={`/villas/${villa.name}`}
+                />
+              </span>
             </span>
           </div>
         ))}
