@@ -8,14 +8,14 @@ import type { VillaIdsType } from '~/types/smoobu';
 import { daysBetweenDates } from '~/utils/calculations';
 import logError from '~/utils/logError';
 
-// It will accept checkIn, checkOut, villaId, discounts?
+// It will accept checkin, checkout, villaId, discounts?
 const usePricing = ({
-  checkIn,
-  checkOut,
+  checkin,
+  checkout,
   villaId,
 }: {
-  checkIn: string;
-  checkOut: string;
+  checkin: string;
+  checkout: string;
   villaId: VillaIdsType;
 }) => {
   const [pricePerNight, setPricePerNight] = useState<number | null>(null);
@@ -27,23 +27,23 @@ const usePricing = ({
   useEffect(() => {
     const calculateTotals = async () => {
       const pricePerNight = await getPricePerNight({
-        checkIn,
-        checkOut,
+        checkin,
+        checkout,
         villaId,
       });
 
       if (pricePerNight) {
         setPricePerNight(pricePerNight);
-        setNumDays(daysBetweenDates(checkIn, checkOut));
+        setNumDays(daysBetweenDates(checkin, checkout));
       } else {
-        throw new Error(`No price found for ${villaId} ${checkIn} ${checkOut}`);
+        throw new Error(`No price found for ${villaId} ${checkin} ${checkout}`);
       }
     };
 
     calculateTotals().catch((error) => {
       logError('Error calculating totals', error);
     });
-  }, [checkIn, checkOut, villaId]);
+  }, [checkin, checkout, villaId]);
 
   useEffect(() => {
     if (pricePerNight && numDays) {

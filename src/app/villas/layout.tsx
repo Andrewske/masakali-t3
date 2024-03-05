@@ -1,9 +1,8 @@
-import Header from '~/components/layout/Header';
-import Footer from '~/components/layout/Footer';
-
 import type { ReactNode } from 'react';
 import '~/styles/globals.scss';
 import 'react-day-picker/dist/style.css';
+import Header from '~/components/layout/Header';
+import Footer from '~/components/layout/Footer';
 
 import ReactQueryProvider from '~/context/ReactQueryProvider';
 

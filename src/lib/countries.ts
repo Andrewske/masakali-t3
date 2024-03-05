@@ -1,5 +1,18 @@
-export type CountryCode = keyof typeof availableCountries;
-export type CountryName = string; // Assuming country names are strings
+import _countries from './countries.json';
+import type { CountryType } from '~/stores/currencyStore';
+
+export const countries = _countries as CountryType[];
+
+// export type CountryCodeType = keyof typeof availableCountries;
+export type CountryNameType = string; // Assuming country names are strings
+
+const countryAlpha2Codes = countries.reduce((acc, country) => {
+  acc[country.isoAlpha2] = country.isoAlpha2;
+  return acc;
+}, {} as Record<string, string>);
+
+// Create a type from the keys of the countryAlpha2Codes object
+export type CountryCodeType = keyof typeof countryAlpha2Codes;
 
 // interface AvailableCountries {
 //   [key in CountryCode]: CountryName;
@@ -256,3 +269,5 @@ export const availableCountries = {
   ZM: 'Zambia',
   ZW: 'Zimbabwe',
 };
+
+// Create an object with alpha-2 codes as keys

@@ -29,8 +29,7 @@ type StripeCheckoutParams = {
 };
 
 type StripeCheckoutResult = {
-  paymentIntent: PaymentIntent | undefined; // Replace 'any' with the actual type of paymentIntent
-  errors: Array<StripeError | Error>;
+  clientSecret: string | null | undefined; // Replace 'any' with the actual type of paymentIntent
 };
 
 export const stripeCheckout = async ({
@@ -39,15 +38,15 @@ export const stripeCheckout = async ({
   cardElement,
   billingDetails,
 }: StripeCheckoutParams): Promise<StripeCheckoutResult> => {
-  let errors: Array<StripeError | Error> = [];
+  const priceInCents = Math.round(price * 100);
   // Create Payment Intent
   const { clientSecret, paymentIntentError } = await createPaymentIntent({
-    amount: price,
+    amount: priceInCents,
     currency: 'usd',
     paymentMethodType: 'card',
   });
 
-  if (paymentIntentError) errors = [...errors, paymentIntentError];
+  if (paymentIntentError) throw paymentIntentError;
 
   // Create the Payment Method Request
   const { paymentMethodReqId, paymentMethodReqError } =
@@ -55,7 +54,7 @@ export const stripeCheckout = async ({
 
   console.log({ paymentMethodReqId, paymentMethodReqError });
 
-  if (paymentMethodReqError) errors = [...errors, paymentMethodReqError];
+  if (paymentMethodReqError) throw paymentMethodReqError;
 
   if (paymentMethodReqId && clientSecret) {
     const { paymentIntent, confirmCardPaymentError } = await confirmCardPayment(
@@ -67,10 +66,10 @@ export const stripeCheckout = async ({
     );
 
     if (confirmCardPaymentError) throw confirmCardPaymentError;
-
-    return { paymentIntent, errors };
+    console.log({ paymentIntent, confirmCardPaymentError });
+    return { clientSecret: paymentIntent?.client_secret };
   }
-  return { paymentIntent: undefined, errors };
+  return { clientSecret: null };
 };
 
 interface CreatePaymentMethodReqParams {

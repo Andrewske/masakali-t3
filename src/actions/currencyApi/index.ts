@@ -1,5 +1,6 @@
 'use server';
 import { env } from '~/env.mjs';
+import type { CountryCodeType } from '~/lib/countries';
 
 type Currency = {
   currency: {
@@ -11,6 +12,7 @@ type Currency = {
     [key: string]: {
       code: string;
       value: number;
+      currencies: string[];
     };
   };
 };
@@ -44,6 +46,68 @@ export const getCurrency = async (currency = 'USD', baseCurrency = 'IDR') => {
 export const getConversionRate = async (currency = 'USD'): Promise<number> => {
   const currencyData = await getCurrency('IDR', currency);
   return currencyData?.['IDR']?.value ?? 1;
+};
+
+export const getCurrencyRates = async (currency = 'IDR') => {
+  try {
+    const headers = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        apiKey: env.CURRENCY_API_KEY,
+      },
+    };
+
+    const url = `https://api.currencyapi.com/v3/latest?base_currency=${currency}`;
+
+    const response = await fetch(url, headers);
+
+    const { data } = (await response.json()) as Currency;
+
+    const mappedResponse: Record<CountryCodeType, number> = Object.entries(
+      data
+    ).reduce((acc, [key, value]) => {
+      acc[key] = value.value;
+      return acc;
+    }, {} as Record<string, number>);
+
+    return mappedResponse;
+  } catch (err) {
+    console.error('getCurrency', { err });
+
+    return null;
+  }
+};
+
+export const getCountryCurrencies = async () => {
+  try {
+    const headers = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        apiKey: env.CURRENCY_API_KEY,
+      },
+    };
+
+    const url = `https://api.currencyapi.com/v3/currencies`;
+
+    const response = await fetch(url, headers);
+
+    const { data } = (await response.json()) as Currency;
+
+    const mappedResponse: Record<string, string> = Object.entries(
+      data // Use 'data' instead of 'response'
+    ).reduce((acc, [key, value]) => {
+      acc[key] = value.currencies[0] ?? '';
+      return acc;
+    }, {} as Record<string, string>);
+
+    return mappedResponse;
+  } catch (err) {
+    console.error('getCountryCurrencies', { err });
+
+    return null;
+  }
 };
 
 export const getCurrencyCountries = async () => {

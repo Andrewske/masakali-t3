@@ -6,8 +6,8 @@ import { env } from '~/env.mjs';
 
 export type PricingDataType = {
   villaName: string;
-  checkIn: Date;
-  checkOut: Date;
+  checkin: Date;
+  checkout: Date;
   numNights: number;
   pricing: {
     pricePerNight: number;
@@ -17,19 +17,21 @@ export type PricingDataType = {
   };
 };
 
+// Okay I am going to have getPricing return all the prices for that villa
+
 export const getPricing = async ({
   villaId,
-  checkIn,
-  checkOut,
+  checkin,
+  checkout,
   conversionRate,
 }: {
   villaId: VillaIdsType;
-  checkIn: Date;
-  checkOut: Date;
+  checkin: Date;
+  checkout: Date;
   conversionRate: number;
   currency?: string;
 }): Promise<PricingDataType> => {
-  const diffInTime = checkOut.getTime() - checkIn.getTime();
+  const diffInTime = checkout.getTime() - checkin.getTime();
   const numNights = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
 
   try {
@@ -37,8 +39,8 @@ export const getPricing = async ({
       where: {
         villaId: Number(villaId),
         date: {
-          gte: checkIn,
-          lt: checkOut,
+          gte: checkin,
+          lt: checkout,
         },
         price: {
           not: null,
@@ -68,8 +70,8 @@ export const getPricing = async ({
 
     return {
       villaName: getVillaName(villaId),
-      checkIn: checkIn,
-      checkOut: checkOut,
+      checkin: checkin,
+      checkout: checkout,
       numNights: numNights,
       pricing: {
         pricePerNight: pricePerNight / conversionRate,
@@ -103,9 +105,22 @@ export const getAllDisabledDates = async (): Promise<
   ]);
 };
 
+function subtractSets<T>(set1: Set<T>, set2: Set<T>): Set<T> {
+  const result = new Set<T>();
+  for (const item of set1) {
+    if (!set2.has(item)) {
+      result.add(item);
+    }
+  }
+  return result;
+}
+
 export const getDisabledDatesForVilla = async (
   villaId: number
-): Promise<Set<string | undefined>> => {
+): Promise<{
+  disabledDates: Set<string | undefined>;
+  checkoutDates: Set<string | undefined>;
+}> => {
   const disabledDates = await prisma.villaPricing.findMany({
     where: {
       villaId: villaId,
@@ -116,7 +131,56 @@ export const getDisabledDatesForVilla = async (
     },
   });
 
-  return new Set([
+  const disabledDatesSet = new Set([
     ...disabledDates.map((date) => date.date.toISOString().split('T')[0]),
   ]);
+
+  const checkoutDates = await getCheckoutDatesForVilla(villaId);
+
+  const resultSet = subtractSets(disabledDatesSet, checkoutDates);
+
+  console.log(resultSet, checkoutDates, disabledDatesSet);
+
+  return {
+    disabledDates: resultSet,
+    checkoutDates: checkoutDates,
+  };
+};
+
+export const getCheckoutDatesForVilla = async (
+  villaId: number
+): Promise<Set<string | undefined>> => {
+  const checkoutDates = await prisma.villaPricing.findMany({
+    where: {
+      villaId: villaId,
+    },
+    select: {
+      date: true,
+      available: true,
+    },
+    orderBy: {
+      date: 'asc',
+    },
+  });
+
+  const availableCheckoutDates = new Set<string | undefined>();
+
+  if (checkoutDates.length === 0) {
+    return availableCheckoutDates;
+  }
+
+  for (let i = 1; i < checkoutDates.length; i++) {
+    if (checkoutDates[i]) {
+      const currentDate = checkoutDates[i];
+      const previousDate = checkoutDates[i - 1];
+
+      if (!currentDate?.available && previousDate?.available) {
+        availableCheckoutDates.add(
+          currentDate?.date.toISOString().split('T')[0]
+        );
+      }
+    }
+  }
+
+  return availableCheckoutDates;
 };

@@ -1,43 +1,48 @@
 'use client';
-import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
+import { useState, useMemo } from 'react';
 import styles from './styles.module.scss';
 import { format } from 'date-fns';
-import { type DateRange } from 'react-day-picker';
+
 import DateRangePicker from '~/components/DateRangePicker';
-import { useRouter } from 'next/navigation';
 
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
-
+import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
+import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
+import { formatCurrency } from '~/utils/helpers';
+import CountryDropdown from '~/components/CountryDropdown';
 const DateContainer = ({
   disabledDates,
+  checkoutDates,
+  villaPricing,
 }: {
   disabledDates: Set<string | undefined>;
-  checkIn: string;
-  checkOut: string;
+  checkoutDates: Set<string | undefined>;
+  villaPricing: VillaPricingType[];
 }) => {
-  const { dateRange, setDateRange } = useReservationStore((state) => state);
+  const { dateRange } = useReservationStore((state) => state);
+  const { currency, conversionRate } = useCurrencyStore((state) => state);
 
-  // TODO: set range needs to set the searchParams of the page.
-  // const [range, setRange] = useState<DateRange | undefined>({
-  //   from: new Date(checkIn ?? new Date()),
-  //   to: new Date(checkOut ?? new Date()),
-  // });
   const [isActive, setIsActive] = useState(false);
-  // const router = useRouter();
 
-  // useEffect(() => {
-  //   const setQueryParams = (newRange: DateRange | undefined) => {
-  //     const { from, to } = newRange || {};
+  const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
+    useMemo(() => {
+      return createPricingObject({
+        villaPricing,
+        checkin: dateRange.from ?? new Date(),
+        checkout: dateRange.to ?? new Date(),
+        conversionRate,
+      });
+    }, [dateRange, villaPricing, conversionRate]);
 
-  //     if (from && to) {
-  //       const checkIn = format(from, 'yyyy-MM-dd');
-  //       const checkOut = format(to, 'yyyy-MM-dd');
-
-  //       router.push(`?checkIn=${checkIn}&checkOut=${checkOut}`);
-  //     }
-  //   };
-  //   setQueryParams(range);
-  // }, [range]);
+  const renderConvertedAmount = (label: string, amount: number) => (
+    <span
+      className="flex justify-between w-full text-sm"
+      key={label}
+    >
+      <h3 className="text-sm">{label}</h3>
+      <p>{amount > 0 && formatCurrency(amount, currency)}</p>
+    </span>
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -60,16 +65,12 @@ const DateContainer = ({
         <h3 className={styles.title}>Departure Date</h3>
         <p>{dateRange?.to && format(dateRange.to, 'MMM d, yyyy')}</p>
       </span>
-      <div className={styles.container}>
-        <h3 className={styles.title}>Guests</h3>
-        <p>1 adult</p>
-      </div>
-
-      <div className={styles.container}>
-        <span className={styles.line} />
-        <h3 className={styles.title}>Total</h3>
-        <p>$163.96 USD</p>
-      </div>
+      {renderConvertedAmount('Price per night', pricePerNight)}
+      {renderConvertedAmount('Subtotal', subTotal)}
+      {renderConvertedAmount('Discount', discount)}
+      {renderConvertedAmount('Taxes', taxes)}
+      {renderConvertedAmount('Total', finalPrice)}
+      <CountryDropdown />
     </div>
   );
 };

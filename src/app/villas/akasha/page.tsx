@@ -4,7 +4,7 @@ import { akashaId } from '~/lib/villas';
 function Page({
   searchParams,
 }: {
-  searchParams: { checkIn: string; checkOut: string };
+  searchParams: { checkin: string; checkout: string };
 }) {
   const description = 'description';
   const amenities = 'amenities';
@@ -14,8 +14,8 @@ function Page({
       description={description}
       amenities={amenities}
       villaId={akashaId}
-      checkIn={searchParams.checkIn}
-      checkOut={searchParams.checkOut}
+      checkin={searchParams.checkin}
+      checkout={searchParams.checkout}
     />
   );
 }

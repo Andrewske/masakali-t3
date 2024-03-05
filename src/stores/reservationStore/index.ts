@@ -1,15 +1,16 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { DateRange } from 'react-day-picker';
 import { createStore } from 'zustand/vanilla';
+import type { VillaNamesType } from '~/lib/villas';
 
 export type ReservationState = {
   dateRange: DateRange;
-  villaName: string;
+  villaName: VillaNamesType;
 };
 
 export type ReservationActions = {
   setDateRange: Dispatch<SetStateAction<DateRange | undefined>>;
-  setVillaName: (name: string) => void;
+  setVillaName: (name: VillaNamesType) => void;
 };
 
 export type ReservationStore = ReservationState & ReservationActions;
@@ -53,6 +54,6 @@ export const createReservationStore = (
         set({ dateRange: range });
       }
     },
-    setVillaName: (name: string) => set({ villaName: name }),
+    setVillaName: (name: VillaNamesType) => set({ villaName: name }),
   }));
 };

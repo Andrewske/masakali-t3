@@ -1,81 +1,76 @@
-import {
-  dehydrate,
-  QueryClient,
-  HydrationBoundary,
-} from '@tanstack/react-query';
 import Image from 'next/image';
-import { useMemo } from 'react';
+
 import CartForm from './CartForm';
 import CartDetails from './CartDetails';
-import { getPricing } from '~/actions/smoobu';
-import { suryaId, type VillaIdsType } from '~/lib/villas';
-import { getMainImage } from '~/utils/villas/images';
-import { getConversionRate } from '~/actions/currencyApi';
-import { AspectRatio } from '~/components/ui/aspect-ratio';
+
+import { type VillaDetail, villaDetails, VillaIdsType } from '~/lib/villas';
+import { redirect } from 'next/navigation';
+
+import { prisma } from '~/db/prisma';
+import type { VillaPricingType } from '~/utils/pricing';
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: {
-    checkIn: string;
-    checkOut: string;
-    villaId: VillaIdsType;
+    villaId: string;
   };
 }) {
-  const queryClient = new QueryClient();
-  const defaultCheckIn = new Date();
-  const defaultCheckOut = new Date();
-  defaultCheckOut.setDate(defaultCheckIn.getDate() + 1);
+  const villaId = parseInt(searchParams.villaId) as VillaIdsType;
 
-  const checkIn: string =
-    searchParams.checkIn ?? defaultCheckIn.toISOString().split('T')[0];
-  const checkOut: string =
-    searchParams.checkOut ?? defaultCheckOut.toISOString().split('T')[0];
-  const villaId = searchParams.villaId ?? suryaId;
-
-  await queryClient.prefetchQuery({
-    queryKey: ['pricing'],
-    queryFn: () => {
-      return getPricing({
-        checkIn,
-        checkOut,
-        villaId: searchParams.villaId ?? suryaId,
-        conversionRate: 1,
-      });
-    },
+  const villa = Object.values(villaDetails).find((villa) => {
+    return villa.id === villaId;
   });
 
-  const mainImage = getMainImage(1574678);
+  if (!villa) {
+    console.error('Villa not found');
+    return redirect('/villas');
+  }
+
+  const villaPricing = (await prisma.villaPricing.findMany({
+    where: {
+      villaId: Number(villaId),
+      price: {
+        not: null,
+      },
+    },
+    select: {
+      date: true,
+      price: true,
+      available: true,
+    },
+  })) as VillaPricingType[];
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <section className="flex-grow flex flex-wrap justify-evenly items-center ">
-        <span className="w-full text-center p-8">
-          <h1>Cart</h1>
-        </span>
-        <span className="w-full md:w-[600px] h-[600px] p-4 grid place-items-center">
-          <Image
-            src={mainImage.src}
-            alt={mainImage.alt}
-            className="object-cover"
-          />
-        </span>
-
-        <span className="w-full md:w-[600px] h-[600px] p-4  grid place-items-center">
-          <CartDetails
-            checkIn={checkIn}
-            checkOut={checkOut}
-            villaId={searchParams.villaId ?? suryaId}
-          />
-        </span>
-        <span className="w-full md:w-[600px] h-[600px] p-4  grid place-items-center">
-          <CartForm
-            checkIn={checkIn}
-            checkOut={checkOut}
-            villaId={villaId}
-          />
-        </span>
-      </section>
-    </HydrationBoundary>
+    <section className=" flex flex-grow flex-col items-center h-full relative">
+      <div className="absolute top-0 left-0  h-full w-full z-0">
+        <Image
+          src={villa?.defaultImage ?? '/villa-placeholder.webp'}
+          alt={`Photo of ${villa?.name ?? ''} villa`}
+          className="object-cover "
+          fill={true}
+          priority={true}
+        />
+      </div>
+      <span className="bg-white bg-opacity-15 p-4 w-full h-full flex flex-col z-10">
+        <div className="flex z-20 justify-center">
+          <h1 className="bg-purple text-white text-center py-4 px-8">Cart</h1>
+        </div>
+        <div className="flex flex-wrap justify-center  z-20">
+          <span className="w-full md:w-[600px] h-[600px] p-4 grid place-items-center">
+            <CartDetails
+              villaId={villaId}
+              villaPricing={villaPricing}
+            />
+          </span>
+          <span className="w-full md:w-[600px] h-[600px] p-4 grid place-items-center  z-20">
+            <CartForm
+              villaId={villaId}
+              villaPricing={villaPricing}
+            />
+          </span>
+        </div>
+      </span>
+    </section>
   );
 }

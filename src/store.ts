@@ -20,8 +20,8 @@ const useStore = create(
       },
       reservation: {
         villaId: 0,
-        checkIn: '',
-        checkOut: '',
+        checkin: '',
+        checkout: '',
         adults: 0,
         children: 0,
       },

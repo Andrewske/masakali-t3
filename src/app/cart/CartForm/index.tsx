@@ -1,7 +1,7 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
 import { getPricing } from '~/actions/smoobu';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import AddressForm from './AddressForm';
@@ -12,45 +12,57 @@ import { Button } from '~/components/ui/button';
 import { Form } from '~/components/ui/form';
 import { stripeCheckout } from '~/actions/stripe';
 
-import {
-  getVillaName,
-  type VillaNamesType,
-  type VillaIdsType,
-} from '~/lib/villas';
+import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import GuestDetailsForm from './GuestDetailsForm';
 import PaymentForm from './PaymentForm';
 
 import getFormSchema, { type FormData } from './getFormSchema';
-import { env } from 'process';
-import { StripeError } from '@stripe/stripe-js';
+import type { StripeError } from '@stripe/stripe-js';
+import { useReservationStore } from '~/providers/ReservationStoreProvider';
+import { type VillaPricingType, createPricingObject } from '~/utils/pricing';
+import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
+import { useUserStore } from '~/providers/UserStoreProvider';
+import { useToast } from '~/components/ui/use-toast';
 
 export default function CartForm({
   villaId,
-  checkIn,
-  checkOut,
+  villaPricing,
 }: {
   villaId: VillaIdsType;
-  checkIn: string;
-  checkOut: string;
+  villaPricing: VillaPricingType[];
 }) {
   const [isProcessing, setIsProcessing] = useState(false);
-  const villaName = getVillaName(villaId);
+  const { conversionRate, conversionRates, setConversionRates } =
+    useCurrencyStore((state) => state);
+  const { dateRange } = useReservationStore((state) => state);
+  const { user, setUser } = useUserStore((state) => state);
   const [step, setStep] = useState(1);
   const stripe = useStripe();
-  // Import the necessary dependency
-
   const elements = useElements();
+  const { toast } = useToast();
+  const checkin = dateRange.from;
+  const checkout = dateRange.to;
+  const villaName = getVillaName(villaId);
 
-  const { data: pricingData, error } = useQuery({
-    // Provide proper typings for the variables
-    queryFn: () =>
-      getPricing({ checkIn, checkOut, villaId, conversionRate: 1 }),
-    queryKey: ['cart', checkIn, checkOut, villaId],
-  });
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
-  if (error) {
-    throw error;
+  useEffect(() => {
+    setConversionRates();
+  }, []);
+  if (!checkin || !checkout) {
+    throw new Error('Date range is not set');
   }
+
+  const conversionRateToUSD = conversionRates['USD'];
+
+  const { finalPrice } = createPricingObject({
+    villaPricing,
+    checkin,
+    checkout,
+    conversionRate: conversionRateToUSD ?? 1,
+  });
 
   const nextStep = () => {
     setStep(step + 1);
@@ -58,21 +70,7 @@ export default function CartForm({
 
   const formOptions = {
     resolver: zodResolver(getFormSchema(villaName)),
-    defaultValues: {
-      fullName: '',
-      email: '',
-      phone: '',
-      adults: 2,
-      children: 0,
-      address: {
-        address1: '',
-        address2: '',
-        city: '',
-        region: '',
-        country: '',
-        zip_code: '',
-      },
-    },
+    defaultValues: user,
     mode: 'onChange' as const,
   };
 
@@ -90,8 +88,42 @@ export default function CartForm({
   const country = form.watch('address.country');
   const zip_code = form.watch('address.zip_code');
 
+  useEffect(() => {
+    setUser({
+      user: {
+        fullName,
+        email,
+        phone,
+        adults,
+        children,
+        address: {
+          address1,
+          address2: address?.address2,
+          city,
+          region,
+          country,
+          zip_code,
+        },
+      },
+    });
+  }, [
+    fullName,
+    email,
+    phone,
+    adults,
+    children,
+    address1,
+    address,
+    city,
+    region,
+    country,
+    zip_code,
+    setUser,
+  ]);
+
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setIsProcessing(true);
+
     const cardElement = elements?.getElement(CardElement);
 
     const billingDetails = {
@@ -108,36 +140,64 @@ export default function CartForm({
       },
     };
 
+    setUser({
+      user: {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        adults: formData.adults,
+        children: formData.children,
+        address: {
+          address1: formData.address.address1,
+          address2: formData.address.address2,
+          city: formData.address.city,
+          region: formData.address.region,
+          country: formData.address.country,
+          zip_code: formData.address.zip_code,
+        },
+      },
+    });
+
     try {
-      if (
-        process.env.NODE_ENV === 'development' &&
-        pricingData?.pricing?.total &&
-        stripe &&
-        cardElement &&
-        billingDetails
-      ) {
-        console.log(
-          'here',
-          pricingData?.pricing?.total,
-          stripe,
-          cardElement,
-          billingDetails
-        );
-        const { paymentIntent, errors } = await stripeCheckout({
-          price: pricingData?.pricing?.total,
+      const price = finalPrice / conversionRate;
+
+      if (price && stripe && cardElement && billingDetails) {
+        console.log('here', price, stripe, cardElement, billingDetails);
+        const { clientSecret } = await stripeCheckout({
+          price: price,
           stripe,
           cardElement,
           billingDetails,
         });
 
-        console.log(paymentIntent);
-
-        if (errors) {
-          (errors as StripeError[]).forEach((error: StripeError) => {
-            console.error(error);
-          });
-          throw new Error('Error processing payment');
+        if (!clientSecret) {
+          throw new Error('Client Secret not found');
         }
+
+        stripe
+          .retrievePaymentIntent(clientSecret)
+          .then(({ paymentIntent }) => {
+            if (!paymentIntent) {
+              throw new Error('Payment Intent not found');
+            }
+            switch (paymentIntent?.status) {
+              case 'succeeded':
+                toast({ title: 'Payment succeeded' });
+                break;
+              case 'processing':
+                toast({ title: 'Payment processing' });
+                break;
+              case 'requires_payment_method':
+                toast({ title: 'Payment failed' });
+                break;
+              default:
+                toast({ title: 'Something went wrong' });
+                break;
+            }
+          })
+          .catch((error: StripeError) => {
+            toast({ title: error.message });
+          });
       }
     } catch (error) {
       console.error('Error:', error);

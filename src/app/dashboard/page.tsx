@@ -12,8 +12,8 @@ export default function Page() {
     try {
       const response = await getPricing({
         villaId: suryaId,
-        checkIn: '2023-11-01',
-        checkOut: '2023-11-05',
+        checkin: '2023-11-01',
+        checkout: '2023-11-05',
       });
       console.log(response);
       return;
