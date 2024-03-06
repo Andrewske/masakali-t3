@@ -1,5 +1,6 @@
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { create } from 'zustand';
+import { createStore } from 'zustand/vanilla';
 export type UserState = {
   user: {
     fullName: string;
@@ -72,7 +73,7 @@ export const createUserStore = (initState: UserState = defaultInitialState) => {
   // Merge rehydrated state with initial state
   const mergedState = { ...initState, ...rehydratedUserState };
 
-  return create(
+  return createStore<UserStore>()(
     persist(
       (set) => ({
         ...mergedState,
@@ -83,7 +84,8 @@ export const createUserStore = (initState: UserState = defaultInitialState) => {
       }),
       {
         name: 'user-storage', // name of item in the storage (must be unique)
-        partialize: (state: UserState) => ({ user: state.user }),
+        partialize: (state: UserStore) => ({ user: state.user }),
+        getStorage: () => window.sessionStorage,
       }
     )
   );

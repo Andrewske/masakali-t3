@@ -1,5 +1,6 @@
 'use client';
 
+import { create } from 'lodash';
 import { type ReactNode, createContext, useRef, useContext } from 'react';
 import { type StoreApi, useStore } from 'zustand';
 import {
@@ -15,10 +16,10 @@ export interface UserStoreProviderProps {
 }
 
 export function UserStoreProvider({ children }: UserStoreProviderProps) {
-  const store = useRef<StoreApi<UserStore> | null>(null);
+  const store = useRef(createUserStore());
 
   if (!store.current) {
-    store.current = createUserStore(initUserStore()) as StoreApi<UserStore>;
+    store.current = createUserStore(initUserStore());
   }
   return (
     <UserStoreContext.Provider value={store.current}>

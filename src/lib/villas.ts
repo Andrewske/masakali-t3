@@ -71,14 +71,18 @@ export type VillaDetailsType = {
   [K in VillaNamesType]: VillaDetail;
 };
 
+// TODO: Description for Lakshmi
+// TODO: Get Guest limits
+// TODO: Write short descriptions with sizes
+
 export const villaDetails: VillaDetailsType = {
   surya: {
     id: suryaId,
     name: 'surya',
     description:
-      'Our largest villa is a warm and elegant choice with ample space to rest and recharge. It has an ensuite breakfast table and features a hand-carved outdoor dining table that can seat larger groups on the private patio. Inside you’ll find a luxury king-sized mattress with high-quality bedding as well as a couch that can serve as an additional bed for an additional guest.',
+      'Our largest 1 bedroom villa is a warm and elegant choice with ample space to rest and recharge. It has an ensuite breakfast table and features a hand-carved outdoor dining table that can seat larger groups on the private patio. Inside you’ll find a luxury king-sized mattress with high-quality bedding as well as a couch that can serve as an additional bed for an additional guest.',
     shortDescription:
-      'Akasha, our newest villa, offers luxury and comfort for up to 6 adults and 2 children, featuring 3 bedrooms, 3.5 baths, a waterfall pool, and ample space for celebrations.',
+      'Our largest 1-bedroom villa offers a spacious retreat with a luxury king-sized bed, additional sleeping couch, private patio with hand-carved dining table for large groups, and an ensuite breakfast table.',
     defaultImage: '/hero-images/akasha-pool.webp',
     images: [
       {
@@ -109,7 +113,7 @@ export const villaDetails: VillaDetailsType = {
     description:
       'One of our more popular villas for romantic getaways and honeymooners offers an enchanting sentiment. In addition to the luxury outdoor shower, this villa features a spacious and comfortable bath. A favorite place to relax is the outdoor hammock that hangs over the rice fields, with a perfect view of the stars at night. This villa also offers a work area with a beautiful antique desk for those who need it.',
     shortDescription:
-      'Akasha, our newest villa, offers luxury and comfort for up to 6 adults and 2 children, featuring 3 bedrooms, 3.5 baths, a waterfall pool, and ample space for celebrations.',
+      'Our romantic villa, ideal for honeymooners, features a luxury outdoor shower, spacious bath, an outdoor hammock with rice field views for star-gazing, and a work area with an antique desk.',
     defaultImage: '/hero-images/akasha-pool.webp',
     images: [
       {
@@ -140,7 +144,7 @@ export const villaDetails: VillaDetailsType = {
     description:
       'This traditional Joglo villa is the perfect fit for a cozy stay. With personal charm and attention to detail, this alluring villa has an irresistible appeal. Jala offers a workstation with a large desk, comfy outdoor lounging areas, and a full private ensuite bathroom. The luxury bedding and linens offer a comfortable and restful sleep while the beautiful, handcrafted furniture and amenities will leave you in awe of the craftsmanship and detail.',
     shortDescription:
-      'Akasha, our newest villa, offers luxury and comfort for up to 6 adults and 2 children, featuring 3 bedrooms, 3.5 baths, a waterfall pool, and ample space for celebrations.',
+      'The traditional Joglo villa, Jala, combines personal charm with detailed craftsmanship, featuring a workstation, comfy outdoor lounges, private ensuite bathroom, luxury bedding, and handcrafted furniture.',
     defaultImage: '/hero-images/akasha-pool.webp',
     images: [
       {
