@@ -27,36 +27,11 @@ const DateRangePicker = ({
   const { dateRange, setDateRange } = useReservationStore((state) => state);
 
   useEffect(() => {
-    function findFirstAvailableDate(
-      today: Date,
-      disabledDates: Set<string | undefined>
-    ): Date {
-      let currentDate = today;
-      while (true) {
-        const formattedDate = format(currentDate, 'yyyy-MM-dd');
-        if (!disabledDates.has(formattedDate)) {
-          // Found a date that is not disabled
-          return currentDate;
-        }
-        // Move to the next day
-        currentDate = addDays(currentDate, 1);
-        // Prevent infinite loop if all dates are disabled
-        if (isBefore(currentDate, today)) {
-          throw new Error('All dates are disabled');
-        }
-      }
-    }
     setDateRange({
-      from: findFirstAvailableDate(new Date(), disabledDates),
+      from: undefined,
+      to: undefined,
     });
   }, [disabledDates]);
-
-  const classNames: ClassNames = {
-    ...dayPickerStyles,
-    day_selected: `${dayPickerStyles.day_selected} ${
-      styles.dayPickerSelected ?? ''
-    }`,
-  };
 
   const isDateInRange = (
     date: Date,
@@ -106,9 +81,10 @@ const DateRangePicker = ({
 
   return (
     <div
-      className={`${styles.wrapper ?? ''} ${
-        isActive ? styles.active ?? '' : ''
-      }`}
+      className={` {
+        absolute top-0 left-0 right-0 bottom-0 overflow-hidden transform -translate-x-full transition-transform duration-300 ease-in-out bg-[rgba(243,243,243,0.9)] grid place-items-center z-40 ${
+          isActive ? 'transform translate-x-0' : ''
+        }`}
     >
       <div ref={dayPickerRef}>
         <DayPicker
@@ -117,7 +93,7 @@ const DateRangePicker = ({
           defaultMonth={today}
           selected={dateRange}
           onSelect={handleSelect}
-          classNames={classNames}
+          classNames={styles}
           disabled={isDayDisabled}
           hidden={(day) => isBefore(day, addDays(today, -1))}
           min={2}

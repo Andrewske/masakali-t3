@@ -1,31 +1,42 @@
 @import '~/styles/vars';
 
-.wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
-  background: rgba(243, 243, 243, 0.9);
-  display: grid;
-  place-items: center;
-  z-index: 40;
-
-  &.active {
-    transform: translateX(0%);
-  }
-}
-
 .dayPicker {
   width: max-content;
-  background-color: $light-purple-5;
   padding: 2rem;
   border-radius: 0.5rem;
 }
 
+.button:hover {
+  background-color: $light-purple-7;
+  color: white;
+}
+
+.day_selected {
+  background-color: $purple;
+  color: white;
+
+  &.day_disabled {
+    color: $gray;
+  }
+}
+
+.day_disabled {
+  color: red;
+}
+
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: $light-purple-7;
+}
+
 .dayPickerSelected {
   background-color: $purple;
+  &:hover {
+    background-color: $purple;
+  }
+}
+
+.dayPickerDay {
+  &:hover {
+    background-color: $light-purple-7;
+  }
 }

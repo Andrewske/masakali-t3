@@ -56,14 +56,20 @@ const DateContainer = ({
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Arrival Date</h3>
-        <p>{dateRange.from && format(dateRange.from, 'MMM d, yyyy')}</p>
+        <p>
+          {dateRange.from
+            ? format(dateRange.from, 'MMM d, yyyy')
+            : 'Choose Dates'}
+        </p>
       </span>
       <span
         className={styles.container}
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Departure Date</h3>
-        <p>{dateRange?.to && format(dateRange.to, 'MMM d, yyyy')}</p>
+        <p>
+          {dateRange?.to ? format(dateRange.to, 'MMM d, yyyy') : 'Choose Dates'}
+        </p>
       </span>
       {renderConvertedAmount('Price per night', pricePerNight)}
       {renderConvertedAmount('Subtotal', subTotal)}
