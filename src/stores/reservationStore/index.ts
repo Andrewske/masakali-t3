@@ -1,7 +1,9 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { DateRange } from 'react-day-picker';
-import { createStore } from 'zustand/vanilla';
+
 import type { VillaNamesType } from '~/lib/villas';
+import { persist } from 'zustand/middleware';
+import { create } from 'zustand';
 
 export type ReservationState = {
   dateRange: DateRange;
@@ -9,7 +11,7 @@ export type ReservationState = {
 };
 
 export type ReservationActions = {
-  setDateRange: Dispatch<SetStateAction<DateRange | undefined>>;
+  setDateRange: ({ to, from }: { to: Date; from: Date }) => void;
   setVillaName: (name: VillaNamesType) => void;
 };
 
@@ -36,24 +38,22 @@ export const defaultInitialState: ReservationState = {
 export const createReservationStore = (
   initState: ReservationState = defaultInitialState
 ) => {
-  return createStore<ReservationStore>((set, get) => ({
-    ...initState,
-    setDateRange: (range: SetStateAction<DateRange | undefined>) => {
-      if (typeof range === 'function') {
-        // If range is a function, we need to get the current state first
-        const currentState = get().dateRange;
-        // Ensure from and to are always Date objects
-        const currentRange = {
-          from: currentState.from || new Date(),
-          to: currentState.to || new Date(),
-        };
-        const newRange = range(currentRange);
-        set({ dateRange: newRange });
-      } else {
-        // If range is a DateRange object or undefined, we can directly set it
-        set({ dateRange: range });
+  return create<ReservationStore>()(
+    persist(
+      (set) => ({
+        ...initState,
+        dateRange: initState.dateRange,
+        setDateRange: ({ to, from }: { to: Date; from: Date }) => {
+          // If range is a DateRange object or undefined, we can directly set it
+          set({ dateRange: { to, from } }); // Type assertion to DateRange
+        },
+        setVillaName: (name: VillaNamesType) => set({ villaName: name }),
+      }),
+      {
+        name: 'reservation-storage', // name of item in the storage (must be unique)
+        // partialize: (state: UserStore) => ({ user: state.user }),
+        // storage: sessionStorage,
       }
-    },
-    setVillaName: (name: VillaNamesType) => set({ villaName: name }),
-  }));
+    )
+  );
 };

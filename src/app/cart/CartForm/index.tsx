@@ -1,28 +1,25 @@
 'use client';
-import { useQuery } from '@tanstack/react-query';
-import { getPricing } from '~/actions/smoobu';
 import { useState, useEffect } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import AddressForm from './AddressForm';
-
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import type { StripeError } from '@stripe/stripe-js';
+
+import AddressForm from './AddressForm';
 import { Button } from '~/components/ui/button';
 import { Form } from '~/components/ui/form';
 import { stripeCheckout } from '~/actions/stripe';
-
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import GuestDetailsForm from './GuestDetailsForm';
 import PaymentForm from './PaymentForm';
-
 import getFormSchema, { type FormData } from './getFormSchema';
-import type { StripeError } from '@stripe/stripe-js';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { type VillaPricingType, createPricingObject } from '~/utils/pricing';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import { useUserStore } from '~/providers/UserStoreProvider';
 import { useToast } from '~/components/ui/use-toast';
+import { createReservation } from '~/actions/smoobu';
+import { UserState, createUserStore } from '~/stores/userStore';
 
 export default function CartForm({
   villaId,
@@ -32,10 +29,11 @@ export default function CartForm({
   villaPricing: VillaPricingType[];
 }) {
   const [isProcessing, setIsProcessing] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(false);
   const { conversionRate, conversionRates, setConversionRates } =
     useCurrencyStore((state) => state);
   const { dateRange } = useReservationStore((state) => state);
-  const { user, setUser } = useUserStore((state) => state);
+  const { user, setUser, _hasHydrated } = useUserStore((state) => state);
   const [step, setStep] = useState(1);
   const stripe = useStripe();
   const elements = useElements();
@@ -45,8 +43,8 @@ export default function CartForm({
   const villaName = getVillaName(villaId);
 
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    console.log(user, _hasHydrated);
+  }, [user, _hasHydrated]);
 
   useEffect(() => {
     setConversionRates();
@@ -57,7 +55,7 @@ export default function CartForm({
 
   const conversionRateToUSD = conversionRates['USD'];
 
-  const { finalPrice } = createPricingObject({
+  const { finalPrice, totalIDR } = createPricingObject({
     villaPricing,
     checkin,
     checkout,
@@ -70,8 +68,22 @@ export default function CartForm({
 
   const formOptions = {
     resolver: zodResolver(getFormSchema(villaName)),
-    defaultValues: user,
-    mode: 'onChange' as const,
+    defaultValues: {
+      fullName: 'Kevin Andrews',
+      email: 'andrewskevin92@gmail.com',
+      phone: '08123456789',
+      adults: 2,
+      children: 0,
+      address: {
+        address1: 'Jl. Kebon Sirih',
+        address2: '',
+        city: 'Jakarta',
+        region: 'DKI Jakarta',
+        country: 'Indonesia',
+        zip_code: '12345',
+      },
+    },
+    mode: 'onSubmit' as const,
   };
 
   const form = useForm<FormData>(formOptions);
@@ -90,20 +102,18 @@ export default function CartForm({
 
   useEffect(() => {
     setUser({
-      user: {
-        fullName,
-        email,
-        phone,
-        adults,
-        children,
-        address: {
-          address1,
-          address2: address?.address2,
-          city,
-          region,
-          country,
-          zip_code,
-        },
+      fullName,
+      email,
+      phone,
+      adults,
+      children,
+      address: {
+        address1,
+        address2: address?.address2,
+        city,
+        region,
+        country,
+        zip_code,
       },
     });
   }, [
@@ -124,6 +134,8 @@ export default function CartForm({
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setIsProcessing(true);
 
+    console.log('submitting form data', formData);
+
     const cardElement = elements?.getElement(CardElement);
 
     const billingDetails = {
@@ -140,75 +152,98 @@ export default function CartForm({
       },
     };
 
-    setUser({
-      user: {
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        adults: formData.adults,
-        children: formData.children,
-        address: {
-          address1: formData.address.address1,
-          address2: formData.address.address2,
-          city: formData.address.city,
-          region: formData.address.region,
-          country: formData.address.country,
-          zip_code: formData.address.zip_code,
-        },
-      },
-    });
-
-    try {
-      const price = finalPrice / conversionRate;
-
-      if (price && stripe && cardElement && billingDetails) {
-        console.log('here', price, stripe, cardElement, billingDetails);
-        const { clientSecret } = await stripeCheckout({
-          price: price,
-          stripe,
-          cardElement,
-          billingDetails,
-        });
-
-        if (!clientSecret) {
-          throw new Error('Client Secret not found');
-        }
-
-        stripe
-          .retrievePaymentIntent(clientSecret)
-          .then(({ paymentIntent }) => {
-            if (!paymentIntent) {
-              throw new Error('Payment Intent not found');
-            }
-            switch (paymentIntent?.status) {
-              case 'succeeded':
-                toast({ title: 'Payment succeeded' });
-                break;
-              case 'processing':
-                toast({ title: 'Payment processing' });
-                break;
-              case 'requires_payment_method':
-                toast({ title: 'Payment failed' });
-                break;
-              default:
-                toast({ title: 'Something went wrong' });
-                break;
-            }
-          })
-          .catch((error: StripeError) => {
-            toast({ title: error.message });
-          });
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsProcessing(false);
+    if (stripe && cardElement && billingDetails) {
+      console.log('card element', cardElement);
+      console.log('submitting form data', formData);
     }
+    const user: UserState['user'] = {
+      fullName: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      adults: formData.adults,
+      children: formData.children,
+      address: {
+        address1: formData.address.address1,
+        address2: formData.address.address2,
+        city: formData.address.city,
+        region: formData.address.region,
+        country: formData.address.country,
+        zip_code: formData.address.zip_code,
+      },
+    };
+
+    setUser(user);
+
+    await createReservation({
+      villaId,
+      checkin,
+      checkout,
+      finalPrice: totalIDR,
+      firstName: formData.fullName.split(' ')[0] ?? '',
+      lastName: formData.fullName.split(' ')[1] ?? '',
+      email: formData.email,
+      phone: formData.phone,
+      adults: formData.adults,
+      children: formData.children,
+      country: formData.address.country,
+      stripePaymentIntentId: '',
+    });
+    setIsProcessing(false);
+
+    // try {
+    //   const price = finalPrice / conversionRate;
+
+    //   if (price && stripe && cardElement && billingDetails) {
+    //     console.log('here', price, stripe, cardElement, billingDetails);
+    //     const { clientSecret } = await stripeCheckout({
+    //       price: price,
+    //       stripe,
+    //       cardElement,
+    //       billingDetails,
+    //     });
+
+    //     if (!clientSecret) {
+    //       throw new Error('Client Secret not found');
+    //     }
+
+    //     stripe
+    //       .retrievePaymentIntent(clientSecret)
+    //       .then(({ paymentIntent }) => {
+    //         if (!paymentIntent) {
+    //           throw new Error('Payment Intent not found');
+    //         }
+    //         switch (paymentIntent?.status) {
+    //           case 'succeeded':
+    //             // send reservation to smoobu
+
+    //             // send email to user
+    //             toast({ title: 'Payment succeeded' });
+    //             break;
+    //           case 'processing':
+    //             toast({ title: 'Payment processing' });
+    //             break;
+    //           case 'requires_payment_method':
+    //             toast({ title: 'Payment failed' });
+    //             break;
+    //           default:
+    //             toast({ title: 'Something went wrong' });
+    //             break;
+    //         }
+    //       })
+    //       .catch((error: StripeError) => {
+    //         toast({ title: error.message });
+    //       });
+    //   }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    // } finally {
+    //   setIsProcessing(false);
+    // }
   };
   const errors = form.formState.errors;
 
   function isButtonDisabled() {
-    if (step === 4) {
+    if (step === 1) {
       return (
         !fullName ||
         !!errors.fullName ||
@@ -251,6 +286,7 @@ export default function CartForm({
           <PaymentForm
             form={form}
             setStep={setStep}
+            setCanSubmit={setCanSubmit}
           />
         )}
 
@@ -258,7 +294,7 @@ export default function CartForm({
           <Button
             type="submit"
             className="bg-purple my-4 w-full"
-            disabled={isProcessing || !stripe}
+            disabled={!canSubmit || isProcessing || !stripe}
           >
             Submit
           </Button>

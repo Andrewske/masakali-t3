@@ -1,13 +1,10 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-
 import styles from './styles.module.scss';
-import { getPricing } from '~/actions/smoobu';
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { useMemo } from 'react';
 import { formatCurrency } from '~/utils/helpers';
-import { Skeleton } from '~/components/ui/skeleton';
+
 import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
@@ -23,7 +20,6 @@ const CartDetails = ({ villaId, villaPricing }: CartDetailsProps) => {
     (state) => state
   );
 
-  console.log(conversionRate, country);
   const { dateRange } = useReservationStore((state) => state);
   const villaName = getVillaName(villaId);
 
@@ -31,10 +27,8 @@ const CartDetails = ({ villaId, villaPricing }: CartDetailsProps) => {
     throw new Error('Date range is not set');
   }
 
-  const checkinString =
-    dateRange.from && dateRange.from.toISOString().split('T')[0];
-  const checkoutString =
-    dateRange.to && dateRange.to.toISOString().split('T')[0];
+  const checkinString = dateRange.from?.toISOString().split('T')[0] ?? '';
+  const checkoutString = dateRange.to?.toISOString().split('T')[0] ?? '';
   const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
     useMemo(() => {
       return createPricingObject({

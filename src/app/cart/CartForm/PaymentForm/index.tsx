@@ -5,6 +5,7 @@ import { FormData } from '../getFormSchema';
 type PaymentFormProps = {
   form: UseFormReturn<FormData>;
   setStep: (step: number) => void;
+  setCanSubmit: (canSubmit: boolean) => void;
 };
 
 const PencilIcon = () => (
@@ -24,7 +25,7 @@ const PencilIcon = () => (
   </svg>
 );
 
-const PaymentForm = ({ form, setStep }: PaymentFormProps) => {
+const PaymentForm = ({ form, setStep, setCanSubmit }: PaymentFormProps) => {
   const { watch } = form;
   const fullName = watch('fullName');
   const email = watch('email');
@@ -75,7 +76,7 @@ const PaymentForm = ({ form, setStep }: PaymentFormProps) => {
         </span>
       </div>
 
-      <Stripe />
+      <Stripe setCanSubmit={setCanSubmit} />
     </div>
   );
 };

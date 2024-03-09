@@ -1,6 +1,6 @@
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import { create } from 'zustand';
-import { createStore } from 'zustand/vanilla';
+
 export type UserState = {
   user: {
     fullName: string;
@@ -17,10 +17,12 @@ export type UserState = {
       country: string;
     };
   };
+  _hasHydrated?: boolean;
 };
 
 export type UserActions = {
-  setUser: (user: UserState) => void;
+  setUser: (user: UserState['user']) => void;
+  setHasHydrated: (hasHydrated: boolean) => void;
 };
 
 export type UserStore = UserState & UserActions;
@@ -42,6 +44,7 @@ export const initUserStore = (): UserState => {
         zip_code: '',
       },
     },
+    _hasHydrated: false,
   };
 };
 
@@ -61,31 +64,22 @@ export const defaultInitialState: UserState = {
       country: '',
     },
   },
+  _hasHydrated: false,
 };
-
 export const createUserStore = (initState: UserState = defaultInitialState) => {
-  // Attempt to rehydrate state from session storage
-  const rehydratedState = sessionStorage.getItem('user-storage');
-  const rehydratedUserState = rehydratedState
-    ? (JSON.parse(rehydratedState) as UserState)
-    : {};
-
-  // Merge rehydrated state with initial state
-  const mergedState = { ...initState, ...rehydratedUserState };
-
-  return createStore<UserStore>()(
+  return create(
     persist(
       (set) => ({
-        ...mergedState,
-        setUser: (user: UserState) => {
-          set(user);
+        ...initState,
+        setUser: (user: UserState['user']) => {
+          set({ user });
           console.log('State set:', user);
         },
       }),
       {
         name: 'user-storage', // name of item in the storage (must be unique)
-        partialize: (state: UserStore) => ({ user: state.user }),
-        getStorage: () => window.sessionStorage,
+        // partialize: (state: UserStore) => ({ user: state.user }),
+        // storage: sessionStorage,
       }
     )
   );

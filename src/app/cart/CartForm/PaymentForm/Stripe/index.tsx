@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { Dispatch, useState } from 'react';
 import { CardElement } from '@stripe/react-stripe-js';
 import type { StripeCardElementChangeEvent } from '@stripe/stripe-js';
 import StripeError from './StripeError';
+import { PaymentElement } from '@stripe/react-stripe-js';
 
-const Stripe = () => {
+const Stripe = ({
+  setCanSubmit,
+}: {
+  setCanSubmit: (canSumbit: boolean) => void;
+}) => {
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   const cardElementOptions = {
@@ -16,6 +21,7 @@ const Stripe = () => {
   return (
     <div>
       <CardElement
+        onFocus={() => setCanSubmit(true)}
         options={cardElementOptions}
         onChange={handleCardDetailsChange}
       />

@@ -3,6 +3,8 @@ import { getVillaName } from '~/lib/villas';
 import type { VillaIdsType } from '~/lib/villas';
 import { prisma } from '~/db/prisma';
 import { env } from '~/env.mjs';
+import { channelIds } from '~/lib/smoobu';
+import { UserState } from '~/stores/userStore';
 
 export type PricingDataType = {
   villaName: string;
@@ -139,8 +141,6 @@ export const getDisabledDatesForVilla = async (
 
   const resultSet = subtractSets(disabledDatesSet, checkoutDates);
 
-  console.log(resultSet, checkoutDates, disabledDatesSet);
-
   return {
     disabledDates: resultSet,
     checkoutDates: checkoutDates,
@@ -183,4 +183,67 @@ export const getCheckoutDatesForVilla = async (
   }
 
   return availableCheckoutDates;
+};
+
+type CreateReservationPropsType = {
+  villaId: VillaIdsType;
+  checkin: Date;
+  checkout: Date;
+  finalPrice: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  adults: number;
+  children: number;
+  country: string;
+  stripePaymentIntentId: string;
+};
+export const createReservation = async ({
+  villaId,
+  checkin,
+  checkout,
+  finalPrice,
+  firstName,
+  lastName,
+  email,
+  phone,
+  adults,
+  children,
+  country,
+  stripePaymentIntentId,
+}: CreateReservationPropsType) => {
+  try {
+    const reservation = await fetch(env.SMOOBU_API_URL + '/reservations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Api-Key': `${env.SMOOBU_API_KEY}`,
+        'Cache-Control': 'no-cache',
+      },
+      body: JSON.stringify({
+        arrivalDate: checkin.toISOString().split('T')[0],
+        departureDate: checkout.toISOString().split('T')[0],
+        apartmentId: villaId,
+        channelId: channelIds.website,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        adults: adults,
+        children: children,
+        notice: stripePaymentIntentId,
+        country: country,
+        price: finalPrice,
+      }),
+    });
+
+    console.log(await reservation.json());
+    return true;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    throw error;
+  }
 };

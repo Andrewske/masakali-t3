@@ -3,8 +3,11 @@ import Image from 'next/image';
 import CartForm from './CartForm';
 import CartDetails from './CartDetails';
 
-import { type VillaDetail, villaDetails, VillaIdsType } from '~/lib/villas';
-import { redirect } from 'next/navigation';
+import {
+  type VillaDetail,
+  villaDetails,
+  type VillaIdsType,
+} from '~/lib/villas';
 
 import { prisma } from '~/db/prisma';
 import type { VillaPricingType } from '~/utils/pricing';
@@ -24,7 +27,7 @@ export default async function Page({
 
   if (!villa) {
     console.error('Villa not found');
-    return redirect('/villas');
+    // return redirect('/villas');
   }
 
   const villaPricing = (await prisma.villaPricing.findMany({

@@ -76,6 +76,29 @@ const AddressForm = ({ form }: AddressFormProps) => {
           value={city}
           setValue={setValue}
         />
+
+        <FormField
+          name="address.country"
+          render={() => (
+            <FormItem className="col-span-1">
+              <FormLabel className="font-montserrat uppercase">
+                Country
+              </FormLabel>
+              <FormControl>
+                <CountryDropdown
+                  valueType="short"
+                  value={country}
+                  classes="w-full border-0 rounded p-2"
+                  onChange={(val: string) => setValue('address.country', val)}
+                />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </span>
+      <span className="grid grid-cols-2 gap-1 py-2">
         <FormField
           name="address.region"
           render={() => (
@@ -90,28 +113,6 @@ const AddressForm = ({ form }: AddressFormProps) => {
                   value={region}
                   classes="w-full border-0 rounded p-2"
                   onChange={(val: string) => setValue('address.region', val)}
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </span>
-      <span className="grid grid-cols-2 gap-1 py-2">
-        <FormField
-          name="address.country"
-          render={() => (
-            <FormItem className="col-span-1">
-              <FormLabel className="font-montserrat uppercase">
-                Country
-              </FormLabel>
-              <FormControl>
-                <CountryDropdown
-                  valueType="short"
-                  value={country}
-                  classes="w-full border-0 rounded p-2"
-                  onChange={(val: string) => setValue('address.country', val)}
                 />
               </FormControl>
 
