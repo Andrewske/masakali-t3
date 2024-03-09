@@ -1,5 +1,6 @@
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand';
+import { User } from '@prisma/client';
 
 export type UserState = {
   user: {
@@ -67,7 +68,7 @@ export const defaultInitialState: UserState = {
   _hasHydrated: false,
 };
 export const createUserStore = (initState: UserState = defaultInitialState) => {
-  return create(
+  return create<UserStore>()(
     persist(
       (set) => ({
         ...initState,
@@ -75,6 +76,8 @@ export const createUserStore = (initState: UserState = defaultInitialState) => {
           set({ user });
           console.log('State set:', user);
         },
+        setHasHydrated: (hasHydrated: boolean) =>
+          set({ _hasHydrated: hasHydrated }),
       }),
       {
         name: 'user-storage', // name of item in the storage (must be unique)

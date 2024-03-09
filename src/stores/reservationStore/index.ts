@@ -1,4 +1,3 @@
-import type { Dispatch, SetStateAction } from 'react';
 import type { DateRange } from 'react-day-picker';
 
 import type { VillaNamesType } from '~/lib/villas';
