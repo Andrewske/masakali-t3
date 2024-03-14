@@ -45,7 +45,7 @@
     "node": "18.17",
     "nodemailer": "^6.9.3",
     "postcss": "^8.4.35",
-    "prisma": "^5.10.2",
+    "prisma": "^5.11.0",
     "react": "18.2.0",
     "react-country-region-selector": "^3.6.1",
     "react-day-picker": "^8.7.1",
