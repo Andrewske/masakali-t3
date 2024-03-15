@@ -10,7 +10,7 @@ export type ReservationState = {
 };
 
 export type ReservationActions = {
-  setDateRange: ({ to, from }: { to: Date; from: Date }) => void;
+  setDateRange: ({ to, from }: DateRange) => void;
   setVillaName: (name: VillaNamesType) => void;
 };
 
@@ -42,7 +42,7 @@ export const createReservationStore = (
       (set) => ({
         ...initState,
         dateRange: initState.dateRange,
-        setDateRange: ({ to, from }: { to: Date; from: Date }) => {
+        setDateRange: ({ to, from }: DateRange) => {
           // If range is a DateRange object or undefined, we can directly set it
           set({ dateRange: { to, from } }); // Type assertion to DateRange
         },
