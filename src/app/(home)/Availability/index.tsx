@@ -47,8 +47,6 @@ const Availability = ({
           isActive={datePickerActive}
           setIsActive={setDatePickerActive}
           disabledDates={disabledDates}
-          range={range}
-          setRange={setRange}
         />
         <div
           className={styles.container}

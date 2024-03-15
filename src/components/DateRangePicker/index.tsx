@@ -26,12 +26,12 @@ const DateRangePicker = ({
   useOnClickOutside(dayPickerRef, () => setIsActive(false));
   const { dateRange, setDateRange } = useReservationStore((state) => state);
 
-  useEffect(() => {
-    setDateRange({
-      from: undefined,
-      to: undefined,
-    });
-  }, [disabledDates]);
+  // useEffect(() => {
+  //   setDateRange({
+  //     from: undefined,
+  //     to: undefined,
+  //   });
+  // }, [disabledDates]);
 
   const isDateInRange = (
     date: Date,
@@ -69,7 +69,7 @@ const DateRangePicker = ({
       console.log('disabled date', newRange);
 
       setDateRange({
-        from: undefined,
+        from: new Date(),
         to: undefined,
       });
     }

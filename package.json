@@ -14,7 +14,7 @@
     "@babel/runtime": "^7.23.9",
     "@everapi/currencyapi-js": "^1.0.6",
     "@hookform/resolvers": "^3.3.4",
-    "@prisma/client": "^5.10.2",
+    "@prisma/client": "^5.11.0",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
