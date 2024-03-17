@@ -114,12 +114,37 @@ function transformReservationData(
 async function upsertReservationToDatabase(
   reservationData: TransformedReservation
 ): Promise<{ smoobuId: number }> {
-  return await prisma.reservation.upsert({
-    where: { smoobuId: reservationData.smoobuId ?? '' },
-    create: reservationData,
-    update: reservationData,
-    select: {
-      smoobuId: true,
-    },
+  const currentReservation = await prisma.reservation.findUnique({
+    where: { smoobuId: reservationData.smoobuId },
   });
+
+  if (!currentReservation) {
+    return await prisma.reservation.create({
+      data: reservationData,
+      select: {
+        smoobuId: true,
+      },
+    });
+  }
+
+  let numberOfChanges = 0;
+  for (const [key, value] of Object.entries(currentReservation)) {
+    if (
+      key in reservationData &&
+      reservationData[key as keyof TransformedReservation] === value
+    ) {
+      numberOfChanges++;
+    }
+  }
+  if (numberOfChanges > 0) {
+    return await prisma.reservation.update({
+      where: { smoobuId: reservationData.smoobuId },
+      data: reservationData,
+      select: {
+        smoobuId: true,
+      },
+    });
+  }
+
+  return { smoobuId: reservationData.smoobuId };
 }
