@@ -37,9 +37,11 @@ export async function GET() {
 
   const transformedData = reservations.map(transformReservationData);
 
-  for (const data of transformedData) {
-    await upsertReservationToDatabase(data);
-  }
+  await upsertReservationsInBatches(transformedData);
+
+  // for (const data of transformedData) {
+  //   await upsertReservationToDatabase(data);
+  // }
 
   // const response = await Promise.all(
   //   transformedData.map((data) => upsertReservationToDatabase(data))
@@ -126,7 +128,6 @@ async function upsertReservationToDatabase(
       },
     });
   }
-
   let numberOfChanges = 0;
   for (const [key, value] of Object.entries(currentReservation)) {
     if (
@@ -147,4 +148,25 @@ async function upsertReservationToDatabase(
   }
 
   return { smoobuId: reservationData.smoobuId };
+  // return await prisma.reservation.upsert({
+  //   where: { smoobuId: reservationData.smoobuId ?? '' },
+  //   create: reservationData,
+  //   update: reservationData,
+  //   select: {
+  //     smoobuId: true,
+  //   },
+  // });
+}
+
+async function upsertReservationsInBatches(
+  reservations: TransformedReservation[]
+): Promise<void> {
+  const batchSize = 100; // Adjust based on your needs and database capabilities
+
+  for (let i = 0; i < reservations.length; i += batchSize) {
+    const batch = reservations.slice(i, i + batchSize);
+    await Promise.all(
+      batch.map((reservation) => upsertReservationToDatabase(reservation))
+    );
+  }
 }
