@@ -61,6 +61,8 @@ export default function CartForm({
 
   const conversionRateToUSD = conversionRates['USD'];
 
+  console.log(currency);
+
   const { finalPrice, totalIDR, discount, taxes, numNights, pricePerNight } =
     createPricingObject({
       villaPricing,
@@ -197,6 +199,8 @@ export default function CartForm({
       },
       isRetreat: false,
     });
+
+    setIsProcessing(false);
 
     return null;
 

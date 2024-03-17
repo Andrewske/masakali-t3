@@ -1,7 +1,7 @@
 'use client';
 import { useState, useMemo } from 'react';
 import styles from './styles.module.scss';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 import DateRangePicker from '~/components/DateRangePicker';
 
@@ -46,6 +46,20 @@ const DateContainer = ({
     </span>
   );
 
+  const arrivalDate =
+    dateRange.from &&
+    dateRange.from instanceof Date &&
+    !isNaN(dateRange.from.getTime())
+      ? format(dateRange.from, "MMM d',' yyyy")
+      : 'Choose Dates';
+
+  const departureDate =
+    dateRange.to &&
+    dateRange.to instanceof Date &&
+    !isNaN(dateRange.to.getTime())
+      ? format(dateRange.to, "MMM d',' yyyy")
+      : 'Choose Dates';
+
   return (
     <div className={styles.wrapper}>
       <DateRangePicker
@@ -58,20 +72,14 @@ const DateContainer = ({
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Arrival Date</h3>
-        <p>
-          {dateRange.from
-            ? format(dateRange.from, 'MMM d, yyyy')
-            : 'Choose Dates'}
-        </p>
+        <p>{arrivalDate}</p>
       </span>
       <span
         className={styles.container}
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Departure Date</h3>
-        <p>
-          {dateRange?.to ? format(dateRange.to, 'MMM d, yyyy') : 'Choose Dates'}
-        </p>
+        <p>{departureDate}</p>
       </span>
       {renderConvertedAmount('Price per night', pricePerNight)}
       {renderConvertedAmount('Subtotal', subTotal)}

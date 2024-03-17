@@ -39,8 +39,10 @@ export const sendBookingConfirmation = async ({
     templateId,
     dynamicTemplateData: data,
   };
+
+  console.log(msg);
   const response = await sgMail.send(msg);
-  console.log(response);
+  //   console.log(response);
   return;
 };
 
