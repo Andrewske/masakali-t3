@@ -1,7 +1,7 @@
 'use client';
 import { useState, useMemo } from 'react';
 import styles from './styles.module.scss';
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 
 import DateRangePicker from '~/components/DateRangePicker';
 
@@ -26,10 +26,11 @@ const DateContainer = ({
 
   const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
     useMemo(() => {
+      console.log('dateRange.from:', dateRange.from);
       return createPricingObject({
         villaPricing,
-        checkin: dateRange.from ?? new Date(),
-        checkout: dateRange.to ?? new Date(),
+        checkin: new Date(dateRange.from ?? ''),
+        checkout: new Date(dateRange.to ?? ''),
         conversionRate,
       });
     }, [dateRange, villaPricing, conversionRate]);
@@ -68,7 +69,9 @@ const DateContainer = ({
       >
         <h3 className={styles.title}>Departure Date</h3>
         <p>
-          {dateRange?.to ? format(dateRange.to, 'MMM d, yyyy') : 'Choose Dates'}
+          {dateRange.to && isValid(new Date(dateRange.to))
+            ? format(new Date(dateRange.to), 'MMM d, yyyy')
+            : 'Choose Dates'}
         </p>
       </span>
       {renderConvertedAmount('Price per night', pricePerNight)}

@@ -19,7 +19,7 @@ import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import { useUserStore } from '~/providers/UserStoreProvider';
 import { useToast } from '~/components/ui/use-toast';
 import { createReservation } from '~/actions/smoobu';
-import { UserState, createUserStore } from '~/stores/userStore';
+import type { UserState } from '~/stores/userStore';
 
 export default function CartForm({
   villaId,
@@ -130,6 +130,8 @@ export default function CartForm({
     zip_code,
     setUser,
   ]);
+
+  const handlePaypalApproved = async (data: any, actions: any) => {
 
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setIsProcessing(true);

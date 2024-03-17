@@ -42,7 +42,7 @@ export const createPricingObject = ({
 }) => {
   const pricesConverted = [];
   const pricesIDR = [];
-
+  console.log({ checkin, checkout });
   // Loop through each day between checkin and checkout
 
   for (

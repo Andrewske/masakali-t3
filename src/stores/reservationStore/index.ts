@@ -26,33 +26,37 @@ export const initReservationStore = (): ReservationState => {
   };
 };
 
-export const defaultInitialState: ReservationState = {
-  dateRange: {
-    from: new Date(),
-    to: new Date(),
-  },
-  villaName: 'surya',
-};
+// export const defaultInitialState: ReservationState = {
+//   dateRange: {
+//     from: new Date(),
+//     to: new Date(new Date().getTime() + 24 * 60 * 60 * 1000), // Add 24 hours to the current time
+//   },
+//   villaName: 'surya',
+// };
 
-export const createReservationStore = (
-  initState: ReservationState = defaultInitialState
-) => {
-  return create<ReservationStore>()(
-    persist(
-      (set) => ({
-        ...initState,
-        dateRange: initState.dateRange,
-        setDateRange: ({ to, from }: DateRange) => {
-          // If range is a DateRange object or undefined, we can directly set it
-          set({ dateRange: { to, from } }); // Type assertion to DateRange
-        },
-        setVillaName: (name: VillaNamesType) => set({ villaName: name }),
-      }),
-      {
-        name: 'reservation-storage', // name of item in the storage (must be unique)
-        // partialize: (state: UserStore) => ({ user: state.user }),
-        // storage: sessionStorage,
-      }
-    )
-  );
-};
+export const createReservationStore = () =>
+  // initState: ReservationState = defaultInitialState
+  {
+    return create<ReservationStore>()(
+      persist(
+        (set) => ({
+          // ...initState,
+          villaName: 'surya',
+          dateRange: {
+            from: new Date(),
+            to: new Date(new Date().setDate(new Date().getDate() + 1)),
+          },
+          setDateRange: ({ to, from }: DateRange) => {
+            // If range is a DateRange object or undefined, we can directly set it
+            set({ dateRange: { to, from } }); // Type assertion to DateRange
+          },
+          setVillaName: (name: VillaNamesType) => set({ villaName: name }),
+        }),
+        {
+          name: 'reservation-storage', // name of item in the storage (must be unique)
+          // partialize: (state: UserStore) => ({ user: state.user }),
+          // storage: sessionStorage,
+        }
+      )
+    );
+  };

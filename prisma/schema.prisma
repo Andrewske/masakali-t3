@@ -57,7 +57,7 @@ model User {
 }
 
 model VerificationToken {
-    identifier String
+    identifier String   @id
     token      String   @unique
     expires    DateTime
 
@@ -103,7 +103,7 @@ model Review {
 
 model Reservation {
     id            String   @id @default(cuid())
-    smoobuId      Int      @unique
+    smoobuId      Int?      @unique
     referenceId   String?   
     villaId       Int
     channelId     Int?
@@ -124,8 +124,8 @@ model Reservation {
     currency      String?    @default("IDR")
     commission    Float?     @default(0)
     cancelled     Boolean?   @default(false)
-
     villa         Villa  @relation(fields: [villaId], references: [id], onDelete: Cascade)
+    paypalId      String?
     @@index([villaId])
 }
 
