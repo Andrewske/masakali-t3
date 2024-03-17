@@ -37,11 +37,15 @@ export async function GET() {
 
   const transformedData = reservations.map(transformReservationData);
 
-  const response = await Promise.all(
-    transformedData.map((data) => upsertReservationToDatabase(data))
-  );
+  for (const data of transformedData) {
+    await upsertReservationToDatabase(data);
+  }
 
-  return NextResponse.json(response);
+  // const response = await Promise.all(
+  //   transformedData.map((data) => upsertReservationToDatabase(data))
+  // );
+
+  return NextResponse.json('Upserted all reservations to the database.');
 }
 
 type SmoobuReservationsResponse = {

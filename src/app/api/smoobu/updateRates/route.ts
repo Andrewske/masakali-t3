@@ -75,39 +75,51 @@ async function upsertVillaPricing(data: SmoobuRatesResponse) {
   const villaIds = Object.keys(data.data);
 
   for (const villaId of villaIds) {
+    const upsertPromises = [];
     const villaPricing = data.data[villaId];
     if (!villaPricing) continue;
 
     for (const [date, pricing] of Object.entries(villaPricing)) {
       if (isPricingData(pricing)) {
-        try {
-          await prisma.villaPricing.upsert({
-            where: {
-              villaId_date: {
-                villaId: parseInt(villaId),
-                date: new Date(date),
-              },
-            },
-            update: {
-              price: pricing.price,
-              available: pricing.available !== 0,
-            },
-            create: {
+        const upsertPromise = prisma.villaPricing.upsert({
+          where: {
+            villaId_date: {
               villaId: parseInt(villaId),
               date: new Date(date),
-              price: pricing.price,
-              available: pricing.available !== 0,
             },
-          });
-        } catch (error) {
-          console.error(
-            `Failed to upsert pricing for villa ${villaId} on date ${date}:`,
-            error
-          );
-          // Handle the error appropriately, e.g., by logging it or retrying the operation
-        }
+          },
+          update: {
+            price: pricing.price,
+            available: pricing.available != 0,
+          },
+          create: {
+            villaId: parseInt(villaId),
+            date: new Date(date),
+            price: pricing.price,
+            available: pricing.available !== 0,
+          },
+        });
+
+        upsertPromises.push(upsertPromise);
       }
     }
+    const results = await Promise.allSettled(upsertPromises);
+    let numFailed = 0;
+    let reason: PromiseRejectedResult | null = null;
+
+    for (const result of results) {
+      if (result.status === 'rejected') {
+        numFailed++;
+        reason = result.reason as PromiseRejectedResult;
+      }
+    }
+    console.log(
+      `Upserted ${
+        upsertPromises.length
+      } pricing records for villa ${villaId}, ${numFailed} failed. Reason: ${
+        reason?.toString() ?? 'None'
+      }`
+    );
   }
 }
 
