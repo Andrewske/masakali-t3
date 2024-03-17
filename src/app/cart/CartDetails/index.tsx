@@ -16,9 +16,7 @@ type CartDetailsProps = {
 };
 
 const CartDetails = ({ villaId, villaPricing }: CartDetailsProps) => {
-  const { conversionRate, country, currency } = useCurrencyStore(
-    (state) => state
-  );
+  const { conversionRate, currency } = useCurrencyStore((state) => state);
 
   const { dateRange } = useReservationStore((state) => state);
   const villaName = getVillaName(villaId);

@@ -1,5 +1,4 @@
 import { Montserrat, Libre_Baskerville } from 'next/font/google';
-import localFont from 'next/font/local';
 
 export const montserrat = Montserrat({
   variable: '--font-montserrat',

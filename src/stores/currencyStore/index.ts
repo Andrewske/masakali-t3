@@ -3,7 +3,6 @@ import { getCurrencyRates } from '~/actions/currencyApi';
 
 import { countryCurrencies } from '~/lib/countryCurrencies';
 import { countries, type CountryCodeType } from '~/lib/countries';
-import { error } from 'console';
 
 export type CurrencyState = {
   country: CountryType;

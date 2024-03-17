@@ -4,7 +4,6 @@ import type { VillaIdsType } from '~/lib/villas';
 import { prisma } from '~/db/prisma';
 import { env } from '~/env.mjs';
 import { channelIds } from '~/lib/smoobu';
-import { UserState } from '~/stores/userStore';
 
 export type PricingDataType = {
   villaName: string;

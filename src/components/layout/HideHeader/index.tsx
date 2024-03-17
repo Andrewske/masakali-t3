@@ -10,7 +10,6 @@ const HideHeader = ({ children }: { children: ReactNode }) => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       //   console.log(currentScrollY, lastScrollY, isHidden);
-      console.log({ currentScrollY, lastScrollY, isHidden });
       if (currentScrollY > 10) {
         setHidden(false);
       } else {
@@ -22,7 +21,7 @@ const HideHeader = ({ children }: { children: ReactNode }) => {
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, isHidden]);
 
   return (
     <div

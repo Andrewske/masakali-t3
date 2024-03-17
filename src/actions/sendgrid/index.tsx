@@ -42,7 +42,7 @@ export const sendBookingConfirmation = async ({
 
   console.log(msg);
   const response = await sgMail.send(msg);
-  //   console.log(response);
+  console.log(response);
   return;
 };
 

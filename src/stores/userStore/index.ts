@@ -1,6 +1,5 @@
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand';
-import { User } from '@prisma/client';
 
 export type UserState = {
   user: {

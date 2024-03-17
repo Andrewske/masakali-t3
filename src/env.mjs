@@ -25,6 +25,8 @@ export const env = createEnv({
     WEBSITE_DISCOUNT: z.string(),
     WEBSITE_TAX: z.string(),
     SENDGRID_API_KEY: z.string(),
+    NEXTAUTH_SECRET: z.string(),
+    NEXTAUTH_URL: z.string(),
   },
 
   /**

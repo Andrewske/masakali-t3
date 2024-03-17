@@ -3,7 +3,6 @@ import type { DateRange } from 'react-day-picker';
 import type { VillaNamesType } from '~/lib/villas';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { create } from 'zustand';
-import { z } from 'zod';
 
 export type ReservationState = {
   dateRange: DateRange;
@@ -33,16 +32,6 @@ export const defaultInitialState: ReservationState = {
     to: new Date(),
   },
   villaName: 'surya',
-};
-
-type StateType = {
-  // Define the structure of your state here
-  // For example:
-  dateRange: {
-    from: string;
-    to: string;
-  };
-  villaName: string;
 };
 
 interface SerializedDate {

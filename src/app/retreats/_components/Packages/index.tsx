@@ -76,7 +76,7 @@ const Packages = () => {
         <li>2 spa services</li>
       </ul>
       <div className="flex flex-wrap w-full justify-evenly">
-        {packageDetails.map((packageDetail, index) => (
+        {packageDetails.map((packageDetail) => (
           <div
             key={packageDetail.title}
             className="flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300"

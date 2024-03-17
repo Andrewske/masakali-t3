@@ -206,7 +206,7 @@ devDependencies:
     specifier: ^8.21.3
     version: 8.56.3
   '@types/google.maps':
-    specifier: ^3.53.6
+    specifier: ^3.55.3
     version: 3.55.3
   '@types/jest':
     specifier: ^29.5.3

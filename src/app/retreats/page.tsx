@@ -1,4 +1,3 @@
-// TODO implement retreats page
 import Image from 'next/image';
 
 import { villaDetails } from '~/lib/villas';

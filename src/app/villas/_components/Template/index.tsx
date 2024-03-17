@@ -4,7 +4,7 @@ import GridGallery from '~/app/villas/_components/GridGallery';
 import DateContainer from '~/app/villas/_components/DateContainer';
 import Link from 'next/link';
 import VillaDetails from '~/app/villas/_components/VillaDetails';
-import { getVillaName, type VillaIdsType, villaDetails } from '~/lib/villas';
+import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import { prisma } from '~/db/prisma';
 import { type VillaPricingType } from '~/utils/pricing';

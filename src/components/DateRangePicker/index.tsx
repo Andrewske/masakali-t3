@@ -1,9 +1,9 @@
 'use client';
-import { useEffect, useRef, type SetStateAction, type Dispatch } from 'react';
+import { useRef, type SetStateAction, type Dispatch } from 'react';
 import styles from './styles.module.scss';
-import dayPickerStyles from 'react-day-picker/dist/style.module.css';
-import { addDays, isBefore, format, setDate } from 'date-fns';
-import { DayPicker, type DateRange, type ClassNames } from 'react-day-picker';
+
+import { addDays, isBefore, format } from 'date-fns';
+import { DayPicker, type DateRange } from 'react-day-picker';
 
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { getCurrentDateInBali } from '~/utils';

@@ -1,8 +1,7 @@
-import { Dispatch, useState } from 'react';
+import { useState } from 'react';
 import { CardElement } from '@stripe/react-stripe-js';
 import type { StripeCardElementChangeEvent } from '@stripe/stripe-js';
 import StripeError from './StripeError';
-import { PaymentElement } from '@stripe/react-stripe-js';
 
 const Stripe = ({
   setCanSubmit,

@@ -1,6 +1,6 @@
 import { type UseFormReturn } from 'react-hook-form';
 import Stripe from './Stripe';
-import { FormData } from '../getFormSchema';
+import type { FormData } from '../getFormSchema';
 
 type PaymentFormProps = {
   form: UseFormReturn<FormData>;

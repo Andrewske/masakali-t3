@@ -1,9 +1,11 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
+import type { Stripe } from '@stripe/stripe-js';
+import { env } from '~/env.mjs';
 // Create a context
-const StripeContext = createContext(null);
+const StripeContext = createContext<Stripe | null>(null);
 
 // Create a provider component
 export const StripeProvider = async ({
@@ -11,7 +13,7 @@ export const StripeProvider = async ({
 }: {
   children: React.ReactNode;
 }) => {
-  const stripe = await loadStripe('your-stripe-publishable-key');
+  const stripe = await loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
   return (
     <StripeContext.Provider value={stripe}>{children}</StripeContext.Provider>
