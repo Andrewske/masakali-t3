@@ -24,7 +24,9 @@ const DateContainer = ({
 
   const [isActive, setIsActive] = useState(false);
 
-  const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
+  console.log({ isActive });
+
+  const { pricePerNight, subTotal, discount, taxes, finalPrice } =
     useMemo(() => {
       return createPricingObject({
         villaPricing,

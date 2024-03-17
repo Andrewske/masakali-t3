@@ -28,6 +28,7 @@ const Availability = ({
     to: nextDay,
   });
 
+  // TODO: Fix Villas Available
   const villasAvailable =
     range?.to &&
     getAvailableVillas({

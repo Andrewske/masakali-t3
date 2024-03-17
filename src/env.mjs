@@ -24,6 +24,7 @@ export const env = createEnv({
     CURRENCY_API_KEY: z.string(),
     WEBSITE_DISCOUNT: z.string(),
     WEBSITE_TAX: z.string(),
+    SENDGRID_API_KEY: z.string(),
   },
 
   /**
@@ -73,5 +74,6 @@ export const env = createEnv({
     CURRENCY_API_KEY: process.env.CURRENCY_API_KEY,
     WEBSITE_DISCOUNT: process.env.WEBSITE_DISCOUNT,
     WEBSITE_TAX: process.env.WEBSITE_TAX,
+    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
 });
