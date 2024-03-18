@@ -1,4 +1,4 @@
-const Label = ({ label, name, ...props }: { label: string; name: string }) => {
+const Label = ({ label, name }: { label: string; name: string }) => {
   return (
     <label
       className="text-sm"

@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import Image, { type StaticImageData } from 'next/image';
+import Image from 'next/image';
 import styles from './styles.module.scss';
 
 import AkashaFront from '~/../public/hero-images/akasha-front.webp';
@@ -35,12 +35,6 @@ const images = [
     alt: 'Akasha at Masakali view of the bathroom 2',
   },
 ];
-
-type ImageType = {
-  src: StaticImageData;
-  alt: string;
-  index: number;
-};
 
 const GridGallery = () => {
   const [indexOfExpandedImage, setIndexOfExpandedImage] = useState(0);

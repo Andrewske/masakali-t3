@@ -71,55 +71,85 @@ async function fetchSmoobuRates(): Promise<SmoobuRatesResponse> {
   }
 }
 
+const updateVillaPricing = async (
+  villaId: number,
+  date: Date,
+  price: number,
+  available: boolean
+) => {
+  await prisma.villaPricing.update({
+    where: {
+      villaId_date: {
+        villaId,
+        date,
+      },
+    },
+    data: {
+      price,
+      available,
+    },
+  });
+};
+
 async function upsertVillaPricing(data: SmoobuRatesResponse) {
   const villaIds = Object.keys(data.data);
 
   for (const villaId of villaIds) {
-    const upsertPromises = [];
+    const currentPricing = await prisma.villaPricing.findMany({
+      where: {
+        villaId: parseInt(villaId),
+      },
+    });
+
     const villaPricing = data.data[villaId];
     if (!villaPricing) continue;
 
     for (const [date, pricing] of Object.entries(villaPricing)) {
-      if (isPricingData(pricing)) {
-        const upsertPromise = prisma.villaPricing.upsert({
-          where: {
-            villaId_date: {
-              villaId: parseInt(villaId),
-              date: new Date(date),
-            },
-          },
-          update: {
-            price: pricing.price,
-            available: pricing.available != 0,
-          },
-          create: {
-            villaId: parseInt(villaId),
-            date: new Date(date),
-            price: pricing.price,
-            available: pricing.available !== 0,
-          },
-        });
+      const current = currentPricing.find((p) => p.date.toISOString() === date);
 
-        upsertPromises.push(upsertPromise);
+      if (current) {
+        if (
+          current.price !== pricing.price ||
+          current.available !== (pricing.available !== 0)
+        ) {
+          await updateVillaPricing(
+            parseInt(villaId),
+            new Date(date),
+            pricing?.price ?? 0,
+            pricing?.available !== 0
+          );
+        }
       }
-    }
-    const results = await Promise.allSettled(upsertPromises);
-    let numFailed = 0;
-    let reason: PromiseRejectedResult | null = null;
 
-    for (const result of results) {
-      if (result.status === 'rejected') {
-        numFailed++;
-        reason = result.reason as PromiseRejectedResult;
-      }
+      // if (isPricingData(pricing)) {
+      //   try {
+      //     await prisma.villaPricing.upsert({
+      //       where: {
+      //         villaId_date: {
+      //           villaId: parseInt(villaId),
+      //           date: new Date(date),
+      //         },
+      //       },
+      //       update: {
+      //         price: pricing.price,
+      //         available: pricing.available !== 0,
+      //       },
+      //       create: {
+      //         villaId: parseInt(villaId),
+      //         date: new Date(date),
+      //         price: pricing.price,
+      //         available: pricing.available !== 0,
+      //       },
+      //     });
+      //   } catch (error) {
+      //     console.error(
+      //       `Failed to upsert pricing for villa ${villaId} on date ${date}:`,
+      //       error
+      //     );
+      //     // Handle the error appropriately, e.g., by logging it or retrying the operation
+      //   }
+      // }
     }
-    console.log(
-      `Upserted ${
-        upsertPromises.length
-      } pricing records for villa ${villaId}, ${numFailed} failed. Reason: ${
-        reason?.toString() ?? 'None'
-      }`
-    );
   }
 }
 

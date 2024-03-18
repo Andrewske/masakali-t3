@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import { prisma } from '~/db/prisma';
 
-import { type VillaIdsType, villaDetails } from '~/lib/villas';
-import GoToVillaButton from '~/components/Button/GoToVillaButton';
+import { type VillaIdsType } from '~/lib/villas';
+
 import ReservationDetails from './ReservationDetails';
 import { type VillaPricingType } from '~/utils/pricing';
 export default async function Page({

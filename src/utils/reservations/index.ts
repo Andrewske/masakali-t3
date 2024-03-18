@@ -1,5 +1,5 @@
 import { type Reservation } from '@prisma/client';
-import { VillaIdsType, villaIdsArray } from '~/lib/villas';
+import { type VillaIdsType, villaIdsArray } from '~/lib/villas';
 import { format, parseISO } from 'date-fns';
 import { getDatesBetweenDates } from '..';
 

@@ -1,4 +1,3 @@
-import styles from './styles.module.scss';
 import { prisma } from '~/db/prisma';
 // Components
 

@@ -37,11 +37,17 @@ export async function GET() {
 
   const transformedData = reservations.map(transformReservationData);
 
-  const response = await Promise.all(
-    transformedData.map((data) => upsertReservationToDatabase(data))
-  );
+  await upsertReservationsInBatches(transformedData);
 
-  return NextResponse.json(response);
+  // for (const data of transformedData) {
+  //   await upsertReservationToDatabase(data);
+  // }
+
+  // const response = await Promise.all(
+  //   transformedData.map((data) => upsertReservationToDatabase(data))
+  // );
+
+  return NextResponse.json('Upserted all reservations to the database.');
 }
 
 type SmoobuReservationsResponse = {
@@ -110,12 +116,57 @@ function transformReservationData(
 async function upsertReservationToDatabase(
   reservationData: TransformedReservation
 ): Promise<{ smoobuId: number }> {
-  return await prisma.reservation.upsert({
-    where: { smoobuId: reservationData.smoobuId ?? '' },
-    create: reservationData,
-    update: reservationData,
-    select: {
-      smoobuId: true,
-    },
+  const currentReservation = await prisma.reservation.findUnique({
+    where: { smoobuId: reservationData.smoobuId },
   });
+
+  if (!currentReservation) {
+    return await prisma.reservation.create({
+      data: reservationData,
+      select: {
+        smoobuId: true,
+      },
+    });
+  }
+  let numberOfChanges = 0;
+  for (const [key, value] of Object.entries(currentReservation)) {
+    if (
+      key in reservationData &&
+      reservationData[key as keyof TransformedReservation] === value
+    ) {
+      numberOfChanges++;
+    }
+  }
+  if (numberOfChanges > 0) {
+    return await prisma.reservation.update({
+      where: { smoobuId: reservationData.smoobuId },
+      data: reservationData,
+      select: {
+        smoobuId: true,
+      },
+    });
+  }
+
+  return { smoobuId: reservationData.smoobuId };
+  // return await prisma.reservation.upsert({
+  //   where: { smoobuId: reservationData.smoobuId ?? '' },
+  //   create: reservationData,
+  //   update: reservationData,
+  //   select: {
+  //     smoobuId: true,
+  //   },
+  // });
+}
+
+async function upsertReservationsInBatches(
+  reservations: TransformedReservation[]
+): Promise<void> {
+  const batchSize = 100; // Adjust based on your needs and database capabilities
+
+  for (let i = 0; i < reservations.length; i += batchSize) {
+    const batch = reservations.slice(i, i + batchSize);
+    await Promise.all(
+      batch.map((reservation) => upsertReservationToDatabase(reservation))
+    );
+  }
 }

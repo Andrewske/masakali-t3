@@ -24,7 +24,9 @@ const DateContainer = ({
 
   const [isActive, setIsActive] = useState(false);
 
-  const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
+  console.log({ isActive, checkoutDates });
+
+  const { pricePerNight, subTotal, discount, taxes, finalPrice } =
     useMemo(() => {
       console.log('dateRange.from:', dateRange.from);
       return createPricingObject({
@@ -45,6 +47,20 @@ const DateContainer = ({
     </span>
   );
 
+  const arrivalDate =
+    dateRange.from &&
+    dateRange.from instanceof Date &&
+    !isNaN(dateRange.from.getTime())
+      ? format(dateRange.from, "MMM d',' yyyy")
+      : 'Choose Dates';
+
+  const departureDate =
+    dateRange.to &&
+    dateRange.to instanceof Date &&
+    !isNaN(dateRange.to.getTime())
+      ? format(dateRange.to, "MMM d',' yyyy")
+      : 'Choose Dates';
+
   return (
     <div className={styles.wrapper}>
       <DateRangePicker
@@ -57,22 +73,14 @@ const DateContainer = ({
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Arrival Date</h3>
-        <p>
-          {dateRange.from
-            ? format(dateRange.from, 'MMM d, yyyy')
-            : 'Choose Dates'}
-        </p>
+        <p>{arrivalDate}</p>
       </span>
       <span
         className={styles.container}
         onClick={() => setIsActive(true)}
       >
         <h3 className={styles.title}>Departure Date</h3>
-        <p>
-          {dateRange.to && isValid(new Date(dateRange.to))
-            ? format(new Date(dateRange.to), 'MMM d, yyyy')
-            : 'Choose Dates'}
-        </p>
+        <p>{departureDate}</p>
       </span>
       {renderConvertedAmount('Price per night', pricePerNight)}
       {renderConvertedAmount('Subtotal', subTotal)}

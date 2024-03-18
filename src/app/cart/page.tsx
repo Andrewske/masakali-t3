@@ -3,11 +3,7 @@ import Image from 'next/image';
 import CartForm from './CartForm';
 import CartDetails from './CartDetails';
 
-import {
-  type VillaDetail,
-  villaDetails,
-  type VillaIdsType,
-} from '~/lib/villas';
+import { villaDetails, type VillaIdsType } from '~/lib/villas';
 
 import { prisma } from '~/db/prisma';
 import type { VillaPricingType } from '~/utils/pricing';

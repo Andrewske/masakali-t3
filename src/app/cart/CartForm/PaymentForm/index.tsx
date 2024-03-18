@@ -1,7 +1,6 @@
 import { type UseFormReturn } from 'react-hook-form';
 import Stripe from './Stripe';
 import type { FormData } from '../getFormSchema';
-import { PayPalButtons } from '@paypal/react-paypal-js';
 
 type PaymentFormProps = {
   form: UseFormReturn<FormData>;

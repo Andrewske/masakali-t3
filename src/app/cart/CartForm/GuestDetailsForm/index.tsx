@@ -1,5 +1,4 @@
 import { type UseFormReturn } from 'react-hook-form';
-import { Button } from '~/components/ui/button';
 import {
   FormControl,
   FormField,
@@ -9,9 +8,10 @@ import {
 } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
 import GuestsForm from './GuestsForm';
-import { VillaNamesType } from '~/lib/villas';
+import type { VillaNamesType } from '~/lib/villas';
 
 interface GuestsDetailsFormProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: UseFormReturn<any>;
   villaName: VillaNamesType;
 }
@@ -22,7 +22,7 @@ const GuestDetailsForm = ({ form, villaName }: GuestsDetailsFormProps) => {
       <FormField
         control={form.control}
         name="fullName"
-        render={({ field, fieldState }) => (
+        render={({ field }) => (
           <FormItem>
             <FormLabel className="font-montserrat uppercase">
               <p>Full Name</p>

@@ -24,7 +24,9 @@ export const env = createEnv({
     CURRENCY_API_KEY: z.string(),
     WEBSITE_DISCOUNT: z.string(),
     WEBSITE_TAX: z.string(),
-    PAYPAL_SECRET: z.string(),
+    SENDGRID_API_KEY: z.string(),
+    NEXTAUTH_SECRET: z.string(),
+    NEXTAUTH_URL: z.string(),
   },
 
   /**
@@ -75,7 +77,6 @@ export const env = createEnv({
     CURRENCY_API_KEY: process.env.CURRENCY_API_KEY,
     WEBSITE_DISCOUNT: process.env.WEBSITE_DISCOUNT,
     WEBSITE_TAX: process.env.WEBSITE_TAX,
-    PAYPAL_SECRET: process.env.PAYPAL_SECRET,
-    NEXT_PUBLIC_PAYPAL_CLIENT_ID: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
 });

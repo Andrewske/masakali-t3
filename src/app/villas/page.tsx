@@ -1,12 +1,6 @@
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
-import { prisma } from '~/db/prisma';
-//import { api } from '~/utils/api';
-
 import { villaDetails } from '~/lib/villas';
 import GoToVillaButton from '~/components/Button/GoToVillaButton';
-
-// TODO: Add villas cards
 function Page() {
   return (
     <>

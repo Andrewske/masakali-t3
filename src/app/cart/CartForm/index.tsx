@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import type { StripeError } from '@stripe/stripe-js';
+// import type { StripeError } from '@stripe/stripe-js';
+// import { stripeCheckout } from '~/actions/stripe';
 
+// import { createReservation } from '~/actions/smoobu';
 import AddressForm from './AddressForm';
 import { Button } from '~/components/ui/button';
 import { Form } from '~/components/ui/form';
-import { stripeCheckout } from '~/actions/stripe';
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import GuestDetailsForm from './GuestDetailsForm';
 import PaymentForm from './PaymentForm';
@@ -17,9 +18,13 @@ import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { type VillaPricingType, createPricingObject } from '~/utils/pricing';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import { useUserStore } from '~/providers/UserStoreProvider';
-import { useToast } from '~/components/ui/use-toast';
-import { createReservation } from '~/actions/smoobu';
-import type { UserState } from '~/stores/userStore';
+// import { useToast } from '~/components/ui/use-toast';
+import { type UserState } from '~/stores/userStore';
+import {
+  sendBookingConfirmation,
+  // type EmailTemplateData,
+} from '~/actions/sendgrid';
+import { formatCurrency } from '~/utils/helpers';
 
 export default function CartForm({
   villaId,
@@ -30,14 +35,15 @@ export default function CartForm({
 }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
-  const { conversionRate, conversionRates, setConversionRates } =
-    useCurrencyStore((state) => state);
+  const { conversionRates, setConversionRates, currency } = useCurrencyStore(
+    (state) => state
+  );
   const { dateRange } = useReservationStore((state) => state);
   const { user, setUser, _hasHydrated } = useUserStore((state) => state);
   const [step, setStep] = useState(1);
   const stripe = useStripe();
   const elements = useElements();
-  const { toast } = useToast();
+  // const { toast } = useToast();
   const checkin = dateRange.from;
   const checkout = dateRange.to;
   const villaName = getVillaName(villaId);
@@ -48,19 +54,22 @@ export default function CartForm({
 
   useEffect(() => {
     setConversionRates();
-  }, []);
+  }, [setConversionRates]);
   if (!checkin || !checkout) {
     throw new Error('Date range is not set');
   }
 
   const conversionRateToUSD = conversionRates['USD'];
 
-  const { finalPrice, totalIDR } = createPricingObject({
-    villaPricing,
-    checkin,
-    checkout,
-    conversionRate: conversionRateToUSD ?? 1,
-  });
+  console.log(currency);
+
+  const { finalPrice, discount, taxes, numNights, pricePerNight } =
+    createPricingObject({
+      villaPricing,
+      checkin,
+      checkout,
+      conversionRate: conversionRateToUSD ?? 1,
+    });
 
   const nextStep = () => {
     setStep(step + 1);
@@ -176,21 +185,43 @@ export default function CartForm({
 
     setUser(user);
 
-    await createReservation({
-      villaId,
-      checkin,
-      checkout,
-      finalPrice: totalIDR,
-      firstName: formData.fullName.split(' ')[0] ?? '',
-      lastName: formData.fullName.split(' ')[1] ?? '',
-      email: formData.email,
-      phone: formData.phone,
-      adults: formData.adults,
-      children: formData.children,
-      country: formData.address.country,
-      stripePaymentIntentId: '',
+    await sendBookingConfirmation({
+      data: {
+        name: formData.fullName,
+        email: formData.email,
+        country: formData.address.country,
+        villaName,
+        startDate: checkin.toISOString(),
+        endDate: checkout.toISOString(),
+        numDays: numNights,
+        price: formatCurrency(pricePerNight, currency),
+        discount: formatCurrency(discount, currency),
+        taxes: formatCurrency(taxes, currency),
+        total: formatCurrency(finalPrice, currency),
+      },
+      isRetreat: false,
     });
+
     setIsProcessing(false);
+
+    return null;
+
+    // await createReservation({
+    //   villaId,
+    //   checkin,
+    //   checkout,
+    //   finalPrice: totalIDR,
+    //   firstName: formData.fullName.split(' ')[0] ?? '',
+    //   lastName: formData.fullName.split(' ')[1] ?? '',
+    //   email: formData.email,
+    //   phone: formData.phone,
+    //   adults: formData.adults,
+    //   children: formData.children,
+    //   country: formData.address.country,
+    //   stripePaymentIntentId: '',
+    // });
+
+    // setIsProcessing(false);
 
     // try {
     //   const price = finalPrice / conversionRate;
@@ -242,6 +273,7 @@ export default function CartForm({
     //   setIsProcessing(false);
     // }
   };
+
   const errors = form.formState.errors;
 
   function isButtonDisabled() {
