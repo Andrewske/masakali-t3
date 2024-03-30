@@ -32,18 +32,27 @@ export default function CreditCardForm({ form }: CCFormProps) {
             className="col-span-5"
             maxLength={19}
             value={cc_number}
-            {...getCardNumberProps({ onChange: setValue })}
+            {...getCardNumberProps({
+              onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                setValue('cc_number', e.target.value),
+            })}
           />
         </span>
         <input
           className="min-w-20"
           value={cc_expiry}
-          {...getExpiryDateProps({ onChange: setValue })}
+          {...getExpiryDateProps({
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+              setValue('cc_expiry', e.target.value),
+          })}
         />
         <input
           className=""
           value={cc_cvc}
-          {...getCVCProps({ onChange: setValue })}
+          {...getCVCProps({
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+              setValue('cc_cvc', e.target.value),
+          })}
         />
       </div>
     </PaymentInputsWrapper>

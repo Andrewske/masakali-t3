@@ -34,7 +34,7 @@ export default function CartForm({
   villaPricing: VillaPricingType[];
 }) {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [canSubmit, setCanSubmit] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(true);
   const { conversionRates, setConversionRates, currency } = useCurrencyStore(
     (state) => state
   );
@@ -146,60 +146,60 @@ export default function CartForm({
 
     console.log('submitting form data', formData);
 
-    const cardElement = elements?.getElement(CardElement);
+    // const cardElement = elements?.getElement(CardElement);
 
-    const billingDetails = {
-      name: formData.fullName,
-      email,
-      phone,
-      address: {
-        city,
-        country,
-        line1: formData.address.address1,
-        line2: formData.address.address2 ?? '',
-        postal_code: formData.address.zip_code,
-        state: formData.address.region,
-      },
-    };
+    // const billingDetails = {
+    //   name: formData.fullName,
+    //   email,
+    //   phone,
+    //   address: {
+    //     city,
+    //     country,
+    //     line1: formData.address.address1,
+    //     line2: formData.address.address2 ?? '',
+    //     postal_code: formData.address.zip_code,
+    //     state: formData.address.region,
+    //   },
+    // };
 
-    if (stripe && cardElement && billingDetails) {
-      console.log('card element', cardElement);
-      console.log('submitting form data', formData);
-    }
-    const user: UserState['user'] = {
-      fullName: formData.fullName,
-      email: formData.email,
-      phone: formData.phone,
-      adults: formData.adults,
-      children: formData.children,
-      address: {
-        address1: formData.address.address1,
-        address2: formData.address.address2,
-        city: formData.address.city,
-        region: formData.address.region,
-        country: formData.address.country,
-        zip_code: formData.address.zip_code,
-      },
-    };
+    // if (stripe && cardElement && billingDetails) {
+    //   console.log('card element', cardElement);
+    //   console.log('submitting form data', formData);
+    // }
+    // const user: UserState['user'] = {
+    //   fullName: formData.fullName,
+    //   email: formData.email,
+    //   phone: formData.phone,
+    //   adults: formData.adults,
+    //   children: formData.children,
+    //   address: {
+    //     address1: formData.address.address1,
+    //     address2: formData.address.address2,
+    //     city: formData.address.city,
+    //     region: formData.address.region,
+    //     country: formData.address.country,
+    //     zip_code: formData.address.zip_code,
+    //   },
+    // };
 
-    setUser(user);
+    // setUser(user);
 
-    await sendBookingConfirmation({
-      data: {
-        name: formData.fullName,
-        email: formData.email,
-        country: formData.address.country,
-        villaName,
-        startDate: checkin.toISOString(),
-        endDate: checkout.toISOString(),
-        numDays: numNights,
-        price: formatCurrency(pricePerNight, currency),
-        discount: formatCurrency(discount, currency),
-        taxes: formatCurrency(taxes, currency),
-        total: formatCurrency(finalPrice, currency),
-      },
-      isRetreat: false,
-    });
+    // await sendBookingConfirmation({
+    //   data: {
+    //     name: formData.fullName,
+    //     email: formData.email,
+    //     country: formData.address.country,
+    //     villaName,
+    //     startDate: checkin.toISOString(),
+    //     endDate: checkout.toISOString(),
+    //     numDays: numNights,
+    //     price: formatCurrency(pricePerNight, currency),
+    //     discount: formatCurrency(discount, currency),
+    //     taxes: formatCurrency(taxes, currency),
+    //     total: formatCurrency(finalPrice, currency),
+    //   },
+    //   isRetreat: false,
+    // });
 
     setIsProcessing(false);
 

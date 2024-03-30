@@ -87,7 +87,7 @@ const PaymentForm = ({ form, setStep, setCanSubmit }: PaymentFormProps) => {
 
       <CreditCardForm form={form} />
 
-      <Stripe setCanSubmit={setCanSubmit} />
+      {/* <Stripe setCanSubmit={setCanSubmit} /> */}
     </div>
   );
 };
