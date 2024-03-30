@@ -28,6 +28,7 @@ module.exports = {
       boxShadow: {
         'error': 'rgba(255, 0, 0, 0.5) 0px 1px 4px, rgba(255, 0, 0, 0.5) 0px 0px 0px 3px',
         'light-purple': 'rgba(163, 143, 159, 0.5) 0px 1px 2px, rgba(163, 143, 159, 0.5) 0px 0px 0px 2px',
+        'dark-purple': 'rgba(55, 33, 55, 0.5) 0px 1px 2px, rgba(55, 33, 55, 0.5) 0px 0px 0px 2px',
       },
       fontFamily: {
         'sans': ['Roboto', 'sans-serif'],

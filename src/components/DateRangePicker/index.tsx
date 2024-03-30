@@ -1,5 +1,5 @@
 'use client';
-import { useRef, type SetStateAction, type Dispatch } from 'react';
+import { useRef, type SetStateAction, type Dispatch, useEffect } from 'react';
 import styles from './styles.module.scss';
 
 import { addDays, isBefore, format } from 'date-fns';
@@ -8,6 +8,7 @@ import { DayPicker, type DateRange } from 'react-day-picker';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { getCurrentDateInBali } from '~/utils';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
+import { getAvailableVillas } from '~/utils/reservations';
 
 const today = getCurrentDateInBali();
 
@@ -25,13 +26,6 @@ const DateRangePicker = ({
   const dayPickerRef = useRef(null);
   useOnClickOutside(dayPickerRef, () => setIsActive(false));
   const { dateRange, setDateRange } = useReservationStore((state) => state);
-
-  // useEffect(() => {
-  //   setDateRange({
-  //     from: undefined,
-  //     to: undefined,
-  //   });
-  // }, [disabledDates, setDateRange]);
 
   const isDateInRange = (
     date: Date,
@@ -64,6 +58,8 @@ const DateRangePicker = ({
         newRange.to = undefined;
       }
       console.log('not disabled');
+
+      // getAvailableVillas(newRange.from, newRange.to);
 
       console.log('newRange Type', typeof newRange.from, typeof newRange.to);
       setDateRange(newRange);

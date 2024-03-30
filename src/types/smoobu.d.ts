@@ -53,3 +53,45 @@ export const UpdateReservationsResponse = [
     smoobuId: number,
   },
 ];
+
+export type SmoobuRatesResponse = {
+  data: {
+    [villaId: string]: {
+      [date: string]: PricingData;
+    };
+  };
+};
+
+export type PricingData = {
+  price: number | null;
+  min_length_of_stay: number;
+  available: number;
+};
+
+export type SmoobuBooking = {
+  arrivalDate: Date;
+  departureDate: Date;
+  channelId?: number;
+  apartmentId: number;
+  arrivalTime?: string;
+  departureTime?: string;
+  firstName?: string;
+  lastName?: string;
+  notice?: string;
+  adults?: string;
+  children?: string;
+  price?: string;
+  priceStatus?: string;
+  prepaymentStatus?: string;
+  deposit?: number;
+  depositStatus?: string;
+  address?: {
+    street?: string;
+    location?: string;
+    postalCode?: string;
+    country?: string;
+  };
+  email?: string;
+  phone?: string;
+  language?: string;
+};

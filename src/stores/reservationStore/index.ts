@@ -55,10 +55,9 @@ export const createReservationStore = (
         ...initState,
         // dateRange: initState.dateRange,
         setDateRange: ({ to, from }: DateRange) => {
-          console.log('setting Date Range');
           // If range is a DateRange object or undefined, we can directly set it
           set({
-            dateRange: { to: new Date(to ?? ''), from: new Date(from ?? '') },
+            dateRange: { to, from },
           }); // Type assertion to DateRange
         },
         setVillaName: (name: VillaNamesType) => set({ villaName: name }),

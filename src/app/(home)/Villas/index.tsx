@@ -27,11 +27,11 @@ const Villas = () => {
           villas have bathtubs.
         </p>
       </div>
-      <div className="flex flex-wrap justify-evenly w-full gap-4">
+      <div className="flex flex-wrap justify-evenly w-full gap-4 h-full">
         {Object.values(villaDetails).map((villa) => (
           <div
             key={villa.id}
-            className=" w-[450px] h-[450px] relative z-10 shadow-light-purple m-4"
+            className=" w-[450px] h-[550px] md:h-[450px] relative z-10 shadow-light-purple m-4"
           >
             <Image
               src={villa.defaultImage}

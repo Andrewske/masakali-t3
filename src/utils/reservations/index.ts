@@ -2,33 +2,36 @@ import { type Reservation } from '@prisma/client';
 import { type VillaIdsType, villaIdsArray } from '~/lib/villas';
 import { format, parseISO } from 'date-fns';
 import { getDatesBetweenDates } from '..';
+import { VillaPricing } from '~/app/(home)/Availability';
 
 type getBlockedDatesAllVillasType = {
-  reservations: Reservation[];
+  villaPricing: VillaPricing[];
   arrivalDate: Date;
   departureDate: Date;
 };
 
 export const getAvailableVillas = ({
-  reservations,
+  villaPricing,
   arrivalDate,
   departureDate,
 }: getBlockedDatesAllVillasType): VillaIdsType[] => {
+  // Initialize a Set to track blocked (booked) villa IDs
   const blockedVillasSet = new Set<VillaIdsType>();
 
-  const formattedArrivalDate = format(arrivalDate, 'yyyy-MM-dd');
-  const formattedDepartureDate = format(departureDate, 'yyyy-MM-dd');
-
-  reservations.forEach((reservation) => {
-    const arrival = reservation?.arrival;
-    const departure = reservation?.departure;
-    const resVillaId = reservation?.villaId as VillaIdsType;
-    if (arrival < formattedDepartureDate && formattedArrivalDate < departure) {
-      blockedVillasSet.add(resVillaId);
+  // Populate the Set with IDs of villas that are blocked within the specified timeframe
+  villaPricing.forEach(({ date, villaId }) => {
+    if (date >= arrivalDate && date < departureDate) {
+      blockedVillasSet.add(villaId);
     }
   });
 
-  return villaIdsArray.filter((villaId) => !blockedVillasSet.has(villaId));
+  // Filter the comprehensive list of villa IDs to exclude those that are blocked
+  // Assuming 'villaIdsArray' contains IDs of all villas under consideration
+  const availableVillas = villaIdsArray.filter(
+    (villaId) => !blockedVillasSet.has(villaId)
+  );
+
+  return availableVillas;
 };
 
 export const getDisabledDatesOld = (

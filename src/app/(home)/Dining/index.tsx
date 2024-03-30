@@ -7,17 +7,17 @@ const Dining = () => {
   return (
     <section
       id="diningWrapper"
-      className="relative flex items-center flex-wrap p-8"
+      className="relative flex justify-center flex-wrap p-8"
     >
       <ScrollOffset id="dining" />
-      <div className="h-[450px] w-full md:max-w-[450px] bg-gray flex  flex-wrap items-center">
+      <div className="md:h-[450px] w-full md:max-w-[450px] bg-gray flex flex-col items-center">
         <Image
           className="object-cover w-full h-full"
           src={DiningImage}
           alt="Photo of breakfast on Surya's porch"
         />
       </div>
-      <div className="h-[450px]  w-full md:max-w-[450px] bg-gray flex flex-col gap-4 flex-wrap p-8 ">
+      <div className="md:h-[450px]  w-full md:max-w-[450px] bg-gray flex flex-col gap-4  p-8 ">
         <h2 className="">Dining</h2>
         <p className="w-full leading-relaxed">
           Masakali offers a full range of options for dining, all with the taste

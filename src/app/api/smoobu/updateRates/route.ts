@@ -1,28 +1,16 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { villaIdsArray } from '~/lib/villas';
-import { prisma } from '~/db/prisma';
+
+import type { PricingData, SmoobuRatesResponse } from '~/types/smoobu';
+import { batchVillaPricing } from '~/utils/smoobu';
 
 export async function GET() {
   const smoobuRatesResponse = await fetchSmoobuRates();
 
-  await upsertVillaPricing(smoobuRatesResponse);
+  await batchVillaPricing(smoobuRatesResponse);
 
   return NextResponse.json({ success: true });
-}
-
-type SmoobuRatesResponse = {
-  data: {
-    [villaId: string]: {
-      [date: string]: PricingData;
-    };
-  };
-};
-
-interface PricingData {
-  price: number | null;
-  min_length_of_stay: number;
-  available: number;
 }
 
 async function fetchSmoobuRates(): Promise<SmoobuRatesResponse> {
@@ -68,88 +56,6 @@ async function fetchSmoobuRates(): Promise<SmoobuRatesResponse> {
   } catch (error) {
     // Handle or log the error appropriately
     throw error;
-  }
-}
-
-const updateVillaPricing = async (
-  villaId: number,
-  date: Date,
-  price: number,
-  available: boolean
-) => {
-  await prisma.villaPricing.update({
-    where: {
-      villaId_date: {
-        villaId,
-        date,
-      },
-    },
-    data: {
-      price,
-      available,
-    },
-  });
-};
-
-async function upsertVillaPricing(data: SmoobuRatesResponse) {
-  const villaIds = Object.keys(data.data);
-
-  for (const villaId of villaIds) {
-    const currentPricing = await prisma.villaPricing.findMany({
-      where: {
-        villaId: parseInt(villaId),
-      },
-    });
-
-    const villaPricing = data.data[villaId];
-    if (!villaPricing) continue;
-
-    for (const [date, pricing] of Object.entries(villaPricing)) {
-      const current = currentPricing.find((p) => p.date.toISOString() === date);
-
-      if (current) {
-        if (
-          current.price !== pricing.price ||
-          current.available !== (pricing.available !== 0)
-        ) {
-          await updateVillaPricing(
-            parseInt(villaId),
-            new Date(date),
-            pricing?.price ?? 0,
-            pricing?.available !== 0
-          );
-        }
-      }
-
-      // if (isPricingData(pricing)) {
-      //   try {
-      //     await prisma.villaPricing.upsert({
-      //       where: {
-      //         villaId_date: {
-      //           villaId: parseInt(villaId),
-      //           date: new Date(date),
-      //         },
-      //       },
-      //       update: {
-      //         price: pricing.price,
-      //         available: pricing.available !== 0,
-      //       },
-      //       create: {
-      //         villaId: parseInt(villaId),
-      //         date: new Date(date),
-      //         price: pricing.price,
-      //         available: pricing.available !== 0,
-      //       },
-      //     });
-      //   } catch (error) {
-      //     console.error(
-      //       `Failed to upsert pricing for villa ${villaId} on date ${date}:`,
-      //       error
-      //     );
-      //     // Handle the error appropriately, e.g., by logging it or retrying the operation
-      //   }
-      // }
-    }
   }
 }
 

@@ -61,8 +61,6 @@ export default function CartForm({
 
   const conversionRateToUSD = conversionRates['USD'];
 
-  console.log(currency);
-
   const { finalPrice, discount, taxes, numNights, pricePerNight } =
     createPricingObject({
       villaPricing,
@@ -91,6 +89,9 @@ export default function CartForm({
         country: 'Indonesia',
         zip_code: '12345',
       },
+      cc_number: '',
+      cc_expiry: '',
+      cc_cvc: '',
     },
     mode: 'onSubmit' as const,
   };

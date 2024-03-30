@@ -27,6 +27,7 @@ export const env = createEnv({
     SENDGRID_API_KEY: z.string(),
     NEXTAUTH_SECRET: z.string(),
     NEXTAUTH_URL: z.string(),
+    NEXT_PUBLIC_XENDIT_PUBLIC_KEY: z.string(),
   },
 
   /**
@@ -77,5 +78,6 @@ export const env = createEnv({
     WEBSITE_DISCOUNT: process.env.WEBSITE_DISCOUNT,
     WEBSITE_TAX: process.env.WEBSITE_TAX,
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+    NEXT_PUBLIC_XENDIT_PUBLIC_KEY: process.env.NEXT_PUBLIC_XENDIT_PUBLIC_KEY,
   },
 });

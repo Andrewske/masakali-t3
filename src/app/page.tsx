@@ -9,12 +9,14 @@ import Villas from '~/app/(home)/Villas';
 import Dining from '~/app/(home)/Dining';
 import Amenities from '~/app/(home)/Amenities';
 import Location from '~/app/(home)/Location';
-import { addDays } from 'date-fns';
+import { addDays, format } from 'date-fns';
 import { getCurrentDateInBali } from '~/utils';
 import { getAllDisabledDates } from '~/actions/smoobu';
 import Footer from '~/components/layout/Footer';
 import Header from '~/components/layout/Header';
 import HideHeader from '~/components/layout/HideHeader';
+import YogaShala from './(home)/YogaShala';
+import type { VillaIdsType } from '~/lib/villas';
 
 const today = getCurrentDateInBali();
 const twoDaysAgo: string = addDays(today, -2).toISOString();
@@ -30,6 +32,28 @@ const Page = async () => {
     },
   });
 
+  const villaPricing = await prisma.villaPricing
+    .findMany({
+      where: {
+        AND: {
+          date: {
+            gte: today,
+          },
+          available: true,
+        },
+      },
+      select: {
+        date: true,
+        villaId: true,
+      },
+    })
+    .then((data) =>
+      data.map((d) => ({
+        date: d.date,
+        villaId: d.villaId as VillaIdsType,
+      }))
+    );
+
   const disabledDates = await getAllDisabledDates();
 
   return (
@@ -41,12 +65,14 @@ const Page = async () => {
       <Availability
         reservations={reservations}
         disabledDates={disabledDates}
+        villaPricing={villaPricing}
       />
       <About />
       <WhyChoose />
       <Villas />
       <Dining />
       <Amenities />
+      <YogaShala />
       <Location />
       <Footer />
     </>

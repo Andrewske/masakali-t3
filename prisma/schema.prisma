@@ -57,7 +57,7 @@ model User {
 }
 
 model VerificationToken {
-    identifier String
+    identifier String   @id
     token      String   @unique
     expires    DateTime
 
@@ -104,7 +104,7 @@ model Review {
 model Reservation {
     id            String   @id @default(cuid())
     smoobuId      Int      @unique
-    referenceId   String?   
+    referenceId   String?  
     villaId       Int
     channelId     Int?
     userId        String?

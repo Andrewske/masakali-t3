@@ -8,7 +8,7 @@ const Amenities = () => {
   return (
     <section className="relative flex items-center flex-wrap p-8 justify-center">
       <ScrollOffset id="amenities" />
-      <div className="h-[600px] w-full md:max-w-[450px] bg-gray flex flex-col gap-4 flex-wrap p-8 ">
+      <div className="md:h-[600px] w-full md:max-w-[450px] bg-gray flex flex-col gap-4 p-8 ">
         <h2 className="">Amenities</h2>
         <p className="w-full leading-relaxed">
           At Masakali, our goal is to go above and beyond your expectations and

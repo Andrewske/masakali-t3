@@ -4,6 +4,7 @@ import type { VillaIdsType } from '~/lib/villas';
 import { prisma } from '~/db/prisma';
 import { env } from '~/env.mjs';
 import { channelIds } from '~/lib/smoobu';
+import { date } from 'zod';
 
 export type PricingDataType = {
   villaName: string;
@@ -89,21 +90,57 @@ export const getPricing = async ({
   }
 };
 
+type DisabledDate = {
+  date: Date;
+  villaId: number;
+};
+
 export const getAllDisabledDates = async (): Promise<
   Set<string | undefined>
 > => {
   const disabledDates = await prisma.villaPricing.findMany({
     where: {
       available: false,
+      date: {
+        gte: new Date(),
+      },
     },
     select: {
+      villaId: true,
       date: true,
     },
   });
+  const villas = new Set(
+    Object.values(disabledDates).map(({ villaId }) => villaId)
+  );
 
-  return new Set([
-    ...disabledDates.map((date) => date.date.toISOString().split('T')[0]),
-  ]);
+  const numVillas = villas.size;
+
+  const dateCounts = groupByDateAndFilter(disabledDates, numVillas);
+  return new Set(dateCounts);
+};
+
+const groupByDateAndFilter = (
+  dates: DisabledDate[],
+  numVillas: number
+): string[] => {
+  // Step 1: Group by date
+  const groupedByDate = new Map<string, DisabledDate[]>();
+  dates.forEach((disabledDate) => {
+    // Convert date to string to use as a Map key
+    const dateString = disabledDate.date.toISOString().split('T')[0];
+    if (!groupedByDate.has(dateString ?? '')) {
+      groupedByDate.set(dateString ?? '', []);
+    }
+    groupedByDate.get(dateString ?? '')?.push(disabledDate);
+  });
+
+  // Step 2: Filter groups where the count is exactly 5
+  const filteredDates = Array.from(groupedByDate.entries())
+    .filter(([_, group]) => group.length === numVillas)
+    .map(([dateString, _]) => dateString);
+
+  return filteredDates;
 };
 
 function subtractSets<T>(set1: Set<T>, set2: Set<T>): Set<T> {
