@@ -25,6 +25,7 @@ import {
   // type EmailTemplateData,
 } from '~/actions/sendgrid';
 import { formatCurrency } from '~/utils/helpers';
+import { xenditCreateToken } from '~/utils/xendit';
 
 export default function CartForm({
   villaId,
@@ -61,7 +62,7 @@ export default function CartForm({
 
   const conversionRateToUSD = conversionRates['USD'];
 
-  const { finalPrice, discount, taxes, numNights, pricePerNight } =
+  const { finalPrice, discount, taxes, numNights, pricePerNight, totalIDR } =
     createPricingObject({
       villaPricing,
       checkin,
@@ -89,9 +90,9 @@ export default function CartForm({
         country: 'Indonesia',
         zip_code: '12345',
       },
-      cc_number: '',
-      cc_expiry: '',
-      cc_cvc: '',
+      cc_number: '4000000000001091',
+      cc_expiry: '05/26',
+      cc_cvc: '999',
     },
     mode: 'onSubmit' as const,
   };
@@ -143,6 +144,22 @@ export default function CartForm({
 
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setIsProcessing(true);
+
+    const [cardExpMonth, cardExpYear] = formData.cc_expiry.split('/');
+
+    if (!cardExpMonth || !cardExpYear) {
+      setIsProcessing(false);
+      return;
+    }
+
+    xenditCreateToken({
+      amount: totalIDR,
+      card_number: formData.cc_number,
+      card_exp_month: cardExpMonth,
+      card_exp_year: '20' + cardExpYear,
+      card_cvn: formData.cc_cvc,
+      is_multiple_use: false,
+    });
 
     console.log('submitting form data', formData);
 

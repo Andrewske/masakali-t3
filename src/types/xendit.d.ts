@@ -23,18 +23,25 @@ export type TokenDataType = {
   should_authenticate: boolean;
 };
 
-export type XenditResponseType = {
-  id: string;
-  authentication_id: string;
-  external_id?: string;
-  masked_card_number: string;
-  status: string;
-  payer_authentication_url?: string;
-  failure_reason?: string;
-  card_info?: {
-    bank?: string;
-    country?: string;
-    type?: string;
-    brand?: string;
-  };
+type XenditErrorType = {
+  error_code: string;
+  message: string;
 };
+
+export type XenditResponseType =
+  | {
+      id: string;
+      authentication_id: string;
+      external_id?: string;
+      masked_card_number: string;
+      status: string;
+      payer_authentication_url?: string;
+      failure_reason?: string;
+      card_info?: {
+        bank?: string;
+        country?: string;
+        type?: string;
+        brand?: string;
+      };
+    }
+  | XenditErrorType;

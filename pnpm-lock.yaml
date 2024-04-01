@@ -182,6 +182,9 @@ dependencies:
   uuid:
     specifier: ^9.0.1
     version: 9.0.1
+  xendit-node:
+    specifier: ^4.3.0
+    version: 4.3.0
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -8530,6 +8533,11 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+    dev: false
+
+  /xendit-node@4.3.0:
+    resolution: {integrity: sha512-pDCigN/qIZrhOMSoQDFD6fET41pE+O9dUWJxqn9hlXsP98zkBfeR9zutlB1xz91wjY15iFSWUHm+iUHGfZM42A==}
+    engines: {node: '>=18.0.0'}
     dev: false
 
   /y18n@5.0.8:

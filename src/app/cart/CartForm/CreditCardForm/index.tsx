@@ -15,6 +15,7 @@ export default function CreditCardForm({ form }: CCFormProps) {
     getExpiryDateProps,
     getCVCProps,
   } = usePaymentInputs();
+
   const { watch } = form;
   const setValue: (name: FieldName, value: string | undefined) => void =
     form.setValue;

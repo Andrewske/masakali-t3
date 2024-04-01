@@ -11,8 +11,10 @@ type XenditCreateTokenProps = {
   is_multiple_use: boolean;
 };
 
-export const xenditCreaetToken = (data: XenditCreateTokenProps) => {
+export const xenditCreateToken = (data: XenditCreateTokenProps) => {
+  console.log('Creating token with data:', data);
   if (!window.Xendit) {
+    console.log('Xendit not loaded');
     return;
   }
 
@@ -28,9 +30,28 @@ export const xenditCreaetToken = (data: XenditCreateTokenProps) => {
 };
 
 export const xenditResponseHandler = (response: XenditResponseType) => {
-  if (response.status === 'IN_REVIEW') {
-    window.open(response.payer_authentication_url);
-  } else {
-    console.log('Token failed with status: ' + response.status);
+  if ('status' in response) {
+    if (response.status === 'IN_REVIEW') {
+      window.open(response.payer_authentication_url);
+    }
+    if (response.status === 'VERIFIED') {
+      const token = response.id;
+
+      console.log('Token created:', token);
+    }
+    if (response.status === 'FAILED' && 'failure_reason' in response) {
+      console.log(
+        'Token failed with status: ' +
+          (response?.failure_reason ?? 'Unknown error')
+      );
+    } else if ('error_code' in response && 'message' in response) {
+      console.log(response);
+      console.log(response.error_code);
+      console.log(
+        `Token failed with status: ${
+          (response.message as string) ?? 'Unknown error'
+        }`
+      );
+    }
   }
 };
