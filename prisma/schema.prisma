@@ -108,8 +108,8 @@ model Reservation {
     villaId       Int
     channelId     Int?
     userId        String?
-    arrival       String
-    departure     String
+    arrival       DateTime
+    departure     DateTime
     createdAt     DateTime
     guestName     String?
     firstName     String?

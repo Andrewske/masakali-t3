@@ -6,7 +6,8 @@ import { format } from 'date-fns';
 import { type Reservation } from '@prisma/client';
 
 import styles from './styles.module.scss';
-import { getAvailableVillas } from '~/utils/reservations';
+// import { getAvailableVillas } from '~/utils/reservations';
+import { getAvailableVillas } from '~/actions/reservations';
 import DateRangePicker from '~/components/DateRangePicker';
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
 import { GoToPageButton } from '~/components/Button/GoToPageButton';
@@ -35,17 +36,20 @@ const Availability = ({
   >(undefined);
 
   useEffect(() => {
-    const villasAvailable =
-      dateRange?.to &&
-      getAvailableVillas({
-        villaPricing,
-        arrivalDate: dateRange?.from ?? today,
-        departureDate: dateRange.to,
-      });
+    async function fetchAvailableVillas() {
+      const villasAvailable =
+        dateRange?.to &&
+        (await getAvailableVillas({
+          from: dateRange?.from?.toISOString() ?? today.toISOString(),
+          to: dateRange?.to.toISOString(),
+        }));
 
-    console.log(villasAvailable);
+      console.log(villasAvailable);
 
-    setVillasAvailable(villasAvailable);
+      setVillasAvailable(villasAvailable);
+    }
+
+    fetchAvailableVillas().catch((err) => console.log(err));
   }, [dateRange, reservations, villaPricing]);
 
   // TODO: Fix Villas Available

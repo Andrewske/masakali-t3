@@ -11,7 +11,7 @@ import Amenities from '~/app/(home)/Amenities';
 import Location from '~/app/(home)/Location';
 import { addDays, format } from 'date-fns';
 import { getCurrentDateInBali } from '~/utils';
-import { getAllDisabledDates } from '~/actions/smoobu';
+import { getAllBlockedDates } from '~/actions/reservations';
 import Footer from '~/components/layout/Footer';
 import Header from '~/components/layout/Header';
 import HideHeader from '~/components/layout/HideHeader';
@@ -19,14 +19,14 @@ import YogaShala from './(home)/YogaShala';
 import type { VillaIdsType } from '~/lib/villas';
 
 const today = getCurrentDateInBali();
-const twoDaysAgo: string = addDays(today, -2).toISOString();
+const twoDaysAgo: Date = addDays(today, -2);
 
 const Page = async () => {
   const reservations = await prisma.reservation.findMany({
     where: {
       departure: {
         gt: twoDaysAgo,
-        lt: '2023-12-01',
+        lt: new Date('2023-12-01'),
       },
       cancelled: false,
     },
@@ -54,7 +54,7 @@ const Page = async () => {
       }))
     );
 
-  const disabledDates = await getAllDisabledDates();
+  const disabledDates = await getAllBlockedDates();
 
   return (
     <>

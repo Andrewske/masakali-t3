@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
@@ -145,61 +145,10 @@ export default function CartForm({
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setIsProcessing(true);
 
-    const [cardExpMonth, cardExpYear] = formData.cc_expiry.split('/');
-
-    if (!cardExpMonth || !cardExpYear) {
-      setIsProcessing(false);
-      return;
-    }
-
-    xenditCreateToken({
-      amount: totalIDR,
-      card_number: formData.cc_number,
-      card_exp_month: cardExpMonth,
-      card_exp_year: '20' + cardExpYear,
-      card_cvn: formData.cc_cvc,
-      is_multiple_use: false,
-    });
-
+    submitToXendit({ formData, setIsProcessing, totalIDR });
     console.log('submitting form data', formData);
 
-    // const cardElement = elements?.getElement(CardElement);
-
-    // const billingDetails = {
-    //   name: formData.fullName,
-    //   email,
-    //   phone,
-    //   address: {
-    //     city,
-    //     country,
-    //     line1: formData.address.address1,
-    //     line2: formData.address.address2 ?? '',
-    //     postal_code: formData.address.zip_code,
-    //     state: formData.address.region,
-    //   },
-    // };
-
-    // if (stripe && cardElement && billingDetails) {
-    //   console.log('card element', cardElement);
-    //   console.log('submitting form data', formData);
-    // }
-    // const user: UserState['user'] = {
-    //   fullName: formData.fullName,
-    //   email: formData.email,
-    //   phone: formData.phone,
-    //   adults: formData.adults,
-    //   children: formData.children,
-    //   address: {
-    //     address1: formData.address.address1,
-    //     address2: formData.address.address2,
-    //     city: formData.address.city,
-    //     region: formData.address.region,
-    //     country: formData.address.country,
-    //     zip_code: formData.address.zip_code,
-    //   },
-    // };
-
-    // setUser(user);
+    setUserState({ formData, setUser });
 
     // await sendBookingConfirmation({
     //   data: {
@@ -292,37 +241,10 @@ export default function CartForm({
 
   const errors = form.formState.errors;
 
-  function isButtonDisabled() {
-    if (step === 1) {
-      return (
-        !fullName ||
-        !!errors.fullName ||
-        !email ||
-        !!errors.email ||
-        !phone ||
-        !!errors.phone
-      );
-    } else if (step === 2) {
-      return (
-        !address1 ||
-        !!errors?.address?.address1 ||
-        !city ||
-        !!errors?.address?.city ||
-        !region ||
-        !!errors?.address?.region ||
-        !country ||
-        !!errors?.address?.country ||
-        !zip_code ||
-        !!errors?.address?.zip_code
-      );
-    }
-    return false;
-  }
-
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        // onSubmit={form.handleSubmit(onSubmit)}
         className="w-full p-4 bg-gray flex-col justify-center items-center gap-2"
       >
         {step === 1 && (
@@ -342,7 +264,7 @@ export default function CartForm({
 
         {step === 3 ? (
           <Button
-            type="submit"
+            onClick={form.handleSubmit(onSubmit)}
             className="bg-purple my-4 w-full"
             disabled={!canSubmit || isProcessing || !stripe}
           >
@@ -362,3 +284,82 @@ export default function CartForm({
     </Form>
   );
 }
+
+type SubmitToXenditProps = {
+  formData: FormData;
+  setIsProcessing: React.Dispatch<React.SetStateAction<boolean>>;
+  totalIDR: number;
+};
+
+const submitToXendit = ({
+  formData,
+  setIsProcessing,
+  totalIDR,
+}: SubmitToXenditProps) => {
+  const [cardExpMonth, cardExpYear] = formData.cc_expiry.split('/');
+
+  if (!cardExpMonth || !cardExpYear) {
+    setIsProcessing(false);
+    return;
+  }
+
+  xenditCreateToken({
+    amount: totalIDR,
+    card_number: formData.cc_number,
+    card_exp_month: cardExpMonth,
+    card_exp_year: '20' + cardExpYear,
+    card_cvn: formData.cc_cvc,
+    is_multiple_use: false,
+  });
+};
+
+type SetUserStateProps = {
+  formData: FormData;
+  setUser: React.Dispatch<React.SetStateAction<UserState>>;
+};
+
+const setUserState = ({ formData, setUser }: SetUserStateProps) => {
+  const { fullName, email, phone, adults, children, address } = formData;
+  const { address1, address2, city, region, country, zip_code } = address;
+
+  // Create a new user object that matches the structure expected by UserState
+  const newUser = {
+    fullName,
+    email,
+    phone,
+    adults,
+    children,
+    address: {
+      address1,
+      address2,
+      city,
+      region,
+      country,
+      zip_code,
+    },
+  };
+
+  // Update the user property within the UserState object
+  setUser((prevState) => ({
+    ...prevState,
+    user: newUser,
+  }));
+};
+
+// const user: UserState['user'] = {
+//   fullName: formData.fullName,
+//   email: formData.email,
+//   phone: formData.phone,
+//   adults: formData.adults,
+//   children: formData.children,
+//   address: {
+//     address1: formData.address.address1,
+//     address2: formData.address.address2,
+//     city: formData.address.city,
+//     region: formData.address.region,
+//     country: formData.address.country,
+//     zip_code: formData.address.zip_code,
+//   },
+// };
+
+// setUser(user);
