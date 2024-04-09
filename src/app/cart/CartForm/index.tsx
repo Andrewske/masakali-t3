@@ -27,6 +27,10 @@ import {
 import { formatCurrency } from '~/utils/helpers';
 import { xenditCreateToken } from '~/utils/xendit';
 
+import Modal from '~/app/cart/Modal';
+import { useXenditStore } from '~/stores/xenditStore';
+import { confirmXenditPayment } from '~/actions/xendit';
+
 export default function CartForm({
   villaId,
   villaPricing,
@@ -39,28 +43,22 @@ export default function CartForm({
   const { conversionRates, setConversionRates, currency } = useCurrencyStore(
     (state) => state
   );
+  const { token, setToken, setPaymentSuccess, paymentSuccess } =
+    useXenditStore();
   const { dateRange } = useReservationStore((state) => state);
-  const { user, setUser, _hasHydrated } = useUserStore((state) => state);
+  const { user, setUser } = useUserStore((state) => state);
   const [step, setStep] = useState(1);
-  const stripe = useStripe();
-  const elements = useElements();
+
   // const { toast } = useToast();
   const checkin = dateRange.from;
   const checkout = dateRange.to;
   const villaName = getVillaName(villaId);
 
-  useEffect(() => {
-    console.log(user, _hasHydrated);
-  }, [user, _hasHydrated]);
+  const conversionRateToUSD = conversionRates['USD'];
 
-  useEffect(() => {
-    setConversionRates();
-  }, [setConversionRates]);
   if (!checkin || !checkout) {
     throw new Error('Date range is not set');
   }
-
-  const conversionRateToUSD = conversionRates['USD'];
 
   const { finalPrice, discount, taxes, numNights, pricePerNight, totalIDR } =
     createPricingObject({
@@ -69,6 +67,55 @@ export default function CartForm({
       checkout,
       conversionRate: conversionRateToUSD ?? 1,
     });
+
+  useEffect(() => {
+    setConversionRates();
+  }, [setConversionRates]);
+  if (!checkin || !checkout) {
+    throw new Error('Date range is not set');
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (token) {
+        console.log({ token });
+        console.log({ user });
+        const payment = await confirmXenditPayment({
+          token,
+          user,
+          reservation: {
+            villaId,
+            villaName,
+            checkin,
+            checkout,
+            numNights,
+            finalPrice,
+            pricePerNight,
+            discount,
+            taxes,
+            totalIDR,
+            currency,
+          },
+        }).catch((err) => {
+          console.error(err);
+          return false;
+        });
+        console.log({ payment });
+        setToken(null);
+        setPaymentSuccess(payment);
+      }
+    };
+
+    void fetchData();
+  }, [token, user, setToken, setPaymentSuccess, totalIDR]);
+
+  useEffect(() => {
+    if (paymentSuccess) {
+      console.log('Payment success');
+    } else {
+      console.log('Payment failed');
+    }
+  }, [paymentSuccess]);
 
   const nextStep = () => {
     setStep(step + 1);
@@ -87,7 +134,7 @@ export default function CartForm({
         address2: '',
         city: 'Jakarta',
         region: 'DKI Jakarta',
-        country: 'Indonesia',
+        country: 'ID',
         zip_code: '12345',
       },
       cc_number: '4000000000001091',
@@ -99,56 +146,55 @@ export default function CartForm({
 
   const form = useForm<FormData>(formOptions);
 
-  const fullName = form.watch('fullName');
-  const email = form.watch('email');
-  const phone = form.watch('phone');
-  const adults = form.watch('adults');
-  const children = form.watch('children');
-  const address = form.watch('address');
-  const address1 = form.watch('address.address1');
-  const city = form.watch('address.city');
-  const region = form.watch('address.region');
-  const country = form.watch('address.country');
-  const zip_code = form.watch('address.zip_code');
+  // const fullName = form.watch('fullName');
+  // const email = form.watch('email');
+  // const phone = form.watch('phone');
+  // const adults = form.watch('adults');
+  // const children = form.watch('children');
+  // const address = form.watch('address');
+  // const address1 = form.watch('address.address1');
+  // const city = form.watch('address.city');
+  // const region = form.watch('address.region');
+  // const country = form.watch('address.country');
+  // const zip_code = form.watch('address.zip_code');
 
-  useEffect(() => {
-    setUser({
-      fullName,
-      email,
-      phone,
-      adults,
-      children,
-      address: {
-        address1,
-        address2: address?.address2,
-        city,
-        region,
-        country,
-        zip_code,
-      },
-    });
-  }, [
-    fullName,
-    email,
-    phone,
-    adults,
-    children,
-    address1,
-    address,
-    city,
-    region,
-    country,
-    zip_code,
-    setUser,
-  ]);
+  // useEffect(() => {
+  //   setUser({
+  //     fullName,
+  //     email,
+  //     phone,
+  //     adults,
+  //     children,
+  //     address: {
+  //       address1,
+  //       address2: address?.address2,
+  //       city,
+  //       region,
+  //       country,
+  //       zip_code,
+  //     },
+  //   });
+  // }, [
+  //   fullName,
+  //   email,
+  //   phone,
+  //   adults,
+  //   children,
+  //   address1,
+  //   address,
+  //   city,
+  //   region,
+  //   country,
+  //   zip_code,
+  //   setUser,
+  // ]);
 
-  const onSubmit: SubmitHandler<FormData> = async (formData) => {
+  const onSubmit: SubmitHandler<FormData> = (formData) => {
     setIsProcessing(true);
 
+    const user = formatUserState({ formData });
+    setUser(user);
     submitToXendit({ formData, setIsProcessing, totalIDR });
-    console.log('submitting form data', formData);
-
-    setUserState({ formData, setUser });
 
     // await sendBookingConfirmation({
     //   data: {
@@ -167,10 +213,6 @@ export default function CartForm({
     //   isRetreat: false,
     // });
 
-    setIsProcessing(false);
-
-    return null;
-
     // await createReservation({
     //   villaId,
     //   checkin,
@@ -183,105 +225,61 @@ export default function CartForm({
     //   adults: formData.adults,
     //   children: formData.children,
     //   country: formData.address.country,
-    //   stripePaymentIntentId: '',
+
     // });
 
     // setIsProcessing(false);
 
-    // try {
-    //   const price = finalPrice / conversionRate;
-
-    //   if (price && stripe && cardElement && billingDetails) {
-    //     console.log('here', price, stripe, cardElement, billingDetails);
-    //     const { clientSecret } = await stripeCheckout({
-    //       price: price,
-    //       stripe,
-    //       cardElement,
-    //       billingDetails,
-    //     });
-
-    //     if (!clientSecret) {
-    //       throw new Error('Client Secret not found');
-    //     }
-
-    //     stripe
-    //       .retrievePaymentIntent(clientSecret)
-    //       .then(({ paymentIntent }) => {
-    //         if (!paymentIntent) {
-    //           throw new Error('Payment Intent not found');
-    //         }
-    //         switch (paymentIntent?.status) {
-    //           case 'succeeded':
-    //             // send reservation to smoobu
-
-    //             // send email to user
-    //             toast({ title: 'Payment succeeded' });
-    //             break;
-    //           case 'processing':
-    //             toast({ title: 'Payment processing' });
-    //             break;
-    //           case 'requires_payment_method':
-    //             toast({ title: 'Payment failed' });
-    //             break;
-    //           default:
-    //             toast({ title: 'Something went wrong' });
-    //             break;
-    //         }
-    //       })
-    //       .catch((error: StripeError) => {
-    //         toast({ title: error.message });
-    //       });
-    //   }
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // } finally {
-    //   setIsProcessing(false);
-    // }
+    setIsProcessing(false);
+    return false;
   };
 
-  const errors = form.formState.errors;
+  // const errors = form.formState.errors;
 
   return (
-    <Form {...form}>
-      <form
-        // onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full p-4 bg-gray flex-col justify-center items-center gap-2"
-      >
-        {step === 1 && (
-          <GuestDetailsForm
-            form={form}
-            villaName={villaName}
-          />
-        )}
-        {step === 2 && <AddressForm form={form} />}
-        {step === 3 && (
-          <PaymentForm
-            form={form}
-            setStep={setStep}
-            setCanSubmit={setCanSubmit}
-          />
-        )}
+    <>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full p-4 bg-gray flex-col justify-center items-center gap-2"
+        >
+          {step === 1 && (
+            <GuestDetailsForm
+              form={form}
+              villaName={villaName}
+            />
+          )}
+          {step === 2 && <AddressForm form={form} />}
+          {step === 3 && (
+            <PaymentForm
+              form={form}
+              setStep={setStep}
+              setCanSubmit={setCanSubmit}
+            />
+          )}
 
-        {step === 3 ? (
-          <Button
-            onClick={form.handleSubmit(onSubmit)}
-            className="bg-purple my-4 w-full"
-            disabled={!canSubmit || isProcessing || !stripe}
-          >
-            Submit
-          </Button>
-        ) : (
-          <Button
-            type="button"
-            onClick={nextStep}
-            className="bg-purple my-4 w-full"
-            disabled={isButtonDisabled()}
-          >
-            Next Step
-          </Button>
-        )}
-      </form>
-    </Form>
+          {step === 3 ? (
+            <Button
+              type="submit"
+              onClick={form.handleSubmit(onSubmit)}
+              className="bg-purple my-4 w-full"
+              disabled={!canSubmit || isProcessing}
+            >
+              Submit
+            </Button>
+          ) : (
+            <Button
+              type="button"
+              onClick={nextStep}
+              className="bg-purple my-4 w-full"
+              disabled={!canSubmit || isProcessing}
+            >
+              Next Step
+            </Button>
+          )}
+        </form>
+      </Form>
+    </>
   );
 }
 
@@ -315,10 +313,9 @@ const submitToXendit = ({
 
 type SetUserStateProps = {
   formData: FormData;
-  setUser: React.Dispatch<React.SetStateAction<UserState>>;
 };
 
-const setUserState = ({ formData, setUser }: SetUserStateProps) => {
+const formatUserState = ({ formData }: SetUserStateProps) => {
   const { fullName, email, phone, adults, children, address } = formData;
   const { address1, address2, city, region, country, zip_code } = address;
 
@@ -340,26 +337,5 @@ const setUserState = ({ formData, setUser }: SetUserStateProps) => {
   };
 
   // Update the user property within the UserState object
-  setUser((prevState) => ({
-    ...prevState,
-    user: newUser,
-  }));
+  return newUser;
 };
-
-// const user: UserState['user'] = {
-//   fullName: formData.fullName,
-//   email: formData.email,
-//   phone: formData.phone,
-//   adults: formData.adults,
-//   children: formData.children,
-//   address: {
-//     address1: formData.address.address1,
-//     address2: formData.address.address2,
-//     city: formData.address.city,
-//     region: formData.address.region,
-//     country: formData.address.country,
-//     zip_code: formData.address.zip_code,
-//   },
-// };
-
-// setUser(user);

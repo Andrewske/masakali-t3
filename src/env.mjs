@@ -28,6 +28,7 @@ export const env = createEnv({
     NEXTAUTH_SECRET: z.string(),
     NEXTAUTH_URL: z.string(),
     XENDIT_SECRET_KEY: z.string(),
+    XENDIT_TEST_SECRET_KEY: z.string(),
   },
 
   /**
@@ -45,6 +46,7 @@ export const env = createEnv({
     NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string(),
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
     NEXT_PUBLIC_XENDIT_PUBLIC_KEY: z.string(),
+    NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY: z.string(),
   },
   /**
    * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
@@ -80,5 +82,7 @@ export const env = createEnv({
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
     NEXT_PUBLIC_XENDIT_PUBLIC_KEY: process.env.NEXT_PUBLIC_XENDIT_PUBLIC_KEY,
     XENDIT_SECRET_KEY: process.env.XENDIT_SECRET_KEY,
+    XENDIT_TEST_SECRET_KEY: process.env.XENDIT_TEST_SECRET_KEY,
+    NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY: process.env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY,
   },
 });

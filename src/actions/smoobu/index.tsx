@@ -233,7 +233,7 @@ type CreateReservationPropsType = {
   adults: number;
   children: number;
   country: string;
-  stripePaymentIntentId: string;
+  xenditExternalId: string;
 };
 export const createReservation = async ({
   villaId,
@@ -247,7 +247,7 @@ export const createReservation = async ({
   adults,
   children,
   country,
-  stripePaymentIntentId,
+  xenditExternalId,
 }: CreateReservationPropsType) => {
   try {
     const reservation = await fetch(env.SMOOBU_API_URL + '/reservations', {
@@ -268,7 +268,7 @@ export const createReservation = async ({
         phone: phone,
         adults: adults,
         children: children,
-        notice: stripePaymentIntentId,
+        notice: xenditExternalId,
         country: country,
         price: finalPrice,
       }),

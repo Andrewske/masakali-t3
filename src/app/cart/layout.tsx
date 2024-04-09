@@ -5,12 +5,15 @@ import { loadStripe } from '@stripe/stripe-js';
 import { env } from '~/env.mjs';
 import Header from '~/components/layout/Header';
 import Footer from '~/components/layout/Footer';
+import Modal from './Modal';
+import XenditProvider from '~/providers/ZenditProvider';
 
 const stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (window.Xendit) {
+      console.log('Xendit loaded');
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       window.Xendit.setPublishableKey(env.NEXT_PUBLIC_XENDIT_PUBLIC_KEY);
     }
@@ -19,9 +22,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Elements stripe={stripePromise}>
-        <Header />
-        {children}
-        <Footer />
+        <XenditProvider>
+          <Header />
+          {children}
+          <Modal />
+          <Footer />
+        </XenditProvider>
       </Elements>
     </>
   );

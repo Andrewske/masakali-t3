@@ -1,6 +1,12 @@
 //https://docs.xendit.co/credit-cards/integrations/tokenization
 
-import type { TokenDataType, XenditResponseType } from '~/types/xendit';
+import type {
+  TokenDataType,
+  XenditErrorResponse,
+  XenditResponseType,
+} from '~/types/xendit';
+import { env } from '~/env.mjs';
+import { useXenditStore } from '~/stores/xenditStore';
 
 type XenditCreateTokenProps = {
   amount: number;
@@ -17,41 +23,67 @@ export const xenditCreateToken = (data: XenditCreateTokenProps) => {
     console.log('Xendit not loaded');
     return;
   }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+  window.Xendit.setPublishableKey(env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY);
+
+  console.log(data.amount);
 
   const tokenData: TokenDataType = {
     ...data,
+    amount: Math.round(data.amount),
+    currency: 'IDR',
     should_authenticate: true,
   };
 
+  // const response = window.Xendit.card.validateCardNumber(tokenData.card_number);
+  // console.log('Card number validation:', response);
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
   window.Xendit.card.createToken(tokenData, xenditResponseHandler);
-
   return false;
 };
 
-export const xenditResponseHandler = (response: XenditResponseType) => {
-  if ('status' in response) {
-    if (response.status === 'IN_REVIEW') {
-      window.open(response.payer_authentication_url);
-    }
-    if (response.status === 'VERIFIED') {
-      const token = response.id;
+export const xenditResponseHandler = (
+  err: XenditErrorResponse,
+  response: XenditResponseType
+) => {
+  const { setPayerAuthUrl, setShowModal, setError, setToken } =
+    useXenditStore.getState();
 
-      console.log('Token created:', token);
-    }
-    if (response.status === 'FAILED' && 'failure_reason' in response) {
-      console.log(
-        'Token failed with status: ' +
-          (response?.failure_reason ?? 'Unknown error')
-      );
-    } else if ('error_code' in response && 'message' in response) {
-      console.log(response);
-      console.log(response.error_code);
-      console.log(
-        `Token failed with status: ${
-          (response.message as string) ?? 'Unknown error'
-        }`
-      );
+  console.log('Xendit response:', response);
+  console.log('Xendit error:', err);
+
+  if (err || !response) {
+    console.error('Error creating token:', err);
+    setError(err?.message || 'Unknown error during tokenization');
+    return;
+  }
+
+  console.log('Xendit response:', response);
+
+  if (response) {
+    switch (response.status) {
+      case 'IN_REVIEW':
+        if (response.payer_authentication_url) {
+          setPayerAuthUrl(response.payer_authentication_url);
+          setShowModal(true); // Open the modal for 3D Secure
+        }
+        break;
+      case 'VERIFIED':
+        console.log('Token created:', response.id);
+        setToken(response.id); // Save the token for further processing
+        setShowModal(false); // Close any open modal
+        break;
+      case 'FAILED':
+        console.error(
+          'Token failed:',
+          response.failure_reason || 'Unknown error'
+        );
+        setError(response.failure_reason || 'Failed without a specific reason');
+        break;
+      default:
+        console.error('Unhandled response status:', response.status);
+        setError('Unhandled response status');
     }
   }
 };
