@@ -8,8 +8,8 @@ type TransformedReservation = {
   referenceId: string;
   villaId: number;
   channelId: number;
-  arrival: string;
-  departure: string;
+  arrival: Date;
+  departure: Date;
   createdAt: Date;
   guestName: string;
   firstName: string;
@@ -88,8 +88,8 @@ function transformReservationData(
     referenceId: res['reference-id'],
     villaId: res.apartment?.id ?? 0,
     channelId: res.channel?.id ?? 0,
-    arrival: res['arrival'],
-    departure: res['departure'],
+    arrival: new Date(res['arrival']),
+    departure: new Date(res['departure']),
     createdAt: new Date(res['created-at']),
     guestName: res['guest-name'],
     firstName: res.firstname,

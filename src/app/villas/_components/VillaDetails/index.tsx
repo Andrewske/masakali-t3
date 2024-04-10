@@ -61,15 +61,18 @@ const VillaDetails = ({ description, amenities }: VillaDataType) => {
 
   const renderHeadings = () => {
     return headings.map((heading, index) => (
-      <h4
-        className={`${styles.heading ?? ''} ${
-          activeHeading === heading ? styles.active ?? '' : ''
-        }`}
+      <div
         key={`${heading}-${index}`}
+        className="relative cursor-pointer"
         onClick={() => setActiveHeading(heading)}
       >
-        {heading}
-      </h4>
+        <h4 className="inline-block">{heading}</h4>
+        <div
+          className={`absolute left-0 bottom-0 w-full h-px bg-purple transform transition-transform duration-250 ease-in-out ${
+            activeHeading === heading ? 'scale-x-100' : 'scale-x-0'
+          }`}
+        ></div>
+      </div>
     ));
   };
 
@@ -78,8 +81,10 @@ const VillaDetails = ({ description, amenities }: VillaDataType) => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.header}>{renderHeadings()}</div>
+    <div className="flex flex-col w-full">
+      <div className="flex justify-evenly flex-wrap gap-1 w-full">
+        {renderHeadings()}
+      </div>
       <div className={styles.container}>{renderContentSections()}</div>
     </div>
   );

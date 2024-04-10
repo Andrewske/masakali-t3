@@ -12,6 +12,7 @@ import DateRangePicker from '~/components/DateRangePicker';
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
 import { GoToPageButton } from '~/components/Button/GoToPageButton';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
+import Link from 'next/link';
 const today = new Date();
 
 export type VillaPricing = {
@@ -40,8 +41,11 @@ const Availability = ({
       const villasAvailable =
         dateRange?.to &&
         (await getAvailableVillas({
-          from: dateRange?.from?.toISOString() ?? today.toISOString(),
-          to: dateRange?.to.toISOString(),
+          from:
+            dateRange?.from?.toISOString().split('T')[0] ??
+            today.toISOString().split('T')[0] ??
+            '',
+          to: dateRange?.to.toISOString().split('T')[0] ?? '',
         }));
 
       console.log(villasAvailable);
@@ -52,16 +56,6 @@ const Availability = ({
     fetchAvailableVillas().catch((err) => console.log(err));
   }, [dateRange, reservations, villaPricing]);
 
-  // TODO: Fix Villas Available
-  // const villasAvailable =
-  //   dateRange?.to &&
-  //   getAvailableVillas({
-  //     reservations,
-  //     arrivalDate: dateRange?.from ?? today,
-  //     departureDate: dateRange.to,
-  //   });
-
-  // TODO: Work on availability logic
   return (
     <section
       id="availability"
@@ -116,67 +110,30 @@ const Availability = ({
         </div>
       </div>
 
-      {/* <div className="flex flex-wrap gap-4 transition-all duration-300 ease-in-out justify-evenly w-full">
-        {villasAvailable &&
-          villasAvailable.map((villaId) => {
-            const villaName = getVillaName(villaId);
-            const villa = villaDetails[villaName];
-            return (
-              <div
-                key={villaId}
-                className=" w-[350px] h-[350px] relative z-10 shadow-light-purple "
-              >
-                <Image
-                  src={villa.defaultImage}
-                  alt={villa.name}
-                  width={300}
-                  height={300}
-                  className="relative object-cover w-full h-full z-0"
-                />
-                <span className="absolute top-0 left-0  h-full z-20 p-4">
-                  <span className="bg-white bg-opacity-80 p-4 w-full h-full grid grid-col-1 place-items-center">
-                    <h3 className="uppercase text-2xl">{villa.name}</h3>
-                    <p className="text-sm">{villa.shortDescription}</p>
-                    <GoToPageButton
-                      callToAction="Book Now"
-                      isWhite={false}
-                      path={`/villas/${villa.name}`}
-                    />
-                  </span>
-                </span>
-              </div>
-            );
-          })}
-      </div> */}
       <div className="flex flex-wrap gap-4 transition-all duration-300 ease-in-out justify-evenly w-full m-4">
         {villasAvailable &&
           villasAvailable.map((villaId) => {
             const villaName = getVillaName(villaId);
             const villa = villaDetails[villaName];
             return (
-              <div
+              <Link
                 key={villaId}
-                className=" h-full w-content relative z-10 shadow-light-purple hover:bg-purple hover:text-white"
+                href={`/villas/${villaName}`}
               >
-                {/* <Image
-                  src={villa.defaultImage}
-                  alt={villa.name}
-                  width={100}
-                  height={100}
-                  className="relative object-cover w-full h-full z-0"
-                /> */}
-                <span className="h-full">
-                  <span className="bg-white bg-opacity-80 px-4 py-2 w-full h-full grid grid-col-1 place-items-center">
-                    <h3 className="uppercase text-2xl">{villa.name}</h3>
-                    <p className="text-xs">{villa.shortDescription}</p>
-                    {/* <GoToPageButton
+                <div className=" h-full w-content relative z-10 shadow-light-purple hover:bg-purple hover:text-white">
+                  <span className="h-full">
+                    <span className="bg-white bg-opacity-80 px-4 py-2 w-full h-full grid grid-col-1 place-items-center">
+                      <h3 className="uppercase text-2xl">{villa.name}</h3>
+                      <p className="text-xs">{villa.shortDescription}</p>
+                      {/* <GoToPageButton
                       callToAction="Book Now"
                       isWhite={false}
                       path={`/villas/${villa.name}`}
                     /> */}
+                    </span>
                   </span>
-                </span>
-              </div>
+                </div>
+              </Link>
             );
           })}
       </div>

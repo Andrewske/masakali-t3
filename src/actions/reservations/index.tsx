@@ -12,17 +12,17 @@ export const getAvailableVillas = async ({
 }) => {
   const blockedVillas = await prisma.reservation.findMany({
     where: {
-      arrival: {
-        lte: new Date(to),
-      },
-      departure: {
-        gte: new Date(from),
-      },
+      AND: [
+        { arrival: { lt: new Date(to) } },
+        { departure: { gt: new Date(from) } },
+      ],
     },
-    select: {
-      villaId: true,
-    },
+    // select: {
+    //   villaId: true,
+    // },
   });
+
+  console.log({ blockedVillas });
 
   const blockedVillaIds = blockedVillas.map(({ villaId }) => villaId);
 

@@ -40,9 +40,9 @@ async function Template({ description, amenities, villaId }: VillaDataType) {
 
   // fix styling with tailwind
   return (
-    <main className="w-full h-screen flex flex-wrap">
+    <main className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-3">
       <section
-        className="flex w-1/3 p-8 flex-col gap-4 justify-center items-center relative"
+        className="flex p-4 sm:p-8 lg:col-span-1 w-full bg-white flex-col gap-4 justify-center items-center relative"
         id="villa-info"
       >
         <NextVilla currentVillaName={villaName} />
@@ -60,7 +60,7 @@ async function Template({ description, amenities, villaId }: VillaDataType) {
           amenities={amenities}
         />
       </section>
-      <section className={styles.rightContainer}>
+      <section className="col-span-2">
         <GridGallery />
       </section>
     </main>

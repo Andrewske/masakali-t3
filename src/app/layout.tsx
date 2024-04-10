@@ -16,12 +16,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="en"
       className={`${montserrat.variable} ${baskerville.variable}`}
     >
-      <body className="h-full flex flex-col">
+      <body>
         <ReactQueryProvider>
           <UserStoreProvider>
             <CurrencyStoreProvider>
               <ReservationStoreProvider>
-                <main className="flex-grow">{children} </main>
+                <main className="min-h-screen flex flex-col justify-between">
+                  {children}{' '}
+                </main>
                 <Toaster />
               </ReservationStoreProvider>
             </CurrencyStoreProvider>

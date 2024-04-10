@@ -71,9 +71,6 @@ export default function CartForm({
   useEffect(() => {
     setConversionRates();
   }, [setConversionRates]);
-  if (!checkin || !checkout) {
-    throw new Error('Date range is not set');
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -196,53 +193,14 @@ export default function CartForm({
     setUser(user);
     submitToXendit({ formData, setIsProcessing, totalIDR });
 
-    // await sendBookingConfirmation({
-    //   data: {
-    //     name: formData.fullName,
-    //     email: formData.email,
-    //     country: formData.address.country,
-    //     villaName,
-    //     startDate: checkin.toISOString(),
-    //     endDate: checkout.toISOString(),
-    //     numDays: numNights,
-    //     price: formatCurrency(pricePerNight, currency),
-    //     discount: formatCurrency(discount, currency),
-    //     taxes: formatCurrency(taxes, currency),
-    //     total: formatCurrency(finalPrice, currency),
-    //   },
-    //   isRetreat: false,
-    // });
-
-    // await createReservation({
-    //   villaId,
-    //   checkin,
-    //   checkout,
-    //   finalPrice: totalIDR,
-    //   firstName: formData.fullName.split(' ')[0] ?? '',
-    //   lastName: formData.fullName.split(' ')[1] ?? '',
-    //   email: formData.email,
-    //   phone: formData.phone,
-    //   adults: formData.adults,
-    //   children: formData.children,
-    //   country: formData.address.country,
-
-    // });
-
-    // setIsProcessing(false);
-
     setIsProcessing(false);
     return false;
   };
 
-  // const errors = form.formState.errors;
-
   return (
     <>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full p-4 bg-gray flex-col justify-center items-center gap-2"
-        >
+        <form className="w-full p-4 bg-gray flex-col justify-center items-center gap-2">
           {step === 1 && (
             <GuestDetailsForm
               form={form}
@@ -260,7 +218,7 @@ export default function CartForm({
 
           {step === 3 ? (
             <Button
-              type="submit"
+              type="button"
               onClick={form.handleSubmit(onSubmit)}
               className="bg-purple my-4 w-full"
               disabled={!canSubmit || isProcessing}

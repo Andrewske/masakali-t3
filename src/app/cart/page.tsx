@@ -41,7 +41,7 @@ export default async function Page({
   })) as VillaPricingType[];
 
   return (
-    <section className=" flex flex-grow flex-col items-center h-full relative">
+    <section className="flex flex-grow flex-col items-center h-full relative">
       <div className="absolute top-0 left-0  h-full w-full z-0">
         <Image
           src={villa?.defaultImage ?? '/villa-placeholder.webp'}
@@ -51,7 +51,7 @@ export default async function Page({
           priority={true}
         />
       </div>
-      <span className="bg-white bg-opacity-15 p-4 w-full h-full flex flex-col z-10">
+      <span className="bg-white bg-opacity-15 p-4 flex-grow flex flex-col z-10 w-full">
         <div className="flex z-20 justify-center">
           <h1 className="bg-purple text-white text-center py-4 px-8">Cart</h1>
         </div>
