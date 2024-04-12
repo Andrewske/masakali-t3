@@ -1,4 +1,4 @@
-import { type NextApiRequest } from 'next';
+import type { NextApiResponse, NextApiRequest } from 'next';
 import { villaIdsArray, type VillaIdsType } from '~/lib/villas';
 
 import type { SmoobuReservation, SmoobuRatesResponse } from '~/types/smoobu';
@@ -29,26 +29,26 @@ const actionTypes = [
 // Type "NextApiRequest" is not a valid type for the function's first argument.
 // Expected "Request | NextRequest", got "NextApiRequest".
 
-async function parseRequestBody(request: NextApiRequest): Promise<WebhookBody> {
-  if (typeof request.body === 'string') {
-    // If the body is already a string, parse it as JSON
-    return JSON.parse(request.body) as WebhookBody;
-  } else {
-    // If the body is a stream, read it and parse the result
-    const chunks = [];
-    for await (const chunk of request.body) {
-      chunks.push(chunk);
-    }
-    const bodyString = Buffer.concat(chunks).toString();
-    return JSON.parse(bodyString) as WebhookBody;
-  }
-}
+// async function parseRequestBody(request: Request): Promise<WebhookBody> {
+//   if (typeof request.body === 'string') {
+//     // If the body is already a string, parse it as JSON
+//     return JSON.parse(request.body) as WebhookBody;
+//   } else {
+//     // If the body is a stream, read it and parse the result
+//     const chunks = [];
+//     for await (const chunk of request.body) {
+//       chunks.push(chunk);
+//     }
+//     const bodyString = Buffer.concat(chunks).toString();
+//     return JSON.parse(bodyString) as WebhookBody;
+//   }
+// }
 
-export async function POST(request: NextApiRequest) {
+export async function POST(request: Request) {
   console.log('Webhook hit');
 
   try {
-    const { action, data } = await parseRequestBody(request);
+    const { action, data } = (await request.json()) as WebhookBody;
 
     if (!actionTypes.includes(action)) {
       return new Response('Invalid action type', { status: 200 });
