@@ -6,9 +6,11 @@ import {
   cancelReservation,
   deleteReservation,
   updateReservation,
-  upsertVillaPricing,
+  batchVillaPricing,
   createReservation,
 } from '~/utils/smoobu';
+
+// TODO: find new upsertPricing
 
 type WebhookBody = {
   action: string;
@@ -23,6 +25,9 @@ const actionTypes = [
   'deleteReservation',
   'newReservation',
 ];
+
+// Type "NextApiRequest" is not a valid type for the function's first argument.
+// Expected "Request | NextRequest", got "NextApiRequest".
 
 async function parseRequestBody(request: NextApiRequest): Promise<WebhookBody> {
   if (typeof request.body === 'string') {
@@ -51,7 +56,7 @@ export async function POST(request: NextApiRequest) {
 
     // TODO: Test
     if (action === 'updateRates' && isSmoobuRatesResponse(data)) {
-      await upsertVillaPricing(data);
+      await batchVillaPricing(data);
     }
 
     if (action === 'updateReservation' && isSmoobuReservation(data)) {

@@ -6,8 +6,6 @@ import { GoToPageButton } from '~/components/Button/GoToPageButton';
 import { villaDetails } from '~/lib/villas';
 import ScrollOffset from '~/components/ScrollOffset';
 
-// TODO - Get other villa photos
-
 const Villas = () => {
   return (
     <section

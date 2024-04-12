@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { villaDetails, type VillaNamesType } from '~/lib/villas';
 
-// TODO: Add the description of the villas
 const Reviews = ({ villaName }: { villaName: VillaNamesType }) => {
   const [step, setStep] = useState(0);
   const reviews = villaDetails[villaName].reviews;

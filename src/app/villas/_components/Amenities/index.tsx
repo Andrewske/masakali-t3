@@ -1,6 +1,5 @@
 import { villaDetails, type VillaNamesType } from '~/lib/villas';
 
-// TODO: Add the description of the villas
 const Amenities = ({ villaName }: { villaName: VillaNamesType }) => {
   const amenities = villaDetails[villaName].amenities;
   return (
