@@ -9,8 +9,6 @@ import {
   createReservation,
 } from '~/utils/smoobu';
 
-// TODO: find new upsertPricing
-
 type WebhookBody = {
   action: string;
   user: number;
@@ -43,6 +41,7 @@ const actionTypes = [
 //   }
 // }
 
+// TODO: Test
 export async function POST(request: Request) {
   console.log('Webhook hit');
 
@@ -53,7 +52,6 @@ export async function POST(request: Request) {
       return new Response('Invalid action type', { status: 200 });
     }
 
-    // TODO: Test
     if (action === 'updateRates' && isSmoobuRatesResponse(data)) {
       await batchVillaPricing(data);
     }
