@@ -1,7 +1,6 @@
 'use client';
 import styles from './styles.module.scss';
 
-import Button from '~/components/Button';
 import { UpdateReservationsButton } from '~/components/Button/UpdateReservations';
 
 // import { getPricing } from '~/actions/smoobu';
@@ -26,11 +25,11 @@ export default function Page() {
   return (
     <main className={styles.main}>
       <UpdateReservationsButton />
-      <Button
+      {/* <Button
         isWhite={false}
         callToAction={'Click Me'}
         handleClick={handleButtonClick}
-      />
+      /> */}
     </main>
   );
 }

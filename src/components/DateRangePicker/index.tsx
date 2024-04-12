@@ -67,7 +67,7 @@ const DateRangePicker = ({
       console.log('disabled date', newRange);
 
       setDateRange({
-        from: undefined,
+        from: new Date(),
         to: undefined,
       });
     }

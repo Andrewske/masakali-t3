@@ -124,8 +124,8 @@ model Reservation {
     currency      String?    @default("IDR")
     commission    Float?     @default(0)
     cancelled     Boolean?   @default(false)
-
     villa         Villa  @relation(fields: [villaId], references: [id], onDelete: Cascade)
+    paypalId      String?
     @@index([villaId])
 }
 
