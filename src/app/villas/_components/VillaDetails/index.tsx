@@ -1,63 +1,27 @@
 'use client';
 import { useState } from 'react';
 import styles from './styles.module.scss';
+import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
+import Description from '../Description';
+import Amenities from '../Amenities';
+import Reviews from '../Reviews';
 
 export type VillaDataType = {
-  description: string;
-  amenities: string;
+  villaId: VillaIdsType;
 };
 
-const VillaDetails = ({ description, amenities }: VillaDataType) => {
+const VillaDetails = ({ villaId }: VillaDataType) => {
   const headings = ['description', 'amenities', 'reviews'];
   const [activeHeading, setActiveHeading] = useState(headings[0]);
+  const villaName = getVillaName(villaId);
 
-  const renderContent = (heading: string) => {
-    const isActive = activeHeading === heading;
-    const contentStyles = `${styles.content ?? ''} ${
-      isActive ? styles.active ?? '' : ''
-    }`;
+  const villa = Object.values(villaDetails).find(
+    (villa) => villa.id === villaId
+  );
 
-    switch (heading) {
-      case 'description':
-        return (
-          <div
-            key={heading}
-            className={contentStyles}
-          >
-            <p className={styles.description}>{description}</p>
-          </div>
-        );
-      case 'amenities':
-        return (
-          <div
-            key={heading}
-            className={contentStyles}
-          >
-            <ul className={styles.amenities}>
-              {amenities.split(',').map((item, index) => (
-                <li
-                  key={`${item}-${index}`}
-                  className={item}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      case 'reviews':
-        return (
-          <div
-            key={heading}
-            className={contentStyles}
-          >
-            <p className={styles.reviews}>These are some reviews</p>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
+  console.log({ villa });
+
+  if (!villa) return <></>;
 
   const renderHeadings = () => {
     return headings.map((heading, index) => (
@@ -76,16 +40,18 @@ const VillaDetails = ({ description, amenities }: VillaDataType) => {
     ));
   };
 
-  const renderContentSections = () => {
-    return headings.map((heading) => renderContent(heading));
-  };
-
   return (
     <div className="flex flex-col w-full">
       <div className="flex justify-evenly flex-wrap gap-1 w-full">
         {renderHeadings()}
       </div>
-      <div className={styles.container}>{renderContentSections()}</div>
+      <div className="flex flex-col">
+        {activeHeading === 'reviews' && <Reviews villaName={villaName} />}
+        {activeHeading === 'description' && (
+          <Description villaName={villaName} />
+        )}
+        {activeHeading === 'amenities' && <Amenities villaName={villaName} />}
+      </div>
     </div>
   );
 };

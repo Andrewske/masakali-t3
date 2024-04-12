@@ -55,13 +55,10 @@ async function Template({ description, amenities, villaId }: VillaDataType) {
           href={`/cart?&villaId=${villaId}`}
           className="button purple"
         >{`Book ${villaName.toString()}`}</Link>
-        <VillaDetails
-          description={description}
-          amenities={amenities}
-        />
+        <VillaDetails villaId={villaId} />
       </section>
       <section className="col-span-2">
-        <GridGallery />
+        <GridGallery villaName={villaName} />
       </section>
     </main>
   );

@@ -11,7 +11,7 @@ await import('./src/env.mjs');
 const config = {
   reactStrictMode: true,
   images: {
-    domains: ['imgur.com']
+    domains: ['imgur.com', 'avatar.iran.liara.run', 'lh3.googleusercontent.com']
   },
   i18n: {
     locales: ['en'],

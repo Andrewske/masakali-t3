@@ -22,8 +22,6 @@ export const getAvailableVillas = async ({
     // },
   });
 
-  console.log({ blockedVillas });
-
   const blockedVillaIds = blockedVillas.map(({ villaId }) => villaId);
 
   // Filter out the blocked villas from the villaIds array
