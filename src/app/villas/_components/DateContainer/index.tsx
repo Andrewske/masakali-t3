@@ -24,11 +24,10 @@ const DateContainer = ({
 
   const [isActive, setIsActive] = useState(false);
 
-  console.log({ isActive, checkoutDates });
+  // console.log({ isActive, checkoutDates });
 
   const { pricePerNight, subTotal, discount, taxes, finalPrice } =
     useMemo(() => {
-      console.log('dateRange.from:', dateRange.from);
       return createPricingObject({
         villaPricing,
         checkin: new Date(dateRange.from ?? ''),

@@ -19,8 +19,6 @@ const VillaDetails = ({ villaId }: VillaDataType) => {
     (villa) => villa.id === villaId
   );
 
-  console.log({ villa });
-
   if (!villa) return <></>;
 
   const renderHeadings = () => {

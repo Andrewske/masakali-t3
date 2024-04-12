@@ -46,32 +46,37 @@ const DateRangePicker = ({
     );
   };
 
+
   const handleSelect = (newRange: DateRange | undefined) => {
-    if (!newRange) return;
-    if (!rangeIncludesDisabledDate(newRange, disabledDates)) {
-      if (
-        newRange?.from &&
-        newRange?.to &&
-        newRange.from.getTime() === newRange.to.getTime()
-      ) {
-        newRange.to = undefined;
-      }
-      console.log('not disabled');
-
-      // getAvailableVillas(newRange.from, newRange.to);
-
-      console.log('newRange Type', typeof newRange.from, typeof newRange.to);
-      setDateRange(newRange);
-    } else {
-      console.log('disabled date', newRange);
-
-      setDateRange({
-        from: new Date(),
-        to: undefined,
-      });
+    // Check if the new range is undefined or if either the start or end date is missing
+    if (!newRange?.from || !newRange?.to) {
+       // Update the date range with the new range's start and end dates, or undefined if not present
+       setDateRange({ from: newRange?.from, to: newRange?.to });
+       return;
     }
-  };
-
+   
+    // Check if the start and end dates of the new range are the same
+    if (newRange.from.getTime() === newRange.to.getTime()) {
+       // If they are the same, update the date range with the start date and set the end date to undefined
+       setDateRange({ from: newRange.from, to: undefined });
+       return; 
+    }
+   
+    // Check if the new range includes any disabled dates
+    if (rangeIncludesDisabledDate(newRange, disabledDates)) {
+       // Determine the new start date based on whether the current start date is the same as the new range's start date
+       const newFromDate =
+         dateRange.from === newRange.from
+           ? newRange.to // If the current start date is the same as the new range's start date, use the new range's end date
+           : new Date(Math.min(newRange.from.getTime(), newRange.to.getTime())); // Otherwise, use the earliest date between the new range's start and end dates
+       // Update the date range with the new start date and set the end date to undefined
+       setDateRange({ from: newFromDate, to: undefined });
+       return; 
+    }
+   
+    // If none of the above conditions are met, update the date range with the new range
+    setDateRange(newRange);
+   };
   const isDayDisabled = (day: Date) => {
     return disabledDates.has(format(day, 'yyyy-MM-dd'));
   };
