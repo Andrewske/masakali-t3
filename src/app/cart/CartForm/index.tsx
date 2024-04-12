@@ -2,11 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-// import type { StripeError } from '@stripe/stripe-js';
-// import { stripeCheckout } from '~/actions/stripe';
 
-// import { createReservation } from '~/actions/smoobu';
 import AddressForm from './AddressForm';
 import { Button } from '~/components/ui/button';
 import { Form } from '~/components/ui/form';
@@ -18,16 +14,9 @@ import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { type VillaPricingType, createPricingObject } from '~/utils/pricing';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import { useUserStore } from '~/providers/UserStoreProvider';
-// import { useToast } from '~/components/ui/use-toast';
-import { type UserState } from '~/stores/userStore';
-import {
-  sendBookingConfirmation,
-  // type EmailTemplateData,
-} from '~/actions/sendgrid';
-import { formatCurrency } from '~/utils/helpers';
+
 import { xenditCreateToken } from '~/utils/xendit';
 
-import Modal from '~/app/cart/Modal';
 import { useXenditStore } from '~/stores/xenditStore';
 import { confirmXenditPayment } from '~/actions/xendit';
 
@@ -104,7 +93,23 @@ export default function CartForm({
     };
 
     void fetchData();
-  }, [token, user, setToken, setPaymentSuccess, totalIDR]);
+  }, [
+    token,
+    user,
+    setToken,
+    setPaymentSuccess,
+    totalIDR,
+    villaId,
+    villaName,
+    checkin,
+    checkout,
+    numNights,
+    finalPrice,
+    pricePerNight,
+    discount,
+    taxes,
+    currency,
+  ]);
 
   useEffect(() => {
     if (paymentSuccess) {

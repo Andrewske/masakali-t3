@@ -1,4 +1,3 @@
-import type { NextApiResponse, NextApiRequest } from 'next';
 import { villaIdsArray, type VillaIdsType } from '~/lib/villas';
 
 import type { SmoobuReservation, SmoobuRatesResponse } from '~/types/smoobu';

@@ -1,13 +1,11 @@
 'use server';
-import { revalidatePath } from 'next/cache';
 import { env } from '~/env.mjs';
 import type { UserState } from '~/stores/userStore';
 import type { XenditChargeResponse } from '~/types/xendit';
 import { sendBookingConfirmation } from '../sendgrid';
 import { formatCurrency } from '~/utils/helpers';
-import { VillaIdsType } from '~/lib/villas';
+import type { VillaIdsType } from '~/lib/villas';
 import { createReservation } from '~/actions/smoobu';
-import { prisma } from '~/db/prisma';
 
 type ConfirmXenditPaymentProps = {
   token: string;

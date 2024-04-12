@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { type Reservation } from '@prisma/client';
@@ -10,7 +9,6 @@ import styles from './styles.module.scss';
 import { getAvailableVillas } from '~/actions/reservations';
 import DateRangePicker from '~/components/DateRangePicker';
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
-import { GoToPageButton } from '~/components/Button/GoToPageButton';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import Link from 'next/link';
 const today = new Date();

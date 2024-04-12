@@ -1,5 +1,5 @@
 import NextVilla from '~/app/villas/_components/NextVilla';
-import styles from './styles.module.scss';
+
 import GridGallery from '~/app/villas/_components/GridGallery';
 import DateContainer from '~/app/villas/_components/DateContainer';
 import Link from 'next/link';
@@ -17,7 +17,7 @@ export type VillaDataType = {
   checkout: string;
 };
 
-async function Template({ description, amenities, villaId }: VillaDataType) {
+async function Template({ villaId }: VillaDataType) {
   const villaName = getVillaName(villaId);
 
   const { disabledDates, checkoutDates } = await getDisabledDatesForVilla(

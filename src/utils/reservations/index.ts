@@ -1,8 +1,8 @@
 import { type Reservation } from '@prisma/client';
 import { type VillaIdsType, villaIdsArray } from '~/lib/villas';
-import { format, parseISO } from 'date-fns';
+// import { format, parseISO } from 'date-fns';
 import { getDatesBetweenDates } from '..';
-import { VillaPricing } from '~/app/(home)/Availability';
+import type { VillaPricing } from '~/app/(home)/Availability';
 
 type getBlockedDatesAllVillasType = {
   villaPricing: VillaPricing[];
@@ -50,21 +50,21 @@ export const getDisabledDatesOld = (
     }
 
     // Create a function to add to dateCounts to limit code duplication
-    const setDateCounts = (dateString: string, villaId: VillaIdsType) => {
-      const ids = dateCounts.get(dateString) || new Set();
-      dateCounts.set(dateString, ids.add(villaId));
+    const setDateCounts = (dateString: Date, villaId: VillaIdsType) => {
+      const ids = dateCounts.get(dateString.toISOString()) || new Set();
+      dateCounts.set(dateString.toISOString(), ids.add(villaId));
     };
 
     // Get each day between the arrival and departure not inclusive.
     const betweenDates = getDatesBetweenDates(
-      parseISO(reservation.arrival),
-      parseISO(reservation.departure)
+      reservation.arrival,
+      reservation.departure
     );
 
     // For each date in between Dates add the villaId
     for (const date of betweenDates) {
-      const dateString = format(date, 'yyyy-MM-dd');
-      setDateCounts(dateString, resVillaId);
+      // const dateString = format(date, 'yyyy-MM-dd');
+      setDateCounts(date, resVillaId);
     }
 
     // check if the reserations arrival date is in the list of depature dates

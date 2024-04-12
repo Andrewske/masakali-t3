@@ -1,4 +1,3 @@
-/* global Xendit */
 import type { ReactNode } from 'react';
 import '~/styles/globals.scss';
 import 'react-day-picker/dist/style.css';
@@ -9,7 +8,7 @@ import { ReservationStoreProvider } from '~/providers/ReservationStoreProvider/i
 import { CurrencyStoreProvider } from '~/providers/CurrencyStoreProvider/index';
 import { UserStoreProvider } from '~/providers/UserStoreProvider';
 import Script from 'next/script';
-import { env } from '~/env.mjs';
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html

@@ -59,13 +59,13 @@ async function fetchSmoobuRates(): Promise<SmoobuRatesResponse> {
   }
 }
 
-// Type guard to ensure the object is of the expected pricing data type
-function isPricingData(obj: unknown): obj is PricingData {
-  return (
-    typeof obj === 'object' &&
-    obj !== null &&
-    'price' in obj &&
-    'min_length_of_stay' in obj &&
-    'available' in obj
-  );
-}
+// // Type guard to ensure the object is of the expected pricing data type
+// function isPricingData(obj: unknown): obj is PricingData {
+//   return (
+//     typeof obj === 'object' &&
+//     obj !== null &&
+//     'price' in obj &&
+//     'min_length_of_stay' in obj &&
+//     'available' in obj
+//   );
+// }

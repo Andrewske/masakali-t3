@@ -17,7 +17,7 @@ type XenditCreateTokenProps = {
   is_multiple_use: boolean;
 };
 
-export const xenditCreateToken = (data: XenditCreateTokenProps) => {
+export const xenditCreateToken = async (data: XenditCreateTokenProps) => {
   console.log('Creating token with data:', data);
   if (!window.Xendit) {
     console.log('Xendit not loaded');
@@ -38,12 +38,16 @@ export const xenditCreateToken = (data: XenditCreateTokenProps) => {
   // const response = window.Xendit.card.validateCardNumber(tokenData.card_number);
   // console.log('Card number validation:', response);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-  window.Xendit.card.createToken(tokenData, xenditResponseHandler);
+  await window.Xendit.card.createToken(tokenData, xenditResponseHandler);
+
   return false;
 };
 
 export const xenditResponseHandler = (
+  /* The `err: XenditErrorResponse` in the `xenditResponseHandler` function signature is defining a
+parameter named `err` with the type `XenditErrorResponse`. This parameter is used to capture any
+error response that may be returned by the Xendit API when handling the token creation process. It
+allows the function to handle and process any errors that occur during the tokenization process. */
   err: XenditErrorResponse,
   response: XenditResponseType
 ) => {
@@ -51,13 +55,13 @@ export const xenditResponseHandler = (
     useXenditStore.getState();
 
   console.log('Xendit response:', response);
-  console.log('Xendit error:', err);
+  // console.log('Xendit error:', err);
 
-  if (err || !response) {
-    console.error('Error creating token:', err);
-    setError(err?.message || 'Unknown error during tokenization');
-    return;
-  }
+  // if (err || !response) {
+  //   console.error('Error creating token:', err);
+  //   setError(err?.message || 'Unknown error during tokenization');
+  //   return;
+  // }
 
   console.log('Xendit response:', response);
 

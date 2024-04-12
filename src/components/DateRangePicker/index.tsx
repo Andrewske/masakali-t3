@@ -1,5 +1,5 @@
 'use client';
-import { useRef, type SetStateAction, type Dispatch, useEffect } from 'react';
+import { useRef, type SetStateAction, type Dispatch } from 'react';
 import styles from './styles.module.scss';
 
 import { addDays, isBefore, format } from 'date-fns';
@@ -8,7 +8,6 @@ import { DayPicker, type DateRange } from 'react-day-picker';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { getCurrentDateInBali } from '~/utils';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
-import { getAvailableVillas } from '~/utils/reservations';
 
 const today = getCurrentDateInBali();
 

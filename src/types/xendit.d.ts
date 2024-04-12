@@ -3,10 +3,15 @@
 declare global {
   interface Window {
     Xendit: {
+      setPublishableKey: (key: string) => void;
       card: {
+        validateCardNumber: (num: string) => boolean;
         createToken: (
           tokenData: TokenDataType, // Replace 'any' with the actual type of tokenData
-          callback: (response: XenditResponseType) => void // Replace 'any' with the actual type of the response
+          callback: (
+            err: XenditErrorResponse,
+            response: XenditResponseType
+          ) => void // Replace 'any' with the actual type of the response
         ) => Promise<string>;
       };
     };

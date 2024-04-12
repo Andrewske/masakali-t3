@@ -2,12 +2,6 @@ import React, { useEffect } from 'react';
 import { useXenditStore } from '~/stores/xenditStore';
 import { env } from '~/env.mjs'; // Ensure this path is correct
 
-declare global {
-  interface Window {
-    Xendit: any;
-  }
-}
-
 const XenditProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -29,7 +23,7 @@ const XenditProvider: React.FC<{ children: React.ReactNode }> = ({
   const initializeXendit = () => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-      window.Xendit.setPublishableKey(env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY);
+      window?.Xendit?.setPublishableKey(env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY);
     } catch (error) {
       console.error('Xendit setup failed:', error);
       setError('Failed to initialize Xendit.');

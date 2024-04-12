@@ -1,7 +1,7 @@
 'use client';
 import { useState, useMemo } from 'react';
 import styles from './styles.module.scss';
-import { format, isValid } from 'date-fns';
+import { format } from 'date-fns';
 
 import DateRangePicker from '~/components/DateRangePicker';
 

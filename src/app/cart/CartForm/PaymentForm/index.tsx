@@ -1,6 +1,4 @@
-/* Global Xendit */
 import { type UseFormReturn } from 'react-hook-form';
-import Stripe from './Stripe';
 import type { FormData } from '../getFormSchema';
 import CreditCardForm from '../CreditCardForm';
 
@@ -27,7 +25,7 @@ const PencilIcon = () => (
   </svg>
 );
 
-const PaymentForm = ({ form, setStep, setCanSubmit }: PaymentFormProps) => {
+const PaymentForm = ({ form, setStep }: PaymentFormProps) => {
   const { watch } = form;
   const fullName = watch('fullName');
   const email = watch('email');
@@ -42,13 +40,13 @@ const PaymentForm = ({ form, setStep, setCanSubmit }: PaymentFormProps) => {
   const country = watch('address.country');
   const zip_code = watch('address.zip_code');
 
-  const handleClick = () => {
-    console.log('clicked');
-    if (window.Xendit) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-      console.log(window.Xendit.card.validateCardNumber('400')); // true
-    }
-  };
+  // const handleClick = () => {
+  //   console.log('clicked');
+  //   if (window.Xendit) {
+  //     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+  //     console.log(window?.Xendit?.card.validateCardNumber('400')); // true
+  //   }
+  // };
   return (
     <div className="flex flex-col gap-2">
       <div
