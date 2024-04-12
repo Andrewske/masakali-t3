@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
+
 /**
  * Logs an error message and details, and reports it to Sentry.
  *
@@ -38,7 +39,7 @@ export const logError = ({
   }
 };
 
-function isValidErrorParams(message, error) {
+function isValidErrorParams(message: string, error: Error | null): boolean {
   return (
     typeof message === 'string' &&
     message.trim() !== '' &&
@@ -46,19 +47,34 @@ function isValidErrorParams(message, error) {
   );
 }
 
-function formatErrorData(data) {
+function formatErrorData(
+  data: Record<string, unknown>
+): string | Record<string, unknown> {
   return typeof data === 'object' && data !== null
     ? JSON.stringify({ ...data })
     : data;
 }
 
-function logToConsole(timestamp, message, errorData, error) {
+function logToConsole(
+  timestamp: string,
+  message: string,
+  errorData: string | Record<string, unknown>,
+  error: Error | null
+) {
   console.log(
-    `${timestamp} - ${message} - ${errorData} - ${error?.message} - ${error?.code}`
+    `${timestamp} - ${message} - ${JSON.stringify(errorData)} - ${
+      error?.message ?? ''
+    }`
   );
 }
 
-function reportToSentry(error, level, data) {
+function reportToSentry(
+  error: Error | null,
+  level: 'error' | 'warning' | 'info',
+  data: string | Record<string, unknown>
+) {
+  // Default to Error if level is not recognized
+
   Sentry.withScope((scope) => {
     scope.setLevel(level);
     scope.setExtra('data', data);
