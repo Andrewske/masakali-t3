@@ -191,12 +191,12 @@ export default function CartForm({
   //   setUser,
   // ]);
 
-  const onSubmit: SubmitHandler<FormData> = (formData) => {
+  const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setIsProcessing(true);
 
     const user = formatUserState({ formData });
     setUser(user);
-    submitToXendit({ formData, setIsProcessing, totalIDR });
+    await submitToXendit({ formData, setIsProcessing, totalIDR });
 
     setIsProcessing(false);
     return false;
@@ -252,7 +252,7 @@ type SubmitToXenditProps = {
   totalIDR: number;
 };
 
-const submitToXendit = ({
+const submitToXendit = async ({
   formData,
   setIsProcessing,
   totalIDR,
@@ -264,7 +264,7 @@ const submitToXendit = ({
     return;
   }
 
-  xenditCreateToken({
+  await xenditCreateToken({
     amount: totalIDR,
     card_number: formData.cc_number,
     card_exp_month: cardExpMonth,
