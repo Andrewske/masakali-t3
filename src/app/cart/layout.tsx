@@ -10,12 +10,6 @@ import XenditProvider from '~/providers/ZenditProvider';
 
 const stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-const initialOptions = {
-  clientId: env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-  currency: 'IDR',
-  intent: 'capture',
-};
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (window.Xendit) {

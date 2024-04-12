@@ -158,7 +158,7 @@ export const villaDetails: VillaDetailsType = {
     description:
       'One of our more popular villas for romantic getaways and honeymooners offers an enchanting sentiment. In addition to the luxury outdoor shower, this villa features a spacious and comfortable bath. A favorite place to relax is the outdoor hammock that hangs over the rice fields, with a perfect view of the stars at night. This villa also offers a work area with a beautiful antique desk for those who need it.',
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
-    defaultImage: '/hero-images/akasha-pool.webp',
+    defaultImage: '/chandra/chandra-front.webp',
     images: [
       {
         src: '/chandra/chandra-pool.webp',
@@ -227,7 +227,7 @@ export const villaDetails: VillaDetailsType = {
     description:
       'This traditional Joglo villa is the perfect fit for a cozy stay. With personal charm and attention to detail, this alluring villa has an irresistible appeal. Jala offers a workstation with a large desk, comfy outdoor lounging areas, and a full private ensuite bathroom. The luxury bedding and linens offer a comfortable and restful sleep while the beautiful, handcrafted furniture and amenities will leave you in awe of the craftsmanship and detail.',
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
-    defaultImage: '/hero-images/akasha-pool.webp',
+    defaultImage: '/jala/jala-pool.webp',
     images: [
       {
         src: '/jala/jala-pool.webp',
@@ -364,7 +364,7 @@ export const villaDetails: VillaDetailsType = {
     description:
       'Luxury meets comfort in our newest villa, Akasha. With 3 bedrooms and 3.5 baths, this spacious home is great for families or couples traveling. This villa features a beautiful waterfall pool, large deck, full kitchen and bar, entertainment room, outdoor living room, large dining area, and breathtaking views. This space is also great for hosting celebrations such as weddings and birthday parties.',
     shortDescription: '2-bedroom villa 2 queen size beds',
-    defaultImage: '/hero-images/akasha-pool.webp',
+    defaultImage: '/lakshmi/lakshmi-kitchen.webp',
     images: [
       {
         src: '/lakshmi/lakshmi-bedroom-1.webp',
