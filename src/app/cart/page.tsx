@@ -7,6 +7,7 @@ import { villaDetails, type VillaIdsType } from '~/lib/villas';
 
 import { prisma } from '~/db/prisma';
 import type { VillaPricingType } from '~/utils/pricing';
+import { logError } from '~/utils/logError';
 
 export default async function Page({
   searchParams,
@@ -23,6 +24,11 @@ export default async function Page({
 
   if (!villa) {
     console.error('Villa not found');
+    logError({
+      message: 'Villa not found',
+      level: 'warning',
+      data: { villaId },
+    });
     // return redirect('/villas');
   }
 

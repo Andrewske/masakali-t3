@@ -6,7 +6,7 @@ const HeaderLinks = () => {
     { name: 'Villas', href: `/villas` },
     { name: 'Dining', href: `/#dining` },
     { name: 'Amenities', href: `/#amenities` },
-    { name: 'Retreats', href: `/retreats` },
+    { name: 'Yoga', href: `/#yoga` },
   ];
 
   return (

@@ -12,7 +12,7 @@ import * as Sentry from '@sentry/nextjs';
 
 type LogErrorParams = {
   message: string;
-  error: Error | null;
+  error?: Error | null;
   level?: 'error' | 'warning' | 'info';
   data?: Record<string, unknown>;
 };

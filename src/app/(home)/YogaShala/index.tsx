@@ -9,26 +9,30 @@ const YogaShala = () => {
       id="diningWrapper"
       className="relative flex justify-center flex-wrap p-8"
     >
-      <ScrollOffset id="dining" />
-      <div className="h-[450px] w-full md:max-w-[450px] bg-gray flex  flex-wrap items-center">
+      <ScrollOffset id="yoga" />
+      <div className="h-min-[450px] w-full md:max-w-[450px] bg-gray flex  flex-wrap items-center">
         <Image
           className="object-cover w-full h-full"
           src={YogaShalaImage}
           alt="Photo of breakfast on Surya's porch"
         />
       </div>
-      <div className="md:h-[450px]  w-full md:max-w-[450px] bg-gray flex flex-col gap-4  p-8 ">
+      <div className="md:min-h-[450px]  w-full md:max-w-[450px] bg-gray flex flex-col gap-4  p-8 ">
         <h2 className="">Yoga Shala</h2>
         <p className="w-full h-content leading-relaxed">
-          Our retreat features a serene yoga shala, welcoming you to partake in
-          yoga sessions twice daily amidst the tranquility of nature. Designed
-          for all levels of practitioners, from beginners to advanced, our
-          classes are led by experienced instructors who focus on traditional
-          yoga practices. These sessions are a perfect complement to your day,
-          inviting you to start each morning with vitality and conclude your
-          evenings with peace. It&apos;s an idyllic space for deepening your
-          practice or discovering tranquility, seamlessly integrating with the
-          natural beauty of our surroundings.
+          At our serene yoga shala, we invite you to embrace tranquility and
+          balance through our thoughtfully scheduled yoga sessions. Immerse
+          yourself in the spiritual essence of Bali with our Morning Flow class
+          at 8:15 am, a perfect way to awaken and energize your body and spirit
+          with the first light of day. As dusk settles, join us for our Evening
+          Flow class at 6:00 pm, designed to help you unwind and reflect,
+          promoting a sense of peace as the day draws to a close. Both classes
+          are led by experienced instructors who integrate the beauty of
+          Balinese nature and philosophy into their teaching, offering a
+          harmonious blend of local tradition and yoga practice. These sessions
+          are a complimentary part of your stay, allowing you to enhance your
+          wellness journey in the privacy and comfort of our yoga shala, set
+          against the backdrop of Bali&apos;s breathtaking landscapes.
         </p>
       </div>
     </section>

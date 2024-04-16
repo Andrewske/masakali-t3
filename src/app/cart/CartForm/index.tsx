@@ -14,11 +14,27 @@ import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { type VillaPricingType, createPricingObject } from '~/utils/pricing';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import { useUserStore } from '~/providers/UserStoreProvider';
+import useFetchPaymentData from '~/hooks/useFetchPaymentData';
+import { submitToXendit } from '~/actions/xendit/submitToXendit';
 
-import { xenditCreateToken } from '~/utils/xendit';
-
-import { useXenditStore } from '~/stores/xenditStore';
-import { confirmXenditPayment } from '~/actions/xendit';
+const formDefaultValues = {
+  fullName: 'Kevin Andrews',
+  email: 'andrewskevin92@gmail.com',
+  phone: '08123456789',
+  adults: 2,
+  children: 0,
+  address: {
+    address1: 'Jl. Kebon Sirih',
+    address2: '',
+    city: 'Jakarta',
+    region: 'DKI Jakarta',
+    country: 'ID',
+    zip_code: '12345',
+  },
+  cc_number: '4000000000001091',
+  cc_expiry: '05/26',
+  cc_cvc: '999',
+};
 
 export default function CartForm({
   villaId,
@@ -32,8 +48,7 @@ export default function CartForm({
   const { conversionRates, setConversionRates, currency } = useCurrencyStore(
     (state) => state
   );
-  const { token, setToken, setPaymentSuccess, paymentSuccess } =
-    useXenditStore();
+
   const { dateRange } = useReservationStore((state) => state);
   const { user, setUser } = useUserStore((state) => state);
   const [step, setStep] = useState(1);
@@ -57,47 +72,8 @@ export default function CartForm({
       conversionRate: conversionRateToUSD ?? 1,
     });
 
-  useEffect(() => {
-    setConversionRates();
-  }, [setConversionRates]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (token) {
-        console.log({ token });
-        console.log({ user });
-        const payment = await confirmXenditPayment({
-          token,
-          user,
-          reservation: {
-            villaId,
-            villaName,
-            checkin,
-            checkout,
-            numNights,
-            finalPrice,
-            pricePerNight,
-            discount,
-            taxes,
-            totalIDR,
-            currency,
-          },
-        }).catch((err) => {
-          console.error(err);
-          return false;
-        });
-        console.log({ payment });
-        setToken(null);
-        setPaymentSuccess(payment);
-      }
-    };
-
-    void fetchData();
-  }, [
-    token,
+  useFetchPaymentData({
     user,
-    setToken,
-    setPaymentSuccess,
     totalIDR,
     villaId,
     villaName,
@@ -109,87 +85,24 @@ export default function CartForm({
     discount,
     taxes,
     currency,
-  ]);
+  });
 
   useEffect(() => {
-    if (paymentSuccess) {
-      console.log('Payment success');
-    } else {
-      console.log('Payment failed');
-    }
-  }, [paymentSuccess]);
+    setConversionRates();
+  }, [setConversionRates]);
 
   const nextStep = () => {
     setStep(step + 1);
   };
 
+  // TODO remove defaults
   const formOptions = {
     resolver: zodResolver(getFormSchema(villaName)),
-    defaultValues: {
-      fullName: 'Kevin Andrews',
-      email: 'andrewskevin92@gmail.com',
-      phone: '08123456789',
-      adults: 2,
-      children: 0,
-      address: {
-        address1: 'Jl. Kebon Sirih',
-        address2: '',
-        city: 'Jakarta',
-        region: 'DKI Jakarta',
-        country: 'ID',
-        zip_code: '12345',
-      },
-      cc_number: '4000000000001091',
-      cc_expiry: '05/26',
-      cc_cvc: '999',
-    },
+    defaultValues: formDefaultValues,
     mode: 'onSubmit' as const,
   };
 
   const form = useForm<FormData>(formOptions);
-
-  // const fullName = form.watch('fullName');
-  // const email = form.watch('email');
-  // const phone = form.watch('phone');
-  // const adults = form.watch('adults');
-  // const children = form.watch('children');
-  // const address = form.watch('address');
-  // const address1 = form.watch('address.address1');
-  // const city = form.watch('address.city');
-  // const region = form.watch('address.region');
-  // const country = form.watch('address.country');
-  // const zip_code = form.watch('address.zip_code');
-
-  // useEffect(() => {
-  //   setUser({
-  //     fullName,
-  //     email,
-  //     phone,
-  //     adults,
-  //     children,
-  //     address: {
-  //       address1,
-  //       address2: address?.address2,
-  //       city,
-  //       region,
-  //       country,
-  //       zip_code,
-  //     },
-  //   });
-  // }, [
-  //   fullName,
-  //   email,
-  //   phone,
-  //   adults,
-  //   children,
-  //   address1,
-  //   address,
-  //   city,
-  //   region,
-  //   country,
-  //   zip_code,
-  //   setUser,
-  // ]);
 
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setIsProcessing(true);
@@ -245,34 +158,6 @@ export default function CartForm({
     </>
   );
 }
-
-type SubmitToXenditProps = {
-  formData: FormData;
-  setIsProcessing: React.Dispatch<React.SetStateAction<boolean>>;
-  totalIDR: number;
-};
-
-const submitToXendit = async ({
-  formData,
-  setIsProcessing,
-  totalIDR,
-}: SubmitToXenditProps) => {
-  const [cardExpMonth, cardExpYear] = formData.cc_expiry.split('/');
-
-  if (!cardExpMonth || !cardExpYear) {
-    setIsProcessing(false);
-    return;
-  }
-
-  await xenditCreateToken({
-    amount: totalIDR,
-    card_number: formData.cc_number,
-    card_exp_month: cardExpMonth,
-    card_exp_year: '20' + cardExpYear,
-    card_cvn: formData.cc_cvc,
-    is_multiple_use: false,
-  });
-};
 
 type SetUserStateProps = {
   formData: FormData;

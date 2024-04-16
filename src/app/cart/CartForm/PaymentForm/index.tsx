@@ -40,13 +40,6 @@ const PaymentForm = ({ form, setStep }: PaymentFormProps) => {
   const country = watch('address.country');
   const zip_code = watch('address.zip_code');
 
-  // const handleClick = () => {
-  //   console.log('clicked');
-  //   if (window.Xendit) {
-  //     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-  //     console.log(window?.Xendit?.card.validateCardNumber('400')); // true
-  //   }
-  // };
   return (
     <div className="flex flex-col gap-2">
       <div
@@ -84,8 +77,6 @@ const PaymentForm = ({ form, setStep }: PaymentFormProps) => {
       </div>
 
       <CreditCardForm form={form} />
-
-      {/* <Stripe setCanSubmit={setCanSubmit} /> */}
     </div>
   );
 };

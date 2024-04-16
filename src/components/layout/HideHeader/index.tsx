@@ -26,7 +26,7 @@ const HideHeader = ({ children }: { children: ReactNode }) => {
   return (
     <div
       className={`${
-        isHidden ? 'h-0 m-0 p-0 overflow-hidden' : 'h-[200px]'
+        isHidden ? 'h-0 m-0 p-0 overflow-hidden' : 'min-h-[200px]'
       } fixed top-0 w-full overflow-hidden transition-all duration-500 ease-in-out z-50`}
     >
       {children}

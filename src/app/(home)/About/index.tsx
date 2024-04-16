@@ -43,7 +43,8 @@ const About = () => {
         <Image
           src={PoolImg}
           alt="Masakali Surya pool view"
-          className={styles.image}
+          width={800}
+          height={800}
         />
       </div>
     </section>

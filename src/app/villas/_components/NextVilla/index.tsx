@@ -10,7 +10,7 @@ export default function NextVilla({
   return (
     <Link
       href={`/villas/${nextVilla(currentVillaName)}`}
-      className="flex"
+      className="flex align-middle py-4"
     >
       <h1 className="">{capitalize(currentVillaName)} Villa</h1>
       <span className="h-full grid place-items-center px-1 transition-all duration-75 ease-in-out hover:scale-150 cursor-pointer">

@@ -9,10 +9,10 @@ import {
 import { Input } from '~/components/ui/input';
 import GuestsForm from './GuestsForm';
 import type { VillaNamesType } from '~/lib/villas';
+import type { FormData } from '../getFormSchema';
 
 interface GuestsDetailsFormProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  form: UseFormReturn<any>;
+  form: UseFormReturn<FormData>;
   villaName: VillaNamesType;
 }
 
