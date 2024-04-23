@@ -29,10 +29,11 @@ export const logError = ({
   }
 
   const timestamp = new Date().toISOString();
-  const errorData = formatErrorData(data);
+  const errorData = { ...data, message };
+  const dataString = formatErrorData(errorData);
 
   try {
-    logToConsole(timestamp, message, errorData, error);
+    logToConsole(timestamp, message, dataString, error);
     reportToSentry(error, level, errorData);
   } catch (error) {
     console.error('Error logging error:', error);
@@ -71,13 +72,14 @@ function logToConsole(
 function reportToSentry(
   error: Error | null,
   level: 'error' | 'warning' | 'info',
-  data: string | Record<string, unknown>
+  data: Record<string, unknown>
 ) {
   // Default to Error if level is not recognized
-
+  console.log('reportToSentry', error, level, data);
+  Sentry.setContext('context', data);
   Sentry.withScope((scope) => {
     scope.setLevel(level);
-    scope.setExtra('data', data);
+
     Sentry.captureException(error);
   });
 }

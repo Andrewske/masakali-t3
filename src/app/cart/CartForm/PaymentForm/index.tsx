@@ -5,7 +5,6 @@ import CreditCardForm from '../CreditCardForm';
 type PaymentFormProps = {
   form: UseFormReturn<FormData>;
   setStep: (step: number) => void;
-  setCanSubmit: (canSubmit: boolean) => void;
 };
 
 const PencilIcon = () => (

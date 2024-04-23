@@ -25,7 +25,7 @@ const XenditProvider: React.FC<{ children: React.ReactNode }> = ({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       window?.Xendit?.setPublishableKey(env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY);
     } catch (error) {
-      console.error('Xendit setup failed:', error);
+      console.log('Xendit setup failed:', error);
       setError('Failed to initialize Xendit.');
     }
   };

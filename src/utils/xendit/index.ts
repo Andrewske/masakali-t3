@@ -1,3 +1,4 @@
+'use client';
 //https://docs.xendit.co/credit-cards/integrations/tokenization
 
 import type {
@@ -19,7 +20,7 @@ type XenditCreateTokenProps = {
 
 export const xenditCreateToken = async (data: XenditCreateTokenProps) => {
   console.log('Creating token with data:', data);
-  if (!window.Xendit) {
+  if (!window || !window.Xendit) {
     console.log('Xendit not loaded');
     return;
   }
@@ -79,14 +80,14 @@ allows the function to handle and process any errors that occur during the token
         setShowModal(false); // Close any open modal
         break;
       case 'FAILED':
-        console.error(
+        console.log(
           'Token failed:',
           response.failure_reason || 'Unknown error'
         );
         setError(response.failure_reason || 'Failed without a specific reason');
         break;
       default:
-        console.error('Unhandled response status:', response.status);
+        console.log('Unhandled response status:', response.status);
         setError('Unhandled response status');
     }
   }

@@ -1,0 +1,25 @@
+import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
+import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
+
+type UseVillaPricingProps = {
+  villaPricing: VillaPricingType[];
+  checkin: Date;
+  checkout: Date;
+};
+
+export const useVillaPricing = ({
+  villaPricing,
+  checkin,
+  checkout,
+}: UseVillaPricingProps) => {
+  const { conversionRates } = useCurrencyStore((state) => state);
+
+  const conversionRateToUSD = conversionRates['USD'];
+
+  return createPricingObject({
+    villaPricing,
+    checkin,
+    checkout,
+    conversionRate: conversionRateToUSD ?? 1,
+  });
+};

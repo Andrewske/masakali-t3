@@ -1,13 +1,8 @@
-import Image from 'next/image';
-
 import CartForm from './CartForm';
 import CartDetails from './CartDetails';
-
-import { villaDetails, type VillaIdsType } from '~/lib/villas';
-
-import { prisma } from '~/db/prisma';
-import type { VillaPricingType } from '~/utils/pricing';
-import { logError } from '~/utils/logError';
+import { type VillaIdsType } from '~/lib/villas';
+import { getVillaDetails, getVillaPricing } from '~/actions/cart';
+import CartImage from './CartImage';
 
 export default async function Page({
   searchParams,
@@ -18,45 +13,13 @@ export default async function Page({
 }) {
   const villaId = parseInt(searchParams.villaId) as VillaIdsType;
 
-  const villa = Object.values(villaDetails).find((villa) => {
-    return villa.id === villaId;
-  });
+  const villa = getVillaDetails(villaId);
 
-  if (!villa) {
-    console.error('Villa not found');
-    logError({
-      message: 'Villa not found',
-      level: 'warning',
-      data: { villaId },
-    });
-    // return redirect('/villas');
-  }
-
-  const villaPricing = (await prisma.villaPricing.findMany({
-    where: {
-      villaId: Number(villaId),
-      price: {
-        not: null,
-      },
-    },
-    select: {
-      date: true,
-      price: true,
-      available: true,
-    },
-  })) as VillaPricingType[];
+  const villaPricing = await getVillaPricing(villaId);
 
   return (
     <section className="flex flex-grow flex-col items-center h-full relative">
-      <div className="absolute top-0 left-0  h-full w-full z-0">
-        <Image
-          src={villa?.defaultImage ?? '/villa-placeholder.webp'}
-          alt={`Photo of ${villa?.name ?? ''} villa`}
-          className="object-cover "
-          fill={true}
-          priority={true}
-        />
-      </div>
+      {villa && <CartImage villa={villa} />}
       <span className="bg-white bg-opacity-15 p-4 flex-grow flex flex-col z-10 w-full">
         <div className="flex z-20 justify-center">
           <h1 className="bg-purple text-white text-center py-4 px-8">Cart</h1>

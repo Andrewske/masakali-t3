@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { confirmXenditPayment } from '~/actions/xendit';
 import { useXenditStore } from '~/stores/xenditStore';
 import { useUserStore } from '~/providers/UserStoreProvider';
-import type { UserState, UserStore } from '~/stores/userStore';
+import type { UserStore } from '~/stores/userStore';
 import type { VillaIdsType } from '~/lib/villas';
-import { logError } from '~/utils/logError';
 
 // Assuming the necessary types are defined elsewhere
 type PaymentData = {
@@ -51,7 +50,7 @@ const useFetchPaymentData = (paymentData: PaymentData) => {
           setPaymentSuccess(payment);
           setToken(null); // Reset the token after successful payment
         } catch (error) {
-          console.error('Failed to fetch payment data:', error);
+          console.log('Failed to fetch payment data:', error);
           // Optionally, handle the error state here
         }
       }
@@ -63,8 +62,6 @@ const useFetchPaymentData = (paymentData: PaymentData) => {
   useEffect(() => {
     if (paymentSuccess) {
       console.log('Payment success');
-    } else {
-      logError({ message: 'Payment Failed', level: 'error', data: { user } });
     }
   }, [paymentSuccess, user]);
 };

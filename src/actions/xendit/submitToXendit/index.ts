@@ -1,24 +1,27 @@
-'use server';
+'use client';
 
 import type { FormData } from '~/app/cart/CartForm/getFormSchema';
 import { xenditCreateToken } from '~/utils/xendit';
 
 type SubmitToXenditProps = {
   formData: FormData;
-  setIsProcessing: React.Dispatch<React.SetStateAction<boolean>>;
+  // setIsProcessing: React.Dispatch<React.SetStateAction<boolean>>;
   totalIDR: number;
 };
 export const submitToXendit = async ({
   formData,
-  setIsProcessing,
+  // setIsProcessing,
   totalIDR,
 }: SubmitToXenditProps) => {
   const [cardExpMonth, cardExpYear] = formData.cc_expiry.split('/');
+  console.log({ cardExpMonth, cardExpYear });
 
-  if (!cardExpMonth || !cardExpYear) {
-    setIsProcessing(false);
-    return;
-  }
+  // if (!cardExpMonth || !cardExpYear) {
+  //   setIsProcessing(false);
+  //   return;
+  // }
+
+  console.log('formData', formData);
 
   await xenditCreateToken({
     amount: totalIDR,

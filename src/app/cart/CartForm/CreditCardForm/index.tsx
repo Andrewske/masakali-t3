@@ -25,37 +25,43 @@ export default function CreditCardForm({ form }: CCFormProps) {
   const cc_cvc = watch('cc_cvc');
 
   return (
-    <PaymentInputsWrapper {...wrapperProps}>
-      <div className="flex w-full justify-between">
-        <span className="grid place-items-center grid-cols-6">
-          <svg {...getCardImageProps({ images })} />
-          <input
-            className="col-span-5"
-            maxLength={19}
-            value={cc_number}
-            {...getCardNumberProps({
-              onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                setValue('cc_number', e.target.value),
-            })}
-          />
-        </span>
+    // <PaymentInputsWrapper {...wrapperProps}>
+    <div className="flex w-full gap-4 flex-wrap">
+      <span className="flex justify-evenly gap-4">
+        <svg {...getCardImageProps({ images })} />
         <input
-          className="min-w-20"
+          className="text-center rounded focus:outline-2"
+          maxLength={19}
+          value={cc_number}
+          {...getCardNumberProps({
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+              setValue('cc_number', e.target.value),
+          })}
+        />
+      </span>
+      <span className="flex justify-center gap-4">
+        <p>Exp</p>
+        <input
+          className="w-16 text-center rounded"
           value={cc_expiry}
           {...getExpiryDateProps({
             onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
               setValue('cc_expiry', e.target.value),
           })}
         />
+      </span>
+      <span className="flex justify-center gap-4">
+        <p>CCV</p>
         <input
-          className=""
+          className="w-14 text-center rounded"
           value={cc_cvc}
           {...getCVCProps({
             onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
               setValue('cc_cvc', e.target.value),
           })}
         />
-      </div>
-    </PaymentInputsWrapper>
+      </span>
+    </div>
+    // </PaymentInputsWrapper>
   );
 }
