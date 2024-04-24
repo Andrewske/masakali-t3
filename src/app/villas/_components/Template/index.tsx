@@ -20,9 +20,7 @@ export type VillaDataType = {
 async function Template({ villaId }: VillaDataType) {
   const villaName = getVillaName(villaId);
 
-  const { disabledDates, checkoutDates } = await getDisabledDatesForVilla(
-    villaId
-  );
+  const { disabledDates } = await getDisabledDatesForVilla(villaId);
 
   const villaPricing = (await prisma.villaPricing.findMany({
     where: {
@@ -49,7 +47,6 @@ async function Template({ villaId }: VillaDataType) {
         <DateContainer
           disabledDates={disabledDates}
           villaPricing={villaPricing}
-          checkoutDates={checkoutDates}
         />
         <Link
           href={`/cart?&villaId=${villaId}`}

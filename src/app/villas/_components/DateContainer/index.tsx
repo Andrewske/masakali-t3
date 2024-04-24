@@ -12,19 +12,16 @@ import { formatCurrency } from '~/utils/helpers';
 import CountryDropdown from '~/components/CountryDropdown';
 const DateContainer = ({
   disabledDates,
-  checkoutDates,
   villaPricing,
 }: {
   disabledDates: Set<string | undefined>;
-  checkoutDates: Set<string | undefined>;
+  // checkoutDates: Set<string | undefined>;
   villaPricing: VillaPricingType[];
 }) => {
   const { dateRange } = useReservationStore((state) => state);
   const { currency, conversionRate } = useCurrencyStore((state) => state);
 
   const [isActive, setIsActive] = useState(false);
-
-  // console.log({ isActive, checkoutDates });
 
   const { pricePerNight, subTotal, discount, taxes, finalPrice } =
     useMemo(() => {
