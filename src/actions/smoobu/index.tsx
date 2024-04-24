@@ -5,7 +5,6 @@ import { prisma } from '~/db/prisma';
 import { env } from '~/env.mjs';
 import { channelIds } from '~/lib/smoobu';
 
-
 export type PricingDataType = {
   villaName: string;
   checkin: Date;
@@ -98,11 +97,13 @@ type DisabledDate = {
 export const getAllDisabledDates = async (): Promise<
   Set<string | undefined>
 > => {
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
   const disabledDates = await prisma.villaPricing.findMany({
     where: {
       available: false,
       date: {
-        gte: new Date(),
+        gte: yesterday,
       },
     },
     select: {
@@ -159,15 +160,22 @@ export const getDisabledDatesForVilla = async (
   disabledDates: Set<string | undefined>;
   checkoutDates: Set<string | undefined>;
 }> => {
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
   const disabledDates = await prisma.villaPricing.findMany({
     where: {
       villaId: villaId,
       available: false,
+      date: {
+        gte: yesterday,
+      },
     },
     select: {
       date: true,
     },
   });
+
+  // console.log({ disabledDates });
 
   const disabledDatesSet = new Set([
     ...disabledDates.map((date) => date.date.toISOString().split('T')[0]),

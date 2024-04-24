@@ -1,5 +1,5 @@
 'use client';
-import { useRef, type SetStateAction, type Dispatch } from 'react';
+import { useRef, useEffect, type SetStateAction, type Dispatch } from 'react';
 import styles from './styles.module.scss';
 
 import { addDays, isBefore, format } from 'date-fns';
@@ -8,8 +8,6 @@ import { DayPicker, type DateRange } from 'react-day-picker';
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { getCurrentDateInBali } from '~/utils';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
-
-const today = getCurrentDateInBali();
 
 type DateRangePickerProps = {
   isActive: boolean;
@@ -25,6 +23,16 @@ const DateRangePicker = ({
   const dayPickerRef = useRef(null);
   useOnClickOutside(dayPickerRef, () => setIsActive(false));
   const { dateRange, setDateRange } = useReservationStore((state) => state);
+
+  useEffect(() => {
+    const date = findFirstAvailableDate(disabledDates);
+    if (date) {
+      setDateRange({
+        from: date,
+        to: addDays(date, 1),
+      });
+    }
+  }, []);
 
   const isDateInRange = (
     date: Date,
@@ -46,37 +54,36 @@ const DateRangePicker = ({
     );
   };
 
-
   const handleSelect = (newRange: DateRange | undefined) => {
     // Check if the new range is undefined or if either the start or end date is missing
     if (!newRange?.from || !newRange?.to) {
-       // Update the date range with the new range's start and end dates, or undefined if not present
-       setDateRange({ from: newRange?.from, to: newRange?.to });
-       return;
+      // Update the date range with the new range's start and end dates, or undefined if not present
+      setDateRange({ from: newRange?.from, to: newRange?.to });
+      return;
     }
-   
+
     // Check if the start and end dates of the new range are the same
     if (newRange.from.getTime() === newRange.to.getTime()) {
-       // If they are the same, update the date range with the start date and set the end date to undefined
-       setDateRange({ from: newRange.from, to: undefined });
-       return; 
+      // If they are the same, update the date range with the start date and set the end date to undefined
+      setDateRange({ from: newRange.from, to: undefined });
+      return;
     }
-   
+
     // Check if the new range includes any disabled dates
     if (rangeIncludesDisabledDate(newRange, disabledDates)) {
-       // Determine the new start date based on whether the current start date is the same as the new range's start date
-       const newFromDate =
-         dateRange.from === newRange.from
-           ? newRange.to // If the current start date is the same as the new range's start date, use the new range's end date
-           : new Date(Math.min(newRange.from.getTime(), newRange.to.getTime())); // Otherwise, use the earliest date between the new range's start and end dates
-       // Update the date range with the new start date and set the end date to undefined
-       setDateRange({ from: newFromDate, to: undefined });
-       return; 
+      // Determine the new start date based on whether the current start date is the same as the new range's start date
+      const newFromDate =
+        dateRange.from === newRange.from
+          ? newRange.to // If the current start date is the same as the new range's start date, use the new range's end date
+          : new Date(Math.min(newRange.from.getTime(), newRange.to.getTime())); // Otherwise, use the earliest date between the new range's start and end dates
+      // Update the date range with the new start date and set the end date to undefined
+      setDateRange({ from: newFromDate, to: undefined });
+      return;
     }
-   
+
     // If none of the above conditions are met, update the date range with the new range
     setDateRange(newRange);
-   };
+  };
   const isDayDisabled = (day: Date) => {
     return disabledDates.has(format(day, 'yyyy-MM-dd'));
   };
@@ -92,12 +99,12 @@ const DateRangePicker = ({
         <DayPicker
           id="date-range-picker"
           mode="range"
-          defaultMonth={today}
+          defaultMonth={new Date()}
           selected={dateRange}
           onSelect={handleSelect}
           classNames={styles}
           disabled={isDayDisabled}
-          hidden={(day) => isBefore(day, addDays(today, -1))}
+          hidden={(day) => isBefore(day, addDays(new Date(), -1))}
           min={2}
         />
       </div>
@@ -105,3 +112,18 @@ const DateRangePicker = ({
   );
 };
 export default DateRangePicker;
+
+function findFirstAvailableDate(
+  disabledDates: Set<string | undefined>
+): Date | null {
+  const currentDate = new Date(); // Start from today
+  currentDate.setHours(0, 0, 0, 0); // Normalize to start of the day
+
+  while (true) {
+    const formattedDate = format(currentDate, 'yyyy-MM-dd');
+    if (!disabledDates.has(formattedDate)) {
+      return currentDate;
+    }
+    currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+  }
+}

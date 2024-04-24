@@ -18,14 +18,35 @@ export const UpdateReservationsButton = ({
     }
   };
 
+  const handleRatesClick = async () => {
+    const response = await fetch('/api/smoobu/updateRates');
+    if (response.ok) {
+      const data =
+        (await response?.json()) as typeof UpdateReservationsResponse;
+      console.log(data);
+    } else {
+      console.log('Error fetching data:', response.statusText);
+    }
+  };
+
   return (
-    <button
-      className={`${styles.container ?? ''} ${
-        isWhite ? `${styles.white ?? ''}` : ''
-      }`}
-      onClick={() => void handleClick()}
-    >
-      Update Reservations
-    </button>
+    <>
+      <button
+        className={`${styles.container ?? ''} ${
+          isWhite ? `${styles.white ?? ''}` : ''
+        }`}
+        onClick={() => void handleClick()}
+      >
+        Update Reservations
+      </button>
+      <button
+        className={`${styles.container ?? ''} ${
+          isWhite ? `${styles.white ?? ''}` : ''
+        }`}
+        onClick={() => void handleRatesClick()}
+      >
+        Update Rates
+      </button>
+    </>
   );
 };

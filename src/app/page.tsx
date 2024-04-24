@@ -26,7 +26,7 @@ const Page = async () => {
     where: {
       departure: {
         gt: twoDaysAgo,
-        lt: new Date('2023-12-01'),
+        // lt: new Date('2023-12-01'),
       },
       cancelled: false,
     },

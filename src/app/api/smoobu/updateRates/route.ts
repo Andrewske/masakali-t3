@@ -1,3 +1,4 @@
+import { consoleIntegration } from '@sentry/nextjs';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { villaIdsArray } from '~/lib/villas';
@@ -7,9 +8,9 @@ import { batchVillaPricing } from '~/utils/smoobu';
 
 export async function GET() {
   const smoobuRatesResponse = await fetchSmoobuRates();
-
+  // console.log(smoobuRatesResponse.data[1115674]);
+  console.log('got a response from smoobu');
   await batchVillaPricing(smoobuRatesResponse);
-
   return NextResponse.json({ success: true });
 }
 

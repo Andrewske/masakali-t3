@@ -69,70 +69,65 @@ type VillaPricingDataType = {
 };
 
 export async function batchVillaPricing({ data }: SmoobuRatesResponse) {
-  const createData: VillaPricingDataType[] = [];
-  const updateData: VillaPricingDataType[] = [];
+  const upsertData: VillaPricingDataType[] = [];
 
-  // Assuming a way to determine records that need to be created or updated
-  // This part is highly dependent on your specific data and database setup
-  for (const [villaId, villaPricing] of Object.entries(data)) {
+  console.log('Upserting pricing data for villas');
+
+  Object.entries(data).forEach(([villaId, villaPricing]) => {
     if (!villaPricing) {
       console.log('No pricing data found for villa', villaId);
-      continue;
+      return;
     }
 
-    Object.entries(villaPricing).forEach(([date, pricing]) => {
-      if (!date || isNaN(Date.parse(date))) {
-        console.error(`Invalid date string: ${date}`);
+    Object.entries(villaPricing).forEach(([dateStr, pricing]) => {
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) {
+        console.error(`Invalid date string: ${dateStr}`);
         return;
       }
 
-      // Example condition to decide between create or update, adjust based on actual logic
-      const record = {
+      const record: VillaPricingDataType = {
         villaId: parseInt(villaId) as VillaIdsType,
-        date: new Date(date),
+        date,
         price: pricing?.price ?? 0,
         available: pricing?.available !== 0,
       };
 
-      // For illustration, assume all go to createData
-      createData.push(record);
-
-      // You would have a similar condition/logic to fill updateData
+      upsertData.push(record);
     });
-  }
+  });
 
-  // Batch Create
-  try {
-    await prisma.villaPricing.createMany({
-      data: createData,
-      skipDuplicates: true, // Assumes your ORM supports this or similar option
-    });
-    console.log('Batch created pricing data successfully');
-  } catch (error) {
-    console.error('Error during batch create:', error);
-  }
+  console.log('Upserting pricing data for', upsertData.length, 'villas');
 
-  // Batch Update
-  // The update logic will depend greatly on how you track changes or decide what needs updating
-  // This part is more complex and would ideally rely on having unique identifiers or conditions to match records for updates
+  // Perform upsert operation
   try {
-    // Example update logic, very dependent on your specific use case
-    for (const record of updateData) {
-      await prisma.villaPricing.updateMany({
-        where: {
-          // Your condition here, for example:
-          villaId: record.villaId,
-          date: record.date,
-        },
-        data: {
-          price: record.price,
-          available: record.available,
-        },
-      });
+    // Function to split an array into chunks
+    function chunkArray<T>(array: T[], chunkSize: number): T[][] {
+      const chunks: T[][] = [];
+      for (let i = 0; i < array.length; i += chunkSize) {
+        chunks.push(array.slice(i, i + chunkSize));
+      }
+      return chunks;
     }
-    console.log('Batch updated pricing data successfully');
+
+    // Split upsertData into chunks of 100
+    const upsertDataChunks = chunkArray(upsertData, 100);
+
+    // Process each chunk in a separate transaction
+    for (const chunk of upsertDataChunks) {
+      await prisma.$transaction(
+        chunk.map(({ villaId, date, ...rest }) =>
+          prisma.villaPricing.upsert({
+            where: { villaId_date: { villaId, date } },
+            update: { ...rest },
+            create: { villaId, date, ...rest },
+          })
+        )
+      );
+    }
+    console.log('Upserted pricing data successfully');
   } catch (error) {
-    console.error('Error during batch update:', error);
+    console.error('Error during upsert:', error);
   }
 }
 
