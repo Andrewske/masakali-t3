@@ -1,11 +1,12 @@
+import { utcToZonedTime } from 'date-fns-tz';
+import { addDays } from 'date-fns';
+
 export const normalizeDate = (date: Date) => {
   const year = date.getFullYear();
   const month = date.getMonth();
   const day = date.getUTCDate();
   return new Date(Date.UTC(year, month, day, 0, 0, 0));
 };
-
-import { addDays } from 'date-fns';
 
 export function getDatesBetweenDates(startDate: Date, endDate: Date): Date[] {
   const dates: Date[] = [];
@@ -20,17 +21,14 @@ export function getDatesBetweenDates(startDate: Date, endDate: Date): Date[] {
   return dates;
 }
 
+// Function to get the current date and time in Bali
 export function getCurrentDateInBali(): Date {
-  const localNow: Date = new Date();
+  // Create a Date object for the current UTC date and time
+  const nowUtc = new Date();
 
-  // Get the local timezone offset in minutes and convert it to milliseconds
-  const localOffset: number = localNow.getTimezoneOffset() * 60000;
+  // Define Bali's IANA time zone identifier
+  const baliTimeZone = 'Asia/Jakarta';
 
-  // Bali, Indonesia is in the UTC+8 time zone (480 minutes ahead of UTC)
-  const baliOffset: number = 480 * 60000;
-
-  // Calculate the Bali time in milliseconds
-  const baliNow: number = localNow.getTime() + localOffset + baliOffset;
-
-  return new Date(baliNow);
+  // Convert the current UTC time to Bali time
+  return utcToZonedTime(nowUtc, baliTimeZone);
 }

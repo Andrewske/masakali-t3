@@ -34,11 +34,13 @@ export const createPricingObject = ({
   checkin,
   checkout,
   conversionRate,
+  adminDiscount,
 }: {
   villaPricing: VillaPricingType[];
   checkin: Date;
   checkout: Date;
   conversionRate: number;
+  adminDiscount?: boolean;
 }) => {
   const pricesConverted = [];
   const pricesIDR = [];
@@ -51,18 +53,19 @@ export const createPricingObject = ({
     date.setDate(date.getDate() + 1)
   ) {
     // Find the price for the current date
-    const priceForDate =
-      villaPricing.find((item) => {
-        const itemDate = new Date(item.date);
-        const currentDate = date;
+    const priceForDate = adminDiscount
+      ? 1
+      : villaPricing.find((item) => {
+          const itemDate = new Date(item.date);
+          const currentDate = date;
 
-        // Compare only the year, month, and day parts
-        return (
-          itemDate.getUTCFullYear() === currentDate.getUTCFullYear() &&
-          itemDate.getUTCMonth() === currentDate.getUTCMonth() &&
-          itemDate.getUTCDate() === currentDate.getUTCDate()
-        );
-      })?.price || 0;
+          // Compare only the year, month, and day parts
+          return (
+            itemDate.getUTCFullYear() === currentDate.getUTCFullYear() &&
+            itemDate.getUTCMonth() === currentDate.getUTCMonth() &&
+            itemDate.getUTCDate() === currentDate.getUTCDate()
+          );
+        })?.price || 0;
 
     pricesIDR.push(priceForDate);
     pricesConverted.push(priceForDate * conversionRate);
@@ -71,6 +74,8 @@ export const createPricingObject = ({
   const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
     calculatePricing(pricesConverted);
   const priceObjIdr = calculatePricing(pricesIDR);
+
+  console.log({ pricePerNight, subTotal, discount, taxes, finalPrice });
 
   return {
     pricePerNight,

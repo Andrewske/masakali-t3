@@ -1,10 +1,12 @@
 import { type UseFormReturn } from 'react-hook-form';
 import type { FormData } from '../getFormSchema';
 import CreditCardForm from '../CreditCardForm';
+import { SetStateAction } from 'react';
 
 type PaymentFormProps = {
   form: UseFormReturn<FormData>;
   setStep: (step: number) => void;
+  setAdminDiscount: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const PencilIcon = () => (
@@ -24,7 +26,7 @@ const PencilIcon = () => (
   </svg>
 );
 
-const PaymentForm = ({ form, setStep }: PaymentFormProps) => {
+const PaymentForm = ({ form, setStep, setAdminDiscount }: PaymentFormProps) => {
   const { watch } = form;
   const fullName = watch('fullName');
   const email = watch('email');
@@ -75,7 +77,10 @@ const PaymentForm = ({ form, setStep }: PaymentFormProps) => {
         </span>
       </div>
 
-      <CreditCardForm form={form} />
+      <CreditCardForm
+        form={form}
+        setAdminDiscount={setAdminDiscount}
+      />
     </div>
   );
 };

@@ -19,6 +19,7 @@ const formSchema = z.object({
   cc_number: z.string().min(16, 'Credit card number is required'),
   cc_expiry: z.string().min(5, 'Expiry date is required'),
   cc_cvc: z.string().min(3, 'CVC is required'),
+  discountCode: z.string().optional(),
 });
 
 export type FormData = z.infer<typeof formSchema>;
@@ -38,7 +39,8 @@ export type FieldName =
   | 'address.zip_code'
   | 'cc_number'
   | 'cc_expiry'
-  | 'cc_cvc';
+  | 'cc_cvc'
+  | 'discountCode';
 
 const getFormSchema = (villaName: VillaNamesType) => {
   return formSchema.refine(

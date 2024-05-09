@@ -7,6 +7,7 @@ import { DayPicker, type DateRange } from 'react-day-picker';
 
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
+import { getCurrentDateInBali } from '~/utils';
 
 type DateRangePickerProps = {
   isActive: boolean;
@@ -31,7 +32,7 @@ const DateRangePicker = ({
         to: addDays(date, 1),
       });
     }
-  }, []);
+  }, [disabledDates, setDateRange]);
 
   const isDateInRange = (
     date: Date,
@@ -115,7 +116,7 @@ export default DateRangePicker;
 function findFirstAvailableDate(
   disabledDates: Set<string | undefined>
 ): Date | null {
-  const currentDate = new Date(); // Start from today
+  const currentDate = getCurrentDateInBali(); // Start from today
   currentDate.setHours(0, 0, 0, 0); // Normalize to start of the day
 
   while (true) {

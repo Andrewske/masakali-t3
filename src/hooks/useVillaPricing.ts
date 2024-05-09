@@ -5,12 +5,14 @@ type UseVillaPricingProps = {
   villaPricing: VillaPricingType[];
   checkin: Date;
   checkout: Date;
+  adminDiscount?: boolean;
 };
 
 export const useVillaPricing = ({
   villaPricing,
   checkin,
   checkout,
+  adminDiscount = false,
 }: UseVillaPricingProps) => {
   const { conversionRates } = useCurrencyStore((state) => state);
 
@@ -21,5 +23,6 @@ export const useVillaPricing = ({
     checkin,
     checkout,
     conversionRate: conversionRateToUSD ?? 1,
+    adminDiscount,
   });
 };

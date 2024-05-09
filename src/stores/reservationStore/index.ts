@@ -3,6 +3,8 @@ import type { DateRange } from 'react-day-picker';
 import type { VillaNamesType } from '~/lib/villas';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { create } from 'zustand';
+import { getCurrentDateInBali } from '~/utils';
+import { add, addDays } from 'date-fns';
 
 export type ReservationState = {
   dateRange: DateRange;
@@ -17,10 +19,11 @@ export type ReservationActions = {
 export type ReservationStore = ReservationState & ReservationActions;
 
 export const initReservationStore = (): ReservationState => {
+  const today = getCurrentDateInBali();
   return {
     dateRange: {
-      from: new Date(),
-      to: new Date(),
+      from: today,
+      to: addDays(today, 1),
     },
     villaName: 'surya',
   };
@@ -28,8 +31,8 @@ export const initReservationStore = (): ReservationState => {
 
 export const defaultInitialState: ReservationState = {
   dateRange: {
-    from: new Date(),
-    to: new Date(),
+    from: getCurrentDateInBali(),
+    to: addDays(getCurrentDateInBali(), 1),
   },
   villaName: 'surya',
 };

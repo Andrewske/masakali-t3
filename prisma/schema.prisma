@@ -6,13 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-  // Further reading:
-  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 // Necessary for Next auth
@@ -67,38 +63,12 @@ model VerificationToken {
 model Villa {
     id           Int @id
     name         String  @unique
-    description  String  @db.Text
-    amenities    String  @db.Text
 
-    images       Image[]
-    reviews      Review[]
     reservations Reservation[]
     pricing      VillaPricing[]
     
 }
 
-model Image {
-    id            String @id @default(cuid())
-    url           String
-    position      Int
-    villaId       Int
-    active        Boolean @default(true)
-    villa         Villa  @relation(fields: [villaId], references: [id], onDelete: Cascade)
-
-    @@index([villaId])
-}
-
-model Review {
-    id            String @id @default(cuid())
-    name          String
-    imgUrl        String
-    date          DateTime
-    text          String @db.Text
-    villaId       Int
-    villa         Villa  @relation(fields: [villaId], references: [id], onDelete: Cascade)
-
-    @@index([villaId])
-}
 
 
 model Reservation {

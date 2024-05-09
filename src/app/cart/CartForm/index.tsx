@@ -32,6 +32,7 @@ export default function CartForm({
   const checkin = dateRange.from;
   const checkout = dateRange.to;
   const villaName = getVillaName(villaId);
+  const [adminDiscount, setAdminDiscount] = useState(false);
 
   if (!checkin || !checkout) {
     throw new Error('Date range is not set');
@@ -41,6 +42,7 @@ export default function CartForm({
     villaPricing,
     checkin,
     checkout,
+    adminDiscount,
   });
 
   useFetchPaymentData({
@@ -78,6 +80,7 @@ export default function CartForm({
             <PaymentForm
               form={form}
               setStep={setStep}
+              setAdminDiscount={setAdminDiscount}
             />
           )}
 
@@ -89,6 +92,9 @@ export default function CartForm({
             onSubmit={onSubmit}
           />
         </form>
+        {adminDiscount && (
+          <p>Admin Discount Applied total = {pricing.totalIDR}</p>
+        )}
       </Form>
     </>
   );

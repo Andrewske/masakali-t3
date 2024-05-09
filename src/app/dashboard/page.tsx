@@ -1,7 +1,7 @@
 'use client';
 import styles from './styles.module.scss';
 
-import { UpdateReservationsButton } from '~/components/Button/UpdateReservations';
+// import { UpdateReservationsButton } from '~/components/Button/UpdateReservations';
 
 // import { getPricing } from '~/actions/smoobu';
 // import { suryaId } from '~/lib/villas';
@@ -24,7 +24,7 @@ export default function Page() {
   // };
   return (
     <main className={styles.main}>
-      <UpdateReservationsButton />
+      {/* <UpdateReservationsButton /> */}
       {/* <Button
         isWhite={false}
         callToAction={'Click Me'}

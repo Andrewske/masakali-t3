@@ -29,6 +29,7 @@ export const env = createEnv({
     NEXTAUTH_URL: z.string(),
     XENDIT_SECRET_KEY: z.string(),
     XENDIT_TEST_SECRET_KEY: z.string(),
+    DISCOUNT_CODE: z.string(),
   },
 
   /**
@@ -87,5 +88,6 @@ export const env = createEnv({
     XENDIT_TEST_SECRET_KEY: process.env.XENDIT_TEST_SECRET_KEY,
     NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY: process.env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY,
     NEXT_PUBLIC_IS_PRODUCTION: process.env.NEXT_PUBLIC_IS_PRODUCTION,
+    DISCOUNT_CODE: process.env.DISCOUNT_CODE,
   },
 });

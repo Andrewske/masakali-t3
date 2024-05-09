@@ -9,6 +9,7 @@ import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import CountryDropdown from '~/components/CountryDropdown';
+import { getCurrentDateInBali } from '~/utils';
 
 type CartDetailsProps = {
   villaId: VillaIdsType;
@@ -31,8 +32,8 @@ const CartDetails = ({ villaId, villaPricing }: CartDetailsProps) => {
     useMemo(() => {
       return createPricingObject({
         villaPricing,
-        checkin: dateRange.from ?? new Date(),
-        checkout: dateRange.to ?? new Date(),
+        checkin: dateRange.from ?? getCurrentDateInBali(),
+        checkout: dateRange.to ?? getCurrentDateInBali(),
         conversionRate,
       });
     }, [dateRange, villaPricing, conversionRate]);
