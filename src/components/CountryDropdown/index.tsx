@@ -13,18 +13,19 @@ import {
   CommandItem,
 } from '~/components/ui/command';
 import Image from 'next/image';
-import type { CountryType } from '~/types/countries';
-import { countries } from '~/lib/countries';
+import type { CountryType } from '~/actions/countries';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import { ScrollArea } from '~/components/ui/scroll-area';
+import { type CountryCodeType } from '~/lib/countryCurrencies';
 
-const CountryDropdown = () => {
+const CountryDropdown = ({ countries }: { countries: CountryType[] }) => {
+  console.log({ countries });
   const [isOpen, setIsOpen] = useState(false);
   const { country, setCountry } = useCurrencyStore((state) => state);
 
   const handleCountrySelection = (country: CountryType) => {
     console.log('Selected Country:', country);
-    setCountry(country.isoAlpha2);
+    setCountry(country.isoAlpha2 as CountryCodeType, countries);
   };
 
   return (
@@ -41,8 +42,8 @@ const CountryDropdown = () => {
         >
           {country.currency.code}{' '}
           <Image
-            src={`data:image/png;base64,${country.flag}`}
-            alt={country.name}
+            src={`data:image/png;base64,${country.flag.toString()}`}
+            alt={country?.name ?? ''}
             width={20}
             height={20}
           />
@@ -54,23 +55,24 @@ const CountryDropdown = () => {
           <CommandEmpty>No Countries Found</CommandEmpty>
           <ScrollArea>
             <CommandGroup>
-              {countries.map((country: CountryType) => (
-                <CommandItem
-                  key={country.name}
-                  onSelect={() => {
-                    void handleCountrySelection(country);
-                    setIsOpen(false);
-                  }}
-                >
-                  {country.name}{' '}
-                  <Image
-                    src={`data:image/png;base64,${country.flag}`}
-                    alt={country.name}
-                    width={20}
-                    height={20}
-                  />
-                </CommandItem>
-              ))}
+              {countries &&
+                countries.map((country: CountryType) => (
+                  <CommandItem
+                    key={country.name}
+                    onSelect={() => {
+                      void handleCountrySelection(country);
+                      setIsOpen(false);
+                    }}
+                  >
+                    {country.name}{' '}
+                    <Image
+                      src={`data:image/png;base64,${country.flag.toString()}`}
+                      alt={country.name}
+                      width={20}
+                      height={20}
+                    />
+                  </CommandItem>
+                ))}
             </CommandGroup>
           </ScrollArea>
         </Command>

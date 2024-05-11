@@ -10,13 +10,17 @@ import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import { formatCurrency } from '~/utils/helpers';
 import CountryDropdown from '~/components/CountryDropdown';
+import { type CountryType } from '~/actions/countries';
+
 const DateContainer = ({
   disabledDates,
   villaPricing,
+  countries,
 }: {
   disabledDates: Set<string | undefined>;
   // checkoutDates: Set<string | undefined>;
   villaPricing: VillaPricingType[];
+  countries: CountryType[];
 }) => {
   const { dateRange } = useReservationStore((state) => state);
   const { currency, conversionRate } = useCurrencyStore((state) => state);
@@ -83,7 +87,7 @@ const DateContainer = ({
       {renderConvertedAmount('Discount', discount)}
       {renderConvertedAmount('Taxes', taxes)}
       {renderConvertedAmount('Total', finalPrice)}
-      <CountryDropdown />
+      <CountryDropdown countries={countries} />
     </div>
   );
 };

@@ -9,6 +9,7 @@ import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import { prisma } from '~/db/prisma';
 import { type VillaPricingType } from '~/utils/pricing';
 import { Suspense } from 'react';
+import { type CountryType } from '~/actions/countries';
 
 export type VillaDataType = {
   villaId: VillaIdsType;
@@ -16,9 +17,10 @@ export type VillaDataType = {
   amenities: string;
   checkin: string;
   checkout: string;
+  countries: CountryType[];
 };
 
-async function Template({ villaId }: VillaDataType) {
+async function Template({ villaId, countries }: VillaDataType) {
   const villaName = getVillaName(villaId);
 
   const { disabledDates } = await getDisabledDatesForVilla(villaId);
@@ -49,6 +51,7 @@ async function Template({ villaId }: VillaDataType) {
           <DateContainer
             disabledDates={disabledDates}
             villaPricing={villaPricing}
+            countries={countries}
           />
         </Suspense>
         <Link

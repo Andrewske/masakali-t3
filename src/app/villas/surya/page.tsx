@@ -1,13 +1,17 @@
+'use server';
+import { getCountries } from '~/actions/countries';
 import Template from '../_components/Template';
 import { suryaId } from '~/lib/villas';
 
-function Page({
+async function Page({
   searchParams,
 }: {
   searchParams: { checkin: string; checkout: string };
 }) {
   const description = 'description';
   const amenities = 'amenities';
+
+  const countries = await getCountries();
 
   return (
     <Template
@@ -16,6 +20,7 @@ function Page({
       villaId={suryaId}
       checkin={searchParams.checkin}
       checkout={searchParams.checkout}
+      countries={countries}
     />
   );
 }

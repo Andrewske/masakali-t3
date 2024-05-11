@@ -1,7 +1,7 @@
 'use server';
 import { env } from '~/env.mjs';
-import type { CountryCodeType } from '~/lib/countries';
 
+import type { CountryCodeType } from '~/lib/countryCurrencies';
 type Currency = {
   currency: {
     meta: {

@@ -113,3 +113,22 @@ model VillaPricing {
 }
 
 
+
+model Country {
+  id         Int      @id @default(autoincrement())
+  name       String
+  isoAlpha2  String  @unique
+  isoAlpha3  String
+  isoNumeric Int
+  currency   Currency @relation(fields: [currencyId], references: [id])
+  currencyId Int      @unique // Mark this field as unique
+  flag       Bytes    // Storing the flag as a byte array
+}
+
+model Currency {
+  id     Int     @id @default(autoincrement())
+  code   String
+  name   String
+  symbol String
+  country Country? @relation // The inverse relation to Country
+}

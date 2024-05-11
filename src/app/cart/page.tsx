@@ -1,8 +1,10 @@
+'use server';
 import CartForm from './CartForm';
 import CartDetails from './CartDetails';
 import { type VillaIdsType } from '~/lib/villas';
 import { getVillaDetails, getVillaPricing } from '~/actions/cart';
 import CartImage from './CartImage';
+import { getCountries } from '~/actions/countries';
 
 export default async function Page({
   searchParams,
@@ -17,6 +19,8 @@ export default async function Page({
 
   const villaPricing = await getVillaPricing(villaId);
 
+  const countries = await getCountries();
+
   return (
     <section className="flex flex-grow flex-col items-center h-full relative">
       {villa && <CartImage villa={villa} />}
@@ -29,6 +33,7 @@ export default async function Page({
             <CartDetails
               villaId={villaId}
               villaPricing={villaPricing}
+              countries={countries}
             />
           </span>
           <span className="w-full md:w-[600px] h-[600px] p-4 grid place-items-center  z-20">
