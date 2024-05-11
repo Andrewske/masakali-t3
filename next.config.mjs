@@ -25,19 +25,17 @@ const analyzerConfig = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const sentryConfig = withSentryConfig(
-  nextConfig,
 
-  {
-    // For all available options, see:
-    // https://github.com/getsentry/sentry-webpack-plugin#options
+export default withSentryConfig(env.ANALYZE === 'true' ? { ...nextConfig, ...analyzerConfig } : nextConfig, {
+  // For all available options, see:
+  // https://github.com/getsentry/sentry-webpack-plugin#options
 
-    // Suppresses source map uploading logs during build
-    silent: true,
-    org: "andrewske",
-    project: "masakali",
-    hideSourceMaps: true,
-  },
+  // Suppresses source map uploading logs during build
+  silent: true,
+  org: "andrewske",
+  project: "masakali",
+  hideSourceMaps: true,
+},
   {
     // For all available options, see:
     // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
@@ -64,7 +62,4 @@ const sentryConfig = withSentryConfig(
     // https://docs.sentry.io/product/crons/
     // https://vercel.com/docs/cron-jobs
     automaticVercelMonitors: true,
-  }
-);
-
-export default withSentryConfig(process.env.ANALYZE === 'true' ? { ...nextConfig, ...analyzerConfig } : nextConfig)
+  })

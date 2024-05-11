@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@libsql/client": "^0.5.6",
     "@million/lint": "^0.0.73",
+    "@next/bundle-analyzer": "^14.2.3",
     "@prisma/client": "^5.13.0",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-dialog": "^1.0.5",
