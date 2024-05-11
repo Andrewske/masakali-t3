@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { type Dispatch, type SetStateAction, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { confirmXenditPayment } from '~/actions/xendit';
 import { useXenditStore } from '~/stores/xenditStore';
 import { useUserStore } from '~/providers/UserStoreProvider';
@@ -21,16 +22,26 @@ type PaymentData = {
   currency: string;
 };
 
-const useFetchPaymentData = (paymentData: PaymentData) => {
+type useFetchPaymentProps = {
+  setIsProcessing: Dispatch<SetStateAction<boolean>>;
+  paymentData: PaymentData;
+};
+
+const useFetchPaymentData = ({
+  paymentData,
+  setIsProcessing,
+}: useFetchPaymentProps) => {
   const { token, setToken, paymentSuccess, setPaymentSuccess } =
     useXenditStore();
   const { user } = useUserStore((state) => state);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPayment = async () => {
       console.log('Fetching Payment');
       if (token && user) {
         try {
+          setIsProcessing(true);
           const payment = await confirmXenditPayment({
             token,
             user,
@@ -53,6 +64,9 @@ const useFetchPaymentData = (paymentData: PaymentData) => {
         } catch (error) {
           console.log('Failed to fetch payment data:', error);
           // Optionally, handle the error state here
+        } finally {
+          setIsProcessing(false);
+          router.push('/success');
         }
       }
     };

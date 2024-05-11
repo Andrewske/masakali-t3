@@ -50,7 +50,7 @@ export const useCartForm = ({
   const form = useForm<FormData>(formOptions);
 
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
-    // setIsProcessing(true);
+    setIsProcessing(true);
     try {
       const user = formatUserState({ formData });
       setUser(user);
@@ -62,7 +62,6 @@ export const useCartForm = ({
       throw new Error('Error submitting form to Xendit');
     } finally {
       setIsProcessing(false);
-      return false;
     }
   };
 

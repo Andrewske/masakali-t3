@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { BeatLoader } from 'react-spinners';
 import AddressForm from './AddressForm';
 
 import { Form } from '~/components/ui/form';
@@ -46,13 +47,16 @@ export default function CartForm({
   });
 
   useFetchPaymentData({
-    user,
-    villaId,
-    villaName,
-    checkin,
-    checkout,
-    ...pricing,
-    currency,
+    paymentData: {
+      user,
+      villaId,
+      villaName,
+      checkin,
+      checkout,
+      ...pricing,
+      currency,
+    },
+    setIsProcessing,
   });
 
   const { form, onSubmit } = useCartForm({
@@ -67,35 +71,46 @@ export default function CartForm({
 
   return (
     <>
-      <Form {...form}>
-        <form className="w-full p-4 bg-gray flex-col justify-center items-center gap-2">
-          {step === 1 && (
-            <GuestDetailsForm
-              form={form}
-              villaName={villaName}
-            />
-          )}
-          {step === 2 && <AddressForm form={form} />}
-          {step === 3 && (
-            <PaymentForm
-              form={form}
-              setStep={setStep}
-              setAdminDiscount={setAdminDiscount}
-            />
-          )}
+      <div className="relative w-full">
+        <Form {...form}>
+          <form className="w-full p-4 bg-gray flex-col justify-center items-center gap-2">
+            {step === 1 && (
+              <GuestDetailsForm
+                form={form}
+                villaName={villaName}
+              />
+            )}
+            {step === 2 && <AddressForm form={form} />}
+            {step === 3 && (
+              <PaymentForm
+                form={form}
+                setStep={setStep}
+                setAdminDiscount={setAdminDiscount}
+              />
+            )}
 
-          <CartSubmitButton
-            form={form}
-            step={step}
-            nextStep={nextStep}
-            isProcessing={isProcessing}
-            onSubmit={onSubmit}
-          />
-        </form>
-        {adminDiscount && (
-          <p>Admin Discount Applied total = {pricing.totalIDR}</p>
+            <CartSubmitButton
+              form={form}
+              step={step}
+              nextStep={nextStep}
+              isProcessing={isProcessing}
+              onSubmit={onSubmit}
+            />
+          </form>
+          {adminDiscount && (
+            <p>Admin Discount Applied total = {pricing.totalIDR}</p>
+          )}
+        </Form>
+        {isProcessing && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            {/* Spinner */}
+            <BeatLoader
+              color="#fff"
+              size={15}
+            />
+          </div>
         )}
-      </Form>
+      </div>
     </>
   );
 }

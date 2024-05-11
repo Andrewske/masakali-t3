@@ -77,37 +77,37 @@ export const confirmXenditPayment = async ({
 
     console.log({ status: responseBody.status === 'CAPTURED' });
 
-    await sendBookingConfirmation({
-      data: {
-        name: fullName,
-        email: email,
-        country: address.country,
-        villaName: villaName,
-        startDate: checkin.toISOString(),
-        endDate: checkout.toISOString(),
-        numDays: numNights,
-        price: formatCurrency(pricePerNight, currency),
-        discount: formatCurrency(discount, currency),
-        taxes: formatCurrency(taxes, currency),
-        total: formatCurrency(finalPrice, currency),
-      },
-      isRetreat: false,
-    });
+    // await sendBookingConfirmation({
+    //   data: {
+    //     name: fullName,
+    //     email: email,
+    //     country: address.country,
+    //     villaName: villaName,
+    //     startDate: checkin.toISOString(),
+    //     endDate: checkout.toISOString(),
+    //     numDays: numNights,
+    //     price: formatCurrency(pricePerNight, currency),
+    //     discount: formatCurrency(discount, currency),
+    //     taxes: formatCurrency(taxes, currency),
+    //     total: formatCurrency(finalPrice, currency),
+    //   },
+    //   isRetreat: false,
+    // });
 
-    await createReservation({
-      villaId,
-      checkin,
-      checkout,
-      finalPrice: totalIDR,
-      firstName: fullName.split(' ')[0] ?? '',
-      lastName: fullName.split(' ')[1] ?? '',
-      email: email,
-      phone: phone,
-      adults: adults,
-      children: children,
-      country: address.country,
-      xenditExternalId: body.external_id,
-    });
+    // await createReservation({
+    //   villaId,
+    //   checkin,
+    //   checkout,
+    //   finalPrice: totalIDR,
+    //   firstName: fullName.split(' ')[0] ?? '',
+    //   lastName: fullName.split(' ')[1] ?? '',
+    //   email: email,
+    //   phone: phone,
+    //   adults: adults,
+    //   children: children,
+    //   country: address.country,
+    //   xenditExternalId: body.external_id,
+    // });
 
     return responseBody.status === 'CAPTURED';
   } catch (error) {

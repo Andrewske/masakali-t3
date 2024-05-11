@@ -64,6 +64,7 @@
     "react-phone-number-input": "^3.3.2",
     "react-responsive-carousel": "^3.2.23",
     "react-select-country-list": "^2.2.3",
+    "react-spinners": "^0.13.8",
     "sass": "^1.62.1",
     "sharp": "^0.33.2",
     "stripe": "^14.18.0",
