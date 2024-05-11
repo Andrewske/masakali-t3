@@ -54,7 +54,7 @@ export const createPricingObject = ({
   ) {
     // Find the price for the current date
     const priceForDate = adminDiscount
-      ? 1
+      ? 5000
       : villaPricing.find((item) => {
           const itemDate = new Date(item.date);
           const currentDate = date;

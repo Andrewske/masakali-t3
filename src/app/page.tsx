@@ -9,7 +9,7 @@ import Villas from '~/app/(home)/Villas';
 import Dining from '~/app/(home)/Dining';
 import Amenities from '~/app/(home)/Amenities';
 import Location from '~/app/(home)/Location';
-import { addDays, format } from 'date-fns';
+import { addDays } from 'date-fns';
 import { getCurrentDateInBali } from '~/utils';
 import { getAllBlockedDates } from '~/actions/reservations';
 import Footer from '~/components/layout/Footer';

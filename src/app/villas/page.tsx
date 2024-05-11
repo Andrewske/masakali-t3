@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { villaDetails } from '~/lib/villas';
 import GoToVillaButton from '~/components/Button/GoToVillaButton';
+
+// make sure villa image fills
 function Page() {
   return (
     <>
