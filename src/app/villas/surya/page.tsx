@@ -8,15 +8,10 @@ async function Page({
 }: {
   searchParams: { checkin: string; checkout: string };
 }) {
-  const description = 'description';
-  const amenities = 'amenities';
-
   const countries = await getCountries();
 
   return (
     <Template
-      description={description}
-      amenities={amenities}
       villaId={suryaId}
       checkin={searchParams.checkin}
       checkout={searchParams.checkout}

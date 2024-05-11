@@ -13,8 +13,6 @@ import { type CountryType } from '~/actions/countries';
 
 export type VillaDataType = {
   villaId: VillaIdsType;
-  description: string;
-  amenities: string;
   checkin: string;
   checkout: string;
   countries: CountryType[];

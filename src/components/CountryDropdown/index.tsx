@@ -19,19 +19,45 @@ import { ScrollArea } from '~/components/ui/scroll-area';
 import { type CountryCodeType } from '~/lib/countryCurrencies';
 
 const CountryDropdown = ({ countries }: { countries: CountryType[] }) => {
-  console.log({ countries });
   const [isOpen, setIsOpen] = useState(false);
   const { country, setCountry } = useCurrencyStore((state) => state);
 
   const handleCountrySelection = (country: CountryType) => {
-    console.log('Selected Country:', country);
     setCountry(country.isoAlpha2 as CountryCodeType, countries);
+  };
+
+  const renderFlag = (flag: string) => {
+    try {
+      // Attempt to decode the base64 string to check if it's valid
+      atob(flag);
+      return (
+        <Image
+          src={`data:image/png;base64,${flag}`}
+          alt={country?.name ?? ''}
+          width="0"
+          height="0"
+          className="w-6 h-5"
+        />
+      );
+    } catch (error) {
+      console.error('Invalid base64 flag:', flag);
+      // Return a default image or null if the base64 string is invalid
+      return (
+        <Image
+          src="/path/to/default/image.png"
+          alt="Default"
+          width="0"
+          height="0"
+          className="w-6 h-5"
+        />
+      );
+    }
   };
 
   return (
     <Popover
       open={isOpen}
-      onOpenChange={() => setIsOpen(true)}
+      onOpenChange={() => setIsOpen(!isOpen)}
     >
       <PopoverTrigger asChild>
         <Button
@@ -42,14 +68,15 @@ const CountryDropdown = ({ countries }: { countries: CountryType[] }) => {
         >
           {country.currency.code}{' '}
           <Image
-            src={`data:image/png;base64,${country.flag.toString()}`}
+            src={`data:image/png;base64,${country.flag}`}
             alt={country?.name ?? ''}
-            width={20}
-            height={20}
+            width="0"
+            height="0"
+            className="w-6 h-5"
           />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] h-[500px] p-0">
+      <PopoverContent className="w-[200px] h-[500px]">
         <Command>
           <CommandInput placeholder="Search" />
           <CommandEmpty>No Countries Found</CommandEmpty>
@@ -59,18 +86,13 @@ const CountryDropdown = ({ countries }: { countries: CountryType[] }) => {
                 countries.map((country: CountryType) => (
                   <CommandItem
                     key={country.name}
+                    className="flex justify-between w-full"
                     onSelect={() => {
                       void handleCountrySelection(country);
                       setIsOpen(false);
                     }}
                   >
-                    {country.name}{' '}
-                    <Image
-                      src={`data:image/png;base64,${country.flag.toString()}`}
-                      alt={country.name}
-                      width={20}
-                      height={20}
-                    />
+                    {country.name} {renderFlag(country.flag.toString())}
                   </CommandItem>
                 ))}
             </CommandGroup>
