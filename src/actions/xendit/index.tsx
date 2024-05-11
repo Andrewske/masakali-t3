@@ -65,8 +65,9 @@ export const confirmXenditPayment = async ({
     });
 
     if (!response.ok) {
+      console.log(response.body);
       throw new Error(
-        `Xendit API request failed with status: ${response.status}`
+        `Xendit API request failed with status: ${response.statusText}`
       );
     }
 
@@ -110,7 +111,7 @@ export const confirmXenditPayment = async ({
     return responseBody.status === 'CAPTURED';
   } catch (error) {
     console.error('Failed to make the credit card charge:', { error });
-    return false; // Rethrowing the error ensures it can be caught and handled upstream
+    return false;
   }
 };
 

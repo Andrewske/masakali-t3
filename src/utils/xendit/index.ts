@@ -64,8 +64,6 @@ allows the function to handle and process any errors that occur during the token
   //   return;
   // }
 
-  console.log('Xendit response:', response);
-
   if (response) {
     switch (response.status) {
       case 'IN_REVIEW':

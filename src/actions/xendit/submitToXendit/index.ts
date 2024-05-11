@@ -1,5 +1,3 @@
-'use client';
-
 import type { FormData } from '~/app/cart/CartForm/getFormSchema';
 import { xenditCreateToken } from '~/utils/xendit';
 
@@ -23,7 +21,7 @@ export const submitToXendit = async ({
 
   console.log('formData', formData);
 
-  await xenditCreateToken({
+  return await xenditCreateToken({
     amount: totalIDR,
     card_number: formData.cc_number,
     card_exp_month: cardExpMonth,

@@ -28,6 +28,7 @@ const useFetchPaymentData = (paymentData: PaymentData) => {
 
   useEffect(() => {
     const fetchPayment = async () => {
+      console.log('Fetching Payment');
       if (token && user) {
         try {
           const payment = await confirmXenditPayment({
@@ -57,7 +58,7 @@ const useFetchPaymentData = (paymentData: PaymentData) => {
     };
 
     void fetchPayment();
-  }, [token, user, setToken, setPaymentSuccess, paymentData]);
+  }, [token]);
 
   useEffect(() => {
     if (paymentSuccess) {
