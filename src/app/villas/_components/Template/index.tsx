@@ -8,6 +8,7 @@ import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import { prisma } from '~/db/prisma';
 import { type VillaPricingType } from '~/utils/pricing';
+import { Suspense } from 'react';
 
 export type VillaDataType = {
   villaId: VillaIdsType;
@@ -44,10 +45,12 @@ async function Template({ villaId }: VillaDataType) {
         id="villa-info"
       >
         <NextVilla currentVillaName={villaName} />
-        <DateContainer
-          disabledDates={disabledDates}
-          villaPricing={villaPricing}
-        />
+        <Suspense fallback={null}>
+          <DateContainer
+            disabledDates={disabledDates}
+            villaPricing={villaPricing}
+          />
+        </Suspense>
         <Link
           href={`/cart?&villaId=${villaId}`}
           className="button purple"
