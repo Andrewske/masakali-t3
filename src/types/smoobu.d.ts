@@ -1,4 +1,5 @@
 import { number } from 'zod';
+import { VillaIdsType } from '~/lib/villas';
 
 export type SmoobuReservation = {
   id: number;
@@ -56,7 +57,7 @@ export const UpdateReservationsResponse = [
 
 export type SmoobuRatesResponse = {
   data: {
-    [villaId: string]: {
+    [villaId: number]: {
       [date: string]: PricingData;
     };
   };

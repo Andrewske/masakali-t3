@@ -62,72 +62,164 @@ export const updateVillaPricing = async (
 // }
 
 type VillaPricingDataType = {
-  villaId: VillaIdsType;
-  date: Date;
+  villaId: number;
+  date: string;
   price: number;
   available: boolean;
 };
 
-export async function batchVillaPricing({ data }: SmoobuRatesResponse) {
-  const upsertData: VillaPricingDataType[] = [];
+type CurrentVillaPricingType = {
+  id: string;
+  villaId: number;
+  date: Date;
+  price: number | null;
+  currency: string | null;
+  available: boolean;
+};
 
-  console.log('Upserting pricing data for villas');
+const oneWeekFromNow = new Date();
+oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
 
-  Object.entries(data).forEach(([villaId, villaPricing]) => {
-    if (!villaPricing) {
-      console.log('No pricing data found for villa', villaId);
-      return;
-    }
+const transformSmoobuRatesResponse = (data: SmoobuRatesResponse['data']) => {
+  const transformedData: VillaPricingDataType[] = [];
 
-    Object.entries(villaPricing).forEach(([dateStr, pricing]) => {
-      const date = new Date(dateStr);
-      if (isNaN(date.getTime())) {
-        console.error(`Invalid date string: ${dateStr}`);
-        return;
+  for (const villaId in data) {
+    for (const date in data[villaId]) {
+      const pricingData = data?.[villaId]?.[date];
+
+      if (pricingData?.price && pricingData?.available !== null) {
+        const newRecord: VillaPricingDataType = {
+          villaId: parseInt(villaId),
+          date,
+          price: pricingData.price,
+          available: Boolean(pricingData.available),
+        };
+
+        transformedData.push(newRecord);
       }
-
-      const record: VillaPricingDataType = {
-        villaId: parseInt(villaId) as VillaIdsType,
-        date,
-        price: pricing?.price ?? 0,
-        available: pricing?.available !== 0,
-      };
-
-      upsertData.push(record);
-    });
-  });
-
-  console.log('Upserting pricing data for', upsertData.length, 'villas');
-
-  // Perform upsert operation
-  try {
-    // Function to split an array into chunks
-    function chunkArray<T>(array: T[], chunkSize: number): T[][] {
-      const chunks: T[][] = [];
-      for (let i = 0; i < array.length; i += chunkSize) {
-        chunks.push(array.slice(i, i + chunkSize));
-      }
-      return chunks;
     }
+  }
 
-    // Split upsertData into chunks of 100
-    const upsertDataChunks = chunkArray(upsertData, 100);
+  // // Filter dates that are less than one week from now
+  // const filteredData = transformedData.filter((villaPricing) => {
+  //   // Convert the date to a Date object if it's not already
+  //   const villaDate =
+  //     villaPricing.date instanceof Date
+  //       ? villaPricing.date
+  //       : new Date(villaPricing.date);
 
-    // Process each chunk in a separate transaction
-    for (const chunk of upsertDataChunks) {
-      await prisma.$transaction(
-        chunk.map(({ villaId, date, ...rest }) =>
-          prisma.villaPricing.upsert({
-            where: { villaId_date: { villaId, date } },
-            update: { ...rest },
-            create: { villaId, date, ...rest },
-          })
-        )
+  //   // Check if the villaDate is less than one week from now
+  //   return villaDate < oneWeekFromNow;
+  // });
+  return transformedData;
+};
+
+function areDatesEqual(dateString: string, dateObject: Date): boolean {
+  // Convert the Date object to a string in "yyyy-mm-dd" format
+  const dateObjectStr = dateObject.toISOString().split('T')[0];
+
+  // Compare the formatted date string with the given date string
+  return dateString === dateObjectStr;
+}
+
+const getChangedVillaPricing = (
+  currentVillaPricing: CurrentVillaPricingType[],
+  newVillaPricing: VillaPricingDataType[]
+) => {
+  const changedRecords: VillaPricingDataType[] = [];
+
+  // First, check for changes in existing records
+  for (const currentRecord of currentVillaPricing) {
+    const correspondingRecord = newVillaPricing.find((record) => {
+      return (
+        record.villaId === currentRecord.villaId &&
+        areDatesEqual(record.date, currentRecord.date)
       );
+    });
+    if (correspondingRecord) {
+      // Check if there's a change in price or availability
+      // if (correspondingRecord.villaId !== 1587920) {
+      //   console.log(correspondingRecord);
+      // }
+      if (
+        correspondingRecord.price !== currentRecord.price ||
+        correspondingRecord.available !== currentRecord.available
+      ) {
+        // console.log({ correspondingRecord, currentRecord });
+        changedRecords.push(correspondingRecord);
+      }
     }
+  }
+
+  // Then, add any new records that do not have a corresponding entry in currentVillaPricing
+  for (const newRecord of newVillaPricing) {
+    const hasCorrespondingRecord = currentVillaPricing.some((currentRecord) => {
+      return (
+        currentRecord.villaId === newRecord.villaId &&
+        areDatesEqual(newRecord.date, currentRecord.date)
+      );
+    });
+
+    if (!hasCorrespondingRecord) {
+      changedRecords.push(newRecord);
+    }
+  }
+
+  return changedRecords;
+};
+
+export async function batchVillaPricing({ data }: SmoobuRatesResponse) {
+  console.log('Starting batchVillaPricing');
+
+  // Transform incoming data to new villa pricing
+  const newVillaPricing = transformSmoobuRatesResponse(data);
+
+  // Retrieve current villa pricing from the database
+  const currentVillaPricing: CurrentVillaPricingType[] =
+    await prisma.villaPricing.findMany();
+
+  // Determine pricing changes
+  const changedVillaPricing = getChangedVillaPricing(
+    currentVillaPricing,
+    newVillaPricing
+  );
+  console.log(
+    'Changed villa pricing for',
+    changedVillaPricing.length,
+    'villas'
+  );
+
+  // Upsert changed pricing into the database
+  try {
+    await upsertPricingData(changedVillaPricing);
     console.log('Upserted pricing data successfully');
   } catch (error) {
     console.error('Error during upsert:', error);
+  }
+}
+
+// Function to split an array into chunks
+function chunkArray<T>(array: T[], chunkSize: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    chunks.push(array.slice(i, i + chunkSize));
+  }
+  return chunks;
+}
+
+// Upsert pricing data into the database in chunks
+async function upsertPricingData(changedVillaPricing: VillaPricingDataType[]) {
+  const upsertDataChunks = chunkArray(changedVillaPricing, 100);
+  for (const chunk of upsertDataChunks) {
+    await prisma.$transaction(
+      chunk.map(({ villaId, date, ...rest }) =>
+        prisma.villaPricing.upsert({
+          where: { villaId_date: { villaId, date: new Date(date) } },
+          update: { ...rest },
+          create: { villaId, date: new Date(date), ...rest },
+        })
+      )
+    );
   }
 }
 
