@@ -11,7 +11,7 @@ import { env } from "./src/env.mjs";
 await import('./src/env.mjs');
 
 /** @type {import("next").NextConfig} */
-const config = {
+const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['imgur.com', 'avatar.iran.liara.run', 'lh3.googleusercontent.com', 'dynamic-media-cdn.tripadvisor.com']
@@ -21,10 +21,13 @@ const config = {
     defaultLocale: 'en'
   }
 }
-
+const analyzerConfig = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const sentryConfig = withSentryConfig(
-  config,
+  nextConfig,
+
   {
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options
@@ -33,6 +36,7 @@ const sentryConfig = withSentryConfig(
     silent: true,
     org: "andrewske",
     project: "masakali",
+    hideSourceMaps: true,
   },
   {
     // For all available options, see:
@@ -62,4 +66,5 @@ const sentryConfig = withSentryConfig(
     automaticVercelMonitors: true,
   }
 );
-export default env.ANALYZE === 'true' ? withBundleAnalyzer(config) : config
+
+export default withSentryConfig(process.env.ANALYZE === 'true' ? { ...nextConfig, ...analyzerConfig } : nextConfig)
