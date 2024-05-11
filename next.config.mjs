@@ -26,16 +26,11 @@ const analyzerConfig = withBundleAnalyzer({
 });
 
 
-export default withSentryConfig(env.ANALYZE === 'true' ? { ...nextConfig, ...analyzerConfig } : nextConfig, {
-  // For all available options, see:
-  // https://github.com/getsentry/sentry-webpack-plugin#options
-
-  // Suppresses source map uploading logs during build
-  silent: true,
-  org: "andrewske",
-  project: "masakali",
-},
+export default withSentryConfig(env.ANALYZE === 'true' ? { ...nextConfig, ...analyzerConfig } : nextConfig,
   {
+    silent: true,
+    org: "andrewske",
+    project: "masakali",
     // For all available options, see:
     // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 

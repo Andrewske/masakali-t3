@@ -75,8 +75,6 @@ export const createPricingObject = ({
     calculatePricing(pricesConverted);
   const priceObjIdr = calculatePricing(pricesIDR);
 
-  console.log({ pricePerNight, subTotal, discount, taxes, finalPrice });
-
   return {
     pricePerNight,
     subTotal,
