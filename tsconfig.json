@@ -36,7 +36,9 @@
     ".next/types/**/*.ts",
     "src/lib/countryparse.js",
     "./types/*.d.ts",
-    "tailwind.config.js"
+    "tailwind.config.js",
+    "src/lib/getAlpha2.js",
+    "src/lib/getAlpha2.js"
   ],
   "exclude": ["node_modules"]
 }

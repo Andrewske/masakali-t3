@@ -4,6 +4,9 @@
  * for Docker builds.
  */
 import { withSentryConfig } from "@sentry/nextjs";
+import withBundleAnalyzer from '@next/bundle-analyzer'
+
+import { env } from "./src/env.mjs";
 
 await import('./src/env.mjs');
 
@@ -20,7 +23,7 @@ const config = {
 }
 
 
-export default withSentryConfig(
+const sentryConfig = withSentryConfig(
   config,
   {
     // For all available options, see:
@@ -59,3 +62,4 @@ export default withSentryConfig(
     automaticVercelMonitors: true,
   }
 );
+export default env.ANALYZE === 'true' ? withBundleAnalyzer(config) : config
