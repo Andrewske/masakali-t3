@@ -34,7 +34,6 @@ export default withSentryConfig(env.ANALYZE === 'true' ? { ...nextConfig, ...ana
   silent: true,
   org: "andrewske",
   project: "masakali",
-  hideSourceMaps: true,
 },
   {
     // For all available options, see:
