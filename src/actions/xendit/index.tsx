@@ -65,7 +65,8 @@ export const confirmXenditPayment = async ({
     });
 
     if (!response.ok) {
-      console.log(response.body);
+      const textData = await response.text();
+      console.log('Text data:', textData);
       throw new Error(
         `Xendit API request failed with status: ${response.statusText}`
       );
