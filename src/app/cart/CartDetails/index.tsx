@@ -1,3 +1,4 @@
+'use client';
 import styles from './styles.module.scss';
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { useMemo } from 'react';
@@ -8,7 +9,7 @@ import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import CountryDropdown from '~/components/CountryDropdown';
 import { getCurrentDateInBali } from '~/utils';
-import { CountryType } from '~/actions/countries';
+import { type CountryType } from '~/actions/countries';
 
 type CartDetailsProps = {
   villaId: VillaIdsType;

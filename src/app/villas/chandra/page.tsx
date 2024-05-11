@@ -1,7 +1,8 @@
+import { getCountries } from '~/actions/countries';
 import Template from '../_components/Template';
 import { chandraId } from '~/lib/villas';
 
-function Page({
+async function Page({
   searchParams,
 }: {
   searchParams: { checkin: string; checkout: string };
@@ -9,6 +10,7 @@ function Page({
   const description = 'description';
   const amenities = 'amenities';
 
+  const countries = await getCountries();
   return (
     <Template
       description={description}
@@ -16,6 +18,7 @@ function Page({
       villaId={chandraId}
       checkin={searchParams.checkin}
       checkout={searchParams.checkout}
+      countries={countries}
     />
   );
 }
