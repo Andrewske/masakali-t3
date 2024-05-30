@@ -2,10 +2,8 @@
 import { env } from '~/env.mjs';
 import type { UserState } from '~/stores/userStore';
 import type { XenditChargeResponse } from '~/types/xendit';
-import { sendBookingConfirmation } from '../sendgrid';
-import { formatCurrency } from '~/utils/helpers';
+
 import type { VillaIdsType } from '~/lib/villas';
-import { createReservation } from '~/actions/smoobu';
 
 type ConfirmXenditPaymentProps = {
   token: string;
@@ -36,28 +34,16 @@ export const confirmXenditPayment = async ({
   token,
   user,
   reservation,
-}: ConfirmXenditPaymentProps): Promise<boolean> => {
-  const {
-    taxes,
-    finalPrice,
-    currency,
-    villaId,
-    villaName,
-    checkin,
-    checkout,
-    numNights,
-    pricePerNight,
-    discount,
-    totalIDR,
-  } = reservation;
-
-  const { fullName, email, address, phone, adults, children } = user;
+}: ConfirmXenditPaymentProps): Promise<{
+  success: boolean;
+  paymentId: string | null;
+}> => {
+  const { totalIDR } = reservation;
 
   const body = createRequestBody(token, user, totalIDR);
   const headers = createRequestHeaders();
 
   try {
-    console.log('Request body:', JSON.stringify(body, null, 2)); // Logging the request body
     const response = await fetch(xenditConfig.url, {
       method: 'POST',
       headers,
@@ -73,46 +59,15 @@ export const confirmXenditPayment = async ({
     }
 
     const responseBody = (await response.json()) as XenditChargeResponse;
-    console.log('Response body:', JSON.stringify(responseBody, null, 2));
 
-    console.log({ status: responseBody.status === 'CAPTURED' });
-
-    // await sendBookingConfirmation({
-    //   data: {
-    //     name: fullName,
-    //     email: email,
-    //     country: address.country,
-    //     villaName: villaName,
-    //     startDate: checkin.toISOString(),
-    //     endDate: checkout.toISOString(),
-    //     numDays: numNights,
-    //     price: formatCurrency(pricePerNight, currency),
-    //     discount: formatCurrency(discount, currency),
-    //     taxes: formatCurrency(taxes, currency),
-    //     total: formatCurrency(finalPrice, currency),
-    //   },
-    //   isRetreat: false,
-    // });
-
-    // await createReservation({
-    //   villaId,
-    //   checkin,
-    //   checkout,
-    //   finalPrice: totalIDR,
-    //   firstName: fullName.split(' ')[0] ?? '',
-    //   lastName: fullName.split(' ')[1] ?? '',
-    //   email: email,
-    //   phone: phone,
-    //   adults: adults,
-    //   children: children,
-    //   country: address.country,
-    //   xenditExternalId: body.external_id,
-    // });
-
-    return responseBody.status === 'CAPTURED';
+    return {
+      success: responseBody.status === 'CAPTURED',
+      paymentId: body.external_id,
+      // reservationId
+    };
   } catch (error) {
     console.error('Failed to make the credit card charge:', { error });
-    return false;
+    return { success: false, paymentId: null };
   }
 };
 

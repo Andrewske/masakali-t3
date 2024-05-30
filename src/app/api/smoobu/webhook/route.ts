@@ -1,3 +1,4 @@
+import { prisma } from '~/db/prisma';
 import { villaIdsArray, type VillaIdsType } from '~/lib/villas';
 
 import type { SmoobuReservation, SmoobuRatesResponse } from '~/types/smoobu';
@@ -76,7 +77,19 @@ export async function POST(request: Request) {
         return;
       }
 
-      await createReservation(data);
+      // check if dbReservation exists
+      const res = await prisma.reservation.findFirst({
+        where: {
+          id: data['reference-id'],
+        },
+      });
+
+      if (res) {
+        await updateReservation(data);
+        return;
+      } else {
+        await createReservation(data);
+      }
     }
   } catch (error) {
     console.error(error);

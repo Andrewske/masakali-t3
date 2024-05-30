@@ -1,5 +1,5 @@
 import { createStore } from 'zustand/vanilla';
-import { getCurrencyRates } from '~/actions/currencyApi';
+import { getRateFromIdr } from '~/actions/currencyApi';
 
 import { countryCurrencies } from '~/lib/countryCurrencies';
 import type { CountryCodeType } from '~/lib/countryCurrencies';
@@ -27,10 +27,12 @@ export type CurrencyState = {
 // };
 
 export type CurrencyActions = {
-  setCountry: (countryCode: CountryCodeType, countries: CountryType[]) => void;
+  setCountry: (
+    countryCode: CountryCodeType,
+    countries: CountryType[]
+  ) => Promise<void>;
   setCurrency: (currency: string) => void;
-  conversionRate: number;
-  setConversionRates: () => void;
+  conversionRate: number | null;
 };
 
 export type CurrencyStore = CurrencyState & CurrencyActions;
@@ -64,47 +66,33 @@ export const createCurrencyStore = (
   return createStore<CurrencyStore>((set) => ({
     ...initState,
     // When a country is selected then we set the country, get the exchange rate
-    setCountry: (countryCode: CountryCodeType, countries: CountryType[]) => {
+    setCountry: async (
+      countryCode: CountryCodeType,
+      countries: CountryType[]
+    ) => {
       console.log('Setting country:', countryCode);
       const country =
         countries &&
         (countries?.find(
           (country) => country?.isoAlpha2 === countryCode
         ) as CountryType);
+
+      const currency = (countryCurrencies as Record<string, string>)[
+        countryCode
+      ];
       set({
         country: country,
       });
       set({
-        currency: (countryCurrencies as Record<string, string>)[countryCode],
+        currency,
       });
-      getCurrencyRates()
-        .then((data) => {
-          console.log('Fetched currency rates:', data);
-          if (data) {
-            const rate = data[country.currency.code as CountryCodeType];
-            console.log('Setting conversion rate:', rate, countryCode, data);
-            set({ conversionRates: data });
-            set({ conversionRate: rate });
-          } else {
-            console.error('Failed to fetch currency rates');
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching currency rates:', error);
-        });
-    },
-    setConversionRates: () => {
-      getCurrencyRates()
-        .then((data) => {
-          if (data) {
-            set({ conversionRates: data });
-          } else {
-            console.error('Failed to fetch currency rates');
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching currency rates:', error);
-        });
+
+      const rate = await getRateFromIdr(currency);
+      if (rate !== null) {
+        set({ conversionRate: rate });
+      } else {
+        set({ conversionRate: undefined });
+      }
     },
     setCurrency: (currency: string) => {
       set({ currency });

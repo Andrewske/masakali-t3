@@ -3,23 +3,18 @@ import { xenditCreateToken } from '~/utils/xendit';
 
 type SubmitToXenditProps = {
   formData: FormData;
-  // setIsProcessing: React.Dispatch<React.SetStateAction<boolean>>;
   totalIDR: number;
 };
 export const submitToXendit = async ({
   formData,
-  // setIsProcessing,
   totalIDR,
 }: SubmitToXenditProps) => {
   const [cardExpMonth, cardExpYear] = formData.cc_expiry.split('/');
-  console.log({ cardExpMonth, cardExpYear });
 
   if (!cardExpMonth || !cardExpYear) {
     console.error('Error with splitting card expiration');
     return;
   }
-
-  console.log('formData', formData);
 
   return await xenditCreateToken({
     amount: totalIDR,

@@ -52,9 +52,11 @@ export const useCartForm = ({
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setIsProcessing(true);
     try {
+      // Set the user with the form data
       const user = formatUserState({ formData });
       setUser(user);
-      console.log('here');
+
+      // Submit the form to Xendit and Create a token
       await submitToXendit({ formData, totalIDR });
       console.log('Successfully submitted form to Xendit');
     } catch (error) {

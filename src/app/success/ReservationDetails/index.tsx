@@ -1,33 +1,28 @@
 'use client';
 import Image from 'next/image';
-import { useReservationStore } from '~/providers/ReservationStoreProvider';
-import { type VillaPricingType, createPricingObject } from '~/utils/pricing';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
-import { useUserStore } from '~/providers/UserStoreProvider';
-import { villaDetails } from '~/lib/villas';
+
+import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
+import { differenceInCalendarDays } from 'date-fns';
 
 import { formatCurrency } from '~/utils/helpers';
+
 const ReservationDetails = ({
-  villaPricing,
+  reservation: { arrival, departure, adults, children, amount, villaId },
 }: {
-  villaPricing: VillaPricingType[];
+  reservation: {
+    arrival: Date;
+    departure: Date;
+    adults: number | null;
+    children: number | null;
+    amount: number | null;
+    villaId: number;
+  };
 }) => {
-  const { dateRange, villaName } = useReservationStore((state) => state);
-  const { conversionRate, currency } = useCurrencyStore((state) => state);
-  const { user } = useUserStore((state) => state);
+  const { currency } = useCurrencyStore((state) => state);
 
+  const villaName = getVillaName(villaId as VillaIdsType);
   const villa = villaDetails[villaName];
-  const checkin = dateRange.from;
-  const checkout = dateRange.to;
-
-  if (!checkin || !checkout) {
-    return (
-      <span>
-        <h1>Could not find reservation</h1>
-        <p>Please contact admin@masakaliretreat.com</p>
-      </span>
-    );
-  }
 
   const formatDate = (date: Date) =>
     date.toLocaleDateString('en-US', {
@@ -36,12 +31,6 @@ const ReservationDetails = ({
       day: 'numeric',
     });
 
-  const pricing = createPricingObject({
-    villaPricing,
-    checkin,
-    checkout,
-    conversionRate,
-  });
   return (
     <div className="flex flex-col justify-evenly items-center p-8">
       <Image
@@ -57,26 +46,20 @@ const ReservationDetails = ({
         <span className="flex w-full p-4 justify-evenly ">
           <div className="border border-purple p-4 grid place-items-center">
             <h3>Checkin</h3>
-            <p>{formatDate(checkin)}</p>
+            <p>{formatDate(arrival)}</p>
             <p>2:00 PM</p>
           </div>
           <div className="border border-purple p-4 grid place-items-center">
             {' '}
             <h3>Checkout</h3>
-            <p>{formatDate(checkout)}</p>
+            <p>{formatDate(departure)}</p>
             <p>11:00 AM</p>
           </div>
         </span>
         <div className="flex flex-col gap-2 max-w-[350px]">
-          <p>Number of guests: {user.adults + user.children}</p>
-          <p>Total nights: {formatCurrency(pricing.numNights, currency)}</p>
-          <p>
-            Price per night: {formatCurrency(pricing.pricePerNight, currency)}
-          </p>
-          <p>Subtotal: {formatCurrency(pricing.subTotal, currency)}</p>
-          <p>Discount: {formatCurrency(pricing.discount, currency)}</p>
-          <p>Taxes: {formatCurrency(pricing.taxes, currency)}</p>
-          <p>Final price: {formatCurrency(pricing.finalPrice, currency)}</p>
+          <p>Number of guests: {(adults ?? 1) + (children ?? 0)}</p>
+          <p>Total nights: {differenceInCalendarDays(arrival, departure)}</p>
+          <p>Final price: {formatCurrency(amount ?? 0, currency)}</p>
         </div>
         <p className="text-xs p-8">
           Questions? Email us at info@masakaliretreat.com

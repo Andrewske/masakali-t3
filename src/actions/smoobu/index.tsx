@@ -4,6 +4,8 @@ import type { VillaIdsType } from '~/lib/villas';
 import { prisma } from '~/db/prisma';
 import { env } from '~/env.mjs';
 import { channelIds } from '~/lib/smoobu';
+import { PaymentData } from '~/hooks/useFetchPaymentData';
+import { UserState } from '~/stores/userStore';
 
 export type PricingDataType = {
   villaName: string;
@@ -58,9 +60,6 @@ export const getPricing = async ({
     if (villaPricing.length !== numNights)
       throw new Error('Villa not available');
 
-    // const conversionRate = await getConversionRate(currency);
-
-    // console.log(conversionRate);
     const pricePerNight =
       villaPricing.reduce((acc, curr) => acc + curr.price, 0) || 0;
     const discountRate = parseFloat(env.WEBSITE_DISCOUNT ?? '0');
@@ -241,8 +240,34 @@ type CreateReservationPropsType = {
   adults: number;
   children: number;
   country: string;
-  xenditExternalId: string;
+  xenditExternalId: string | null;
 };
+
+export const createReservationData = ({
+  paymentData,
+  user,
+  externalId,
+}: {
+  paymentData: PaymentData;
+  user: UserState['user'];
+  externalId: string | null;
+}) => {
+  return {
+    villaId: paymentData.villaId,
+    checkin: paymentData.checkin,
+    checkout: paymentData.checkout,
+    finalPrice: paymentData.totalIDR,
+    firstName: user.fullName.split(' ')[0] ?? '',
+    lastName: user.fullName.split(' ')[1] ?? '',
+    email: user.email,
+    phone: user.phone,
+    adults: user.adults,
+    children: user.children,
+    country: user.address.country,
+    xenditExternalId: externalId,
+  };
+};
+
 export const createReservation = async ({
   villaId,
   checkin,
@@ -258,6 +283,28 @@ export const createReservation = async ({
   xenditExternalId,
 }: CreateReservationPropsType) => {
   try {
+    // Create the reservation in the database
+    const dbReservation = await prisma.reservation.create({
+      data: {
+        villaId,
+        channelId: channelIds.website,
+        arrival: checkin,
+        departure: checkout,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        adults: adults,
+        children: children,
+        note: xenditExternalId,
+        amount: finalPrice,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    // Create the reservation in Smoobu
     const reservation = await fetch(env.SMOOBU_API_URL + '/reservations', {
       method: 'POST',
       headers: {
@@ -279,11 +326,16 @@ export const createReservation = async ({
         notice: xenditExternalId,
         country: country,
         price: finalPrice,
+        'reference-id': dbReservation.id,
       }),
     });
 
-    console.log(await reservation.json());
-    return true;
+    if (reservation.status === 200) {
+      return dbReservation.id;
+    } else {
+      console.error(reservation);
+      throw new Error('Failed to create reservation');
+    }
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);

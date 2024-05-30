@@ -1,33 +1,40 @@
 import { prisma } from '~/db/prisma';
-
-import { type VillaIdsType } from '~/lib/villas';
-
 import ReservationDetails from './ReservationDetails';
-import { type VillaPricingType } from '~/utils/pricing';
+
 export default async function Page({
-  searchParams,
+  searchParams: { reservationId },
 }: {
   searchParams: {
-    villaId: string;
+    reservationId: string;
   };
 }) {
-  const villaId = parseInt(searchParams.villaId) as VillaIdsType;
-
-  const villaPricing = (await prisma.villaPricing.findMany({
+  const reservation = await prisma.reservation.findFirst({
     where: {
-      villaId: Number(villaId),
+      id: reservationId,
     },
     select: {
-      date: true,
-      price: true,
-      available: true,
+      arrival: true,
+      departure: true,
+      adults: true,
+      children: true,
+      villaId: true,
+      amount: true,
     },
-  })) as VillaPricingType[];
+  });
+
+  if (!reservation) {
+    return (
+      <section className=" w-full grid place-items-center p-16">
+        <h1>Could not find reservation</h1>
+        <p>Please contact admin@masakaliretreat.com</p>
+      </section>
+    );
+  }
 
   return (
     <section className=" w-full grid place-items-center p-16">
       <h1>Success!</h1>
-      <ReservationDetails villaPricing={villaPricing} />
+      <ReservationDetails reservation={reservation} />
     </section>
   );
 }

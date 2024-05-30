@@ -69,18 +69,18 @@ model Villa {
     
 }
 
-
+// 
 
 model Reservation {
     id            String   @id @default(cuid())
-    smoobuId      Int      @unique
+    smoobuId      Int?     @unique
     referenceId   String?  
     villaId       Int
     channelId     Int?
     userId        String?
     arrival       DateTime
     departure     DateTime
-    createdAt     DateTime
+    createdAt     DateTime @default(now()) 
     guestName     String?
     firstName     String?
     lastName      String?
@@ -131,4 +131,5 @@ model Currency {
   name   String
   symbol String
   country Country? @relation // The inverse relation to Country
+  rateFromIDR Int @default(1)
 }

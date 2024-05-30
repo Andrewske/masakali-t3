@@ -6,8 +6,15 @@ import { useUserStore } from '~/providers/UserStoreProvider';
 import type { UserStore } from '~/stores/userStore';
 import type { VillaIdsType } from '~/lib/villas';
 
+import {
+  createBookingConfirmationData,
+  sendBookingConfirmation,
+} from '~/actions/sendgrid';
+
+import { createReservationData, createReservation } from '~/actions/smoobu';
 // Assuming the necessary types are defined elsewhere
-type PaymentData = {
+
+export type PaymentData = {
   user: UserStore['user']; // Replace UserType with the actual type of your user object
   totalIDR: number;
   villaId: VillaIdsType;
@@ -59,14 +66,31 @@ const useFetchPaymentData = ({
               currency: paymentData.currency,
             },
           });
-          setPaymentSuccess(payment);
+          setPaymentSuccess(payment.success);
           setToken(null); // Reset the token after successful payment
+
+          // Send the booking confirmation
+          const bookingConfirmationData = createBookingConfirmationData({
+            user,
+            paymentData,
+          });
+          await sendBookingConfirmation({ data: bookingConfirmationData });
+
+          const reservationData = createReservationData({
+            user,
+            paymentData,
+            externalId: payment.paymentId,
+          });
+
+          const reservationId = await createReservation(reservationData);
+          if (paymentSuccess) {
+            router.push(`/success?reservationId=${reservationId}`);
+          }
         } catch (error) {
           console.log('Failed to fetch payment data:', error);
           // Optionally, handle the error state here
         } finally {
           setIsProcessing(false);
-          router.push('/success');
         }
       }
     };
