@@ -45,43 +45,67 @@ const updateCurrency = async (code: string, rate_from_idr: number) => {
   }
 };
 
-export async function GET() {
-  try {
-    const currencies = await prisma.currency.findMany({
+async function getExchangeRates() {
+  const currencies = await prisma.currency
+    .findMany({
       select: {
         code: true,
       },
+    })
+    .then((currencies) => currencies.map((c) => c.code));
+
+  const currenciesParam = currencies.join(',');
+
+  try {
+    const response = await axios.get(`https://api.currencyapi.com/v3/latest`, {
+      headers: {
+        'Content-Type': 'application/json',
+        apiKey: process.env.CURRENCY_API_KEY,
+      },
+      params: {
+        base_currency: 'IDR',
+        currencies: currenciesParam,
+      },
     });
+    console.log('Response:', response.data);
+    return response.data as ExchangeRatesResponse;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      console.error('Error response data:', error.response.data); // Log error response data
+    } else {
+      console.error('An unexpected error occurred:', error);
+    }
+  }
+}
 
-    // Constructing the currencies parameter as a URL-encoded string
-    const currenciesParam = new URLSearchParams(
-      currencies.map((c) => `currencies[]=${c.code}`).join('&')
-    );
+export async function GET() {
+  try {
+    const response = await getExchangeRates();
 
-    // console.log(currenciesParam);
-
-    const response: ExchangeRatesResponse = await axios.get(
-      `https://api.currencyapi.com/v3/latest`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          apiKey: env.CURRENCY_API_KEY,
-        },
-        params: {
-          base_currency: 'IDR',
-          currenciesParam, // Parsing the constructed parameters
-        },
-      }
-    );
-
-    const { data } = response.data;
-
-    if (!data) {
-      throw new Error('Exchange rates not found');
+    if (!response) {
+      return {
+        status: 500,
+        body: 'Error fetching exchange rates',
+      };
     }
 
-    for (const { code, value } of Object.values(data)) {
-      await updateCurrency(code as string, value as number);
+    const { data } = response;
+
+    const batchSize = 10;
+    const valuesArray = Object.values(data);
+
+    // Create an array of arrays, where each inner array is a batch of size batchSize
+    const batches = [];
+    for (let i = 0; i < valuesArray.length; i += batchSize) {
+      batches.push(valuesArray.slice(i, i + batchSize));
+    }
+
+    // Process each batch
+    for (const batch of batches) {
+      const promises = batch.map(({ code, value }) =>
+        updateCurrency(code, value)
+      );
+      await Promise.all(promises);
     }
 
     return new Response(JSON.stringify(data), { status: 200 });
