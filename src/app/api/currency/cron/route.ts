@@ -67,7 +67,7 @@ async function getExchangeRates() {
         currencies: currenciesParam,
       },
     });
-    console.log('Response:', response.data);
+
     return response.data as ExchangeRatesResponse;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -83,10 +83,7 @@ export async function GET() {
     const response = await getExchangeRates();
 
     if (!response) {
-      return {
-        status: 500,
-        body: 'Error fetching exchange rates',
-      };
+      return new Response('Error getting exchange rates', { status: 500 });
     }
 
     const { data } = response;
