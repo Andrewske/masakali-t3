@@ -115,7 +115,7 @@ function transformReservationData(
  */
 async function upsertReservationToDatabase(
   reservationData: TransformedReservation
-): Promise<{ smoobuId: number }> {
+): Promise<{ smoobuId: number | null }> {
   const currentReservation = await prisma.reservation.findUnique({
     where: { smoobuId: reservationData.smoobuId },
   });

@@ -76,6 +76,7 @@ const useFetchPaymentData = ({
           });
           await sendBookingConfirmation({ data: bookingConfirmationData });
 
+          // Create the reservation
           const reservationData = createReservationData({
             user,
             paymentData,

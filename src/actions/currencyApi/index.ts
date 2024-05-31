@@ -28,7 +28,7 @@ export const getRateFromIdr = async (
         code: currency,
       },
       select: {
-        rateFromIDR: true,
+        rate_from_idr: true,
       },
     });
 
@@ -36,7 +36,7 @@ export const getRateFromIdr = async (
       throw new Error('Rate not found');
     }
 
-    return rate.rateFromIDR;
+    return rate.rate_from_idr;
   } catch (error) {
     console.log(error);
     return null; // Explicitly returning null in case of an error

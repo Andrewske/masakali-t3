@@ -1,6 +1,3 @@
-// import { getCurrency } from '~/actions/currencyApi';
-import { NextResponse } from 'next/server';
-
 import { prisma } from '~/db/prisma';
 import fs from 'fs';
 
@@ -28,38 +25,22 @@ async function importCountries() {
       // Create a new currency entry if it doesn't already exist
       const currency = await prisma.currency.upsert({
         where: { code: country.currency.code },
-        update: {
-          code: country.currency.code,
-          name: country.currency.name,
-        },
+        update: {},
         create: {
           code: country.currency.code,
           name: country.currency.name,
-        },
-        select: {
-          id: true,
+          symbol: country.currency.symbol,
         },
       });
 
       // Insert the country data into the database
-      await prisma.country.upsert({
-        where: {
-          iso_alpha2: country.isoAlpha2,
-        },
-        update: {
+      await prisma.country.create({
+        data: {
           name: country.name,
-          iso_alpha2: country.isoAlpha2,
-          iso_alpha3: country.isoAlpha3,
-          iso_numeric: Number(country.isoNumeric),
-          currency_id: currency.id, // Associate the currency using its ID
-          flag: Buffer.from(country.flag, 'base64'), // Convert base64 string to byte array
-        },
-        create: {
-          name: country.name,
-          iso_alpha2: country.isoAlpha2,
-          iso_alpha3: country.isoAlpha3,
-          iso_numeric: Number(country.isoNumeric),
-          currency_id: currency.id, // Associate the currency using its ID
+          isoAlpha2: country.isoAlpha2,
+          isoAlpha3: country.isoAlpha3,
+          isoNumeric: Number(country.isoNumeric),
+          currencyId: currency.id, // Associate the currency using its ID
           flag: Buffer.from(country.flag, 'base64'), // Convert base64 string to byte array
         },
       });
@@ -69,8 +50,6 @@ async function importCountries() {
   }
 }
 
-export async function GET() {
-  await importCountries();
-
-  return NextResponse.json({ success: true });
-}
+importCountries().catch((e) => {
+  throw e;
+});

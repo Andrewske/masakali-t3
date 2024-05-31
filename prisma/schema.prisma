@@ -114,22 +114,21 @@ model VillaPricing {
 
 
 
-model Country {
-  id         Int      @id @default(autoincrement())
-  name       String
-  isoAlpha2  String  @unique
-  isoAlpha3  String
-  isoNumeric Int
-  currency   Currency @relation(fields: [currencyId], references: [id])
-  currencyId Int      @unique // Mark this field as unique
-  flag       Bytes    // Storing the flag as a byte array
+model currency {
+  id                 Int     @id @default(autoincrement())
+  code               String  @unique
+  name               String
+  countries          country[] // This represents the inverse relationship from country to currency
+  rate_from_idr      Float     @default(1)
 }
 
-model Currency {
-  id     Int     @id @default(autoincrement())
-  code   String
-  name   String
-  symbol String
-  country Country? @relation // The inverse relation to Country
-  rateFromIDR Int @default(1)
+model country {
+  id                  Int      @id @default(autoincrement())
+  name                String
+  iso_alpha2          String   @unique
+  iso_alpha3          String
+  iso_numeric         Int
+  currency_id         Int
+  currency            currency @relation(fields: [currency_id], references: [id])
+  flag                Bytes    // Storing the flag as a byte array
 }
