@@ -1,6 +1,3 @@
-// import { getCurrency } from '~/actions/currencyApi';
-import { NextResponse } from 'next/server';
-
 import { prisma } from '~/db/prisma';
 import fs from 'fs';
 
@@ -16,7 +13,7 @@ type Country = {
   flag: string;
 };
 
-async function importCountries() {
+export async function importCountries() {
   // Read the countries.json file
   const data = fs.readFileSync('countries.json', 'utf8');
   const countries = JSON.parse(data) as Country[];
@@ -71,10 +68,4 @@ async function importCountries() {
       console.error(`Error inserting country: ${country.name}`, error);
     }
   }
-}
-
-export async function GET() {
-  await importCountries();
-
-  return NextResponse.json({ success: true });
 }
