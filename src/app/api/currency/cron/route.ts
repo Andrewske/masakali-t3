@@ -80,11 +80,9 @@ export async function GET() {
       throw new Error('Exchange rates not found');
     }
 
-    await Promise.all(
-      Object.entries(data).map(([_, { code, value }]: [string, RateInfo]) => {
-        return updateCurrency(code, Number(value));
-      })
-    );
+    for (const { code, value } of Object.values(data)) {
+      await updateCurrency(code as string, value as number);
+    }
 
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (err) {
