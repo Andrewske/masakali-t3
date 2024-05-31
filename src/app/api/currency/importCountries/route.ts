@@ -12,7 +12,6 @@ type Country = {
   currency: {
     code: string;
     name: string;
-    symbol: string;
   };
   flag: string;
 };
@@ -41,6 +40,10 @@ async function importCountries() {
         },
       });
 
+      if (!country.isoAlpha2) {
+        throw new Error('No ISO Alpha 2 code');
+      }
+
       // Insert the country data into the database
       await prisma.country.upsert({
         where: {
@@ -64,6 +67,7 @@ async function importCountries() {
         },
       });
     } catch (error) {
+      console.log(country);
       console.error(`Error inserting country: ${country.name}`, error);
     }
   }

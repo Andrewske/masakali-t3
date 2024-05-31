@@ -22,8 +22,8 @@ const CountryDropdown = ({ countries }: { countries: CountryType[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { country, setCountry } = useCurrencyStore((state) => state);
 
-  const handleCountrySelection = (country: CountryType) => {
-    setCountry(country.isoAlpha2 as CountryCodeType, countries);
+  const handleCountrySelection = async (country: CountryType) => {
+    await setCountry(country.iso_alpha2 as CountryCodeType, countries);
   };
 
   const renderFlag = (flag: string) => {

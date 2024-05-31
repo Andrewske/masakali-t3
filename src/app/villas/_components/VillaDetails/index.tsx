@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import styles from './styles.module.scss';
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
 import Description from '../Description';
 import Amenities from '../Amenities';

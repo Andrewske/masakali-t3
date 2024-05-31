@@ -4,8 +4,8 @@ import type { VillaIdsType } from '~/lib/villas';
 import { prisma } from '~/db/prisma';
 import { env } from '~/env.mjs';
 import { channelIds } from '~/lib/smoobu';
-import { PaymentData } from '~/hooks/useFetchPaymentData';
-import { UserState } from '~/stores/userStore';
+import type { PaymentData } from '~/hooks/useFetchPaymentData';
+import type { UserState } from '~/stores/userStore';
 
 export type PricingDataType = {
   villaName: string;

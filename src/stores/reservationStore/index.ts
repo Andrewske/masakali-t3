@@ -4,7 +4,7 @@ import type { VillaNamesType } from '~/lib/villas';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { create } from 'zustand';
 import { getCurrentDateInBali } from '~/utils';
-import { add, addDays } from 'date-fns';
+import { addDays } from 'date-fns';
 
 export type ReservationState = {
   dateRange: DateRange;

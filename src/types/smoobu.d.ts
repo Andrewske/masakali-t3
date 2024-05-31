@@ -1,5 +1,4 @@
 import { number } from 'zod';
-import { VillaIdsType } from '~/lib/villas';
 
 export type SmoobuReservation = {
   id: number;

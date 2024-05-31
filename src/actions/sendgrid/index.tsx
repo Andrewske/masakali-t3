@@ -3,8 +3,8 @@ import sgMail from '@sendgrid/mail';
 import { format } from 'date-fns';
 
 import { env } from '~/env.mjs';
-import { PaymentData } from '~/hooks/useFetchPaymentData';
-import { UserState } from '~/stores/userStore';
+import type { PaymentData } from '~/hooks/useFetchPaymentData';
+import type { UserState } from '~/stores/userStore';
 import { formatCurrency } from '~/utils/helpers';
 
 const retreatBookingEmailTemplate = 'd-60fce1dc0ea0423c92948e59fb505a6e';

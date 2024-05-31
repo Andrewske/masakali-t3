@@ -1,9 +1,8 @@
-import { consoleIntegration } from '@sentry/nextjs';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { villaIdsArray } from '~/lib/villas';
 
-import type { PricingData, SmoobuRatesResponse } from '~/types/smoobu';
+import type { SmoobuRatesResponse } from '~/types/smoobu';
 import { batchVillaPricing } from '~/utils/smoobu';
 
 export async function GET() {

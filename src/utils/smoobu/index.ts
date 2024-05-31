@@ -1,6 +1,6 @@
 import { prisma } from '~/db/prisma';
 import { channelIds } from '~/lib/smoobu';
-import { akashaId, lakshmiId, type VillaIdsType } from '~/lib/villas';
+import { akashaId, lakshmiId } from '~/lib/villas';
 import type { SmoobuRatesResponse, SmoobuReservation } from '~/types/smoobu';
 
 export const updateVillaPricing = async (

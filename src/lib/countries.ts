@@ -270,7 +270,7 @@ export const availableCountries = {
 };
 
 // const countryAlpha2Codes = countries.reduce((acc, country) => {
-//   acc[country.isoAlpha2] = country.isoAlpha2;
+//   acc[country.iso_alpha2] = country.iso_alpha2;
 //   return acc;
 // }, {} as Record<string, string>);
 

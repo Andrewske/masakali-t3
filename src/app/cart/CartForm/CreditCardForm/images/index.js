@@ -8,7 +8,7 @@ import mastercard from './mastercard.js';
 import placeholder from './placeholder.js';
 import visa from './visa.js';
 
-export default {
+const cardImages = {
   amex,
   dinersclub,
   discover,
@@ -19,3 +19,5 @@ export default {
   placeholder,
   visa
 };
+
+export default cardImages;

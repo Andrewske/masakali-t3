@@ -12,20 +12,6 @@ export type CurrencyState = {
   conversionRates: Record<string, number>;
 };
 
-// export type CountryType = {
-//   id?: number;
-//   name?: string;
-//   isoAlpha2?: string;
-//   isoAlpha3?: string;
-//   isoNumeric?: number;
-//   currency?: {
-//     code?: string;
-//     name?: string;
-//     symbol?: string | boolean;
-//   };
-//   flag?: string;
-// };
-
 export type CurrencyActions = {
   setCountry: (
     countryCode: CountryCodeType,
@@ -49,7 +35,7 @@ export const initCurrencyStore = (): CurrencyState => {
 export const defaultInitialState: CurrencyState = {
   country: {
     name: 'Indonesia',
-    isoAlpha2: 'ID',
+    iso_alpha2: 'ID',
     currency: {
       code: 'IDR',
     },
@@ -74,7 +60,7 @@ export const createCurrencyStore = (
       const country =
         countries &&
         (countries?.find(
-          (country) => country?.isoAlpha2 === countryCode
+          (country) => country?.iso_alpha2 === countryCode
         ) as CountryType);
 
       const currency = (countryCurrencies as Record<string, string>)[

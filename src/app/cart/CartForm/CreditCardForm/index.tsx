@@ -1,8 +1,7 @@
-import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
+import { usePaymentInputs } from 'react-payment-inputs';
 import images from './images';
 import type { FieldName, FormData } from '../getFormSchema';
 import type { UseFormReturn } from 'react-hook-form';
-import type { SetStateAction } from 'react';
 
 type CCFormProps = {
   form: UseFormReturn<FormData>;
@@ -14,7 +13,6 @@ export default function CreditCardForm({
   setAdminDiscount,
 }: CCFormProps) {
   const {
-    wrapperProps,
     getCardImageProps,
     getCardNumberProps,
     getExpiryDateProps,

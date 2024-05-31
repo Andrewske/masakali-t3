@@ -1,7 +1,6 @@
 import { type UseFormReturn } from 'react-hook-form';
 import type { FormData } from '../getFormSchema';
 import CreditCardForm from '../CreditCardForm';
-import { SetStateAction } from 'react';
 
 type PaymentFormProps = {
   form: UseFormReturn<FormData>;

@@ -29,7 +29,7 @@ const updateCurrency = async (code: string, rate_from_idr: number) => {
 
     if (!currency) {
       console.log('no_currency', code, rate_from_idr);
-      throw new Error('Currency not found');
+      return;
     }
 
     return await prisma.currency.update({
