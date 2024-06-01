@@ -97,7 +97,7 @@ export default function CartForm({
             />
           </form>
           {adminDiscount && (
-            <p>Admin Discount Applied total = {pricing.totalIDR}</p>
+            <p>Admin Discount Applied total = {pricing.finalPrice}</p>
           )}
         </Form>
         {isProcessing && (

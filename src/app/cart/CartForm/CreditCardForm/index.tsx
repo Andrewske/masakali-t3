@@ -2,6 +2,8 @@ import { usePaymentInputs } from 'react-payment-inputs';
 import images from './images';
 import type { FieldName, FormData } from '../getFormSchema';
 import type { UseFormReturn } from 'react-hook-form';
+import DiscountModal from '../../DiscountModal';
+import { sub } from 'date-fns';
 
 type CCFormProps = {
   form: UseFormReturn<FormData>;
@@ -27,10 +29,7 @@ export default function CreditCardForm({
   const cc_expiry = watch('cc_expiry');
   const cc_cvc = watch('cc_cvc');
 
-  // ...
-
-  const handleDiscount = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const discountCode = e.target.value;
+  const submitDiscountCode = async (discountCode: string) => {
     const response = await fetch(
       `/api/cart/discount?discountCode=${encodeURIComponent(discountCode)}`,
       {
@@ -49,13 +48,6 @@ export default function CreditCardForm({
   return (
     // <PaymentInputsWrapper {...wrapperProps}>
     <div className="flex w-full gap-4 flex-wrap">
-      <span className="flex justify-evenly gap-4">
-        <input
-          className="text-center rounded focus:outline-2"
-          maxLength={19}
-          onChange={handleDiscount}
-        />
-      </span>
       <span className="flex justify-evenly gap-4">
         <svg {...getCardImageProps({ images })} />
         <input
@@ -90,6 +82,7 @@ export default function CreditCardForm({
           })}
         />
       </span>
+      <DiscountModal submitDiscountCode={submitDiscountCode} />
     </div>
     // </PaymentInputsWrapper>
   );
