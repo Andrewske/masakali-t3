@@ -9,6 +9,7 @@ export type VillaPricingType = {
 const calculatePricing = (prices: number[]) => {
   const numNights = prices.length;
   const subTotal = prices.reduce((acc, price) => acc + price, 0);
+  console.log({ prices, subTotal });
   const pricePerNight = subTotal / numNights;
 
   // Calculate discount
@@ -49,7 +50,7 @@ export const createPricingObject = ({
 
   for (
     let date = new Date(checkin);
-    date <= checkout;
+    date < checkout;
     date.setDate(date.getDate() + 1)
   ) {
     // Find the price for the current date
@@ -70,6 +71,8 @@ export const createPricingObject = ({
     pricesIDR.push(priceForDate);
     pricesConverted.push(priceForDate * conversionRate);
   }
+
+  console.log({ pricesConverted });
 
   const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
     calculatePricing(pricesConverted);
