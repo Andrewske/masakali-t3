@@ -15,6 +15,7 @@ const Button = ({ callToAction, isWhite, handleClick }: ButtonStyle) => {
         isWhite ? `${styles.white ?? ''}` : ''
       }`}
       onClick={handleClick}
+      type="button"
     >
       {callToAction}
     </button>

@@ -7,38 +7,16 @@ const Modal: React.FC = () => {
   if (!showModal) return null;
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{
-          position: 'relative',
-          width: '600px',
-          height: '400px',
-          backgroundColor: '#FFF',
-          padding: '20px',
-          borderRadius: '8px',
-        }}
-      >
+    <div className="fixed inset-0 w-full h-screen bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="relative w-3/4 h-full bg-white px-5 rounded-lg">
         <iframe
           src={payerAuthUrl || ''}
-          style={{ width: '100%', height: '100%', border: 'none' }}
+          className="w-full h-full border-none"
           title="3D Secure Authentication"
         />
         <button
           onClick={() => setShowModal(false)}
-          style={{ position: 'absolute', top: '10px', right: '10px' }}
+          className="absolute top-2.5 right-2.5"
         >
           Close
         </button>

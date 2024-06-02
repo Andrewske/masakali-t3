@@ -6,12 +6,10 @@ import { useUserStore } from '~/providers/UserStoreProvider';
 import type { UserStore } from '~/stores/userStore';
 import type { VillaIdsType } from '~/lib/villas';
 
-import {
-  createBookingConfirmationData,
-  sendBookingConfirmation,
-} from '~/actions/sendgrid';
+import { sendBookingConfirmation } from '~/actions/sendgrid';
 
 import { createReservationData, createReservation } from '~/actions/smoobu';
+import { createBookingConfirmationData } from '~/utils/sendgrid';
 // Assuming the necessary types are defined elsewhere
 
 export type PaymentData = {
@@ -45,8 +43,8 @@ const useFetchPaymentData = ({
 
   useEffect(() => {
     const fetchPayment = async () => {
-      console.log('Fetching Payment');
       if (token && user) {
+        console.log('Fetching Payment');
         try {
           setIsProcessing(true);
           const payment = await confirmXenditPayment({
@@ -74,19 +72,22 @@ const useFetchPaymentData = ({
             user,
             paymentData,
           });
+
           await sendBookingConfirmation({ data: bookingConfirmationData });
 
           // Create the reservation
-          const reservationData = createReservationData({
-            user,
-            paymentData,
-            externalId: payment.paymentId,
-          });
+          // const reservationData = createReservationData({
+          //   user,
+          //   paymentData,
+          //   externalId: payment.paymentId,
+          // });
 
-          const reservationId = await createReservation(reservationData);
-          if (paymentSuccess) {
-            router.push(`/success?reservationId=${reservationId}`);
-          }
+          // console.log({ reservationData });
+
+          // const reservationId = await createReservation(reservationData);
+          // if (paymentSuccess) {
+          //   router.push(`/success?reservationId=${reservationId}`);
+          // }
         } catch (error) {
           console.log('Failed to fetch payment data:', error);
           // Optionally, handle the error state here

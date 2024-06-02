@@ -3,7 +3,6 @@ import images from './images';
 import type { FieldName, FormData } from '../getFormSchema';
 import type { UseFormReturn } from 'react-hook-form';
 import DiscountModal from '../../DiscountModal';
-import { sub } from 'date-fns';
 
 type CCFormProps = {
   form: UseFormReturn<FormData>;

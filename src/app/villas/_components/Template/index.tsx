@@ -1,5 +1,4 @@
 import NextVilla from '~/app/villas/_components/NextVilla';
-
 import GridGallery from '~/app/villas/_components/GridGallery';
 import DateContainer from '~/app/villas/_components/DateContainer';
 import Link from 'next/link';
@@ -10,6 +9,9 @@ import { prisma } from '~/db/prisma';
 import { type VillaPricingType } from '~/utils/pricing';
 import { Suspense } from 'react';
 import { type CountryType } from '~/actions/countries';
+import Button from '~/components/Button';
+import { redirect } from 'next/navigation';
+import { env } from '~/env.mjs';
 
 export type VillaDataType = {
   villaId: VillaIdsType;
@@ -18,7 +20,12 @@ export type VillaDataType = {
   countries: CountryType[];
 };
 
-async function Template({ villaId, countries }: VillaDataType) {
+async function Template({
+  villaId,
+  countries,
+  checkin,
+  checkout,
+}: VillaDataType) {
   const villaName = getVillaName(villaId);
 
   const { disabledDates } = await getDisabledDatesForVilla(villaId);
@@ -36,6 +43,26 @@ async function Template({ villaId, countries }: VillaDataType) {
       available: true,
     },
   })) as VillaPricingType[];
+
+  const handleBooking = async () => {
+    'use server';
+    const reservationId = await prisma.reservation.create({
+      data: {
+        villaId: Number(villaId),
+        arrival: checkin,
+        departure: checkout,
+        channelId: env.SMOOBU_SETTINGS_CHANNEL_ID,
+      },
+      select: {
+        id: true,
+      },
+    });
+    if (reservationId) {
+      redirect(`/cart?reservationId=${String(reservationId)}`);
+    } else {
+      console.log('Error creating reservation');
+    }
+  };
 
   // fix styling with tailwind
   return (
@@ -56,6 +83,11 @@ async function Template({ villaId, countries }: VillaDataType) {
           href={`/cart?&villaId=${villaId}`}
           className="button purple"
         >{`Book ${villaName.toString()}`}</Link>
+        <Button
+          handleClick={handleBooking}
+          isWhite={false}
+          callToAction={`Book ${villaName.toString()}`}
+        />
         <VillaDetails villaId={villaId} />
       </section>
       <section className="col-span-2">

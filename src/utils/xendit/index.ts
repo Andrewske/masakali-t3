@@ -54,8 +54,8 @@ allows the function to handle and process any errors that occur during the token
 ) => {
   const { setPayerAuthUrl, setShowModal, setError, setToken } =
     useXenditStore.getState();
-
-  console.log('Xendit response:', response);
+  console.log('Xendit error :', err);
+  console.log('Xendit response:', response, err);
   // console.log('Xendit error:', err);
 
   // if (err || !response) {
