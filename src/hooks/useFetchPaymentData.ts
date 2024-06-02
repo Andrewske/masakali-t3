@@ -110,7 +110,8 @@ const useFetchPaymentData = ({
 
             router.push(`/success?reservationId=${reservationId}`);
           } else {
-            throw new Error('Payment failed');
+            console.log('Payment failed', payment);
+            throw new Error('Payment Failed');
           }
         } catch (error) {
           console.log('Failed to fetch payment data:', error);
