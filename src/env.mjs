@@ -31,7 +31,8 @@ export const env = createEnv({
     XENDIT_TEST_SECRET_KEY: z.string(),
     DISCOUNT_CODE: z.string(),
     ANALYZE: z.string(),
-    SENTRY_AUTH_TOKEN: z.string()
+    SENTRY_AUTH_TOKEN: z.string(),
+    SMOOBU_SETTINGS_CHANNEL_ID: z.string(),
   },
 
   /**
@@ -92,6 +93,7 @@ export const env = createEnv({
     NEXT_PUBLIC_IS_PRODUCTION: process.env.NEXT_PUBLIC_IS_PRODUCTION,
     DISCOUNT_CODE: process.env.DISCOUNT_CODE,
     ANALYZE: process.env.ANALYZE,
-    SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN
+    SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
+    SMOOBU_SETTINGS_CHANNEL_ID: process.env.SMOOBU_SETTINGS_CHANNEL_ID,
   },
 });

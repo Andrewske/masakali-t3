@@ -30,9 +30,9 @@ async function Template({
 
   const { disabledDates } = await getDisabledDatesForVilla(villaId);
 
-  const villaPricing = (await prisma.villaPricing.findMany({
+  const villaPricing = (await prisma.villa_pricing.findMany({
     where: {
-      villaId: Number(villaId),
+      villa_id: Number(villaId),
       price: {
         not: null,
       },
@@ -48,10 +48,10 @@ async function Template({
     'use server';
     const reservationId = await prisma.reservation.create({
       data: {
-        villaId: Number(villaId),
+        villa_id: Number(villaId),
         arrival: checkin,
         departure: checkout,
-        channelId: env.SMOOBU_SETTINGS_CHANNEL_ID,
+        channel_id: Number(env.SMOOBU_SETTINGS_CHANNEL_ID),
       },
       select: {
         id: true,

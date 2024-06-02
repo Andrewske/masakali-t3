@@ -11,106 +11,56 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-// Necessary for Next auth
-model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
-    @@index([userId])
-}
 
-model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-    @@index([userId])
-}
-
-model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    admin         Boolean?  @default(false)
-    accounts      Account[]
-    sessions      Session[]
-}
-
-model VerificationToken {
-    identifier String   @id
-    token      String   @unique
-    expires    DateTime
-
-    @@unique([identifier, token])
-}
-
-model Villa {
+model villa {
     id           Int @id
     name         String  @unique
-
-    reservations Reservation[]
-    pricing      VillaPricing[]
-    
+    reservations reservation[]
+    pricing      villa_pricing[]
 }
 
-// 
-
-model Reservation {
-    id            String   @id @default(cuid())
-    smoobuId      Int?     @unique
-    referenceId   String?  
-    villaId       Int
-    channelId     Int?
-    userId        String?
-    arrival       DateTime
-    departure     DateTime
-    createdAt     DateTime @default(now()) 
-    guestName     String?
-    firstName     String?
-    lastName      String?
-    email         String?
-    phone         String?
-    adults        Int?       @default(1)
-    children      Int?       @default(0)
-    note          String?    @db.Text
-    extraNote     String?    @db.Text
-    amount        Float?     @default(0)
-    currency      String?    @default("IDR")
-    commission    Float?     @default(0)
-    cancelled     Boolean?   @default(false)
-    villa         Villa  @relation(fields: [villaId], references: [id], onDelete: Cascade)
-    @@index([villaId])
-}
-
-
-model VillaPricing {
+model villa_pricing {
     id            String    @id @default(cuid())
-    villaId       Int
+    villa_id      Int
     date          DateTime
     price         Float?
     currency      String?   @default("IDR")
     available     Boolean   @default(true)
 
-    villa         Villa  @relation(fields: [villaId], references: [id], onDelete: Cascade)
-    @@index([villaId])
-    @@unique([villaId, date])
+    villa         villa  @relation(fields: [villa_id], references: [id], onDelete: Cascade)
+    @@index([villa_id])
+    @@unique([villa_id, date])
 }
+
+model reservation {
+    id            String   @id @default(cuid())
+    smoobu_id     Int?     @unique
+    reference_id  String?  
+    villa_id      Int
+    channel_id    Int?
+    user_id       String?
+    arrival       DateTime
+    departure     DateTime
+    created_at    DateTime @default(now()) 
+    guest_name    String?
+    first_name    String?
+    last_name     String?
+    email         String?
+    phone         String?
+    adults        Int?       @default(1)
+    children      Int?       @default(0)
+    note          String?    @db.Text
+    extra_note    String?    @db.Text
+    amount        Float?     @default(0)
+    currency      String?    @default("IDR")
+    commission    Float?     @default(0)
+    cancelled     Boolean?   @default(false)
+    villa         villa  @relation(fields: [villa_id], references: [id], onDelete: Cascade)
+    @@index([villa_id])
+}
+
+
 
 
 
@@ -132,3 +82,56 @@ model country {
   currency            currency @relation(fields: [currency_id], references: [id])
   flag                Bytes    // Storing the flag as a byte array
 }
+
+
+
+
+
+// // Necessary for Next auth
+// model Account {
+//     id                String  @id @default(cuid())
+//     userId            String
+//     type              String
+//     provider          String
+//     providerAccountId String
+//     refresh_token     String? @db.Text
+//     access_token      String? @db.Text
+//     expires_at        Int?
+//     token_type        String?
+//     scope             String?
+//     id_token          String? @db.Text
+//     session_state     String?
+//     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//     @@unique([provider, providerAccountId])
+//     @@index([userId])
+// }
+
+// model Session {
+//     id           String   @id @default(cuid())
+//     sessionToken String   @unique
+//     userId       String
+//     expires      DateTime
+//     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//     @@index([userId])
+// }
+
+// model User {
+//     id            String    @id @default(cuid())
+//     name          String?
+//     email         String?   @unique
+//     emailVerified DateTime?
+//     image         String?
+//     admin         Boolean?  @default(false)
+//     accounts      Account[]
+//     sessions      Session[]
+// }
+
+// model VerificationToken {
+//     identifier String   @id
+//     token      String   @unique
+//     expires    DateTime
+
+//     @@unique([identifier, token])
+// }

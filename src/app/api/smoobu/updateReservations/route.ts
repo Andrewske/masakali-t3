@@ -4,22 +4,22 @@ import type { SmoobuReservation } from '~/types/smoobu';
 import { prisma } from '~/db/prisma';
 import { NextResponse } from 'next/server';
 type TransformedReservation = {
-  smoobuId: number;
-  referenceId: string;
-  villaId: number;
-  channelId: number;
+  smoobu_id: number;
+  reference_id: string;
+  villa_id: number;
+  channel_id: number;
   arrival: Date;
   departure: Date;
-  createdAt: Date;
-  guestName: string;
-  firstName: string;
-  lastName: string;
+  created_at: Date;
+  guest_name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   phone: string;
   adults: number;
   children: number;
   note: string;
-  extraNote: string;
+  extra_note: string;
   amount: number;
   currency: string;
   commission: number;
@@ -84,22 +84,22 @@ function transformReservationData(
   res: SmoobuReservation
 ): TransformedReservation {
   return {
-    smoobuId: res.id,
-    referenceId: res['reference-id'],
-    villaId: res.apartment?.id ?? 0,
-    channelId: res.channel?.id ?? 0,
+    smoobu_id: res.id,
+    reference_id: res['reference-id'],
+    villa_id: res.apartment?.id ?? 0,
+    channel_id: res.channel?.id ?? 0,
     arrival: new Date(res['arrival']),
     departure: new Date(res['departure']),
-    createdAt: new Date(res['created-at']),
-    guestName: res['guest-name'],
-    firstName: res.firstname,
-    lastName: res.lastname,
+    created_at: new Date(res['created-at']),
+    guest_name: res['guest-name'],
+    first_name: res.firstname,
+    last_name: res.lastname,
     email: res.email,
     phone: res.phone,
     adults: res.adults,
     children: res.children,
     note: res['notice'],
-    extraNote: res['assistant-notice'],
+    extra_note: res['assistant-notice'],
     amount: res.price,
     currency: 'IDR',
     commission: res['commission-included'],
@@ -115,16 +115,16 @@ function transformReservationData(
  */
 async function upsertReservationToDatabase(
   reservationData: TransformedReservation
-): Promise<{ smoobuId: number | null }> {
+): Promise<{ smoobu_id: number | null }> {
   const currentReservation = await prisma.reservation.findUnique({
-    where: { smoobuId: reservationData.smoobuId },
+    where: { smoobu_id: reservationData.smoobu_id },
   });
 
   if (!currentReservation) {
     return await prisma.reservation.create({
       data: reservationData,
       select: {
-        smoobuId: true,
+        smoobu_id: true,
       },
     });
   }
@@ -139,21 +139,21 @@ async function upsertReservationToDatabase(
   }
   if (numberOfChanges > 0) {
     return await prisma.reservation.update({
-      where: { smoobuId: reservationData.smoobuId },
+      where: { smoobu_id: reservationData.smoobu_id },
       data: reservationData,
       select: {
-        smoobuId: true,
+        smoobu_id: true,
       },
     });
   }
 
-  return { smoobuId: reservationData.smoobuId };
+  return { smoobu_id: reservationData.smoobu_id };
   // return await prisma.reservation.upsert({
-  //   where: { smoobuId: reservationData.smoobuId ?? '' },
+  //   where: { smoobu_id: reservationData.smoobu_id ?? '' },
   //   create: reservationData,
   //   update: reservationData,
   //   select: {
-  //     smoobuId: true,
+  //     smoobu_id: true,
   //   },
   // });
 }

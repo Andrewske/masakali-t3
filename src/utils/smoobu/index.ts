@@ -4,15 +4,15 @@ import { akashaId, lakshmiId } from '~/lib/villas';
 import type { SmoobuRatesResponse, SmoobuReservation } from '~/types/smoobu';
 
 export const updateVillaPricing = async (
-  villaId: number,
+  villa_id: number,
   date: Date,
   price: number,
   available: boolean
 ) => {
-  await prisma.villaPricing.update({
+  await prisma.villa_pricing.update({
     where: {
-      villaId_date: {
-        villaId,
+      villa_id_date: {
+        villa_id,
         date,
       },
     },
@@ -62,7 +62,7 @@ export const updateVillaPricing = async (
 // }
 
 type VillaPricingDataType = {
-  villaId: number;
+  villa_id: number;
   date: string;
   price: number;
   available: boolean;
@@ -70,7 +70,7 @@ type VillaPricingDataType = {
 
 type CurrentVillaPricingType = {
   id: string;
-  villaId: number;
+  villa_id: number;
   date: Date;
   price: number | null;
   currency: string | null;
@@ -89,7 +89,7 @@ const transformSmoobuRatesResponse = (data: SmoobuRatesResponse['data']) => {
 
       if (pricingData?.price && pricingData?.available !== null) {
         const newRecord: VillaPricingDataType = {
-          villaId: parseInt(villaId),
+          villa_id: parseInt(villaId),
           date,
           price: pricingData.price,
           available: Boolean(pricingData.available),
@@ -132,7 +132,7 @@ const getChangedVillaPricing = (
   for (const currentRecord of currentVillaPricing) {
     const correspondingRecord = newVillaPricing.find((record) => {
       return (
-        record.villaId === currentRecord.villaId &&
+        record.villa_id === currentRecord.villa_id &&
         areDatesEqual(record.date, currentRecord.date)
       );
     });
@@ -155,7 +155,7 @@ const getChangedVillaPricing = (
   for (const newRecord of newVillaPricing) {
     const hasCorrespondingRecord = currentVillaPricing.some((currentRecord) => {
       return (
-        currentRecord.villaId === newRecord.villaId &&
+        currentRecord.villa_id === newRecord.villa_id &&
         areDatesEqual(newRecord.date, currentRecord.date)
       );
     });
@@ -176,18 +176,18 @@ export async function batchVillaPricing({ data }: SmoobuRatesResponse) {
 
   // Retrieve current villa pricing from the database
   const currentVillaPricing: CurrentVillaPricingType[] =
-    await prisma.villaPricing.findMany();
+    await prisma.villa_pricing.findMany();
 
   // Determine pricing changes
   const changedVillaPricing = getChangedVillaPricing(
     currentVillaPricing,
     newVillaPricing
   );
-  console.log(
-    'Changed villa pricing for',
-    changedVillaPricing.length,
-    'villas'
-  );
+  // console.log(
+  //   'Changed villa pricing for',
+  //   changedVillaPricing.length,
+  //   'villas'
+  // );
 
   // Upsert changed pricing into the database
   try {
@@ -212,11 +212,11 @@ async function upsertPricingData(changedVillaPricing: VillaPricingDataType[]) {
   const upsertDataChunks = chunkArray(changedVillaPricing, 100);
   for (const chunk of upsertDataChunks) {
     await prisma.$transaction(
-      chunk.map(({ villaId, date, ...rest }) =>
-        prisma.villaPricing.upsert({
-          where: { villaId_date: { villaId, date: new Date(date) } },
+      chunk.map(({ villa_id, date, ...rest }) =>
+        prisma.villa_pricing.upsert({
+          where: { villa_id_date: { villa_id, date: new Date(date) } },
           update: { ...rest },
-          create: { villaId, date: new Date(date), ...rest },
+          create: { villa_id, date: new Date(date), ...rest },
         })
       )
     );
@@ -226,41 +226,41 @@ async function upsertPricingData(changedVillaPricing: VillaPricingDataType[]) {
 function parseSmoobuReservation(smoobuReservation: SmoobuReservation) {
   const {
     id: smoobuId,
-    'reference-id': referenceId,
-    apartment: { id: villaId },
-    channel: { id: channelId },
+    'reference-id': reference_id,
+    apartment: { id: villa_id },
+    channel: { id: channel_id },
     arrival,
     departure,
     'created-at': createdAt,
-    'guest-name': guestName,
-    firstname: firstName,
-    lastname: lastName,
+    'guest-name': guest_name,
+    firstname: first_name,
+    lastname: last_name,
     email,
     phone,
     adults,
     children,
     notice: note,
-    'assistant-notice': extraNote,
+    'assistant-notice': extra_note,
     price: amount,
     'commission-included': commission,
   } = smoobuReservation;
   return {
     smoobuId,
-    referenceId,
-    villaId,
-    channelId,
+    reference_id,
+    villa_id,
+    channel_id,
     arrival: new Date(arrival).toISOString(),
     departure: new Date(departure).toISOString(),
     createdAt: new Date(createdAt).toISOString(),
-    guestName,
-    firstName,
-    lastName,
+    guest_name,
+    first_name,
+    last_name,
     email,
     phone,
     adults,
     children,
     note,
-    extraNote,
+    extra_note,
     amount,
     commission,
   };
@@ -271,14 +271,14 @@ export async function createReservation(smoobuReservation: SmoobuReservation) {
   const reservationData = parseSmoobuReservation(smoobuReservation);
 
   // Use Prisma to create a new reservation in the database
-  const { villaId, ...otherReservationData } = reservationData;
+  const { villa_id, ...otherReservationData } = reservationData;
 
   const newReservation = await prisma.reservation.create({
     data: {
       ...otherReservationData,
       villa: {
         connect: {
-          id: villaId,
+          id: villa_id,
         },
       },
     },
@@ -286,12 +286,12 @@ export async function createReservation(smoobuReservation: SmoobuReservation) {
 
   const { arrival, departure } = reservationData;
 
-  if (villaId === lakshmiId) {
+  if (villa_id === lakshmiId) {
     console.log('Blocking Akasha');
     await blockVilla(akashaId, arrival, departure);
   }
 
-  if (villaId === akashaId) {
+  if (villa_id === akashaId) {
     console.log('Blocking Lakshmi');
     await blockVilla(lakshmiId, arrival, departure);
   }
@@ -303,17 +303,17 @@ export async function updateReservation(smoobuReservation: SmoobuReservation) {
   const smoobuId = smoobuReservation.id;
   // Update the reservation
 
-  const { villaId, ...otherReservationData } =
+  const { villa_id, ...otherReservationData } =
     parseSmoobuReservation(smoobuReservation);
   await prisma.reservation.upsert({
     where: {
-      smoobuId: smoobuId, // Use the smoobuId from the function argument
+      smoobu_id: smoobuId, // Use the smoobuId from the function argument
     },
     update: {
       ...otherReservationData, // Exclude villaId from this object
       villa: {
         connect: {
-          id: villaId, // Connect to the villa by its ID
+          id: villa_id, // Connect to the villa by its ID
         },
       },
     },
@@ -322,13 +322,13 @@ export async function updateReservation(smoobuReservation: SmoobuReservation) {
       // Exclude villaId from this object
       villa: {
         connect: {
-          id: villaId, // Connect to the villa by its ID
+          id: villa_id, // Connect to the villa by its ID
         },
       },
     },
   });
 
-  if (villaId === lakshmiId) {
+  if (villa_id === lakshmiId) {
     console.log('Blocking Akasha');
     await blockVilla(
       akashaId,
@@ -337,7 +337,7 @@ export async function updateReservation(smoobuReservation: SmoobuReservation) {
     );
   }
 
-  if (villaId === akashaId) {
+  if (villa_id === akashaId) {
     console.log('Blocking Lakshmi');
     await blockVilla(
       lakshmiId,
@@ -349,11 +349,11 @@ export async function updateReservation(smoobuReservation: SmoobuReservation) {
   return;
 }
 
-export async function cancelReservation(smoobuId: number) {
+export async function cancelReservation(smoobu_id: number) {
   // First, find the reservation by smoobuId to get its id
   const reservation = await prisma.reservation.findUnique({
     where: {
-      smoobuId,
+      smoobu_id,
     },
   });
 
@@ -372,11 +372,11 @@ export async function cancelReservation(smoobuId: number) {
   });
 }
 
-export async function deleteReservation(smoobuId: number) {
+export async function deleteReservation(smoobu_id: number) {
   // First, find the reservation by smoobuId to get its id
   const reservation = await prisma.reservation.findUnique({
     where: {
-      smoobuId,
+      smoobu_id,
     },
   });
 
@@ -430,8 +430,6 @@ export async function blockVilla(
     email: 'N/A',
   };
 
-  console.log({ data, apiKey, villaId, arrival, departure });
-
   try {
     console.log('fetching');
     const response = await fetch('https://login.smoobu.com/api/reservations', {
@@ -453,24 +451,24 @@ export async function blockVilla(
       );
     }
 
-    const { id: smoobuId } = (await response.json()) as CreateBookingResponse;
+    const { id: smoobu_id } = (await response.json()) as CreateBookingResponse;
 
     await prisma.reservation.create({
       data: {
         arrival: data.arrivalDate,
         departure: data.departureDate,
-        smoobuId,
-        channelId: channelIds['blocked'],
+        smoobu_id,
+        channel_id: channelIds['blocked'],
         villa: {
           connect: {
             id: villaId,
           },
         },
-        createdAt: new Date(),
+        created_at: new Date(),
       },
     });
 
-    return smoobuId;
+    return smoobu_id;
   } catch (error) {
     console.error('Error blocking villa:', error);
     throw error;

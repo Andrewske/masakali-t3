@@ -38,9 +38,9 @@ export const getPricing = async ({
   const numNights = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
 
   try {
-    const villaPricing = (await prisma.villaPricing.findMany({
+    const villaPricing = (await prisma.villa_pricing.findMany({
       where: {
-        villaId: Number(villaId),
+        villa_id: Number(villaId),
         date: {
           gte: checkin,
           lt: checkout,
@@ -90,7 +90,7 @@ export const getPricing = async ({
 
 type DisabledDate = {
   date: Date;
-  villaId: number;
+  villa_id: number;
 };
 
 export const getAllDisabledDates = async (): Promise<
@@ -98,7 +98,7 @@ export const getAllDisabledDates = async (): Promise<
 > => {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  const disabledDates = await prisma.villaPricing.findMany({
+  const disabledDates = await prisma.villa_pricing.findMany({
     where: {
       available: false,
       date: {
@@ -106,12 +106,12 @@ export const getAllDisabledDates = async (): Promise<
       },
     },
     select: {
-      villaId: true,
+      villa_id: true,
       date: true,
     },
   });
   const villas = new Set(
-    Object.values(disabledDates).map(({ villaId }) => villaId)
+    Object.values(disabledDates).map(({ villa_id }) => villa_id)
   );
 
   const numVillas = villas.size;
@@ -161,9 +161,9 @@ export const getDisabledDatesForVilla = async (
 }> => {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  const disabledDates = await prisma.villaPricing.findMany({
+  const disabledDates = await prisma.villa_pricing.findMany({
     where: {
-      villaId: villaId,
+      villa_id: villaId,
       available: false,
       date: {
         gte: yesterday,
@@ -193,9 +193,9 @@ export const getDisabledDatesForVilla = async (
 export const getCheckoutDatesForVilla = async (
   villaId: number
 ): Promise<Set<string | undefined>> => {
-  const checkoutDates = await prisma.villaPricing.findMany({
+  const checkoutDates = await prisma.villa_pricing.findMany({
     where: {
-      villaId: villaId,
+      villa_id: villaId,
     },
     select: {
       date: true,
@@ -286,12 +286,12 @@ export const createReservation = async ({
     // Create the reservation in the database
     const dbReservation = await prisma.reservation.create({
       data: {
-        villaId,
-        channelId: channelIds.website,
+        villa_id: villaId,
+        channel_id: channelIds.website,
         arrival: checkin,
         departure: checkout,
-        firstName: firstName,
-        lastName: lastName,
+        first_name: firstName,
+        last_name: lastName,
         email: email,
         phone: phone,
         adults: adults,

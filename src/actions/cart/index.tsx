@@ -18,9 +18,9 @@ export const getVillaDetails = (villaId: VillaIdsType) => {
 
 export const getVillaPricing = async (villaId: VillaIdsType) => {
   try {
-    return (await prisma.villaPricing.findMany({
+    return (await prisma.villa_pricing.findMany({
       where: {
-        villaId: Number(villaId),
+        villa_id: Number(villaId),
         price: {
           not: null,
         },

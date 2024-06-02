@@ -32,7 +32,7 @@ const Page = async () => {
     },
   });
 
-  const villaPricing = await prisma.villaPricing
+  const villaPricing = await prisma.villa_pricing
     .findMany({
       where: {
         AND: {
@@ -44,13 +44,13 @@ const Page = async () => {
       },
       select: {
         date: true,
-        villaId: true,
+        villa_id: true,
       },
     })
     .then((data) =>
       data.map((d) => ({
         date: d.date,
-        villaId: d.villaId as VillaIdsType,
+        villaId: d.villa_id as VillaIdsType,
       }))
     );
 
