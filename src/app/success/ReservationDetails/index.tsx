@@ -8,7 +8,7 @@ import { differenceInCalendarDays } from 'date-fns';
 import { formatCurrency } from '~/utils/helpers';
 
 const ReservationDetails = ({
-  reservation: { arrival, departure, adults, children, amount, villaId },
+  reservation: { arrival, departure, adults, children, amount, villa_id },
 }: {
   reservation: {
     arrival: Date;
@@ -16,12 +16,12 @@ const ReservationDetails = ({
     adults: number | null;
     children: number | null;
     amount: number | null;
-    villaId: number;
+    villa_id: number;
   };
 }) => {
   const { currency } = useCurrencyStore((state) => state);
 
-  const villaName = getVillaName(villaId as VillaIdsType);
+  const villaName = getVillaName(villa_id as VillaIdsType);
   const villa = villaDetails[villaName];
 
   const formatDate = (date: Date) =>
@@ -58,7 +58,7 @@ const ReservationDetails = ({
         </span>
         <div className="flex flex-col gap-2 max-w-[350px]">
           <p>Number of guests: {(adults ?? 1) + (children ?? 0)}</p>
-          <p>Total nights: {differenceInCalendarDays(arrival, departure)}</p>
+          <p>Total nights: {differenceInCalendarDays(departure, arrival)}</p>
           <p>Final price: {formatCurrency(amount ?? 0, currency)}</p>
         </div>
         <p className="text-xs p-8">

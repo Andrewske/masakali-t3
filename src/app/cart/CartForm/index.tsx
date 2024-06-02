@@ -21,9 +21,11 @@ import { useFormSteps } from '~/hooks/useFormSteps';
 export default function CartForm({
   villaId,
   villaPricing,
+  reservationId,
 }: {
   villaId: VillaIdsType;
   villaPricing: VillaPricingType[];
+  reservationId: string;
 }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [adminDiscount, setAdminDiscount] = useState(false);
@@ -60,6 +62,7 @@ export default function CartForm({
       currency,
     },
     setIsProcessing,
+    reservationId,
   });
 
   const { form, onSubmit } = useCartForm({

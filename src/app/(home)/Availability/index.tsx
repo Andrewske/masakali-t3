@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
-import { type Reservation } from '@prisma/client';
+import { type reservation } from '@prisma/client';
 
 import styles from './styles.module.scss';
 // import { getAvailableVillas } from '~/utils/reservations';
@@ -15,7 +15,7 @@ const today = new Date();
 
 export type VillaPricing = {
   date: Date;
-  villaId: VillaIdsType;
+  villa_id: VillaIdsType;
 };
 
 const Availability = ({
@@ -23,7 +23,7 @@ const Availability = ({
   disabledDates,
   villaPricing,
 }: {
-  reservations: Reservation[];
+  reservations: reservation[];
   disabledDates: Set<string | undefined>;
   villaPricing: VillaPricing[];
 }) => {

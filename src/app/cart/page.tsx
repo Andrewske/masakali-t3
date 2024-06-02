@@ -5,15 +5,32 @@ import { type VillaIdsType } from '~/lib/villas';
 import { getVillaDetails, getVillaPricing } from '~/actions/cart';
 import CartImage from './CartImage';
 import { getCountries } from '~/actions/countries';
+import { prisma } from '~/db/prisma';
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: {
     villaId: string;
+    reservationId: string;
   };
 }) {
-  const villaId = parseInt(searchParams.villaId) as VillaIdsType;
+  const reservation = await prisma.reservation.findUnique({
+    where: {
+      id: searchParams.reservationId,
+    },
+  });
+
+  if (!reservation) {
+    return (
+      <section className=" w-full grid place-items-center p-16">
+        <h1>Could not find reservation</h1>
+        <p>Please contact admin@masakaliretreat.com</p>
+      </section>
+    );
+  }
+
+  const villaId = reservation.villa_id as VillaIdsType;
 
   const villa = getVillaDetails(villaId);
 
@@ -40,6 +57,7 @@ export default async function Page({
             <CartForm
               villaId={villaId}
               villaPricing={villaPricing}
+              reservationId={searchParams.reservationId}
             />
           </span>
         </div>

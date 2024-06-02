@@ -8,8 +8,11 @@ import type { VillaIdsType } from '~/lib/villas';
 
 import { sendBookingConfirmation } from '~/actions/sendgrid';
 
-import { createReservationData, createReservation } from '~/actions/smoobu';
+import { createReservation } from '~/actions/smoobu/createReservation';
 import { createBookingConfirmationData } from '~/utils/sendgrid';
+
+import { updateReservation } from '~/actions/reservations/updateReservation';
+import { createReservationData } from '~/utils/smoobu/createReservationData';
 // Assuming the necessary types are defined elsewhere
 
 export type PaymentData = {
@@ -30,11 +33,13 @@ export type PaymentData = {
 type useFetchPaymentProps = {
   setIsProcessing: Dispatch<SetStateAction<boolean>>;
   paymentData: PaymentData;
+  reservationId: string;
 };
 
 const useFetchPaymentData = ({
   paymentData,
   setIsProcessing,
+  reservationId,
 }: useFetchPaymentProps) => {
   const { token, setToken, paymentSuccess, setPaymentSuccess } =
     useXenditStore();
@@ -67,27 +72,46 @@ const useFetchPaymentData = ({
           setPaymentSuccess(payment.success);
           setToken(null); // Reset the token after successful payment
 
-          // Send the booking confirmation
-          const bookingConfirmationData = createBookingConfirmationData({
-            user,
-            paymentData,
-          });
+          if (payment.success && payment.paymentId) {
+            // Create the reservation
+            const reservationData = createReservationData({
+              user,
+              paymentData,
+              externalId: payment.paymentId,
+            });
 
-          await sendBookingConfirmation({ data: bookingConfirmationData });
+            const smoobuId = await createReservation({
+              data: reservationData,
+              reservationId,
+            });
 
-          // Create the reservation
-          // const reservationData = createReservationData({
-          //   user,
-          //   paymentData,
-          //   externalId: payment.paymentId,
-          // });
+            // Send the booking confirmation
+            const bookingConfirmationData = createBookingConfirmationData({
+              user,
+              paymentData,
+            });
 
-          // console.log({ reservationData });
+            await sendBookingConfirmation({ data: bookingConfirmationData });
 
-          // const reservationId = await createReservation(reservationData);
-          // if (paymentSuccess) {
-          //   router.push(`/success?reservationId=${reservationId}`);
-          // }
+            await updateReservation({
+              reservationId,
+              data: {
+                smoobu_id: Number(smoobuId),
+                guest_name: user.fullName,
+                email: user.email,
+                phone: user.phone,
+                adults: user.adults,
+                children: user.children,
+                note: payment.paymentId,
+                amount: paymentData.totalIDR,
+                currency: paymentData.currency,
+              },
+            });
+
+            router.push(`/success?reservationId=${reservationId}`);
+          } else {
+            throw new Error('Payment failed');
+          }
         } catch (error) {
           console.log('Failed to fetch payment data:', error);
           // Optionally, handle the error state here
@@ -98,7 +122,16 @@ const useFetchPaymentData = ({
     };
 
     void fetchPayment();
-  }, [token]);
+  }, [
+    token,
+    user,
+    paymentData,
+    reservationId,
+    setIsProcessing,
+    router,
+    setPaymentSuccess,
+    setToken,
+  ]);
 
   useEffect(() => {
     if (paymentSuccess) {

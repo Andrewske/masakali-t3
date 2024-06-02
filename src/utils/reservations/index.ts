@@ -1,4 +1,4 @@
-import { type Reservation } from '@prisma/client';
+import { type reservation } from '@prisma/client';
 import { type VillaIdsType, villaIdsArray } from '~/lib/villas';
 // import { format, parseISO } from 'date-fns';
 import { getDatesBetweenDates } from '..';
@@ -19,9 +19,9 @@ export const getAvailableVillas = ({
   const blockedVillasSet = new Set<VillaIdsType>();
 
   // Populate the Set with IDs of villas that are blocked within the specified timeframe
-  villaPricing.forEach(({ date, villaId }) => {
+  villaPricing.forEach(({ date, villa_id }) => {
     if (date >= arrivalDate && date < departureDate) {
-      blockedVillasSet.add(villaId);
+      blockedVillasSet.add(villa_id);
     }
   });
 
@@ -35,7 +35,7 @@ export const getAvailableVillas = ({
 };
 
 export const getDisabledDatesOld = (
-  reservations: Reservation[],
+  reservations: reservation[],
   villaId?: VillaIdsType
 ) => {
   // This map gives a date and the count of villaIds that have reservations on that date
@@ -43,9 +43,9 @@ export const getDisabledDatesOld = (
 
   // Loop through each reservation
   for (const reservation of reservations) {
-    const resVillaId = reservation.villaId as VillaIdsType;
+    const resVillaId = reservation.villa_id as VillaIdsType;
     // If a villaId is given and the reservation doesn't match, skip it
-    if (villaId && reservation.villaId !== villaId) {
+    if (villaId && reservation.villa_id !== villaId) {
       continue;
     }
 
@@ -69,7 +69,7 @@ export const getDisabledDatesOld = (
 
     // check if the reserations arrival date is in the list of depature dates
     const hasArrival = reservations.some(
-      (r) => r.departure === reservation.arrival && r.villaId === resVillaId
+      (r) => r.departure === reservation.arrival && r.villa_id === resVillaId
     );
 
     if (hasArrival) {
@@ -78,7 +78,7 @@ export const getDisabledDatesOld = (
 
     // check if the reservations departure date is in the list of arrival dates
     const hasDeparture = reservations.some(
-      (r) => r.arrival === reservation.departure && r.villaId === resVillaId
+      (r) => r.arrival === reservation.departure && r.villa_id === resVillaId
     );
 
     if (hasDeparture) {

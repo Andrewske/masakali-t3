@@ -50,7 +50,7 @@ const Page = async () => {
     .then((data) =>
       data.map((d) => ({
         date: d.date,
-        villaId: d.villa_id as VillaIdsType,
+        villa_id: d.villa_id as VillaIdsType,
       }))
     );
 

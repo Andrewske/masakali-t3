@@ -17,7 +17,7 @@ export default async function Page({
       departure: true,
       adults: true,
       children: true,
-      villaId: true,
+      villa_id: true,
       amount: true,
     },
   });

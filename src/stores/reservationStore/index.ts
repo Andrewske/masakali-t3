@@ -9,11 +9,13 @@ import { addDays } from 'date-fns';
 export type ReservationState = {
   dateRange: DateRange;
   villaName: VillaNamesType;
+  reservationId: string | null;
 };
 
 export type ReservationActions = {
   setDateRange: ({ to, from }: DateRange) => void;
   setVillaName: (name: VillaNamesType) => void;
+  setReservationId: (id: string | null) => void;
 };
 
 export type ReservationStore = ReservationState & ReservationActions;
@@ -26,6 +28,7 @@ export const initReservationStore = (): ReservationState => {
       to: addDays(today, 1),
     },
     villaName: 'surya',
+    reservationId: null,
   };
 };
 
@@ -35,6 +38,7 @@ export const defaultInitialState: ReservationState = {
     to: addDays(getCurrentDateInBali(), 1),
   },
   villaName: 'surya',
+  reservationId: null,
 };
 
 interface SerializedDate {
@@ -65,6 +69,7 @@ export const createReservationStore = (
           }); // Type assertion to DateRange
         },
         setVillaName: (name: VillaNamesType) => set({ villaName: name }),
+        setReservationId: (id: string | null) => set({ reservationId: id }),
       }),
       {
         name: 'reservation-storage',

@@ -1,7 +1,5 @@
 'use client';
 
-import styles from './styles.module.scss';
-
 interface ButtonStyle {
   callToAction: string;
   isWhite?: boolean;
@@ -11,10 +9,10 @@ interface ButtonStyle {
 const Button = ({ callToAction, isWhite, handleClick }: ButtonStyle) => {
   return (
     <button
-      className={`${styles.container ?? ''} ${
-        isWhite ? `${styles.white ?? ''}` : ''
+      className={`uppercase font-montserrat text-2xl px-8 py-2 max-w-[250px] mx-auto ${
+        isWhite ? 'bg-white text-purple' : 'bg-purple text-white'
       }`}
-      onClick={handleClick}
+      onClick={() => handleClick()}
       type="button"
     >
       {callToAction}

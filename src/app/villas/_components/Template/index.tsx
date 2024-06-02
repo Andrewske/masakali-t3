@@ -1,31 +1,19 @@
 import NextVilla from '~/app/villas/_components/NextVilla';
 import GridGallery from '~/app/villas/_components/GridGallery';
 import DateContainer from '~/app/villas/_components/DateContainer';
-import Link from 'next/link';
 import VillaDetails from '~/app/villas/_components/VillaDetails';
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import { prisma } from '~/db/prisma';
 import { type VillaPricingType } from '~/utils/pricing';
 import { Suspense } from 'react';
-import { type CountryType } from '~/actions/countries';
-import Button from '~/components/Button';
-import { redirect } from 'next/navigation';
-import { env } from '~/env.mjs';
+import { getCountries } from '~/actions/countries';
 
 export type VillaDataType = {
   villaId: VillaIdsType;
-  checkin: string;
-  checkout: string;
-  countries: CountryType[];
 };
 
-async function Template({
-  villaId,
-  countries,
-  checkin,
-  checkout,
-}: VillaDataType) {
+async function Template({ villaId }: VillaDataType) {
   const villaName = getVillaName(villaId);
 
   const { disabledDates } = await getDisabledDatesForVilla(villaId);
@@ -44,27 +32,7 @@ async function Template({
     },
   })) as VillaPricingType[];
 
-  const handleBooking = async () => {
-    'use server';
-    const reservationId = await prisma.reservation.create({
-      data: {
-        villa_id: Number(villaId),
-        arrival: checkin,
-        departure: checkout,
-        channel_id: Number(env.SMOOBU_SETTINGS_CHANNEL_ID),
-      },
-      select: {
-        id: true,
-      },
-    });
-    if (reservationId) {
-      redirect(`/cart?reservationId=${String(reservationId)}`);
-    } else {
-      console.log('Error creating reservation');
-    }
-  };
-
-  // fix styling with tailwind
+  const countries = await getCountries();
   return (
     <main className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-3">
       <section
@@ -77,17 +45,14 @@ async function Template({
             disabledDates={disabledDates}
             villaPricing={villaPricing}
             countries={countries}
+            villaId={villaId}
           />
         </Suspense>
-        <Link
+        {/* <Link
           href={`/cart?&villaId=${villaId}`}
           className="button purple"
-        >{`Book ${villaName.toString()}`}</Link>
-        <Button
-          handleClick={handleBooking}
-          isWhite={false}
-          callToAction={`Book ${villaName.toString()}`}
-        />
+        >{`Book ${villaName.toString()}`}</Link> */}
+
         <VillaDetails villaId={villaId} />
       </section>
       <section className="col-span-2">

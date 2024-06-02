@@ -22,7 +22,7 @@ export const getAvailableVillas = async ({
     // },
   });
 
-  const blockedVillaIds = blockedVillas.map(({ villaId }) => villaId);
+  const blockedVillaIds = blockedVillas.map(({ villa_id }) => villa_id);
 
   // Filter out the blocked villas from the villaIds array
   const availableVillas = Array.from(villaIdsMap.keys()).filter(
@@ -43,7 +43,7 @@ export const getAllBlockedDates = async () => {
     select: {
       arrival: true,
       departure: true,
-      villaId: true,
+      villa_id: true,
     },
   });
 
