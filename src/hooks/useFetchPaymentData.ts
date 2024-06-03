@@ -1,4 +1,9 @@
-import { type Dispatch, type SetStateAction, useEffect } from 'react';
+import {
+  type Dispatch,
+  type SetStateAction,
+  useCallback,
+  useEffect,
+} from 'react';
 import { useRouter } from 'next/navigation';
 import { confirmXenditPayment } from '~/actions/xendit';
 import { useXenditStore } from '~/stores/xenditStore';
@@ -46,8 +51,8 @@ const useFetchPaymentData = ({
   const { user } = useUserStore((state) => state);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchPayment = async () => {
+  const fetchPayment = useCallback(
+    async ({ token, user }: { token: string; user: UserStore['user'] }) => {
       if (token && user) {
         console.log('Fetching Payment');
         try {
@@ -120,19 +125,22 @@ const useFetchPaymentData = ({
           setIsProcessing(false);
         }
       }
-    };
+    },
+    [
+      setIsProcessing,
+      paymentData,
+      setPaymentSuccess,
+      setToken,
+      reservationId,
+      router,
+    ]
+  );
 
-    void fetchPayment();
-  }, [
-    token,
-    user,
-    paymentData,
-    reservationId,
-    setIsProcessing,
-    router,
-    setPaymentSuccess,
-    setToken,
-  ]);
+  useEffect(() => {
+    if (token && user) {
+      void fetchPayment({ token, user });
+    }
+  }, [token, user, fetchPayment]);
 
   useEffect(() => {
     if (paymentSuccess) {
