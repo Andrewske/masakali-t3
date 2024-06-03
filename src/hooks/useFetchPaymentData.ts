@@ -75,7 +75,7 @@ const useFetchPaymentData = ({
             },
           });
           setPaymentSuccess(payment.success);
-          setToken(null); // Reset the token after successful payment
+          // setToken(null); // Reset the token after successful payment
 
           if (payment.success && payment.paymentId) {
             // Create the reservation
@@ -130,7 +130,7 @@ const useFetchPaymentData = ({
       setIsProcessing,
       paymentData,
       setPaymentSuccess,
-      setToken,
+      // setToken,
       reservationId,
       router,
     ]
