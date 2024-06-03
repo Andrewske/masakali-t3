@@ -60,6 +60,8 @@ export const confirmXenditPayment = async ({
 
     const responseBody = (await response.json()) as XenditChargeResponse;
 
+    console.log('Xendit response body:', responseBody);
+
     return {
       success: responseBody.status === 'CAPTURED',
       paymentId: body.external_id,
