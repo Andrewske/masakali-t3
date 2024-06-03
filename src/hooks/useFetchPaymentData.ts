@@ -159,12 +159,6 @@ const useFetchPaymentData = ({
       void fetchPayment({ token, user });
     }
   }, [token, user, fetchPayment]);
-
-  useEffect(() => {
-    if (paymentSuccess) {
-      console.log('Payment success');
-    }
-  }, [paymentSuccess, user]);
 };
 
 export default useFetchPaymentData;
