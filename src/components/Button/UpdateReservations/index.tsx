@@ -10,8 +10,7 @@ export const UpdateReservationsButton = ({
   const handleClick = async () => {
     const response = await fetch('/api/smoobu/updateReservations');
     if (response.ok) {
-      const data =
-        (await response?.json()) as typeof UpdateReservationsResponse;
+      const data = (await response?.json()) as UpdateReservationsResponse;
       console.log(data);
     } else {
       console.log('Error fetching data:', response.statusText);
@@ -21,8 +20,7 @@ export const UpdateReservationsButton = ({
   const handleRatesClick = async () => {
     const response = await fetch('/api/smoobu/updateRates');
     if (response.ok) {
-      const data =
-        (await response?.json()) as typeof UpdateReservationsResponse;
+      const data = (await response?.json()) as UpdateReservationsResponse;
       console.log(data);
     } else {
       console.log('Error fetching data:', response.statusText);

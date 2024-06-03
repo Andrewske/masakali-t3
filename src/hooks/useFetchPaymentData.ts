@@ -18,6 +18,7 @@ import { createBookingConfirmationData } from '~/utils/sendgrid';
 
 import { updateReservation } from '~/actions/reservations/updateReservation';
 import { createReservationData } from '~/utils/smoobu/createReservationData';
+import { useToast } from '~/components/ui/use-toast';
 
 export type PaymentData = {
   user: UserStore['user']; // Replace UserType with the actual type of your user object
@@ -48,6 +49,7 @@ const useFetchPaymentData = ({
   const { token, setToken, setPaymentSuccess } = useXenditStore();
   const { user } = useUserStore((state) => state);
   const router = useRouter();
+  const { toast } = useToast();
 
   // const previousPaymentData = usePrevious(paymentData);
 
@@ -116,12 +118,15 @@ const useFetchPaymentData = ({
 
             router.push(`/success?reservationId=${reservationId}`);
           } else {
-            console.log('Payment failed', payment);
             throw new Error('Payment Failed');
           }
         } catch (error) {
+          toast({
+            title: 'Payment Failed',
+            description:
+              'Please try again or contact admin@masakaliretreat.com',
+          });
           console.log('Failed to fetch payment data:', error);
-          // Optionally, handle the error state here
         } finally {
           setIsProcessing(false);
         }
@@ -134,6 +139,7 @@ const useFetchPaymentData = ({
       setToken,
       reservationId,
       router,
+      toast,
     ]
   );
 

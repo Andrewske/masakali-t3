@@ -49,11 +49,16 @@ export async function POST(request: Request) {
   try {
     const { action, data } = (await request.json()) as WebhookBody;
 
+    console.log('Webhook action:', action);
+    console.log('Webhook data:', data);
+
     if (!actionTypes.includes(action)) {
       return new Response('Invalid action type', { status: 200 });
     }
 
     if (action === 'updateRates' && isSmoobuRatesResponse(data)) {
+      // await updateVillaPricing();
+      console.log('updateRates', { data });
       await batchVillaPricing(data);
     }
 
@@ -78,9 +83,10 @@ export async function POST(request: Request) {
       }
 
       // check if dbReservation exists
+
       const res = await prisma.reservation.findFirst({
         where: {
-          id: data['reference-id'],
+          smoobu_id: data.id,
         },
       });
 

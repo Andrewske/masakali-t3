@@ -27,6 +27,8 @@ model villa_pricing {
     price         Float?
     currency      String?   @default("IDR")
     available     Boolean   @default(true)
+    created_at    DateTime  @default(now())
+    updated_at    DateTime?  @updatedAt
 
     villa         villa  @relation(fields: [villa_id], references: [id], onDelete: Cascade)
     @@index([villa_id])
@@ -43,6 +45,7 @@ model reservation {
     arrival       DateTime
     departure     DateTime
     created_at    DateTime @default(now()) 
+    updated_at    DateTime? @updatedAt
     guest_name    String?
     first_name    String?
     last_name     String?

@@ -48,10 +48,10 @@ export type SmoobuReservationsResponse = {
   bookings: SmoobuReservation[];
 };
 
-export const UpdateReservationsResponse = [
+export type UpdateReservationsResponse = [
   {
-    smoobuId: number,
-  },
+    smoobuId: number;
+  }
 ];
 
 export type SmoobuRatesResponse = {

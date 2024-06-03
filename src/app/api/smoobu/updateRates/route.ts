@@ -9,11 +9,15 @@ export async function GET() {
   const smoobuRatesResponse = await fetchSmoobuRates();
   // console.log(smoobuRatesResponse.data[1115674]);
   console.log('got a response from smoobu');
+  if (!smoobuRatesResponse) {
+    return NextResponse.json({ success: false });
+  }
   await batchVillaPricing(smoobuRatesResponse);
   return NextResponse.json({ success: true });
 }
 
-async function fetchSmoobuRates(): Promise<SmoobuRatesResponse> {
+async function fetchSmoobuRates(): Promise<SmoobuRatesResponse | null> {
+  console.log('fetching smoobu rates');
   const smoobuApiUrl: string = process.env.SMOOBU_API_URL ?? '';
   if (!smoobuApiUrl) {
     throw new Error(
@@ -55,7 +59,8 @@ async function fetchSmoobuRates(): Promise<SmoobuRatesResponse> {
     return response.data;
   } catch (error) {
     // Handle or log the error appropriately
-    throw error;
+    console.error('Error getting rates:', JSON.stringify(error));
+    return null;
   }
 }
 

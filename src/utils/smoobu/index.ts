@@ -95,6 +95,8 @@ const transformSmoobuRatesResponse = (data: SmoobuRatesResponse['data']) => {
           available: Boolean(pricingData.available),
         };
 
+        console.log({ newRecord });
+
         transformedData.push(newRecord);
       }
     }
@@ -168,8 +170,9 @@ const getChangedVillaPricing = (
   return changedRecords;
 };
 
-export async function batchVillaPricing({ data }: SmoobuRatesResponse) {
+export async function batchVillaPricing(data: SmoobuRatesResponse) {
   console.log('Starting batchVillaPricing');
+  console.log('data:', data);
 
   // Transform incoming data to new villa pricing
   const newVillaPricing = transformSmoobuRatesResponse(data);
@@ -210,28 +213,33 @@ function chunkArray<T>(array: T[], chunkSize: number): T[][] {
 // Upsert pricing data into the database in chunks
 async function upsertPricingData(changedVillaPricing: VillaPricingDataType[]) {
   const upsertDataChunks = chunkArray(changedVillaPricing, 100);
-  for (const chunk of upsertDataChunks) {
-    await prisma.$transaction(
-      chunk.map(({ villa_id, date, ...rest }) =>
-        prisma.villa_pricing.upsert({
-          where: { villa_id_date: { villa_id, date: new Date(date) } },
-          update: { ...rest },
-          create: { villa_id, date: new Date(date), ...rest },
-        })
-      )
-    );
+
+  try {
+    for (const chunk of upsertDataChunks) {
+      await prisma.$transaction(
+        chunk.map(({ villa_id, date, ...rest }) =>
+          prisma.villa_pricing.upsert({
+            where: { villa_id_date: { villa_id, date: new Date(date) } },
+            update: { ...rest },
+            create: { villa_id, date: new Date(date), ...rest },
+          })
+        )
+      );
+    }
+  } catch (error) {
+    console.error('Error during upsert:', error);
   }
 }
 
 function parseSmoobuReservation(smoobuReservation: SmoobuReservation) {
   const {
-    id: smoobuId,
+    id: smoobu_id,
     'reference-id': reference_id,
     apartment: { id: villa_id },
     channel: { id: channel_id },
     arrival,
     departure,
-    'created-at': createdAt,
+    'created-at': created_at,
     'guest-name': guest_name,
     firstname: first_name,
     lastname: last_name,
@@ -245,13 +253,13 @@ function parseSmoobuReservation(smoobuReservation: SmoobuReservation) {
     'commission-included': commission,
   } = smoobuReservation;
   return {
-    smoobuId,
+    smoobu_id,
     reference_id,
     villa_id,
     channel_id,
     arrival: new Date(arrival).toISOString(),
     departure: new Date(departure).toISOString(),
-    createdAt: new Date(createdAt).toISOString(),
+    created_at: new Date(created_at).toISOString(),
     guest_name,
     first_name,
     last_name,
