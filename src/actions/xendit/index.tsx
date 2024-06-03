@@ -38,6 +38,10 @@ export const confirmXenditPayment = async ({
   success: boolean;
   paymentId: string | null;
 }> => {
+  console.log('Confirming Xendit payment...');
+  console.log('Token:', token);
+  console.log('User:', user);
+  console.log('Reservation:', reservation);
   const { totalIDR } = reservation;
 
   const body = createRequestBody(token, user, totalIDR);
@@ -49,6 +53,8 @@ export const confirmXenditPayment = async ({
       headers,
       body: JSON.stringify(body),
     });
+
+    console.log('Xendit API response:', response);
 
     if (!response.ok) {
       const textData = await response.text();
@@ -64,7 +70,7 @@ export const confirmXenditPayment = async ({
 
     return {
       success: responseBody.status === 'CAPTURED',
-      paymentId: body.external_id,
+      paymentId: responseBody.external_id,
       // reservationId
     };
   } catch (error) {

@@ -10,8 +10,8 @@ const Header = () => {
         <span className="flex flex-wrap justify-center items-center p-4">
           <Image
             src="/FullWhiteLogo_TransparentBackground.png"
-            width={150}
-            height={150}
+            width="150"
+            height="0"
             alt="Masakali Retreat Logo in white with transparent background"
             className="object-contain order-1"
           />

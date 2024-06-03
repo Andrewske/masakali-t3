@@ -61,7 +61,7 @@ export const createReservation = async ({
     if (response.status === 200) {
       return responseData.id;
     } else {
-      console.error(response);
+      console.error(responseData);
       throw new Error('Failed to create reservation');
     }
   } catch (error) {

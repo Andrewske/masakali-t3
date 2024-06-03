@@ -1,6 +1,5 @@
 import Image from 'next/image';
 
-
 type FeatureProps = {
   iconSrc: string;
   iconAlt: string;
@@ -14,8 +13,8 @@ const Feature = ({ iconSrc, iconAlt, title, description }: FeatureProps) => (
       <Image
         src={iconSrc}
         alt={iconAlt}
-        width={25}
-        height={25}
+        width="25"
+        height="0"
       />
       <h4>{title}</h4>
     </span>
