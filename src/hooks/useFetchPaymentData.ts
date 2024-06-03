@@ -18,8 +18,6 @@ import { createBookingConfirmationData } from '~/utils/sendgrid';
 
 import { updateReservation } from '~/actions/reservations/updateReservation';
 import { createReservationData } from '~/utils/smoobu/createReservationData';
-import usePrevious from './usePrevious';
-// Assuming the necessary types are defined elsewhere
 
 export type PaymentData = {
   user: UserStore['user']; // Replace UserType with the actual type of your user object
@@ -47,8 +45,7 @@ const useFetchPaymentData = ({
   setIsProcessing,
   reservationId,
 }: useFetchPaymentProps) => {
-  const { token, setToken, paymentSuccess, setPaymentSuccess } =
-    useXenditStore();
+  const { token, setToken, setPaymentSuccess } = useXenditStore();
   const { user } = useUserStore((state) => state);
   const router = useRouter();
 
@@ -56,15 +53,6 @@ const useFetchPaymentData = ({
 
   const fetchPayment = useCallback(
     async ({ token, user }: { token: string; user: UserStore['user'] }) => {
-      // if (previousPaymentData !== paymentData) {
-      //   console.log(`Payment Data has changes:`);
-      //   console.log({ paymentData });
-      //   console.log({ previousPaymentData });
-      //   console.log(
-      //     JSON.stringify(paymentData) === JSON.stringify(previousPaymentData)
-      //   );
-      // }
-
       if (token && user) {
         console.log('Fetching Payment');
         try {
@@ -90,48 +78,47 @@ const useFetchPaymentData = ({
           setToken(null); // Reset the token after successful payment
           console.log('Payment success:', payment.success);
 
-          // if (payment.success && payment.paymentId) {
-          //   // Create the reservation
-          //   const reservationData = createReservationData({
-          //     user,
-          //     paymentData,
-          //     externalId: payment.paymentId,
-          //   });
+          if (payment.success && payment.paymentId) {
+            // Create the reservation
+            const reservationData = createReservationData({
+              user,
+              paymentData,
+              externalId: payment.paymentId,
+            });
 
-          //   const smoobuId = await createReservation({
-          //     data: reservationData,
-          //     reservationId,
-          //   });
+            const smoobuId = await createReservation({
+              data: reservationData,
+              reservationId,
+            });
 
-          //   // Send the booking confirmation
-          //   const bookingConfirmationData = createBookingConfirmationData({
-          //     user,
-          //     paymentData,
-          //   });
+            // Send the booking confirmation
+            const bookingConfirmationData = createBookingConfirmationData({
+              user,
+              paymentData,
+            });
 
-          //   await sendBookingConfirmation({ data: bookingConfirmationData });
+            await sendBookingConfirmation({ data: bookingConfirmationData });
 
-          //   await updateReservation({
-          //     reservationId,
-          //     data: {
-          //       smoobu_id: Number(smoobuId),
-          //       guest_name: user.fullName,
-          //       email: user.email,
-          //       phone: user.phone,
-          //       adults: user.adults,
-          //       children: user.children,
-          //       note: payment.paymentId,
-          //       amount: paymentData.totalIDR,
-          //       currency: paymentData.currency,
-          //     },
-          //   });
+            await updateReservation({
+              reservationId,
+              data: {
+                smoobu_id: Number(smoobuId),
+                guest_name: user.fullName,
+                email: user.email,
+                phone: user.phone,
+                adults: user.adults,
+                children: user.children,
+                note: payment.paymentId,
+                amount: paymentData.totalIDR,
+                currency: paymentData.currency,
+              },
+            });
 
-          //   router.push(`/success?reservationId=${reservationId}`);
-
-          // } else {
-          //   console.log('Payment failed', payment);
-          //   throw new Error('Payment Failed');
-          // }
+            router.push(`/success?reservationId=${reservationId}`);
+          } else {
+            console.log('Payment failed', payment);
+            throw new Error('Payment Failed');
+          }
         } catch (error) {
           console.log('Failed to fetch payment data:', error);
           // Optionally, handle the error state here
@@ -145,14 +132,10 @@ const useFetchPaymentData = ({
       paymentData,
       setPaymentSuccess,
       setToken,
-      // reservationId,
-      // router,
+      reservationId,
+      router,
     ]
   );
-
-  // const previousToken = usePrevious(token);
-  // const previousUser = usePrevious(user);
-  // const previousFetchPayment = usePrevious(fetchPayment);
 
   useEffect(() => {
     if (token && user) {
