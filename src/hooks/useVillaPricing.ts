@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
 
@@ -18,11 +19,15 @@ export const useVillaPricing = ({
 
   const conversionRateToUSD = conversionRates['USD'];
 
-  return createPricingObject({
-    villaPricing,
-    checkin,
-    checkout,
-    conversionRate: conversionRateToUSD ?? 1,
-    adminDiscount,
-  });
+  return useMemo(
+    () =>
+      createPricingObject({
+        villaPricing,
+        checkin,
+        checkout,
+        conversionRate: conversionRateToUSD ?? 1,
+        adminDiscount,
+      }),
+    [villaPricing, checkin, checkout, conversionRateToUSD, adminDiscount]
+  );
 };

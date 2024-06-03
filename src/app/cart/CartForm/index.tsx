@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { BeatLoader } from 'react-spinners';
 import AddressForm from './AddressForm';
 
@@ -51,8 +51,8 @@ export default function CartForm({
     adminDiscount,
   });
 
-  useFetchPaymentData({
-    paymentData: {
+  const computePaymentData = useMemo(() => {
+    return {
       user,
       villaId,
       villaName,
@@ -60,7 +60,11 @@ export default function CartForm({
       checkout,
       ...pricing,
       currency,
-    },
+    };
+  }, [user, villaId, villaName, checkin, checkout, pricing, currency]);
+
+  useFetchPaymentData({
+    paymentData: computePaymentData,
     setIsProcessing,
     reservationId,
   });
