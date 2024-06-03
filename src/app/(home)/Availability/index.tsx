@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { type reservation } from '@prisma/client';
@@ -11,7 +10,6 @@ import DateRangePicker from '~/components/DateRangePicker';
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import Link from 'next/link';
-const today = new Date();
 
 export type VillaPricing = {
   date: Date;
@@ -39,14 +37,9 @@ const Availability = ({
       const villasAvailable =
         dateRange?.to &&
         (await getAvailableVillas({
-          from:
-            dateRange?.from?.toISOString().split('T')[0] ??
-            today.toISOString().split('T')[0] ??
-            '',
+          from: dateRange?.from?.toISOString().split('T')[0] ?? '',
           to: dateRange?.to.toISOString().split('T')[0] ?? '',
         }));
-
-      console.log(villasAvailable);
 
       setVillasAvailable(villasAvailable);
     }

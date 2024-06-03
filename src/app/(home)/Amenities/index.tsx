@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import DiningImage from '../../../../public/hero-images/akasha-pool.webp';
 import ScrollOffset from '~/components/ScrollOffset';
