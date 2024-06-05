@@ -12,7 +12,9 @@ const XenditProvider: React.FC<{ children: React.ReactNode }> = ({
       try {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         window?.Xendit?.setPublishableKey(
-          env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY
+          process.env.NODE_ENV == 'production'
+            ? env.NEXT_PUBLIC_XENDIT_PUBLIC_KEY
+            : env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY
         );
       } catch (error) {
         console.log('Xendit setup failed:', error);
