@@ -12,3 +12,11 @@ export const formatCurrency = (value: number, currency: string) => {
 
   return new Intl.NumberFormat('en-US', options).format(value);
 };
+
+export function areDatesEqual(dateString: string, dateObject: Date): boolean {
+  // Convert the Date object to a string in "yyyy-mm-dd" format
+  const dateObjectStr = dateObject.toISOString().split('T')[0];
+
+  // Compare the formatted date string with the given date string
+  return dateString === dateObjectStr;
+}

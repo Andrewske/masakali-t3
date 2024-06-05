@@ -95,3 +95,19 @@ export type SmoobuBooking = {
   phone?: string;
   language?: string;
 };
+
+export type VillaPricingDataType = {
+  villa_id: number;
+  date: string;
+  price: number;
+  available: boolean;
+};
+
+export type CurrentVillaPricingType = {
+  id: string;
+  villa_id: number;
+  date: Date;
+  price: number | null;
+  currency: string | null;
+  available: boolean;
+};

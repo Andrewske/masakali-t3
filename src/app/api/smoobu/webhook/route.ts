@@ -6,9 +6,9 @@ import {
   cancelReservation,
   deleteReservation,
   updateReservation,
-  batchVillaPricing,
   createReservation,
 } from '~/utils/smoobu';
+import { batchVillaPricing } from '~/utils/smoobu/batchVillaPricing';
 
 type WebhookBody = {
   action: string;
@@ -57,8 +57,6 @@ export async function POST(request: Request) {
     }
 
     if (action === 'updateRates' && isSmoobuRatesResponse(data)) {
-      // await updateVillaPricing();
-      console.log('updateRates', { data });
       await batchVillaPricing(data);
     }
 
