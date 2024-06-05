@@ -18,10 +18,10 @@ export const submitToXendit = async ({
 
   return await xenditCreateToken({
     amount: totalIDR,
-    card_number: formData.cc_number,
-    card_exp_month: cardExpMonth,
-    card_exp_year: '20' + cardExpYear,
-    card_cvn: formData.cc_cvc,
+    card_number: formData.cc_number.replace(/\s/g, ''),
+    card_exp_month: cardExpMonth.replace(/\s/g, ''),
+    card_exp_year: '20' + cardExpYear.replace(/\s/g, ''),
+    card_cvn: formData.cc_cvc.replace(/\s/g, ''),
     is_multiple_use: false,
   });
 };
