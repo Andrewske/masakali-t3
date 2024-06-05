@@ -26,7 +26,10 @@ type ConfirmXenditPaymentProps = {
 // Configuration for Xendit API
 const xenditConfig = {
   url: 'https://api.xendit.co/credit_card_charges',
-  username: env.XENDIT_TEST_SECRET_KEY,
+  username:
+    process.env.NODE_ENV === 'production'
+      ? env.XENDIT_SECRET_KEY
+      : env.XENDIT_TEST_SECRET_KEY,
   password: '', // Password is empty, but colon remains to fulfill the basic auth format
 };
 
