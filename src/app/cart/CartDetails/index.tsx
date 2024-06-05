@@ -3,7 +3,6 @@ import styles from './styles.module.scss';
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { useMemo } from 'react';
 import { formatCurrency } from '~/utils/helpers';
-
 import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';

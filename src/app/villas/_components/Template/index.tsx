@@ -40,14 +40,13 @@ async function Template({ villaId }: VillaDataType) {
         id="villa-info"
       >
         <NextVilla currentVillaName={villaName} />
-        <Suspense fallback={null}>
-          <DateContainer
-            disabledDates={disabledDates}
-            villaPricing={villaPricing}
-            countries={countries}
-            villaId={villaId}
-          />
-        </Suspense>
+
+        <DateContainer
+          disabledDates={disabledDates}
+          villaPricing={villaPricing}
+          countries={countries}
+          villaId={villaId}
+        />
         {/* <Link
           href={`/cart?&villaId=${villaId}`}
           className="button purple"

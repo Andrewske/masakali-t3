@@ -28,43 +28,43 @@ import { type VillaNamesType } from '~/lib/villas';
 //   cc_cvc: '999',
 // };
 
-const formDefaultValues = {
-  fullName: 'Kevin Andrews',
-  email: 'andrewskevin92@gmail.com',
-  phone: '15098992771',
-  adults: 2,
-  children: 0,
-  address: {
-    address1: 'Jl. Kebon Sirih',
-    address2: '',
-    city: 'Jakarta',
-    region: 'DKI Jakarta',
-    country: 'ID',
-    zip_code: '98208',
-  },
-  cc_number: '',
-  cc_expiry: '',
-  cc_cvc: '',
-};
-
 // const formDefaultValues = {
-//   fullName: '',
-//   email: '',
-//   phone: '',
+//   fullName: 'Kevin Andrews',
+//   email: 'andrewskevin92@gmail.com',
+//   phone: '15098992771',
 //   adults: 2,
 //   children: 0,
 //   address: {
-//     address1: '',
+//     address1: 'Jl. Kebon Sirih',
 //     address2: '',
-//     city: '',
-//     region: '',
-//     country: '',
-//     zip_code: '',
+//     city: 'Jakarta',
+//     region: 'DKI Jakarta',
+//     country: 'ID',
+//     zip_code: '98208',
 //   },
 //   cc_number: '',
 //   cc_expiry: '',
 //   cc_cvc: '',
 // };
+
+const formDefaultValues = {
+  fullName: '',
+  email: '',
+  phone: '',
+  adults: 2,
+  children: 0,
+  address: {
+    address1: '',
+    address2: '',
+    city: '',
+    region: '',
+    country: '',
+    zip_code: '',
+  },
+  cc_number: '',
+  cc_expiry: '',
+  cc_cvc: '',
+};
 
 type UseCartFormProps = {
   setIsProcessing: Dispatch<SetStateAction<boolean>>;
@@ -77,11 +77,11 @@ export const useCartForm = ({
   villaName,
   totalIDR,
 }: UseCartFormProps) => {
-  const { setUser } = useUserStore((state) => state);
+  const { user, setUser } = useUserStore((state) => state);
 
   const formOptions = {
     resolver: zodResolver(getFormSchema(villaName)),
-    defaultValues: formDefaultValues,
+    defaultValues: user,
     mode: 'onSubmit' as const,
   };
 

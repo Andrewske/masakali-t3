@@ -1,9 +1,7 @@
 'use client';
 import { useState, useMemo, useEffect } from 'react';
 import { format } from 'date-fns';
-
 import DateRangePicker from '~/components/DateRangePicker';
-
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
@@ -43,9 +41,8 @@ const DateContainer = ({
       };
       fetchReservation().catch(console.error);
     }
-  });
+  }, [reservationId, setReservationId]);
 
-  console.log({ reservationId });
   const router = useRouter();
 
   const [isActive, setIsActive] = useState(false);

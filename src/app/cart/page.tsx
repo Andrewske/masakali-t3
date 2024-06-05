@@ -1,4 +1,3 @@
-'use server';
 import CartForm from './CartForm';
 import CartDetails from './CartDetails';
 import { type VillaIdsType } from '~/lib/villas';
