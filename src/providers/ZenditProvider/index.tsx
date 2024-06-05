@@ -12,12 +12,6 @@ const XenditProvider: React.FC<{ children: React.ReactNode }> = ({
       try {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
 
-        console.log('NEXT_PUBLIC_IS_PRODUCTION', env.NEXT_PUBLIC_IS_PRODUCTION);
-        if (env.NEXT_PUBLIC_IS_PRODUCTION == 'true') {
-          console.log('NEXT_PUBLIC_XENDIT_PUBLIC_KEY');
-        } else {
-          console.log('NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY');
-        }
         window?.Xendit?.setPublishableKey(
           env.NEXT_PUBLIC_IS_PRODUCTION == 'true'
             ? env.NEXT_PUBLIC_XENDIT_PUBLIC_KEY
