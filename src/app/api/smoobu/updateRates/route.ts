@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { villaIdsArray } from '~/lib/villas';
 
 import type { SmoobuRatesResponse } from '~/types/smoobu';
-import { batchVillaPricing } from '~/utils/smoobu';
+import { batchVillaPricing } from '~/utils/smoobu/batchVillaPricing';
 
 export async function GET() {
   const smoobuRatesResponse = await fetchSmoobuRates();
