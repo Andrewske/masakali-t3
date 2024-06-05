@@ -24,8 +24,13 @@ export const xenditCreateToken = async (data: XenditCreateTokenProps) => {
     console.log('Xendit not loaded');
     return;
   }
+
+  const key =
+    env.NEXT_PUBLIC_IS_PRODUCTION == 'true'
+      ? env.NEXT_PUBLIC_XENDIT_PUBLIC_KEY
+      : env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY;
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-  window.Xendit.setPublishableKey(env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY);
+  window.Xendit.setPublishableKey(key);
 
   console.log(data.amount);
 
