@@ -36,8 +36,8 @@ const DateContainer = ({
   useEffect(() => {
     if (reservationId) {
       const fetchReservation = async () => {
-        const smoobuId = await lookupReservation(reservationId);
-        if (smoobuId) {
+        const { smoobuId, error } = await lookupReservation(reservationId);
+        if (smoobuId || error) {
           setReservationId(null);
         }
       };

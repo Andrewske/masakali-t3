@@ -13,11 +13,11 @@ export const lookupReservation = async (reservationId: string) => {
     });
     if (!reservation) {
       console.log('Could not find reservation');
-      return null;
+      return { smoobuId: null, error: 'Could not find reservation' };
     }
-    return reservation?.smoobu_id;
+    return { smoobuId: reservation?.smoobu_id, error: null };
   } catch (error) {
     console.log('Error finding reservation:', error);
-    return null;
+    return { smoobuId: null, error: 'Error finding reservation' };
   }
 };

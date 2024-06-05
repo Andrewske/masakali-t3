@@ -7,8 +7,8 @@ const Modal: React.FC = () => {
   if (!showModal) return null;
 
   return (
-    <div className="fixed inset-0 w-full h-screen bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="relative w-3/4 h-full bg-white px-5 rounded-lg">
+    <div className="fixed inset-0 h-screen w-full mx-auto bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="relative w-full md:max-w- h-full bg-white p-5 rounded-lg m-4">
         <iframe
           src={payerAuthUrl || ''}
           className="w-full h-full border-none"
