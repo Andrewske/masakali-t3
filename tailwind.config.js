@@ -34,7 +34,7 @@ module.exports = {
         'sans': ['Roboto', 'sans-serif'],
         'serif': ['"Roboto Slab"', 'serif'],
         'montserrat': ['var(--font-montserrat)', 'sans-serif'],
-        'baskerville': ['var(--font-baskerville)', 'serif'],
+        'baskerville': ['var(--font-baskerville)', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {

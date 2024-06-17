@@ -1,4 +1,4 @@
-import { Montserrat, Libre_Baskerville } from 'next/font/google';
+import { Montserrat, Baskervville } from 'next/font/google';
 
 export const montserrat = Montserrat({
   variable: '--font-montserrat',
@@ -7,8 +7,9 @@ export const montserrat = Montserrat({
   display: 'swap',
 });
 
-export const baskerville = Libre_Baskerville({
+export const baskerville = Baskervville({
   weight: '400',
+  style: 'normal',
   variable: '--font-baskerville',
   subsets: ['latin'],
   display: 'swap',
