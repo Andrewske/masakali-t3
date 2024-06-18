@@ -24,7 +24,7 @@ const Footer = () => {
             <p>Masakali</p>
             <p>Br. Ayah Kelusa Payangan</p>
             <p>Gianyar Bali 80572</p>
-            <p>+62 821-4635-5565</p>
+            <p className="font-montserrat">+62 821-4635-5565</p>
           </div>
 
           <Link href="https://www.instagram.com/masakaliretreat">
@@ -62,7 +62,7 @@ const Footer = () => {
           </Link>
         </span>
       </div>
-      <div className="w-1/2 grid place-items-center grid-col-1 gap-4">
+      <div className="w-1/2 grid place-items-center grid-col-1 gap-4 font-montserrat uppercase">
         {sectionLinks.map((link) => (
           <LinkWithUnderline
             key={link}

@@ -38,7 +38,7 @@ export default async function Page({
   const countries = await getCountries();
 
   return (
-    <section className="flex flex-grow flex-col items-center h-full relative">
+    <section className="flex flex-grow flex-col items-center h-full relative mt-[150px]">
       {villa && <CartImage villa={villa} />}
       <span className="bg-white bg-opacity-15 p-4 flex-grow flex flex-col z-10 w-full">
         <div className="flex z-20 justify-center">
