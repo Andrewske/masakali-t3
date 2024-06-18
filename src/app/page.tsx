@@ -9,51 +9,13 @@ import Villas from '~/app/(home)/Villas';
 import Dining from '~/app/(home)/Dining';
 import Amenities from '~/app/(home)/Amenities';
 import Location from '~/app/(home)/Location';
-import { addDays } from 'date-fns';
-import { getCurrentDateInBali } from '~/utils';
 import { getAllBlockedDates } from '~/actions/reservations';
 import Footer from '~/components/layout/Footer';
 import Header from '~/components/layout/Header';
 import HideHeader from '~/components/layout/HideHeader';
 import YogaShala from './(home)/YogaShala';
-import type { VillaIdsType } from '~/lib/villas';
-
-const today = getCurrentDateInBali();
-const twoDaysAgo: Date = addDays(today, -2);
 
 const Page = async () => {
-  const reservations = await prisma.reservation.findMany({
-    where: {
-      departure: {
-        gt: twoDaysAgo,
-        // lt: new Date('2023-12-01'),
-      },
-      cancelled: false,
-    },
-  });
-
-  const villaPricing = await prisma.villa_pricing
-    .findMany({
-      where: {
-        AND: {
-          date: {
-            gte: today,
-          },
-          available: true,
-        },
-      },
-      select: {
-        date: true,
-        villa_id: true,
-      },
-    })
-    .then((data) =>
-      data.map((d) => ({
-        date: d.date,
-        villa_id: d.villa_id as VillaIdsType,
-      }))
-    );
-
   const disabledDates = await getAllBlockedDates();
 
   return (
@@ -62,11 +24,7 @@ const Page = async () => {
         <Header />
       </HideHeader>
       <HeroSlideShow />
-      <Availability
-        reservations={reservations}
-        disabledDates={disabledDates}
-        villaPricing={villaPricing}
-      />
+      <Availability disabledDates={disabledDates} />
       <About />
       <WhyChoose />
       <Villas />

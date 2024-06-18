@@ -59,7 +59,7 @@ const DateContainer = ({
 
   const renderConvertedAmount = (label: string, amount: number) => (
     <span
-      className="flex justify-between w-full text-sm"
+      className="flex justify-between w-full text-sm font-montserrat"
       key={label}
     >
       <h3 className="text-sm">{label}</h3>
@@ -121,17 +121,17 @@ const DateContainer = ({
           disabledDates={disabledDates}
         />
         <span
-          className="flex-grow w-content"
+          className="flex-grow w-content font-montserrat"
           onClick={() => setIsActive(true)}
         >
-          <h3 className="text-xl font-montserrat">Arrival Date</h3>
+          <h3 className="text-xl ">Arrival Date</h3>
           <p>{arrivalDate}</p>
         </span>
         <span
-          className="flex-grow w-content"
+          className="flex-grow w-content font-montserrat"
           onClick={() => setIsActive(true)}
         >
-          <h3 className="text-xl font-montserrat">Departure Date</h3>
+          <h3 className="text-xl ">Departure Date</h3>
           <p>{departureDate}</p>
         </span>
         {renderConvertedAmount('Price per night', pricePerNight)}

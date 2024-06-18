@@ -5,7 +5,7 @@ import HeaderLinks from '~/components/layout/Header/Links';
 
 const Header = () => {
   return (
-    <nav className="relative md:fixed top-0 w-full flex flex-col z-50">
+    <nav className="relative md:fixed top-0 w-full flex flex-col z-50 h-[150px]">
       <div className="z-50 flex flex-col md:flex-row md:justify-between bg-purple w-full relative flex-wrap h-full ">
         <span className="flex flex-wrap justify-center items-center p-4">
           <Image

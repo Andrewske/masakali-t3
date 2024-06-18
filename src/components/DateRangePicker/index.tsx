@@ -91,9 +91,9 @@ const DateRangePicker = ({
   return (
     <div
       className={` {
-        absolute top-0 left-0 right-0 bottom-0 overflow-hidden transform -translate-x-full transition-transform duration-300 ease-in-out bg-[rgba(243,243,243,0.9)] flex justify-center pt-16  z-40 ${
+        absolute top-0 left-0 right-0 bottom-0 overflow-hidden transform -translate-x-full transition-transform duration-300 ease-in-out bg-[rgba(243,243,243,0.9)] flex justify-center z-40 ${
           isActive ? 'transform translate-x-0' : ''
-        }`}
+        } text-purple`}
     >
       <div ref={dayPickerRef}>
         <DayPicker

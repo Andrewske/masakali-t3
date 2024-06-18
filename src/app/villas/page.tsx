@@ -5,7 +5,7 @@ import GoToVillaButton from '~/components/Button/GoToVillaButton';
 // make sure villa image fills
 function Page() {
   return (
-    <>
+    <section className="mt-[150px]">
       {Object.values(villaDetails).map((villa) => (
         <div
           key={villa.id}
@@ -19,7 +19,7 @@ function Page() {
             className="md:w-6/10 flex-grow max-w-[600px]"
           />
 
-          <div className="flex flex-col md:max-w-[500px] p-4 bg-gray  justify-between">
+          <div className="flex flex-col md:max-w-[500px] p-4 bg-purple text-white  justify-around">
             <span>
               <h2 className="text-3xl pb-8 text-center">{villa.name}</h2>
               <p>{villa.description}</p>
@@ -30,7 +30,7 @@ function Page() {
           </div>
         </div>
       ))}
-    </>
+    </section>
   );
 }
 export default Page;

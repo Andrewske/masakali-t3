@@ -6,7 +6,9 @@ const GoToVillaButton = ({ villaName }: { villaName: VillaNamesType }) => {
   const router = useRouter();
   return (
     <button onClick={() => router.push(`/villas/${villaName}`)}>
-      <a className="bg-purple text-white px-8 py-4 uppercase">Book Now</a>
+      <a className="bg-white text-purple hover:bg-purple hover:text-white hover:border-white border border-solid px-8 py-4 uppercase font-montserrat">
+        Book {villaName}
+      </a>
     </button>
   );
 };

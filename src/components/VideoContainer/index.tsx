@@ -1,4 +1,12 @@
-const VideoContainer = ({ title, text }: { title: string; text: string }) => {
+const VideoContainer = ({
+  title,
+  text,
+  videoId,
+}: {
+  title: string;
+  text: string;
+  videoId: string;
+}) => {
   return (
     <div className="w-full bg-gray relative flex flex-col md:grid md:grid-col-5 p-16">
       <div className="md:absolute md:top-1/2 md:left-1/3 md:transform md:-translate-x-1/2 md:-translate-y-1/2 bg-purple py-16 px-8 flex flex-col align-center gap-8 text-white">
@@ -9,7 +17,7 @@ const VideoContainer = ({ title, text }: { title: string; text: string }) => {
       </div>
       <iframe
         height={480}
-        src="https://www.youtube.com/embed/in8GqtSGIJ0"
+        src={`https://www.youtube.com/embed/${videoId}`}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         title={title}
