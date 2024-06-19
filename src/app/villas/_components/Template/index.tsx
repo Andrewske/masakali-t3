@@ -1,13 +1,19 @@
+import dynamic from 'next/dynamic';
+
 import NextVilla from '~/app/villas/_components/NextVilla';
 import GridGallery from '~/app/villas/_components/GridGallery';
-import DateContainer from '~/app/villas/_components/DateContainer';
+
 import VillaDetails from '~/app/villas/_components/VillaDetails';
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import { prisma } from '~/db/prisma';
 import { type VillaPricingType } from '~/utils/pricing';
-import { Suspense } from 'react';
 import { getCountries } from '~/actions/countries';
+
+const DateContainer = dynamic(
+  () => import('~/app/villas/_components/DateContainer'),
+  { ssr: false }
+);
 
 export type VillaDataType = {
   villaId: VillaIdsType;
@@ -34,8 +40,8 @@ async function Template({ villaId }: VillaDataType) {
 
   const countries = await getCountries();
   return (
-    <main className="w-full grid grid-cols-1 lg:grid-cols-3">
-      <section
+    <section className="w-full grid grid-cols-1 lg:grid-cols-3">
+      <div
         className="flex p-4 sm:p-8 lg:col-span-1 w-full bg-white flex-col gap-4 justify-center items-center relative"
         id="villa-info"
       >
@@ -53,11 +59,11 @@ async function Template({ villaId }: VillaDataType) {
         >{`Book ${villaName.toString()}`}</Link> */}
 
         <VillaDetails villaId={villaId} />
-      </section>
-      <section className="col-span-2">
+      </div>
+      <div className="col-span-2">
         <GridGallery villaName={villaName} />
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }
 
