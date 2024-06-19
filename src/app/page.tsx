@@ -20,7 +20,7 @@ const Page = async () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
 
       <HeroSlideShow />
       <Availability disabledDates={disabledDates} />
@@ -37,7 +37,6 @@ const Page = async () => {
       <Amenities />
       <YogaShala />
       <Location /> */}
-      <Footer />
     </>
   );
 };

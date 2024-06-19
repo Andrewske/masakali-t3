@@ -1,8 +1,6 @@
 import Image, { type StaticImageData } from 'next/image';
 import YogaShalaImage from '~/../public/hero-images/akasha-pool.webp';
 
-import ScrollOffset from '~/components/ScrollOffset';
-
 const ContentContainer = ({
   heading,
   content,
@@ -45,7 +43,11 @@ const ContentContainer = ({
     </div>
   );
   return (
-    <section className="relative flex justify-center flex-wrap p-8 font-baskerville">
+    <section
+      className={`relative flex justify-center ${
+        imgPosition === 'left' ? 'flex-wrap' : 'flex-wrap-reverse '
+      } p-8 font-baskerville`}
+    >
       {imgPosition === 'left' ? image : contentBox}
       {imgPosition === 'left' ? contentBox : image}
     </section>

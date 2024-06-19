@@ -5,26 +5,26 @@ import { GoToPageButton } from '~/components/Button/GoToPageButton';
 // make sure villa image fills
 function Page() {
   return (
-    <section className="mt-[150px]">
+    <section className="flex flex-col md:gap-16 md:py-16">
       {Object.values(villaDetails).map((villa) => (
         <div
           key={villa.id}
-          className="flex flex-col md:flex-row md:items-stretch min-h-[400px] p-8 justify-center"
+          className="flex flex-col flex-wrap md:flex-row md:items-stretch min-h-[400px] justify-center"
         >
-          <Image
-            src={villa.defaultImage}
-            alt={villa.name}
-            width={600}
-            height={400}
-            className="md:w-6/10 flex-grow max-w-[600px]"
-          />
+          <span className="w-full md:w-[600px] h-[400px] relative">
+            <Image
+              src={villa.defaultImage}
+              alt={villa.name}
+              fill={true}
+              className="object-cover"
+              sizes="(max-width: 600px) 100vw, 33vw"
+            />
+          </span>
 
-          <div className="flex flex-col md:max-w-[500px] p-4 bg-purple text-white  justify-around">
-            <span>
-              <h2 className="text-3xl pb-8 text-center">{villa.name}</h2>
-              <p>{villa.description}</p>
-            </span>
-            <span className="mb-8 flex justify-center">
+          <div className="flex flex-col gap-8 w-full md:min-w-[400px] md:max-w-[600px] p-8 bg-purple text-white  justify-around">
+            <h2 className="text-3xl text-center">{villa.name}</h2>
+            <p>{villa.description}</p>
+            <span className="flex justify-center">
               <GoToPageButton
                 path={`/villas/${villa.name}`}
                 callToAction={`Book ${villa.name}`}

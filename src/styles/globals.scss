@@ -3,6 +3,10 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+:root {
+  scroll-padding: 0;
+}
+
 html,
 body {
   padding: 0;

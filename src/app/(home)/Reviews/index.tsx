@@ -1,5 +1,4 @@
 import HeroCarousel from '../HeroSlideShow/Carousel';
-
 import { villaDetails } from '~/lib/villas';
 
 const renderImages = () => {
@@ -20,10 +19,7 @@ const renderImages = () => {
 
 const Reviews = () => {
   return (
-    <section
-      id="home"
-      className="flex flex-col items-center justify-center w-full h-auto py-16 md:px-16 gap-16"
-    >
+    <section className="flex flex-col items-center justify-center w-full h-auto py-16 md:px-16 gap-16">
       <h2 className="uppercase font-montserrat text-3xl text-center">
         What our guest have to say
       </h2>

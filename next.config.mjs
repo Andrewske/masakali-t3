@@ -15,6 +15,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['imgur.com', 'avatar.iran.liara.run', 'lh3.googleusercontent.com', 'dynamic-media-cdn.tripadvisor.com']
+
   },
   i18n: {
     locales: ['en'],

@@ -34,7 +34,7 @@ async function Template({ villaId }: VillaDataType) {
 
   const countries = await getCountries();
   return (
-    <main className="w-full grid grid-cols-1 lg:grid-cols-3 mt-[150px]">
+    <main className="w-full grid grid-cols-1 lg:grid-cols-3">
       <section
         className="flex p-4 sm:p-8 lg:col-span-1 w-full bg-white flex-col gap-4 justify-center items-center relative"
         id="villa-info"

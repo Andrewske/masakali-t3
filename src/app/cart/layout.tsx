@@ -1,9 +1,6 @@
 'use client';
 import { useEffect, type ReactNode } from 'react';
-
 import { env } from '~/env.mjs';
-import Header from '~/components/layout/Header';
-import Footer from '~/components/layout/Footer';
 import Modal from './Modal';
 import XenditProvider from '~/providers/ZenditProvider';
 
@@ -19,10 +16,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <XenditProvider>
-        <Header />
         {children}
         <Modal />
-        <Footer />
       </XenditProvider>
     </>
   );

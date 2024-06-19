@@ -8,6 +8,8 @@ import { ReservationStoreProvider } from '~/providers/ReservationStoreProvider/i
 import { CurrencyStoreProvider } from '~/providers/CurrencyStoreProvider/index';
 import { UserStoreProvider } from '~/providers/UserStoreProvider';
 import Script from 'next/script';
+import Header from '~/components/layout/Header';
+import Footer from '~/components/layout/Footer';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -20,9 +22,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <UserStoreProvider>
             <CurrencyStoreProvider>
               <ReservationStoreProvider>
+                <header className="relative md:sticky top-0 z-50">
+                  <Header />
+                </header>
                 <main className="min-h-screen flex flex-col justify-between">
-                  {children}{' '}
+                  {children}
                 </main>
+                <Footer />
                 <Toaster />
               </ReservationStoreProvider>
             </CurrencyStoreProvider>

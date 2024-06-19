@@ -127,6 +127,7 @@ const Availability = ({
             <div>
               <h3 className="text-sm font-montserrat text-left">Adults</h3>
               <input
+                id="adults"
                 className="w-[235px] h-[45px] font-montserrat bg-white text-purple px-4 text-xl"
                 onChange={(e) => {
                   setUser(updateUserAdults(user, parseInt(e.target.value)));
@@ -138,6 +139,7 @@ const Availability = ({
             <div>
               <h3 className="text-sm font-montserrat text-left">Children</h3>
               <input
+                id="children"
                 className="w-[235px] h-[45px] bg-white text-purple px-4 text-xl normal-nums align-middle font-montserrat"
                 onChange={(e) => {
                   setUser(updateUserChildren(user, parseInt(e.target.value)));

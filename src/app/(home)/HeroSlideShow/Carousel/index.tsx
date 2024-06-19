@@ -14,7 +14,7 @@ const HeroCarousel = ({
     children && (
       <Carousel
         className="w-full m-auto [&>div>button]:!bg-purple "
-        autoFocus={true}
+        // autoFocus={true}
         infiniteLoop={true}
         autoPlay={true}
         // renderArrowPrev https://github.com/leandrowd/react-responsive-carousel
