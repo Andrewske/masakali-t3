@@ -28,9 +28,9 @@ const Page = async () => {
       <WhyChoose />
       <Villas />
       <VideoContainer
-        title="Your Journey to wellness"
-        text="At Masakali Retreat, we believe in the holistic approach to wellness. Our yoga shala is designed to provide a serene environment where you can connect with yourself and nature. Join us for a class or retreat, and embark on a journey of self-discovery and rejuvenation."
-        videoId="jeAphDoR-cc"
+        title="Take a Tour"
+        text="When it comes to Masakali Retreat’s design, customer service, location, and overall atmosphere, no detail is overlooked. We have meticulously crafted every aspect to ensure a perfect balance between luxury and nature, providing you with top-tier service and amenities amidst the stunning natural beauty of Bali. Discover the serene elegance and exceptional comfort that awaits you at Masakali Retreat, where every moment is designed to offer an unforgettable experience."
+        videoId="in8GqtSGIJ0"
       />
       <Reviews />
       {/* <Dining />

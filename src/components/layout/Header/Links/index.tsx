@@ -4,8 +4,7 @@ const HeaderLinks = () => {
   const links = [
     { name: 'Home', href: `/` },
     { name: 'Villas', href: `/villas` },
-    { name: 'Dining', href: `/#dining` },
-    { name: 'Amenities', href: `/#amenities` },
+    { name: 'Experience', href: `/experience` },
     { name: 'Yoga', href: `/yoga` },
   ];
 

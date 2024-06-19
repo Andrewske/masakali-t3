@@ -13,7 +13,7 @@ const ContentContainer = ({
 }: {
   heading: string;
   content: string;
-  buttonText: string;
+  buttonText?: string;
   imgSrc: StaticImageData;
   imgAlt: string;
   imgPosition: 'left' | 'right';
@@ -23,12 +23,14 @@ const ContentContainer = ({
       <h2 className="">{heading}</h2>
       <p className="w-full h-content leading-relaxed">{content}</p>
       <span className="w-full py-4 ">
-        <button
-          className="py-3 px-6 border-solid border border-purple  w-auto font-montserrat uppercase text-purple hover:bg-purple hover:text-white"
-          type="button"
-        >
-          {buttonText}
-        </button>
+        {buttonText && (
+          <button
+            className="py-3 px-6 border-solid border border-purple  w-auto font-montserrat uppercase text-purple hover:bg-purple hover:text-white"
+            type="button"
+          >
+            {buttonText}
+          </button>
+        )}
       </span>
     </div>
   );
