@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import styles from '../styles.module.scss';
 
 type GoToPageButtonProps = {
   callToAction: string;
@@ -16,9 +15,11 @@ export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
 }) => {
   return (
     <Link
-      className={`${styles.container ?? ''} ${
-        isWhite ? `${styles.white ?? ''}` : ''
-      } font-montserrat uppercase hover:bg-white hover:text-purple hover:border-purple hover:border border-solid`}
+      className={`py-3 px-6 ${
+        isWhite
+          ? `bg-white text-purple hover:bg-purple hover:text-white hover:border-white`
+          : 'bg-purple text-white hover:bg-white hover:text-purple hover:border-purple'
+      } font-montserrat uppercase hover:border border-solid`}
       href={path}
     >
       {callToAction}

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { villaDetails } from '~/lib/villas';
-import GoToVillaButton from '~/components/Button/GoToVillaButton';
+import { GoToPageButton } from '~/components/Button/GoToPageButton';
 
 // make sure villa image fills
 function Page() {
@@ -25,7 +25,11 @@ function Page() {
               <p>{villa.description}</p>
             </span>
             <span className="mb-8 flex justify-center">
-              <GoToVillaButton villaName={villa.name} />
+              <GoToPageButton
+                path={`/villas/${villa.name}`}
+                callToAction={`Book ${villa.name}`}
+                isWhite={true}
+              />
             </span>
           </div>
         </div>

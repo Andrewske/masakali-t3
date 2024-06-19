@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import HeaderLinks from '~/components/layout/Header/Links';
+import { GoToPageButton } from '~/components/Button/GoToPageButton';
 
 const Header = () => {
   return (
@@ -21,12 +22,11 @@ const Header = () => {
         <span className="flex flex-wrap items-center justify-center p-4 gap-16">
           <HeaderLinks />
 
-          <Link
-            href="/villas"
-            className="button white"
-          >
-            Book Now
-          </Link>
+          <GoToPageButton
+            path="/villas"
+            callToAction="Book Now"
+            isWhite={true}
+          />
         </span>
       </div>
     </nav>
