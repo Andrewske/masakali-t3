@@ -26,6 +26,7 @@ const GridGallery = ({ villaName }: { villaName: VillaNamesType }) => {
           width={800}
           height={800}
           onClick={() => setIndexOfExpandedImage(index)}
+          placeholder="blur"
         />
       ))}
     </div>

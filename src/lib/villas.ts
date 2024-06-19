@@ -1,3 +1,40 @@
+import type { StaticImageData } from 'next/image';
+
+import suryaImage1 from '~/../public/surya/surya-main.webp';
+import suryaImage2 from '~/../public/surya/surya-pool-view.webp';
+import suryaImage3 from '~/../public/surya/surya-kitchen.webp';
+import suryaImage4 from '~/../public/surya/surya-bed.webp';
+import suryaImage5 from '~/../public/surya/surya-bath.webp';
+import suryaImage6 from '~/../public/surya/surya-front.webp';
+
+import chandraImage1 from '~/../public/chandra/chandra-pool.webp';
+import chandraImage2 from '~/../public/chandra/chandra-bed.webp';
+import chandraImage3 from '~/../public/chandra/chandra-bath.webp';
+import chandraImage4 from '~/../public/chandra/chandra-front.webp';
+import chandraImage5 from '~/../public/chandra/chandra-hammock.webp';
+import chandraImage6 from '~/../public/chandra/chandra-kitchen.webp';
+
+import jalaImage1 from '~/../public/jala/jala-pool.webp';
+import jalaImage2 from '~/../public/jala/jala-kitchen.webp';
+import jalaImage3 from '~/../public/jala/jala-bed.webp';
+import jalaImage4 from '~/../public/jala/jala-bath.webp';
+import jalaImage5 from '~/../public/jala/jala-front.webp';
+import jalaImage6 from '~/../public/jala/jala-views.webp';
+
+import akashaImage1 from '~/../public/akasha/akasha-pool.webp';
+import akashaImage2 from '~/../public/akasha/akasha-kitchen.webp';
+import akashaImage3 from '~/../public/akasha/akasha-bed.webp';
+import akashaImage4 from '~/../public/akasha/akasha-bathroom.webp';
+import akashaImage5 from '~/../public/akasha/akasha-front.webp';
+import akashaImage6 from '~/../public/akasha/akasha-views.webp';
+
+import lakshmiImage1 from '~/../public/lakshmi/lakshmi-pool.webp';
+import lakshmiImage2 from '~/../public/lakshmi/lakshmi-kitchen.webp';
+import lakshmiImage3 from '~/../public/lakshmi/lakshmi-bedroom-1.webp';
+import lakshmiImage4 from '~/../public/lakshmi/lakshmi-bathroom.webp';
+import lakshmiImage5 from '~/../public/lakshmi/lakshmi-bedroom-2.webp';
+import lakshmiImage6 from '~/../public/lakshmi/lakshmi-bedroom-2a.webp';
+
 export const suryaId = 1115674;
 export const chandraId = 1115668;
 export const jalaId = 1115671;
@@ -58,7 +95,7 @@ export type VillaDetail = {
   shortDescription: string;
   defaultImage: string;
   images: {
-    src: string;
+    src: StaticImageData;
     alt: string;
   }[];
   maxGuests: {
@@ -92,27 +129,27 @@ export const villaDetails: VillaDetailsType = {
     defaultImage: '/surya/surya-main.webp',
     images: [
       {
-        src: '/surya/surya-main.webp',
+        src: suryaImage1,
         alt: 'Surya at Masakali view of the pool',
       },
       {
-        src: '/surya/surya-pool-view.webp',
+        src: suryaImage2,
         alt: 'Surya at Masakali view of the pool',
       },
       {
-        src: '/surya/surya-kitchen.webp',
+        src: suryaImage3,
         alt: 'Surya at Masakali view of the kitchen',
       },
       {
-        src: '/surya/surya-bed.webp',
+        src: suryaImage4,
         alt: 'Surya at Masakali view of the bed',
       },
       {
-        src: '/surya/surya-bath.webp',
+        src: suryaImage5,
         alt: 'Surya at Masakali view of the bathroom',
       },
       {
-        src: '/surya/surya-front.webp',
+        src: suryaImage6,
         alt: 'Surya at Masakali view of the front',
       },
     ],
@@ -161,29 +198,17 @@ export const villaDetails: VillaDetailsType = {
     defaultImage: '/chandra/chandra-front.webp',
     images: [
       {
-        src: '/chandra/chandra-pool.webp',
+        src: chandraImage1,
         alt: 'Chandra at Masakali view of the pool',
       },
       {
-        src: '/chandra/chandra-bed.webp',
+        src: chandraImage2,
         alt: 'Chandra at Masakali view of the bed',
       },
-      {
-        src: '/chandra/chandra-bath.webp',
-        alt: 'Chandra at Masakali view of the bathroom',
-      },
-      {
-        src: '/chandra/chandra-front.webp',
-        alt: 'Chandra at Masakali view of the front',
-      },
-      {
-        src: '/chandra/chandra-hammock.webp',
-        alt: 'Chandra at Masakali view of the hammock',
-      },
-      {
-        src: '/chandra/chandra-kitchen.webp',
-        alt: 'Chandra at Masakali view of the kitchen',
-      },
+      { src: chandraImage3, alt: 'Chandra at Masakali view of the bathroom' },
+      { src: chandraImage4, alt: 'Chandra at Masakali view of the front' },
+      { src: chandraImage5, alt: 'Chandra at Masakali view of the hammock' },
+      { src: chandraImage6, alt: 'Chandra at Masakali view of the kitchen' },
     ],
     maxGuests: {
       adults: 4,
@@ -230,28 +255,28 @@ export const villaDetails: VillaDetailsType = {
     defaultImage: '/jala/jala-pool.webp',
     images: [
       {
-        src: '/jala/jala-pool.webp',
+        src: jalaImage1,
         alt: 'Jala at Masakali view of the pool',
       },
       {
-        src: '/jala/jala-kitchen.webp',
+        src: jalaImage2,
         alt: 'Jala at Masakali view of the kitchen',
       },
       {
-        src: '/jala/jala-bed.webp',
+        src: jalaImage3,
         alt: 'Jala at Masakali view of the bed',
       },
       {
-        src: '/jala/jala-bath.webp',
+        src: jalaImage4,
         alt: 'Jala at Masakali view of the bathroom',
       },
       {
-        src: '/jala/jala-front.webp',
-        alt: 'Jala at Masakali view of the bathroom',
+        src: jalaImage5,
+        alt: 'Jala at Masakali view of the front',
       },
       {
-        src: '/jala/jala-views.webp',
-        alt: 'Jala at Masakali view of the bathroom',
+        src: jalaImage6,
+        alt: 'Jala at Masakali view of the views',
       },
     ],
     maxGuests: {
@@ -298,30 +323,12 @@ export const villaDetails: VillaDetailsType = {
     shortDescription: '3-bedroom villa up to 6 adults and 2 children',
     defaultImage: '/hero-images/akasha-pool.webp',
     images: [
-      {
-        src: '/akasha/akasha-front.webp',
-        alt: 'Akasha at Masakali view of the bathroom',
-      },
-      {
-        src: '/akasha/akasha-pool.webp',
-        alt: 'Akasha at Masakali view of the pool',
-      },
-      {
-        src: '/akasha/akasha-kitchen.webp',
-        alt: 'Akasha at Masakali view of the kitchen',
-      },
-      {
-        src: '/akasha/akasha-bed.webp',
-        alt: 'Akasha at Masakali view of the bed',
-      },
-      {
-        src: '/akasha/akasha-bathroom.webp',
-        alt: 'Akasha at Masakali view of the bathroom',
-      },
-      {
-        src: '/akasha/akasha-views.webp',
-        alt: 'Akasha at Masakali view of the bathroom',
-      },
+      { src: akashaImage1, alt: 'Akasha at Masakali view of the pool' },
+      { src: akashaImage2, alt: 'Akasha at Masakali view of the kitchen' },
+      { src: akashaImage3, alt: 'Akasha at Masakali view of the bed' },
+      { src: akashaImage4, alt: 'Akasha at Masakali view of the bathroom' },
+      { src: akashaImage5, alt: 'Akasha at Masakali view of the front' },
+      { src: akashaImage6, alt: 'Akasha at Masakali view of the views' },
     ],
     maxGuests: {
       adults: 6,
@@ -366,30 +373,12 @@ export const villaDetails: VillaDetailsType = {
     shortDescription: '2-bedroom villa 2 queen size beds',
     defaultImage: '/lakshmi/lakshmi-kitchen.webp',
     images: [
-      {
-        src: '/lakshmi/lakshmi-bedroom-1.webp',
-        alt: 'Lakshmi at Masakali view of the pool',
-      },
-      {
-        src: '/lakshmi/lakshmi-kitchen.webp',
-        alt: 'Lakshmi at Masakali view of the kitchen',
-      },
-      {
-        src: '/lakshmi/lakshmi-bedroom-2.webp',
-        alt: 'Lakshmi at Masakali view of the bed',
-      },
-      {
-        src: '/lakshmi/lakshmi-bathroom.webp',
-        alt: 'Lakshmi at Masakali view of the bathroom',
-      },
-      {
-        src: '/lakshmi/lakshmi-pool.webp',
-        alt: 'Lakshmi at Masakali view of the bathroom',
-      },
-      {
-        src: '/lakshmi/lakshmi-bedroom-2a.webp',
-        alt: 'Lakshmi at Masakali view of the bathroom',
-      },
+      { src: lakshmiImage1, alt: 'Lakshmi at Masakali view of the pool' },
+      { src: lakshmiImage2, alt: 'Lakshmi at Masakali view of the kitchen' },
+      { src: lakshmiImage3, alt: 'Lakshmi at Masakali view of the bedroom 1' },
+      { src: lakshmiImage4, alt: 'Lakshmi at Masakali view of the bathroom' },
+      { src: lakshmiImage5, alt: 'Lakshmi at Masakali view of the bedroom-2' },
+      { src: lakshmiImage6, alt: 'Lakshmi at Masakali view of the bedroom-2a' },
     ],
     maxGuests: {
       adults: 4,
