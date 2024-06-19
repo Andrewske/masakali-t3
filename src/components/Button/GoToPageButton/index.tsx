@@ -17,8 +17,8 @@ export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
     <Link
       className={`py-3 px-6 ${
         isWhite
-          ? `bg-white text-purple hover:bg-purple hover:text-white hover:border-white`
-          : 'bg-purple text-white hover:bg-white hover:text-purple hover:border-purple'
+          ? `bg-white text-purple border-white hover:bg-purple hover:text-white `
+          : 'bg-purple text-white hover:bg-white hover:text-purple border-purple'
       } font-montserrat uppercase border border-solid `}
       href={path}
     >
