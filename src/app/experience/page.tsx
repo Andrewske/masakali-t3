@@ -56,6 +56,7 @@ export default async function Page() {
         imgPosition="right"
         imgAlt="Masakali Yoga Retreat Image 2"
       />
+
       <VideoContainer
         title="Your Journey to wellness"
         text="At Masakali Retreat, we believe in the holistic approach to wellness. Our yoga shala is designed to provide a serene environment where you can connect with yourself and nature. Join us for a class or retreat, and embark on a journey of self-discovery and rejuvenation."

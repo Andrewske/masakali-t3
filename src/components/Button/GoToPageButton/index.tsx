@@ -18,7 +18,7 @@ export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
     <Link
       className={`${styles.container ?? ''} ${
         isWhite ? `${styles.white ?? ''}` : ''
-      }`}
+      } font-montserrat uppercase hover:bg-white hover:text-purple hover:border-purple hover:border border-solid`}
       href={path}
     >
       {callToAction}

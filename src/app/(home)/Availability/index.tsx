@@ -94,9 +94,9 @@ const Availability = ({
   return (
     <section
       id="availability"
-      className="bg-purple text-white  h-full w-full"
+      className="bg-purple text-white  h-full w-full py-16 md:py-0"
     >
-      <div className="relative flex h-[300px]  ">
+      <div className="relative flex h-auto md:h-[300px]">
         <DateRangePicker
           isActive={datePickerActive}
           setIsActive={setDatePickerActive}

@@ -9,12 +9,13 @@ type FeatureProps = {
 
 const Feature = ({ iconSrc, iconAlt, title, description }: FeatureProps) => (
   <div className="flex flex-col gap-4 max-w-[350px] ">
-    <span className="flex justify-items-start gap-4 w-full">
+    <span className="flex justify-items-start gap-4 w-full h-auto">
       <Image
         src={iconSrc}
         alt={iconAlt}
-        width="25"
+        width="0"
         height="0"
+        className="w-[25px] h-[25px]"
       />
       <h4>{title}</h4>
     </span>
@@ -50,9 +51,9 @@ const WhyChoose = () => {
   return (
     <div className="bg-purple text-white grid grid-col-1 place-items-center w-full p-8">
       <div className="">
-        <h3 className="p-4">Why choose masakali retreat</h3>
+        <h2 className="p-4 ">Why choose masakali retreat</h2>
       </div>
-      <div className="flex flex-wrap justify-evenly w-full p-4">
+      <div className="flex flex-wrap justify-evenly w-full p-4 gap-4">
         {features.map((feature, index) => (
           <Feature
             key={index}
