@@ -10,6 +10,8 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 await import('./src/env.mjs');
 
+
+
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -21,6 +23,7 @@ const nextConfig = {
     locales: ['en'],
     defaultLocale: 'en'
   },
+
 }
 
 const sentryWebpackPluginOptions = {

@@ -19,7 +19,7 @@ export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
         isWhite
           ? `bg-white text-purple hover:bg-purple hover:text-white hover:border-white`
           : 'bg-purple text-white hover:bg-white hover:text-purple hover:border-purple'
-      } font-montserrat uppercase hover:border border-solid`}
+      } font-montserrat uppercase border border-solid `}
       href={path}
     >
       {callToAction}
