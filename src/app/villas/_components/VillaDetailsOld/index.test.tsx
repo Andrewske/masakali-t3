@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 // import type { RenderResult } from '@testing-library/react';
-import VillaDetails from '../VillaDetails';
+import VillaDetails from '.';
 
 type VillaDataType = {
   description: string;

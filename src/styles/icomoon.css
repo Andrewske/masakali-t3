@@ -1,0 +1,66 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?8bm10m');
+  src:  url('fonts/icomoon.eot?8bm10m#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?8bm10m') format('truetype'),
+    url('fonts/icomoon.woff?8bm10m') format('woff'),
+    url('fonts/icomoon.svg?8bm10m#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shower:before {
+  content: "\e900";
+}
+.icon-bath:before {
+  content: "\e901";
+}
+.icon-bathtub:before {
+  content: "\e901";
+}
+.icon-s15:before {
+  content: "\e901";
+}
+.icon-binoculars:before {
+  content: "\e902";
+}
+.icon-directions_car:before {
+  content: "\e903";
+}
+.icon-tv:before {
+  content: "\e904";
+}
+.icon-security:before {
+  content: "\e905";
+}
+.icon-pool1:before {
+  content: "\e906";
+}
+.icon-local_laundry_service:before {
+  content: "\e907";
+}
+.icon-kitchen:before {
+  content: "\e908";
+}
+.icon-pool:before {
+  content: "\e909";
+}
+.icon-connection:before {
+  content: "\e91b";
+}
