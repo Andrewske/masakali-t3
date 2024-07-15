@@ -1,10 +1,11 @@
+'use client';
 import Image, { type StaticImageData } from 'next/image';
-import YogaShalaImage from '~/../public/hero-images/akasha-pool.webp';
 
 const ContentContainer = ({
   heading,
   content,
   buttonText,
+  buttonLink,
   imgSrc,
   imgAlt,
   imgPosition,
@@ -12,6 +13,7 @@ const ContentContainer = ({
   heading: string;
   content: string;
   buttonText?: string;
+  buttonLink?: string;
   imgSrc: StaticImageData;
   imgAlt: string;
   imgPosition: 'left' | 'right';
@@ -25,6 +27,7 @@ const ContentContainer = ({
           <button
             className="py-3 px-6 border-solid border border-purple  w-auto font-montserrat uppercase text-purple hover:bg-purple hover:text-white"
             type="button"
+            onClick={() => window.open(buttonLink, '_blank')}
           >
             {buttonText}
           </button>

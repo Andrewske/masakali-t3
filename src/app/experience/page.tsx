@@ -8,6 +8,7 @@ import Availability from '../(home)/Availability';
 import SpaImage from '../../../public/experience/masakali_spa.jpg';
 import YogaShalaImage from '../../../public/yoga/masakali_yoga_shala.jpg';
 import ExperienceImage from '../../../public/experience/masakali_experience.jpg';
+import RomanceImage from '../../../public/experience/flower_pool.jpeg';
 
 import { getAllBlockedDates } from '~/actions/reservations';
 
@@ -26,29 +27,50 @@ export default async function Page() {
 
       <div className="flex flex-col gap-8 w-full p-16">
         <p className="w-full max-w-[885px] text-center font-baskerville m-auto">
-          Though a mere 12.5km drive from the hustle and bustle of Ubud,
-          Masakali Retreat is nestled in the beautiful Kelusa village, offering
-          a retreat that feels like a million miles from the touristic hub.
+          Perched in Kelusa Village with breathtaking panoramic views of the
+          rice fields, mountains and tropical jungle, you&apos;ll feel instantly
+          relaxed the moment you enter Masakali Retreat. Just a mere 12.5km
+          north of the hustle and bustle of Ubud, Masakali Retreat offers a very
+          secluded and peaceful atmosphere; however, it’s still just a short
+          drive away from the vibrant Ubud city center which is filled with
+          diverse activities, cultural attractions and culinary works of art.
+          And closer still, to the east, west and north of us, are remarkable
+          waterfalls, ATV rides, white water rafting, the elephant park, the
+          famous Tegallalang rice terraces, zip lining, shopping, Mount Batur
+          and other family-friendly activities. This area has something for
+          everyone.
         </p>
         <p className="w-full max-w-[885px] text-center font-baskerville m-auto">
-          Sitting pretty in the hills of Kelusa and sporting million-dollar
-          views, you’ll instantly feel relaxed the second you enter our private
-          villas. However, a quick drive away is the beautiful Ubud city centre,
-          offering a million things to do.
-        </p>
-        <p className="w-full max-w-[885px] text-center font-baskerville m-auto">
-          From its waterfalls, ATV rides, rice terraces, zip lining, shopping,
-          and a wide variety of activities for all ages, cultural attractions
-          and sights, the area has something for everyone.
+          Masakali Retreat offers more than just luxury accommodations. Enjoy
+          our daily yoga classes and retreats, dine in with room service
+          featuring local ingredients, or indulge in spa services or our romance
+          packages designed to create unforgettable memories.
         </p>
       </div>
       <ContentContainer
-        heading="Dining"
-        content="Masakali offers a full range of options for dining, all with the taste and charm of fresh Balinese ingredients. Our curated selection of savory cuisine includes many local Balinese dishes as well as international dishes. Our staff will prepare you breakfast which is included in the price of your villa from select items on the menu as well as offer lunch and dinner so you can enjoy your meal in the privacy of your own villa."
-        buttonText="Browse food and cocktail menu"
-        imgSrc={DiningPhoto}
+        heading="Yoga"
+        content="We invite you to embrace tranquility and balance through yoga and breathwork sessions at Masakali’s very own yoga shala. Immerse yourself in the spiritual essence of Bali with our Morning Flow class at 8:15 am, a perfect way to awaken and energize your body and spirit with the first light of day. As dusk settles, join us for our Evening Flow class at 6:00 pm, designed to help you unwind and reflect, promoting a sense of peace as the day draws to a close. Both classes are led by experienced instructors who integrate the beauty of Balinese nature and philosophy into their teaching, offering a harmonious blend of local tradition and yoga practice. These sessions allow you to enhance your health and wellness in the privacy and comfort of our yoga shala, set against the backdrop of Bali's breathtaking landscapes. Additionally, we are and will be scheduling various yoga retreats and workshops for guests to attend."
+        imgSrc={YogaShalaImage}
         imgPosition="left"
-        imgAlt="Masakali Dining Photo"
+        imgAlt="Masakali Yoga Shala"
+      />
+      <ContentContainer
+        heading="Tour Packages"
+        content="At Masakali Retreat, we offer a range of curated tour packages that showcase the best of Bali's natural beauty and cultural heritage. Each tour package is designed to provide a unique and immersive experience, perfect for adventurers and culture enthusiasts alike."
+        imgSrc={ExperienceImage}
+        imgPosition="right"
+        imgAlt="Masakali Yoga Shala"
+        buttonText="Explore our tour packages"
+        buttonLink={'/pdf/tour_packages.pdf'}
+      />
+      <ContentContainer
+        heading="Romance Packages"
+        content="At Masakali Retreat, we specialize in creating unforgettable romantic experiences for couples. Our exclusive romance packages are designed to offer the perfect blend of luxury and, intimacy, ensuring that your stay is truly special. Enjoy a private candlelight dinner under the stars, relax and rejuvenate with our signature spa treatments designed for couples, delight in a unique and enchanting experience with our flower-filled pool or bath service or floating breakfast .Let us take care of all the details while you focus on enjoying quality time together. Our romance packages are designed to cater to your every need, creating an idyllic setting for love and connection."
+        imgSrc={RomanceImage}
+        imgPosition="left"
+        imgAlt="Masakali Yoga Shala"
+        buttonText="Explore our romance packages"
+        buttonLink={'/pdf/romance_packages.pdf'}
       />
       <ContentContainer
         heading="Spa Services"
@@ -57,51 +79,16 @@ export default async function Page() {
         imgSrc={SpaImage}
         imgPosition="right"
         imgAlt="Masakali Yoga Retreat Image 2"
+        buttonLink={'/pdf/spa_services.pdf'}
       />
       <ContentContainer
-        heading="Yoga"
-        content="At our serene yoga shala, we invite you to embrace tranquility and
-          balance through our thoughtfully scheduled yoga sessions. Immerse
-          yourself in the spiritual essence of Bali with our Morning Flow class
-          at 8:15 am, a perfect way to awaken and energize your body and spirit
-          with the first light of day. As dusk settles, join us for our Evening
-          Flow class at 6:00 pm, designed to help you unwind and reflect,
-          promoting a sense of peace as the day draws to a close. Both classes
-          are led by experienced instructors who integrate the beauty of
-          Balinese nature and philosophy into their teaching, offering a
-          harmonious blend of local tradition and yoga practice. These sessions
-          are a complimentary part of your stay, allowing you to enhance your
-          wellness journey in the privacy and comfort of our yoga shala, set
-          against the backdrop of Bali's breathtaking landscapes."
-        imgSrc={YogaShalaImage}
+        heading="Dining"
+        content="Masakali offers a full range of options for dining, all with the taste and charm of fresh Balinese ingredients. Our curated selection of savory cuisine includes many local Balinese dishes as well as international dishes. Our staff will prepare you breakfast which is included in the price of your villa from select items on the menu as well as offer beverages, lunch and dinner so you can enjoy your meal in the privacy of your own villa."
+        // buttonText="Browse food and cocktail menu"
+        imgSrc={DiningPhoto}
         imgPosition="left"
-        imgAlt="Masakali Yoga Shala"
+        imgAlt="Masakali Dining Photo"
       />
-      <ContentContainer
-        heading="Tour Packages"
-        content="At our serene yoga shala, we invite you to embrace tranquility and
-          balance through our thoughtfully scheduled yoga sessions. Immerse
-          yourself in the spiritual essence of Bali with our Morning Flow class
-          at 8:15 am, a perfect way to awaken and energize your body and spirit
-          with the first light of day. As dusk settles, join us for our Evening
-          Flow class at 6:00 pm, designed to help you unwind and reflect,
-          promoting a sense of peace as the day draws to a close. Both classes
-          are led by experienced instructors who integrate the beauty of
-          Balinese nature and philosophy into their teaching, offering a
-          harmonious blend of local tradition and yoga practice. These sessions
-          are a complimentary part of your stay, allowing you to enhance your
-          wellness journey in the privacy and comfort of our yoga shala, set
-          against the backdrop of Bali's breathtaking landscapes."
-        imgSrc={ExperienceImage}
-        imgPosition="right"
-        imgAlt="Masakali Yoga Shala"
-      />
-
-      {/* <VideoContainer
-        title="Your Journey to wellness"
-        text="At Masakali Retreat, we believe in the holistic approach to wellness. Our yoga shala is designed to provide a serene environment where you can connect with yourself and nature. Join us for a class or retreat, and embark on a journey of self-discovery and rejuvenation."
-        videoId="zELEznlniRw"
-      /> */}
     </section>
   );
 }

@@ -26,7 +26,7 @@ export default function Page() {
       <ContentContainer
         heading="Yoga Classes"
         content="Whether you are a seasoned yogi or just beginning your journey, our experienced instructors guide you through each pose with care and expertise. Our classes are designed to accommodate all skill levels, ensuring a nurturing and inclusive environment."
-        buttonText="See our yoga class schedule"
+        // buttonText="See our yoga class schedule"
         imgSrc={YogaClasses}
         imgPosition="left"
         imgAlt="Masakali Yoga Retreat Image"
@@ -34,7 +34,7 @@ export default function Page() {
       <ContentContainer
         heading="Yoga Retreats"
         content="Immerse yourself in a transformative experience with our yoga retreats. Our retreats are thoughtfully curated to provide a perfect blend of yoga, meditation, and relaxation amidst the lush landscapes of Bali."
-        buttonText="Explore our upcoming retreats"
+        // buttonText="Explore our upcoming retreats"
         imgSrc={YogaRetreats}
         imgPosition="right"
         imgAlt="Masakali Yoga Retreat Image 2"
