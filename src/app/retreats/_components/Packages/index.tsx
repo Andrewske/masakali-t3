@@ -1,40 +1,82 @@
 import { villaDetails } from '~/lib/villas';
 import Image from 'next/image';
 
+import SuryaImage from '~/../public/surya/surya-bed.webp';
+import JalaImage from '~/../public/jala/jala-bed.webp';
+import AkashaImage from '~/../public/akasha/akasha-bed.webp';
+import TwinImage1 from '~/../public/lakshmi/lakshmi-bedroom-1.webp';
+import TwinImage2 from '~/../public/lakshmi/lakshmi-bedroom-2.webp';
+import TwinImage3 from '~/../public/lakshmi/lakshmi-bedroom-2a.webp';
+
 const packageDetails = [
   {
-    title: 'Surya',
-    price: 3000,
+    title: 'Twin Bed Shared Villa',
+    price1: '$850 (per person)',
     listItems: [
-      'Private Room (Max 2 people)',
-      '1 king bed',
-      'Private Infinity Pool',
-      'Private Kitchenette',
+      'Shared Villa',
+      'Max 3 people',
+      '2 twin beds upstairs',
+      '1 Pullout sofa downstairs',
+      'Communal Pool',
     ],
-    image: villaDetails['akasha'].defaultImage,
+    image: TwinImage3,
   },
   {
-    title: 'Jala',
-    price: 3000,
+    title: 'Upstairs Queen Bed in a Shared Villa',
+    price1: '$1015 (1 person)',
+    price2: '$1675 (two people)',
     listItems: [
-      'Private Room (Max 2 people)',
+      'Private Room in shared villa',
+      'Max 2 people',
       '1 queen bed',
-      'Private Infinity Pool',
-      'Private Kitchenette',
+      'Communal Pool',
     ],
-    image: villaDetails['akasha'].defaultImage,
+    image: TwinImage2,
   },
   {
-    title: 'Priya',
-    price: 2000,
-    listItems: ['Shared Villa with Twin Beds', 'Private Tub'],
-    image: villaDetails['akasha'].defaultImage,
+    title: 'Twin Bed Shared room',
+    price1: '$1,150 (1 person)',
+    price2: '$1,830 (two people)',
+    listItems: ['Shared Room', 'Max 2 people', 'Communal Pool'],
+    image: TwinImage3,
   },
   {
-    title: 'Isvara',
-    price: 2000,
-    listItems: ['Shared Villa with Twin Beds'],
-    image: villaDetails['akasha'].defaultImage,
+    title: 'Private Room with King Bed',
+    price1: '$1325 (1 person)',
+    price2: '$2030 (two people)',
+    listItems: [
+      'Private Room in shared villa',
+      'Max 2 people',
+      '1 king bed',
+      'Communal Pool',
+    ],
+    image: AkashaImage,
+  },
+  {
+    title: '2 story private villa with queen bed',
+    price1: '$1325 (1 person)',
+    price2: '$2030 (two people)',
+    listItems: [
+      'Private Villa',
+      'Max 2 people',
+      '1 queen bed',
+      'Communal Pool',
+    ],
+    image: TwinImage1,
+  },
+  {
+    title: 'Private Villa with queen bed and private pool',
+    price1: '$1387 (1 person)',
+    price2: '$2047 (two people)',
+    listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
+    image: JalaImage,
+  },
+  {
+    title: 'Private Villa with king bed and private pool',
+    price1: '$1480 (1 person)',
+    price2: '$2140 (two people)',
+    listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
+    image: SuryaImage,
   },
 ];
 
@@ -67,19 +109,16 @@ const Packages = () => {
           beautiful luxury pool.
         </p>
       </span>
+      <p className="font-bold">
+        For booking inquiries, please contact us at{' '}
+        <a href="mailto:info@masakaliretreat.com">info@masakaliretreat.com</a>
+      </p>
 
-      <h3>Included with all rooms</h3>
-      <ul>
-        <li>5 days + 4 nights accommodation</li>
-        <li>All Activities (Tours + Healings + Cultural Activites)</li>
-        <li>3 meals per day</li>
-        <li>2 spa services</li>
-      </ul>
       <div className="flex flex-wrap w-full justify-evenly">
         {packageDetails.map((packageDetail) => (
           <div
             key={packageDetail.title}
-            className="flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300"
+            className="flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300 max-w-[300px] my-4"
           >
             <span className="w-[300px] h-[300px]">
               <Image
@@ -91,8 +130,11 @@ const Packages = () => {
               />
             </span>
             <span className="flex flex-col gap-8 p-4">
-              <h3 className="text-3xl">{packageDetail.title}</h3>
-              <p>${packageDetail.price}</p>
+              <h3 className="text-xl">{packageDetail.title}</h3>
+              <span className="font-bold">
+                <p>{packageDetail.price1}</p>
+                {packageDetail.price2 && <p>{packageDetail.price2}</p>}
+              </span>
               <ul>
                 {packageDetail.listItems.map((item, index) => (
                   <li key={index}>{item}</li>

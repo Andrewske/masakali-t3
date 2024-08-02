@@ -1,5 +1,6 @@
 'use client';
 import Image, { type StaticImageData } from 'next/image';
+import type { ReactNode } from 'react';
 
 const ContentContainer = ({
   heading,
@@ -9,25 +10,27 @@ const ContentContainer = ({
   imgSrc,
   imgAlt,
   imgPosition,
+  newTab = true,
 }: {
   heading: string;
-  content: string;
+  content: string | ReactNode;
   buttonText?: string;
   buttonLink?: string;
   imgSrc: StaticImageData;
   imgAlt: string;
   imgPosition: 'left' | 'right';
+  newTab?: boolean;
 }) => {
   const contentBox = (
     <div className="w-full sm:max-h-[600px] max-w-[600px] bg-gray flex flex-col  justify-center gap-8  p-8 text-left ">
       <h2 className="">{heading}</h2>
-      <p className="w-full h-content leading-relaxed">{content}</p>
+      <div className="w-full h-content leading-relaxed">{content}</div>
       <span className="w-full py-4 ">
         {buttonText && (
           <button
             className="py-3 px-6 border-solid border border-purple  w-auto font-montserrat uppercase text-purple hover:bg-purple hover:text-white"
             type="button"
-            onClick={() => window.open(buttonLink, '_blank')}
+            onClick={() => window.open(buttonLink, newTab ? '_blank' : '_self')}
           >
             {buttonText}
           </button>

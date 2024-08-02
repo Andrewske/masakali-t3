@@ -8,7 +8,7 @@ import youtubeIcon from '~/../public/icons/youtube_icon.png';
 
 import LinkWithUnderline from '~/components/LinkWithUnderline';
 
-const sectionLinks = ['', 'villas', 'experience', 'yoga'];
+const sectionLinks = ['', 'villas', 'experience', 'yoga', 'retreats'];
 
 const Footer = () => {
   return (
