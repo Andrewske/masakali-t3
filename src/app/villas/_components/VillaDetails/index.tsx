@@ -143,13 +143,18 @@ const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {villaDetails[villaName].amenities.map((item) => {
-              return amenities[item] ? (
+              const amenity = amenities[item];
+              if (!amenity) {
+                return null;
+              }
+
+              return (
                 <Item
-                  key={amenities[item].icon}
-                  className={amenities[item].icon}
-                  text={amenities[item].text}
+                  key={amenity.icon}
+                  className={amenity.icon}
+                  text={amenity.text}
                 />
-              ) : null;
+              );
             })}
           </div>
         </div>

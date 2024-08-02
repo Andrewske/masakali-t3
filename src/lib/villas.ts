@@ -38,7 +38,7 @@ import lakshmiImage3 from '~/../public/lakshmi/lakshmi-bedroom-1.webp';
 import lakshmiImage4 from '~/../public/lakshmi/lakshmi-bathroom.webp';
 import lakshmiImage5 from '~/../public/lakshmi/lakshmi-bedroom-2.webp';
 import lakshmiImage6 from '~/../public/lakshmi/lakshmi-bedroom-2a.webp';
-import lakshmiNameImage from '~/../public/lakshmi/lakshmi-name-image.jpg';
+import lakshmiNameImage from '~/../public/lakshmi/lakshmi-name-image.webp';
 
 export const suryaId = 1115674;
 export const chandraId = 1115668;
