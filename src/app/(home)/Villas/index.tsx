@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 import { GoToPageButton } from '~/components/Button/GoToPageButton';
 import { villaDetails } from '~/lib/villas';
 import Link from 'next/link';
+import VillaImage from '~/components/VillaImage';
 
 const Villas = () => {
   return (
@@ -27,36 +28,12 @@ const Villas = () => {
       </div>
       <div className="flex flex-wrap justify-evenly w-full gap-4 h-full">
         {Object.values(villaDetails).map((villa) => (
-          <div
-            key={villa.id}
-            className=" w-[450px] h-[550px] md:h-[450px] relative z-10"
-          >
-            <Image
-              src={villa.defaultImage}
-              alt={villa.name}
-              width={300}
-              height={300}
-              className="relative object-cover w-full h-full z-0"
-            />
-            <span className="absolute top-0 left-0  h-full z-20">
-              <span className="bg-white bg-opacity-70 p-4 w-full h-full grid grid-col-1 place-items-center">
-                <h3 className="uppercase text-2xl">{villa.name}</h3>
-                <p className="font-medium">{villa.description}</p>
-                <GoToPageButton
-                  callToAction="Book Now"
-                  isWhite={false}
-                  path={`/villas/${villa.name}`}
-                />
-              </span>
-            </span>
-          </div>
+          <VillaImage
+            key={`${villa.name}-image`}
+            villaName={villa.name}
+          />
         ))}
       </div>
-      <GoToPageButton
-        callToAction="View All Villas"
-        isWhite={false}
-        path="/villas"
-      />
     </section>
   );
 };

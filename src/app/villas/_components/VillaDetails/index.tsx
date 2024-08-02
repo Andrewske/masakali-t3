@@ -1,10 +1,9 @@
-import Image, { type StaticImageData } from 'next/image';
+import Image from 'next/image';
 import React from 'react';
 
-import bedIcon from '~/../public/icons/bed_icon.png';
-import bathIcon from '~/../public/icons/bath_icon.png';
-import { villaDetails } from '~/lib/villas';
+import { villaDetails, type VillaNamesType } from '~/lib/villas';
 import { GoToPageButton } from '~/components/Button/GoToPageButton';
+import VillaImage from '~/components/VillaImage';
 
 const Item = ({ className, text }: { className: string; text: string }) => {
   return (
@@ -20,71 +19,105 @@ const Item = ({ className, text }: { className: string; text: string }) => {
   );
 };
 
-const amenities = [
-  {
+interface Amenity {
+  icon: string;
+  text: string;
+}
+
+interface Amenities {
+  [key: string]: Amenity;
+}
+
+const amenities: Amenities = {
+  kitchen: {
     icon: 'icon-kitchen',
     text: 'Fully Equipped Kitchen',
   },
-  {
+  'infinity-pool': {
     icon: 'icon-pool',
     text: 'Private Infitity Pool',
   },
-  {
+  bath: {
     icon: 'icon-bath',
     text: 'Ensuite Bathrooms',
   },
-  {
+  shower: {
     icon: 'icon-shower',
     text: 'Outdoor Showers',
   },
-  {
+  safetydeposit: {
     icon: 'icon-security',
     text: 'Safety Deposit Box',
   },
-  {
+  security: {
     icon: 'icon-security',
     text: 'Onsite Security',
   },
-  {
+  tv: {
     icon: 'icon-tv',
     text: 'Television',
   },
-  {
+  toiletries: {
     icon: 'icon-bath',
     text: 'Toiletries',
   },
-  {
+  bathrobes: {
     icon: 'icon-bath',
     text: 'Bathrobes',
   },
-  {
+  wifi: {
     icon: 'icon-connection',
     text: 'Free Wifi',
   },
-  {
+  parking: {
     icon: 'icon-directions_car',
     text: 'Free Parking',
   },
-  {
+  service: {
     icon: 'icon-kitchen',
     text: 'Room Service',
   },
-];
+  garden: {
+    icon: 'icon-leaf',
+    text: 'Garden view',
+  },
+  mosquito: {
+    icon: 'icon-bug',
+    text: 'Mosquito net',
+  },
+  bluetooth: {
+    icon: 'icon-music',
+    text: 'Bluetooth speaker system',
+  },
+  events: {
+    icon: 'icon-camera',
+    text: 'Suitable for events',
+  },
+  fans: {
+    icon: 'icon-thermometer',
+    text: 'Portable fans',
+  },
+  workspace: {
+    icon: 'icon-display',
+    text: 'Dedicated workspace',
+  },
+  breakfast: {
+    icon: 'icon-spoon-knife',
+    text: 'Breakfast included',
+  },
+  hammock: {
+    icon: 'icon-tree',
+    text: 'Hammock',
+  },
+};
 
-const VillaDetails = () => {
+const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
   return (
     <div className="flex justify-center w-full flex-wrap ">
       <div className="max-w-[800px] flex flex-col gap-4 p-4 text-left divide-y">
         <div className="flex flex-col gap-4">
           <h2>The Details</h2>
-          <p>
-            Originally built as the owner’s private dream residence, it now
-            offers our guests two floors of three uniquely designed bedrooms,
-            each with en-suite bathrooms and walk in closets. The grand
-            residence also boasts a personal office, two living rooms, a fully
-            equipped kitchen, grand outdoor dining area, and beautiful infinity
-            pool with cascading fountains.
-          </p>
+          <p>{villaDetails[villaName].details}</p>
           <div className="flex gap-4 ">
             {/* <span className="relative w-8 h-8">
                 <Image
@@ -95,12 +128,12 @@ const VillaDetails = () => {
               </span>
               <p className="font-montserrat">1-2</p> */}
             <Item
-              className="icon-bath"
-              text="1-2"
+              className="icon-bed"
+              text={villaDetails[villaName].beds}
             />
             <Item
               className="icon-bath"
-              text="1"
+              text={villaDetails[villaName].baths}
             />
           </div>
         </div>
@@ -109,13 +142,15 @@ const VillaDetails = () => {
             Included Amenities
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {amenities.map((item) => (
-              <Item
-                key={item.icon}
-                className={item.icon}
-                text={item.text}
-              />
-            ))}
+            {villaDetails[villaName].amenities.map((item) => {
+              return amenities[item] ? (
+                <Item
+                  key={amenities[item].icon}
+                  className={amenities[item].icon}
+                  text={amenities[item].text}
+                />
+              ) : null;
+            })}
           </div>
         </div>
         <div className="w-full py-8 flex flex-col gap-4">
@@ -144,18 +179,16 @@ const VillaDetails = () => {
           <p className="bg-purple py-4 px-8 w-[300px] text-center text-white border border-solid border-light-purple-7 font-montserrat uppercase">
             Key Details
           </p>
-          <p className="bg-gray py-4 px-8 w-[300px] text-center  border border-solid border-light-purple-7 font-montserrat uppercase">
-            1-3 Bedrooms
-          </p>
-          <p className="bg-gray py-4 px-8 w-[300px] text-center  border border-solid border-light-purple-7 font-montserrat uppercase">
-            Ensuit Bathrooms
-          </p>
-          <p className="bg-gray py-4 px-8 w-[300px] text-center  border border-solid border-light-purple-7 font-montserrat uppercase">
-            Dedicated Workspace
-          </p>
-          <p className="bg-gray py-4 px-8 w-[300px] text-center  border border-solid border-light-purple-7 font-montserrat uppercase">
-            Full Kitchen
-          </p>
+          {villaDetails[villaName].keyDetails.map((item) => {
+            return (
+              <p
+                key={item}
+                className="bg-gray py-4 px-8 w-[300px] text-center  border border-solid border-light-purple-7 font-montserrat uppercase"
+              >
+                {item}
+              </p>
+            );
+          })}
         </div>
       </div>
 
@@ -164,33 +197,13 @@ const VillaDetails = () => {
           Explore Our Other Villas
         </h2>
         <div className="flex flex-wrap justify-center gap-4 mt-16">
-          {Object.values(villaDetails).map((villa, index) => {
-            if (index < 4) {
-              return (
-                <div
-                  key={villa.name}
-                  className="relative group cursor-pointer"
-                >
-                  <Image
-                    src={villa.defaultImage}
-                    alt={villa.name}
-                    width={400}
-                    height={400}
-                    className="w-[500px] h-[500px] object-cover z-0"
-                  />
-                  <span className="absolute top-0 left-0 right-0 h-full z-10 hidden group-hover:block">
-                    <span className="bg-white bg-opacity-70 p-4 w-full h-full grid grid-cols-1 place-items-center">
-                      <h3 className="uppercase text-2xl">{villa.name}</h3>
-                      <GoToPageButton
-                        callToAction={`Book ${villa.name}`}
-                        path={`/villas/${villa.name}`}
-                        isWhite={false}
-                      />
-                    </span>
-                  </span>
-                </div>
-              );
-            }
+          {Object.values(villaDetails).map((villa) => {
+            return villa.name !== villaName ? (
+              <VillaImage
+                key={`${villa.name}-image`}
+                villaName={villa.name}
+              />
+            ) : null;
           })}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import HeroImage from '~/components/HeroImage';
-import YogaMain from '~/../public/yoga/yoga-retreat-landscape.jpg';
+import MainImage from '~/../public/yoga/yoga-shala-landscape-2.jpg';
+
 import ContentContainer from '~/components/ContentContainer';
 import YogaClasses from '../../../public/yoga/yoga-retreat-3.jpg';
 
@@ -7,7 +8,7 @@ export default function Page() {
   return (
     <section className="h-full w-full">
       <HeroImage
-        imgSrc={YogaMain}
+        imgSrc={MainImage}
         imgAlt="Akasha at Masakali view of the pool"
         topText="Masakali"
         bottomText="Yoga Retreats"

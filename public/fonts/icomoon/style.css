@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?8bm10m');
-  src:  url('fonts/icomoon.eot?8bm10m#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?8bm10m') format('truetype'),
-    url('fonts/icomoon.woff?8bm10m') format('woff'),
-    url('fonts/icomoon.svg?8bm10m#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?slxlgj');
+  src:  url('fonts/icomoon.eot?slxlgj#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?slxlgj') format('truetype'),
+    url('fonts/icomoon.woff?slxlgj') format('woff'),
+    url('fonts/icomoon.svg?slxlgj#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-tree:before {
+  content: "\e90b";
+}
+.icon-thermometer:before {
+  content: "\e90c";
+}
+.icon-bed:before {
+  content: "\e90a";
+}
 .icon-shower:before {
   content: "\e900";
 }
@@ -61,6 +70,27 @@
 .icon-pool:before {
   content: "\e909";
 }
+.icon-camera:before {
+  content: "\e90f";
+}
+.icon-music:before {
+  content: "\e911";
+}
 .icon-connection:before {
   content: "\e91b";
+}
+.icon-phone:before {
+  content: "\e942";
+}
+.icon-display:before {
+  content: "\e956";
+}
+.icon-bug:before {
+  content: "\e999";
+}
+.icon-spoon-knife:before {
+  content: "\e9a3";
+}
+.icon-leaf:before {
+  content: "\e9a4";
 }

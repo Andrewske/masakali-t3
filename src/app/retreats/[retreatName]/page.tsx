@@ -3,8 +3,7 @@ import Image from 'next/image';
 import Packages from '../_components/Packages';
 import { format } from 'date-fns';
 import ContentContainer from '~/components/ContentContainer';
-
-import MainImage from '~/../public/yoga/yoga-shala-landscape-2.jpg';
+import MainImage from '~/../public/yoga/yoga-retreat-landscape.jpg';
 import MeditationDroneImage from '~/../public/yoga/Meditation-drone1.jpg';
 import YogaRetreat4 from '~/../public/yoga/yoga-retreat-4.jpg';
 import RetreatActivity from '~/../public/yoga/retreat_activity_1.jpeg';
@@ -16,7 +15,7 @@ const retreatDetails = {
   endDate: '2025-04-11',
   whyChose:
     'Experience a transformative journey at Masakali Retreat with our six-day, five-night yoga retreat, set against the breathtaking backdrop of Balinese mountains, lush forests, and serene rice fields. Practice yoga, connect with nature, and find inner peace as you absorb the tranquility of one of the most spectacular places in the world',
-  details: `At the Tribute Yoga Retreat from April 6-11, you’ll immerse yourself in a harmonious blend of yoga, adventure, and cultural experiences. Each day begins with invigorating yoga sessions and a healthy breakfast, setting the tone for the day. You will explore the vibrant town of Ubud, visit the Yoga Barn, and embark on nature excursions to the Tepalang Rice Fields and Sebatu Waterfalls. The retreat includes spiritual experiences such as a traditional Malukat ceremony and a heart-opening cacao ceremony. You’ll also have the opportunity to participate in an ecstatic dance session, trek to Mount Batur for a stunning sunrise, and visit the Pyramids of Chi for meditation and sound healing. Enjoy relaxing spa services, including acupuncture & massages,, and savor delicious meals, with a special welcome dinner and closing dinner to bookend your transformative journey. Additional highlights include the Campuhan Ridge walk and a trip to Ubud’s renowned attractions. Join us for a retreat that nurtures your body, mind, and spirit in the serene beauty of Bali.`,
+  details: `At the Tribute Yoga Retreat from April 6-11, you’ll immerse yourself in a harmonious blend of yoga, adventure, and cultural experiences. Each day begins with invigorating yoga sessions and a healthy breakfast, setting the tone for the day. You will explore the vibrant town of Ubud, visit the Yoga Barn, and embark on nature excursions to the Tepalang Rice Fields and Sebatu Waterfalls. The retreat includes spiritual experiences such as a traditional Malukat ceremony and a heart-opening cacao ceremony. You’ll also have the opportunity to participate in an ecstatic dance session, trek to Mount Batur for a stunning sunrise, and visit the Pyramids of Chi for meditation and sound healing. Enjoy relaxing spa services, including acupuncture & massages, and savor delicious meals, with a special welcome dinner and closing dinner to bookend your transformative journey. Additional highlights include the Campuhan Ridge walk and a trip to Ubud’s renowned attractions. Join us for a retreat that nurtures your body, mind, and spirit in the serene beauty of Bali.`,
   included: (
     <div>
       <span>

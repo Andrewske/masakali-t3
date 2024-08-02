@@ -6,6 +6,7 @@ import suryaImage3 from '~/../public/surya/surya-kitchen.webp';
 import suryaImage4 from '~/../public/surya/surya-bed.webp';
 import suryaImage5 from '~/../public/surya/surya-bath.webp';
 import suryaImage6 from '~/../public/surya/surya-front.webp';
+import suryaNameImage from '~/../public/surya/surya-name-image.jpg';
 
 import chandraImage1 from '~/../public/chandra/chandra-pool.webp';
 import chandraImage2 from '~/../public/chandra/chandra-bed.webp';
@@ -13,6 +14,7 @@ import chandraImage3 from '~/../public/chandra/chandra-bath.webp';
 import chandraImage4 from '~/../public/chandra/chandra-front.webp';
 import chandraImage5 from '~/../public/chandra/chandra-hammock.webp';
 import chandraImage6 from '~/../public/chandra/chandra-kitchen.webp';
+import chandraNameImage from '~/../public/chandra/chandra-name-image.jpg';
 
 import jalaImage1 from '~/../public/jala/jala-pool.webp';
 import jalaImage2 from '~/../public/jala/jala-kitchen.webp';
@@ -20,6 +22,7 @@ import jalaImage3 from '~/../public/jala/jala-bed.webp';
 import jalaImage4 from '~/../public/jala/jala-bath.webp';
 import jalaImage5 from '~/../public/jala/jala-front.webp';
 import jalaImage6 from '~/../public/jala/jala-views.webp';
+import jalaNameImage from '~/../public/jala/jala-name-image.jpg';
 
 import akashaImage1 from '~/../public/akasha/akasha-pool.webp';
 import akashaImage2 from '~/../public/akasha/akasha-kitchen.webp';
@@ -27,6 +30,7 @@ import akashaImage3 from '~/../public/akasha/akasha-bed.webp';
 import akashaImage4 from '~/../public/akasha/akasha-bathroom.webp';
 import akashaImage5 from '~/../public/akasha/akasha-front.webp';
 import akashaImage6 from '~/../public/akasha/akasha-views.webp';
+import akashaNameImage from '~/../public/akasha/akasha-name-image.jpeg';
 
 import lakshmiImage1 from '~/../public/lakshmi/lakshmi-pool.webp';
 import lakshmiImage2 from '~/../public/lakshmi/lakshmi-kitchen.webp';
@@ -34,6 +38,7 @@ import lakshmiImage3 from '~/../public/lakshmi/lakshmi-bedroom-1.webp';
 import lakshmiImage4 from '~/../public/lakshmi/lakshmi-bathroom.webp';
 import lakshmiImage5 from '~/../public/lakshmi/lakshmi-bedroom-2.webp';
 import lakshmiImage6 from '~/../public/lakshmi/lakshmi-bedroom-2a.webp';
+import lakshmiNameImage from '~/../public/lakshmi/lakshmi-name-image.jpg';
 
 export const suryaId = 1115674;
 export const chandraId = 1115668;
@@ -92,17 +97,24 @@ export type VillaDetail = {
   id: VillaIdsType;
   name: VillaNamesType;
   description: string;
+  nameDescription: string;
+  sanskrit: string;
+  details: string;
   shortDescription: string;
   defaultImage: string;
+  beds: string;
+  baths: string;
   images: {
     src: StaticImageData;
     alt: string;
   }[];
+  nameImage: StaticImageData;
   maxGuests: {
     adults: number;
     children: number;
   };
   amenities: string[];
+  keyDetails: string[];
   reviews: {
     imgUrl: string;
     name: string;
@@ -125,8 +137,13 @@ export const villaDetails: VillaDetailsType = {
     name: 'surya',
     description:
       'Our largest 1 bedroom villa is a warm and elegant choice with ample space to rest and recharge. It has an ensuite breakfast table and features a hand-carved outdoor dining table that can seat larger groups on the private patio. Inside you’ll find a luxury king-sized mattress with high-quality bedding as well as a couch that can serve as an additional bed for an additional guest.',
+    nameDescription: `Representing the radiant and powerful energy of the sun, Surya Villa is a space designed to infuse your stay with warmth and vitality. The name honors the sun as a symbol of life and light, encouraging you to embrace your own inner radiance and vitality as you enjoy the vibrant atmosphere of Surya Villa.`,
+    sanskrit: 'सूर्य',
+    details: `Spend your days in the infinity pool and your evenings watching the sun sink into the mountainous landscape from your private deck. Villa Surya offers a luxurious experience with a spacious bedroom, an en-suite bathroom, and a comfortable couch that can be used as an additional bed. The villa also features a kitchenette for your convenience, a private infinity pool with breathtaking views, and an outdoor deck perfect for soaking in the serene surroundings.`,
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
     defaultImage: '/surya/surya-main.webp',
+    beds: '1-2',
+    baths: '1',
     images: [
       {
         src: suryaImage1,
@@ -153,22 +170,37 @@ export const villaDetails: VillaDetailsType = {
         alt: 'Surya at Masakali view of the front',
       },
     ],
+    nameImage: suryaNameImage,
     maxGuests: {
       adults: 4,
       children: 2,
     },
     amenities: [
-      'Wifi 100 mb/s',
-      'Private infinity pool',
-      'Garden view',
-      'Outdoor shower',
-      'Mosquito net',
-      'Bluetooth speaker system',
-      'Suitable for events',
-      'Portable fans',
+      'kitchen',
+      'pool',
+      'bath',
+      'shower',
+      'safetydeposit',
+      'security',
+      'tv',
+      'toiletries',
+      'bathrobes',
+      'wifi',
+      'parking',
+      'service',
+      'garden',
+      'mosquito',
+      'bluetooth',
+      'fans',
+      'workspace',
+      'breakfast',
+    ],
+    keyDetails: [
+      '1 bedroom',
+      'Ensuite bathroom',
+      'Private Infinity Pool',
       'Dedicated workspace',
       'Full kitchenette',
-      'Breakfast included',
     ],
     reviews: [
       {
@@ -194,8 +226,13 @@ export const villaDetails: VillaDetailsType = {
     name: 'chandra',
     description:
       'One of our more popular villas for romantic getaways and honeymooners offers an enchanting sentiment. In addition to the luxury outdoor shower, this villa features a spacious and comfortable bath. A favorite place to relax is the outdoor hammock that hangs over the rice fields, with a perfect view of the stars at night. This villa also offers a work area with a beautiful antique desk for those who need it.',
+    nameDescription: `Chandra, meaning “moon” in Sanskrit, symbolizes tranquility, reflection, and the soothing energy of the night. Chandra Villa is named to capture the serene ambiance of moonlit nights, offering a space for introspection and deep relaxation. Embrace the calming influence of Chandra Villa as you embark on your journey to inner peace.`,
+    sanskrit: 'चन्द्र',
+    details: `Designed for romantic getaways, Villa Chandra offers an intimate retreat surrounded by nature. This one-bedroom villa features an outdoor hammock hanging over the forest and a luxurious bathtub that can be filled with flowers. The villa includes a spacious bedroom, en-suite bathroom, kitchenette, private infinity pool with stunning views, and an outdoor lounging area perfect for relaxation.`,
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
     defaultImage: '/chandra/chandra-front.webp',
+    beds: '1',
+    baths: '1',
     images: [
       {
         src: chandraImage1,
@@ -210,24 +247,38 @@ export const villaDetails: VillaDetailsType = {
       { src: chandraImage5, alt: 'Chandra at Masakali view of the hammock' },
       { src: chandraImage6, alt: 'Chandra at Masakali view of the kitchen' },
     ],
+    nameImage: chandraNameImage,
     maxGuests: {
       adults: 4,
       children: 2,
     },
     amenities: [
-      'Hammock',
-      'Wifi 100 mb/s',
-      'Private infinity pool',
-      'Garden view',
-      'Outdoor shower',
-      'Spacious bathtub',
-      'Mosquito net',
-      'Bluetooth speaker',
-      'Suitable for events',
-      'Ceiling & portable fans',
+      'kitchen',
+      'pool',
+      'bath',
+      'shower',
+      'safetydeposit',
+      'security',
+      'tv',
+      'toiletries',
+      'bathrobes',
+      'wifi',
+      'parking',
+      'service',
+      'garden',
+      'mosquito',
+      'bluetooth',
+      'fans',
+      'workspace',
+      'breakfast',
+      'hammock',
+    ],
+    keyDetails: [
+      '1 bedroom',
+      'Ensuite bathroom',
+      'Private Infinity Pool',
       'Dedicated workspace',
       'Full kitchenette',
-      'Breakfast included',
     ],
     reviews: [
       {
@@ -251,8 +302,13 @@ export const villaDetails: VillaDetailsType = {
     name: 'jala',
     description:
       'This traditional Joglo villa is the perfect fit for a cozy stay. With personal charm and attention to detail, this alluring villa has an irresistible appeal. Jala offers a workstation with a large desk, comfy outdoor lounging areas, and a full private ensuite bathroom. The luxury bedding and linens offer a comfortable and restful sleep while the beautiful, handcrafted furniture and amenities will leave you in awe of the craftsmanship and detail.',
+    nameDescription: `Derived from the Sanskrit word for “water,” Jala Villa evokes a sense of fluidity and adaptability. Water represents the flow of life and the power of transformation.`,
+    sanskrit: 'जल',
+    details: `Villa Jala is a quaint and cozy retreat, ideal for those seeking a homely and intimate experience. This one-bedroom villa includes a comfortable bedroom, en-suite bathroom with modern amenities, kitchenette for preparing light meals, private infinity pool offering serene views, and an outdoor seating area for enjoying the tranquil surroundings.`,
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
     defaultImage: '/jala/jala-pool.webp',
+    beds: '1',
+    baths: '1',
     images: [
       {
         src: jalaImage1,
@@ -279,22 +335,37 @@ export const villaDetails: VillaDetailsType = {
         alt: 'Jala at Masakali view of the views',
       },
     ],
+    nameImage: jalaNameImage,
     maxGuests: {
       adults: 2,
       children: 2,
     },
     amenities: [
-      'Wifi 100 mb/s',
-      'Private infinity pool',
-      'Garden view',
-      'Outdoor shower',
-      'Mosquito net',
-      'Bluetooth speaker system',
-      'Suitable for events',
-      'Portable fans',
+      'kitchen',
+      'pool',
+      'bath',
+      'shower',
+      'safetydeposit',
+      'security',
+      'tv',
+      'toiletries',
+      'bathrobes',
+      'wifi',
+      'parking',
+      'service',
+      'garden',
+      'mosquito',
+      'bluetooth',
+      'fans',
+      'workspace',
+      'breakfast',
+    ],
+    keyDetails: [
+      '1 bedroom',
+      'Ensuite bathroom',
+      'Private Infinity Pool',
       'Dedicated workspace',
       'Full kitchenette',
-      'Breakfast included',
     ],
     reviews: [
       {
@@ -320,8 +391,13 @@ export const villaDetails: VillaDetailsType = {
     name: 'akasha',
     description:
       'Luxury meets comfort in our newest villa, Akasha. With 3 bedrooms and 3.5 baths, this spacious home is great for families or couples traveling. This villa features a beautiful waterfall pool, large deck, full kitchen and bar, entertainment room, outdoor living room, large dining area, and breathtaking views. This space is also great for hosting celebrations such as weddings and birthday parties.',
+    nameDescription: `Akasha, in Sanskrit, translates to “ether” or “spirit.” This villa is named to embody the essence of space and boundless energy. Just as the vastness of the sky knows no limits, Akasha Villa invites you to expand your horizons, connect with your inner self, and find serenity in the limitless possibilities of your journey.`,
+    sanskrit: 'आकाश',
+    details: `Akasha, in Sanskrit, translates to “ether” or “spirit.” This villa is named to embody the essence of space and boundless energy. Just as the vastness of the sky knows no limits, Akasha Villa invites you to expand your horizons, connect with your inner self, and find serenity in the limitless possibilities of your journey.`,
     shortDescription: '3-bedroom villa up to 6 adults and 2 children',
     defaultImage: '/hero-images/akasha-pool.webp',
+    beds: '3-5',
+    baths: '3.5',
     images: [
       { src: akashaImage1, alt: 'Akasha at Masakali view of the pool' },
       { src: akashaImage2, alt: 'Akasha at Masakali view of the kitchen' },
@@ -330,22 +406,37 @@ export const villaDetails: VillaDetailsType = {
       { src: akashaImage5, alt: 'Akasha at Masakali view of the front' },
       { src: akashaImage6, alt: 'Akasha at Masakali view of the views' },
     ],
+    nameImage: akashaNameImage,
     maxGuests: {
       adults: 6,
       children: 2,
     },
     amenities: [
-      'Wifi 100 mb/s',
-      'Private infinity pool',
-      'Garden view',
-      'Outdoor shower',
-      'Mosquito net',
-      'Bluetooth speaker system',
-      'Suitable for events',
-      'Portable fans',
-      'Dedicated workspace',
+      'kitchen',
+      'pool',
+      'bath',
+      'shower',
+      'safetydeposit',
+      'security',
+      'tv',
+      'toiletries',
+      'bathrobes',
+      'wifi',
+      'parking',
+      'service',
+      'garden',
+      'mosquito',
+      'bluetooth',
+      'events',
+      'fans',
+      'workspace',
+      'breakfast',
+    ],
+    keyDetails: [
+      '3 bedroom',
+      'Ensuite bathrooms',
       'Full kitchenette',
-      'Breakfast included',
+      'Entertainment areas',
     ],
     reviews: [
       {
@@ -370,8 +461,13 @@ export const villaDetails: VillaDetailsType = {
     name: 'lakshmi',
     description:
       'Luxury meets comfort in our newest villa, Akasha. With 3 bedrooms and 3.5 baths, this spacious home is great for families or couples traveling. This villa features a beautiful waterfall pool, large deck, full kitchen and bar, entertainment room, outdoor living room, large dining area, and breathtaking views. This space is also great for hosting celebrations such as weddings and birthday parties.',
+    nameDescription: `Named after the Hindu goddess of wealth, prosperity, and fortune, Lakshmi Villa embodies the essence of abundance and grace. The name Lakshmi signifies not only material wealth but also spiritual prosperity and beauty. Staying at Lakshmi Villa invites you to bask in the luxurious surroundings and find harmony and balance in your life. Embrace the serene ambiance and rejuvenating energy of Lakshmi Villa as you immerse yourself in a truly opulent and enriching experience.`,
+    sanskrit: 'लक्ष्मी',
+    details: `Villa Lakshmi, the downstairs portion of Akasha Villa, provides a luxurious and private experience with all the necessary amenities for a comfortable stay. This villa features two bedrooms, each with a private bathroom and garden, an additional half bath off the kitchen, a fully equipped kitchen, a huge private infinity pool, a large dining area, a bar area, and two lounge areas, one with a television and the other offering incredible views over the rice fields.`,
     shortDescription: '2-bedroom villa 2 queen size beds',
     defaultImage: '/lakshmi/lakshmi-kitchen.webp',
+    beds: '2-4',
+    baths: '2.5',
     images: [
       { src: lakshmiImage1, alt: 'Lakshmi at Masakali view of the pool' },
       { src: lakshmiImage2, alt: 'Lakshmi at Masakali view of the kitchen' },
@@ -380,22 +476,37 @@ export const villaDetails: VillaDetailsType = {
       { src: lakshmiImage5, alt: 'Lakshmi at Masakali view of the bedroom-2' },
       { src: lakshmiImage6, alt: 'Lakshmi at Masakali view of the bedroom-2a' },
     ],
+    nameImage: lakshmiNameImage,
     maxGuests: {
       adults: 4,
       children: 2,
     },
     amenities: [
-      'Wifi 100 mb/s',
-      'Private infinity pool',
-      'Garden view',
-      'Outdoor shower',
-      'Mosquito net',
-      'Bluetooth speaker system',
-      'Suitable for events',
-      'Portable fans',
-      'Dedicated workspace',
+      'kitchen',
+      'pool',
+      'bath',
+      'shower',
+      'safetydeposit',
+      'security',
+      'tv',
+      'toiletries',
+      'bathrobes',
+      'wifi',
+      'parking',
+      'service',
+      'garden',
+      'mosquito',
+      'bluetooth',
+      'events',
+      'fans',
+      'workspace',
+      'breakfast',
+    ],
+    keyDetails: [
+      '2 bedroom',
+      'Ensuite bathrooms',
       'Full kitchenette',
-      'Breakfast included',
+      'Entertainment areas',
     ],
     reviews: [
       {

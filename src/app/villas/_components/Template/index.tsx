@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import NextVilla from '~/app/villas/_components/NextVilla';
 import GridGallery from '~/app/villas/_components/GridGallery';
 
-import { getVillaName, type VillaIdsType } from '~/lib/villas';
+import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import { prisma } from '~/db/prisma';
 import { type VillaPricingType } from '~/utils/pricing';
@@ -63,7 +63,7 @@ async function Template({ villaId }: VillaDataType) {
           className="button purple"
         >{`Book ${villaName.toString()}`}</Link> */}
 
-          <Description villaName={villaName} />
+          {/* <Description villaName={villaName} /> */}
         </div>
         <div className="col-span-2">
           <GridGallery villaName={villaName} />
@@ -71,12 +71,25 @@ async function Template({ villaId }: VillaDataType) {
       </div>
       <ContentContainer
         heading=""
-        content="Spend your days in the infinity pool, and your evenings watching the sun sink into the mountainous landscape from your private deck. Villa Surya is the total luxury experience."
-        imgSrc={DiningImage}
+        content={
+          <div className="flex flex-col gap-4 ">
+            <span className="relative h-[2.5rem] flex items-center">
+              <p className="absolute top-0 left-0 text-4xl z-0 text-light-purple-5 opacity-60">
+                {villaDetails[villaName].sanskrit}
+              </p>
+              <p className="text-xl z-10 uppercase font-montserrat">
+                {villaDetails[villaName].name}
+              </p>
+            </span>
+            <span className="max-w-[200px] border border-light-purple-5 max-h-[1px]"></span>
+            <div>{villaDetails[villaName].nameDescription}</div>
+          </div>
+        }
+        imgSrc={villaDetails[villaName].nameImage}
         imgPosition="left"
-        imgAlt="Masakali Pool"
+        imgAlt={`${villaDetails[villaName].name} at Masakali view of the pool`}
       />
-      <VillaDetails />
+      <VillaDetails villaName={villaName} />
     </section>
   );
 }
