@@ -10,7 +10,7 @@ import CountryDropdown from '~/components/CountryDropdown';
 import { type CountryType } from '~/actions/countries';
 import Button from '~/components/Button';
 import { createReservation } from '~/actions/reservations/createReservation';
-import { type VillaIdsType } from '~/lib/villas';
+import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { useRouter } from 'next/navigation';
 import { updateReservation } from '~/actions/reservations/updateReservation';
 import { lookupReservation } from '~/actions/reservations/lookupReservation';
@@ -31,6 +31,9 @@ const DateContainer = ({
   const { reservationId, setReservationId } = useReservationStore(
     (state) => state
   );
+  const villaName = getVillaName(villaId);
+
+  console.log({ villaName });
   useEffect(() => {
     if (reservationId) {
       const fetchReservation = async () => {
@@ -144,7 +147,7 @@ const DateContainer = ({
       <Button
         handleClick={handleBooking}
         isWhite={false}
-        callToAction={`Book Surya`}
+        callToAction={`Book ${villaName}`}
       />
     </div>
   );

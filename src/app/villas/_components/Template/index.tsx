@@ -8,11 +8,9 @@ import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import { prisma } from '~/db/prisma';
 import { type VillaPricingType } from '~/utils/pricing';
 import { getCountries } from '~/actions/countries';
-import Description from '../Description';
+
 import VillaDetails from '../VillaDetails';
 import ContentContainer from '~/components/ContentContainer';
-
-import DiningImage from '~/../public/home/dining.jpg';
 
 const DateContainer = dynamic(
   () => import('~/app/villas/_components/DateContainer'),
@@ -58,12 +56,6 @@ async function Template({ villaId }: VillaDataType) {
             countries={countries}
             villaId={villaId}
           />
-          {/* <Link
-          href={`/cart?&villaId=${villaId}`}
-          className="button purple"
-        >{`Book ${villaName.toString()}`}</Link> */}
-
-          {/* <Description villaName={villaName} /> */}
         </div>
         <div className="col-span-2">
           <GridGallery villaName={villaName} />

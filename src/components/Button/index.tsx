@@ -9,7 +9,7 @@ interface ButtonStyle {
 const Button = ({ callToAction, isWhite, handleClick }: ButtonStyle) => {
   return (
     <button
-      className={`uppercase font-montserrat text-2xl px-8 py-2 max-w-[250px] mx-auto ${
+      className={`uppercase font-montserrat text-2xl px-8 py-2 mx-auto ${
         isWhite ? 'bg-white text-purple' : 'bg-purple text-white'
       }`}
       onClick={() => handleClick()}
