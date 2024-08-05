@@ -128,6 +128,10 @@ const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
               </span>
               <p className="font-montserrat">1-2</p> */}
             <Item
+              className="icon-man-woman"
+              text={villaDetails[villaName].adults}
+            />
+            <Item
               className="icon-bed"
               text={villaDetails[villaName].beds}
             />

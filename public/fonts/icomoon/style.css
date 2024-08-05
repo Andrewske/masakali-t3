@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('fonts/icomoon.eot?lz5vme');
-  src: url('fonts/icomoon.eot?lz5vme#iefix') format('embedded-opentype'),
+  src:  url('fonts/icomoon.eot?lz5vme');
+  src:  url('fonts/icomoon.eot?lz5vme#iefix') format('embedded-opentype'),
     url('fonts/icomoon.ttf?lz5vme') format('truetype'),
     url('fonts/icomoon.woff?lz5vme') format('woff'),
     url('fonts/icomoon.svg?lz5vme#icomoon') format('svg');
@@ -10,8 +10,7 @@
   font-display: block;
 }
 
-[class^='icon-'],
-[class*=' icon-'] {
+[class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: never;
@@ -27,83 +26,83 @@
 }
 
 .icon-menu1:before {
-  content: '\e90d';
+  content: "\e90d";
 }
 .icon-directions_car:before {
-  content: '\e903';
+  content: "\e903";
 }
 .icon-tv:before {
-  content: '\e904';
+  content: "\e904";
 }
 .icon-security:before {
-  content: '\e905';
+  content: "\e905";
 }
 .icon-pool1:before {
-  content: '\e906';
+  content: "\e906";
 }
 .icon-local_laundry_service:before {
-  content: '\e907';
+  content: "\e907";
 }
 .icon-kitchen:before {
-  content: '\e908';
+  content: "\e908";
 }
 .icon-pool:before {
-  content: '\e909';
+  content: "\e909";
 }
 .icon-tree:before {
-  content: '\e90b';
+  content: "\e90b";
 }
 .icon-thermometer:before {
-  content: '\e90c';
+  content: "\e90c";
 }
 .icon-bed:before {
-  content: '\e90a';
+  content: "\e90a";
 }
 .icon-shower:before {
-  content: '\e900';
+  content: "\e900";
 }
 .icon-bath:before {
-  content: '\e901';
+  content: "\e901";
 }
 .icon-bathtub:before {
-  content: '\e901';
+  content: "\e901";
 }
 .icon-s15:before {
-  content: '\e901';
+  content: "\e901";
 }
 .icon-binoculars:before {
-  content: '\e902';
+  content: "\e902";
 }
 .icon-camera:before {
-  content: '\e90f';
+  content: "\e90f";
 }
 .icon-music:before {
-  content: '\e911';
+  content: "\e911";
 }
 .icon-connection:before {
-  content: '\e91b';
+  content: "\e91b";
 }
 .icon-phone:before {
-  content: '\e942';
+  content: "\e942";
 }
 .icon-display:before {
-  content: '\e956';
+  content: "\e956";
 }
 .icon-bug:before {
-  content: '\e999';
+  content: "\e999";
 }
 .icon-spoon-knife:before {
-  content: '\e9a3';
+  content: "\e9a3";
 }
 .icon-leaf:before {
-  content: '\e9a4';
+  content: "\e9a4";
 }
 .icon-menu:before {
-  content: '\e9bd';
+  content: "\e9bd";
 }
 .icon-star-full:before {
-  content: '\e9d9';
+  content: "\e9d9";
 }
 .icon-man-woman:before {
-  content: '\e9de';
+  content: "\e9de";
 }

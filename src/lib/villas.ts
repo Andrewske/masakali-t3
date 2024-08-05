@@ -104,6 +104,7 @@ export type VillaDetail = {
   defaultImage: string;
   beds: string;
   baths: string;
+  adults: string;
   images: {
     src: StaticImageData;
     alt: string;
@@ -144,6 +145,7 @@ export const villaDetails: VillaDetailsType = {
     defaultImage: '/surya/surya-main.webp',
     beds: '1-2',
     baths: '1',
+    adults: '3',
     images: [
       {
         src: suryaImage1,
@@ -233,6 +235,7 @@ export const villaDetails: VillaDetailsType = {
     defaultImage: '/chandra/chandra-front.webp',
     beds: '1',
     baths: '1',
+    adults: '2',
     images: [
       {
         src: chandraImage1,
@@ -309,6 +312,7 @@ export const villaDetails: VillaDetailsType = {
     defaultImage: '/jala/jala-pool.webp',
     beds: '1',
     baths: '1',
+    adults: '2',
     images: [
       {
         src: jalaImage1,
@@ -398,6 +402,7 @@ export const villaDetails: VillaDetailsType = {
     defaultImage: '/hero-images/akasha-pool.webp',
     beds: '3-5',
     baths: '3.5',
+    adults: '8',
     images: [
       { src: akashaImage1, alt: 'Akasha at Masakali view of the pool' },
       { src: akashaImage2, alt: 'Akasha at Masakali view of the kitchen' },
@@ -468,6 +473,7 @@ export const villaDetails: VillaDetailsType = {
     defaultImage: '/lakshmi/lakshmi-kitchen.webp',
     beds: '2-4',
     baths: '2.5',
+    adults: '4',
     images: [
       { src: lakshmiImage1, alt: 'Lakshmi at Masakali view of the pool' },
       { src: lakshmiImage2, alt: 'Lakshmi at Masakali view of the kitchen' },

@@ -23,7 +23,7 @@ const VillaImage = ({ villaName }: { villaName: VillaNamesType }) => {
         </p>
         <p className="font-montserrat uppercase">
           {villaDetails[villaName].beds} <span className="text-xs">bed</span>{' '}
-          {villaDetails[villaName].baths} <span className="text-xs">baths</span>
+          {villaDetails[villaName].baths} <span className="text-xs">bath</span>
         </p>
       </span>
     </Link>
