@@ -19,10 +19,19 @@ const renderImages = () => {
 
 const Reviews = () => {
   return (
-    <section className="flex flex-col items-center justify-center w-full h-auto py-16 md:px-16 gap-16">
-      <h2 className="uppercase font-montserrat text-3xl text-center">
-        What our guest have to say
-      </h2>
+    <section className="flex flex-col items-center justify-center w-full  py-16 md:px-16 gap-8 min-h-[60dvh]">
+      <div className="flex flex-col gap-4">
+        <h2 className="uppercase font-montserrat text-3xl text-center">
+          What our guest have to say
+        </h2>
+        <span className="w-full m-auto flex justify-center gap-4">
+          <span className="icon-star-full text-light-purple-7"></span>
+          <span className="icon-star-full text-light-purple-7"></span>
+          <span className="icon-star-full text-light-purple-7"></span>
+          <span className="icon-star-full text-light-purple-7"></span>
+          <span className="icon-star-full text-light-purple-7"></span>
+        </span>
+      </div>
       <span className="w-full m-auto">
         <HeroCarousel showArrows={true}>{renderImages()}</HeroCarousel>
       </span>

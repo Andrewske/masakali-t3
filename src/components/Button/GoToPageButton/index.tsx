@@ -15,7 +15,7 @@ export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
 }) => {
   return (
     <Link
-      className={`py-3 px-6 ${
+      className={`whitespace-nowrap py-3 px-6 ${
         isWhite
           ? `bg-white text-purple border-white hover:bg-purple hover:text-white `
           : 'bg-purple text-white hover:bg-white hover:text-purple border-purple'

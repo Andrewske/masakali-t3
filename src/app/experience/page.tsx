@@ -75,7 +75,7 @@ export default async function Page() {
       <ContentContainer
         heading="Spa Services"
         content="Let our accomplished therapists work their magic and pamper you from head to toe with the vast variety of spa treatments we have on offer. From luxury manicures and pedicures to full body therapeutic massages, no matter what indulgent experience you’re chasing, we can help provide it. Our spa services are set up in the privacy of your own villa - where we can set up treatment beds in your room or private deck overlooking the Balinese rice fields. We strive to deliver divine experiences in stunning surroundings, making for a sublime place to relax, heal and nurture."
-        buttonText="Explore our upcoming retreats"
+        buttonText="Browse spa services menu"
         imgSrc={SpaImage}
         imgPosition="right"
         imgAlt="Masakali Yoga Retreat Image 2"

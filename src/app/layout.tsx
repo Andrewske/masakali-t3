@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${baskerville.variable}`}
+      className={`${montserrat.variable} ${baskerville.variable} overflow-x-hidden`}
     >
       <body>
         <ReactQueryProvider>

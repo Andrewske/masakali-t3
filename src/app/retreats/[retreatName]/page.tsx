@@ -67,18 +67,18 @@ export default function Page() {
           fill={true}
           className="object-cover object-bottom"
         />
-        <div className="relative bg-purple z-10 px-8 py-16 text-white grid place-items-center gap-8">
+        <div className="relative text-center bg-purple z-10 py-16 text-white grid place-items-center gap-8">
           <h2>Masakali Presents</h2>
           <h1>{retreatDetails.name}</h1>
         </div>
       </div>
       <div
         id="details"
-        className="flex flex-wrap justify-center"
+        className="flex flex-wrap justify-center sm:px-4"
       >
         <div
           id="when"
-          className="flex flex-col gap-4 sm:items-end w-[50%] min-w-[312px]    px-8 py-16 bg-gray-100 text-gray-800"
+          className="flex flex-col gap-4 items-center sm:items-end w-[50%] min-w-[312px] px-4 py-16 bg-gray-100 text-gray-800"
         >
           <h2 className="">When</h2>
           <span className="flex gap-2">
@@ -93,7 +93,7 @@ export default function Page() {
         </div>
         <div
           id="where"
-          className="flex flex-col gap-4  items-start w-[50%] min-w-[312px] px-8 py-16 bg-gray-100 text-gray-800"
+          className="flex flex-col gap-4  items-start w-[50%] min-w-[312px] px-4 py-16 bg-gray-100 text-gray-800"
         >
           <h2>Where</h2>
           <span className="flex flex-col gap-2 max-w-[600px]">

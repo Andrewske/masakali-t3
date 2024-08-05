@@ -22,7 +22,7 @@ const ContentContainer = ({
   newTab?: boolean;
 }) => {
   const contentBox = (
-    <div className="w-full sm:max-h-[600px] max-w-[600px] bg-gray flex flex-col  justify-center gap-8  p-8 text-left ">
+    <div className="w-full sm:max-h-[600px] max-w-[600px] bg-gray flex flex-col  justify-center gap-8  px-4 py-8 sm:px-8 text-left ">
       <h2 className="">{heading}</h2>
       <div className="w-full h-content leading-relaxed">{content}</div>
       <span className="w-full py-4 ">
@@ -52,7 +52,7 @@ const ContentContainer = ({
     <section
       className={`relative flex justify-center ${
         imgPosition === 'left' ? 'flex-wrap' : 'flex-wrap-reverse '
-      } p-8 font-baskerville`}
+      } sm:px-8 py-8 font-baskerville`}
     >
       {imgPosition === 'left' ? image : contentBox}
       {imgPosition === 'left' ? contentBox : image}

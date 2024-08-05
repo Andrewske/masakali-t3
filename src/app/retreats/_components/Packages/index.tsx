@@ -7,6 +7,7 @@ import AkashaImage from '~/../public/akasha/akasha-bed.webp';
 import TwinImage1 from '~/../public/lakshmi/lakshmi-bedroom-1.webp';
 import TwinImage2 from '~/../public/lakshmi/lakshmi-bedroom-2.webp';
 import TwinImage3 from '~/../public/lakshmi/lakshmi-bedroom-2a.webp';
+import LumbungImage from '~/../public/lumbungs/lumbung-renders.jpg';
 
 const packageDetails = [
   {
@@ -24,26 +25,26 @@ const packageDetails = [
   {
     title: 'Upstairs Queen Bed in a Shared Villa',
     price1: '$1015 (1 person)',
-    price2: '$1675 (two people)',
+    price2: '$1675 (2 people)',
     listItems: [
       'Private Room in shared villa',
       'Max 2 people',
       '1 queen bed',
       'Communal Pool',
     ],
-    image: TwinImage2,
+    image: LumbungImage,
   },
   {
     title: 'Twin Bed Shared room',
     price1: '$1,150 (1 person)',
-    price2: '$1,830 (two people)',
+    price2: '$1,830 (2 people)',
     listItems: ['Shared Room', 'Max 2 people', 'Communal Pool'],
     image: TwinImage3,
   },
   {
     title: 'Private Room with King Bed',
     price1: '$1325 (1 person)',
-    price2: '$2030 (two people)',
+    price2: '$2030 (2 people)',
     listItems: [
       'Private Room in shared villa',
       'Max 2 people',
@@ -55,26 +56,26 @@ const packageDetails = [
   {
     title: '2 story private villa with queen bed',
     price1: '$1325 (1 person)',
-    price2: '$2030 (two people)',
+    price2: '$2030 (2 people)',
     listItems: [
       'Private Villa',
       'Max 2 people',
       '1 queen bed',
       'Communal Pool',
     ],
-    image: TwinImage1,
+    image: LumbungImage,
   },
   {
     title: 'Private Villa with queen bed and private pool',
     price1: '$1387 (1 person)',
-    price2: '$2047 (two people)',
+    price2: '$2047 (2 people)',
     listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
     image: JalaImage,
   },
   {
     title: 'Private Villa with king bed and private pool',
     price1: '$1480 (1 person)',
-    price2: '$2140 (two people)',
+    price2: '$2140 (2 people)',
     listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
     image: SuryaImage,
   },
@@ -120,13 +121,13 @@ const Packages = () => {
             key={packageDetail.title}
             className="flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300 max-w-[300px] my-4"
           >
-            <span className="w-[300px] h-[300px]">
+            <span className="w-full h-[300px]">
               <Image
                 src={packageDetail.image}
                 alt={packageDetail.title}
                 width={300}
                 height={300}
-                className="object-cover w-full h-full"
+                className="object-cover h-full"
               />
             </span>
             <span className="flex flex-col gap-8 p-4">

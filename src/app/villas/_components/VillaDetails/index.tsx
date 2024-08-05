@@ -197,8 +197,8 @@ const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
         </div>
       </div>
 
-      <div className="bg-gray w-full py-32">
-        <h2 className="font-montserrat uppercase w-full text-center">
+      <div className="bg-gray w-full py-8">
+        <h2 className="font-montserrat uppercase w-full text-center py-16">
           Explore Our Other Villas
         </h2>
         <div className="flex flex-wrap justify-center gap-4 mt-16">

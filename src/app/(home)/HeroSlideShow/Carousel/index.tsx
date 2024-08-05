@@ -30,7 +30,7 @@ const HeroCarousel = ({
         //     </button>
         //   )
         // }
-        // dynamicHeight={true}
+        dynamicHeight={true}
         showStatus={false}
         showThumbs={false}
         useKeyboardArrows={true}

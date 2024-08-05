@@ -10,7 +10,7 @@ const HeaderLinks = () => {
   ];
 
   return (
-    <nav className="flex flex-grow flex-wrap items-center gap-16 text-center justify-center font-montserrat uppercase">
+    <>
       {links.map((link) => (
         <LinkWithUnderline
           key={link.name}
@@ -19,7 +19,7 @@ const HeaderLinks = () => {
           {link.name}
         </LinkWithUnderline>
       ))}
-    </nav>
+    </>
   );
 };
 
