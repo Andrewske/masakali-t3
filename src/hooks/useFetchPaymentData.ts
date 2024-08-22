@@ -11,7 +11,10 @@ import { useUserStore } from '~/providers/UserStoreProvider';
 import type { UserStore } from '~/stores/userStore';
 import type { VillaIdsType } from '~/lib/villas';
 
-import { sendBookingConfirmation } from '~/actions/sendgrid';
+import {
+  sendAdminBookingConfirmation,
+  sendBookingConfirmation,
+} from '~/actions/sendgrid';
 
 import { createReservation } from '~/actions/smoobu/createReservation';
 import { createBookingConfirmationData } from '~/utils/sendgrid';
@@ -100,6 +103,9 @@ const useFetchPaymentData = ({
             });
 
             await sendBookingConfirmation({ data: bookingConfirmationData });
+            await sendAdminBookingConfirmation({
+              data: bookingConfirmationData,
+            });
 
             await updateReservation({
               reservationId,
