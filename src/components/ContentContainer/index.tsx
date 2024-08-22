@@ -25,8 +25,8 @@ const ContentContainer = ({
     <div className="w-full sm:max-h-[600px] max-w-[600px] bg-gray flex flex-col  justify-center gap-8  px-4 py-8 sm:px-8 text-left ">
       <h2 className="">{heading}</h2>
       <div className="w-full h-content leading-relaxed">{content}</div>
-      <span className="w-full py-4 ">
-        {buttonText && (
+      {buttonText && (
+        <span className="w-full py-4 ">
           <button
             className="py-3 px-6 border-solid border border-purple  w-auto font-montserrat uppercase text-purple hover:bg-purple hover:text-white"
             type="button"
@@ -34,8 +34,8 @@ const ContentContainer = ({
           >
             {buttonText}
           </button>
-        )}
-      </span>
+        </span>
+      )}
     </div>
   );
 

@@ -16,7 +16,26 @@ await import('./src/env.mjs');
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['imgur.com', 'avatar.iran.liara.run', 'lh3.googleusercontent.com', 'dynamic-media-cdn.tripadvisor.com']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatar.iran.liara.run',
+        port: '',
+        pathname: '/public',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '/a-/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dynamic-media-cdn.tripadvisor.com',
+        port: '',
+        pathname: '/media/**',
+      },
+    ],
 
   },
   i18n: {
