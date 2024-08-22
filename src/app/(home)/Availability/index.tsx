@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 
-// import { getAvailableVillas } from '~/utils/reservations';
 import { getAvailableVillas } from '~/actions/reservations';
 import DateRangePicker from '~/components/DateRangePicker';
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
