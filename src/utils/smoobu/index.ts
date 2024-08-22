@@ -1,12 +1,7 @@
 import { prisma } from '~/db/prisma';
 import { channelIds } from '~/lib/smoobu';
 import { akashaId, lakshmiId } from '~/lib/villas';
-import type {
-  SmoobuRatesResponse,
-  SmoobuReservation,
-  VillaPricingDataType,
-} from '~/types/smoobu';
-import transformSmoobuRatesResponse from './transformSmoobuRatesResponse';
+import type { SmoobuReservation } from '~/types/smoobu';
 
 function parseSmoobuReservation(smoobuReservation: SmoobuReservation) {
   const {

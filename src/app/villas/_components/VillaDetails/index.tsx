@@ -1,8 +1,6 @@
-import Image from 'next/image';
 import React from 'react';
-
 import { villaDetails, type VillaNamesType } from '~/lib/villas';
-import { GoToPageButton } from '~/components/Button/GoToPageButton';
+
 import VillaImage from '~/components/VillaImage';
 
 const Item = ({ className, text }: { className: string; text: string }) => {

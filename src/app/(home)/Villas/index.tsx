@@ -1,10 +1,6 @@
-import Image from 'next/image';
-
 import styles from './styles.module.scss';
 
-import { GoToPageButton } from '~/components/Button/GoToPageButton';
 import { villaDetails } from '~/lib/villas';
-import Link from 'next/link';
 import VillaImage from '~/components/VillaImage';
 
 const Villas = () => {

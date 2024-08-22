@@ -1,5 +1,3 @@
-import { number } from 'zod';
-
 export type SmoobuReservation = {
   id: number;
   'reference-id': string;

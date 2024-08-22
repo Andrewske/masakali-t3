@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { format } from 'date-fns';
-import { type reservation } from '@prisma/client';
 
 // import { getAvailableVillas } from '~/utils/reservations';
 import { getAvailableVillas } from '~/actions/reservations';

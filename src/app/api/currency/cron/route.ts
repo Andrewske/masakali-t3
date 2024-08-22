@@ -1,4 +1,3 @@
-import { env } from '~/env.mjs';
 import axios from 'axios';
 import { prisma } from '~/db/prisma';
 

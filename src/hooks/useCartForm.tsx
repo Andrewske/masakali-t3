@@ -47,24 +47,24 @@ import { type VillaNamesType } from '~/lib/villas';
 //   cc_cvc: '',
 // };
 
-const formDefaultValues = {
-  fullName: '',
-  email: '',
-  phone: '',
-  adults: 2,
-  children: 0,
-  address: {
-    address1: '',
-    address2: '',
-    city: '',
-    region: '',
-    country: '',
-    zip_code: '',
-  },
-  cc_number: '',
-  cc_expiry: '',
-  cc_cvc: '',
-};
+// const formDefaultValues = {
+//   fullName: '',
+//   email: '',
+//   phone: '',
+//   adults: 2,
+//   children: 0,
+//   address: {
+//     address1: '',
+//     address2: '',
+//     city: '',
+//     region: '',
+//     country: '',
+//     zip_code: '',
+//   },
+//   cc_number: '',
+//   cc_expiry: '',
+//   cc_cvc: '',
+// };
 
 type UseCartFormProps = {
   setIsProcessing: Dispatch<SetStateAction<boolean>>;
