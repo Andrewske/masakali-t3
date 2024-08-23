@@ -22,7 +22,7 @@ export default function Page() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-8 w-full p-16">
+      <div className="flex flex-col gap-8 w-full p-8">
         <h1 className="text-center">Future Yoga Retreats</h1>
         <ContentContainer
           heading="Tribute Yoga Retreat"

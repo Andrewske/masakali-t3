@@ -8,7 +8,7 @@ import Availability from '../(home)/Availability';
 import SpaImage from '../../../public/experience/masakali_spa.jpg';
 import YogaShalaImage from '../../../public/yoga/masakali_yoga_shala.jpg';
 import ExperienceImage from '../../../public/experience/masakali_experience.jpg';
-import RomanceImage from '../../../public/experience/flower_pool.jpeg';
+import RomanceImage from '../../../public/experience/flower_pool.jpg';
 
 import { getAllBlockedDates } from '~/actions/reservations';
 
