@@ -11,6 +11,7 @@ import ActivitiesImage from '~/../public/retreats/tribute/activities.jpg';
 import YogaRetreat5 from '~/../public/yoga/yoga-retreat-5.jpg';
 import ContactFormImage from '~/../public/retreats/tribute/contact_form.jpg';
 import ContactForm from '../_components/ContactForm';
+import GroupPhoto from '~/../public/retreats/tribute/group_photo.jpg';
 
 const retreatDetails = {
   name: 'Tribute Yoga Retreat',
@@ -233,7 +234,7 @@ export default function Page() {
         heading={`Who is this retreat for?`}
         content={retreatDetails.whoIsItFor}
         // buttonText="See our yoga class schedule"
-        imgSrc={YogaRetreat5}
+        imgSrc={GroupPhoto}
         imgPosition="right"
         imgAlt="Masakali Yoga Retreat Image"
       />
