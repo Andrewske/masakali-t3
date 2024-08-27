@@ -54,7 +54,47 @@ const retreatDetails = {
     </div>
   ),
   expect: `Immerse yourself in a transformative yoga-centered retreat designed to nurture your body, mind, and spirit. Through daily yoga sessions, you’ll work through stress, anxiety, and fear, finding a path to a calmer and more peaceful life. Gain deeper self-awareness and begin to shift old patterns and conditioning that may be affecting your relationships and overall well-being. Experience a profound connection to your body, supported by a healthy, organic diet. Engage in various activities, including spiritual ceremonies, nature excursions, and wellness treatments, all aimed at enhancing your inner peace and emotional healing. Our retreat offers a supportive and guided environment, helping you achieve the personal growth and transformation you desire, leading to a deeper connection with yourself and what truly matters to you.`,
-  whoIsItFor: `We welcome Tribute Yoga members to join us on this transformative journey. Whether you are a complete beginner or an experienced yogi, this retreat is for anyone who deeply desires to cultivate a profound relationship with themselves and lead a passionate, purposeful life. Open to both singles and couples, men and women, this retreat invites those with an authentic yearning to embrace new possibilities, take self-responsibility, and choose love over fear. Join us for an extraordinary experience that fosters personal growth, inner peace, and a deeper connection to your true self.`,
+  whoIsItFor: (
+    <div className="flex flex-col gap-2">
+      <p>
+        The Tribute Power Yoga Retreat in Bali is designed for those who seek a
+        deeper connection to themselves and the world around them. This retreat
+        is for:
+      </p>
+      <ul className="list-disc px-4 text-left text-sm">
+        <li>
+          <strong>⁠Yoga Enthusiasts:</strong> Whether you are a seasoned yogi or
+          new to the practice, our daily yoga sessions will guide you through a
+          journey of self-discovery, strength, and flexibility.
+        </li>
+        <li>
+          <strong>Mindfulness Seekers:</strong> If you are looking to cultivate
+          inner peace and mindfulness, our guided meditation sessions will help
+          you find balance and clarity amidst the beauty of Bali&apos;s natural
+          surroundings.
+        </li>
+        <li>
+          <strong>Adventure Lovers:</strong> For those who crave exploration,
+          our excursions will take you beyond the yoga mat to experience Bali’s
+          breathtaking landscapes, vibrant culture, and rich traditions.
+        </li>
+        <li>
+          <strong>⁠Wellness Warriors:</strong> If you are on a path to holistic
+          well-being, this retreat offers a nurturing environment where you can
+          focus on your physical, mental, and spiritual health.
+        </li>
+        <li>
+          <strong>Cultural Explorers:</strong> Immerse yourself in the local
+          culture through authentic experiences that connect you to the heart of
+          Bali, from its lush jungles to its serene beaches.
+        </li>
+      </ul>
+      <p>
+        If you&apos;re ready to rejuvenate your spirit, explore new horizons,
+        and connect with like-minded individuals, this retreat is for you.
+      </p>
+    </div>
+  ),
 };
 
 const parseDates = (startDate: string, endDate: string) => {
