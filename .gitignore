@@ -49,3 +49,6 @@ yarn-error.log*
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+
+masakali-9ec3894a5c2f.json
