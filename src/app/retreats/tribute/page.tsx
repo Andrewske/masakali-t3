@@ -8,7 +8,7 @@ import MeditationDroneImage from '~/../public/yoga/Meditation-drone1.jpg';
 import YogaRetreat4 from '~/../public/yoga/yoga-retreat-4.jpg';
 import ExpectImage from '~/../public/retreats/tribute/expect.jpeg';
 import ActivitiesImage from '~/../public/retreats/tribute/activities.jpg';
-import YogaRetreat5 from '~/../public/yoga/yoga-retreat-5.jpg';
+// import YogaRetreat5 from '~/../public/yoga/yoga-retreat-5.jpg';
 import ContactFormImage from '~/../public/retreats/tribute/contact_form.jpg';
 import ContactForm from '../_components/ContactForm';
 import GroupPhoto from '~/../public/retreats/tribute/group_photo.jpg';
