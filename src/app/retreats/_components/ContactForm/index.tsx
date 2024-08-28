@@ -17,6 +17,8 @@ import { Button } from '~/components/ui/button';
 import { Textarea } from '~/components/ui/textarea';
 import { sendRetreatInquiry } from '~/actions/sendgrid/retreat';
 import { useToast } from '~/components/ui/use-toast';
+import { sendRetreatDataToGoogleSheets } from '~/actions/googleApi';
+import { format } from 'date-fns';
 
 const formDefaultValues = {
   fullName: '',
@@ -55,6 +57,11 @@ const ContactForm = () => {
           ...formData,
         },
       });
+      await sendRetreatDataToGoogleSheets({
+        date: format(new Date(), 'MM/dd/yy'),
+        ...formData,
+      });
+
       form.reset();
     } catch (error) {
       console.error('Failed to send inquiry:', error);

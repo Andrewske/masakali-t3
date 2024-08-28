@@ -74,6 +74,7 @@
     "react-select-country-list": "^2.2.3",
     "react-spinners": "^0.13.8",
     "sass": "^1.71.1",
+    "server-only": "^0.0.1",
     "sharp": "^0.33.4",
     "stripe": "^14.18.0",
     "superjson": "1.12.2",

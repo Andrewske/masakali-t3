@@ -33,6 +33,8 @@ export const env = createEnv({
     ANALYZE: z.string(),
     SENTRY_AUTH_TOKEN: z.string(),
     SMOOBU_SETTINGS_CHANNEL_ID: z.string(),
+    GOOGLE_SERVICE_KEY: z.string(),
+    RETREAT_LEADS_SPREADSHEET_ID: z.string(),
   },
 
   /**
@@ -95,5 +97,7 @@ export const env = createEnv({
     ANALYZE: process.env.ANALYZE,
     SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
     SMOOBU_SETTINGS_CHANNEL_ID: process.env.SMOOBU_SETTINGS_CHANNEL_ID,
+    GOOGLE_SERVICE_KEY: process.env.GOOGLE_SERVICE_KEY,
+    RETREAT_LEADS_SPREADSHEET_ID: process.env.RETREAT_LEADS_SPREADSHEET_ID,
   },
 });
