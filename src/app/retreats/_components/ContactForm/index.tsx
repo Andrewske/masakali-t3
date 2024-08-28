@@ -115,7 +115,7 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-            <span className="flex justify-between font-montserrat">
+            <span className="flex justify-between">
               <FormField
                 control={form.control}
                 name="phone"
@@ -126,7 +126,7 @@ const ContactForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="phone"
+                        placeholder="Phone"
                         {...field}
                       />
                     </FormControl>
