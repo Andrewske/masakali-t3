@@ -60,7 +60,7 @@ export const sendAdminBookingConfirmation = async ({
   const templateId = adminBookingEmailTemplate;
 
   const msg = {
-    to: data.email,
+    to: 'info@masakaliretreat.com',
     from: 'admin@masakaliretreat.com',
     templateId,
     dynamicTemplateData: data,
