@@ -3,15 +3,16 @@ import Image from 'next/image';
 import Packages from '../_components/Packages';
 import { format } from 'date-fns';
 import ContentContainer from '~/components/ContentContainer';
-import MainImage from '~/../public/retreats/tribute/main_image.jpg';
+import MainImage from '~/../public/hero-images/masakali_arial.jpg';
 import MeditationDroneImage from '~/../public/yoga/Meditation-drone1.jpg';
 import YogaRetreat4 from '~/../public/yoga/yoga-retreat-4.jpg';
 import ExpectImage from '~/../public/retreats/tribute/expect.jpeg';
-import ActivitiesImage from '~/../public/retreats/tribute/activities.jpg';
+import ActivitiesImage from '~/../public/retreats/tribute/sacred_monkey_forest.jpg';
 // import YogaRetreat5 from '~/../public/yoga/yoga-retreat-5.jpg';
-import ContactFormImage from '~/../public/retreats/tribute/contact_form.jpg';
+import ContactFormImage from '~/../public/retreats/tribute/yoge_shala_jungle.jpg';
 import ContactForm from '../_components/ContactForm';
 import GroupPhoto from '~/../public/retreats/tribute/group_photo.jpg';
+import BookNowButton from '~/app/retreats/_components/BookNowButton';
 
 const retreatDetails = {
   name: 'Tribute Yoga Retreat',
@@ -24,10 +25,11 @@ const retreatDetails = {
     <div>
       <ul>
         <li>6 days, 5 nights accommodation</li>
-        <li>Morning & Evening Flow</li>
-        <li>Morning breakfast</li>
+        <li>Welcome massage</li>
+        <li>Daily yoga and meditation</li>
+        <li>Organic breakfast</li>
         <li>Opening & Closing Dinner</li>
-        <li>Activities Program (Tours + Healing)</li>
+        <li>Daily Activities (Tours + Healing Experiences)</li>
       </ul>
       <br />
       <ul>
@@ -41,11 +43,12 @@ const retreatDetails = {
   activities: (
     <div>
       <ul className="list-disc px-4 text-left ">
-        <li>Ubud Trip</li>
+        <li>Welcome massage</li>
+        <li>Ubud Trip (add what this trip includes: monkeys, etc.)</li>
         <li>Pyramids of Chi</li>
         <li>Mount Batur Sunrise Trek/ Volcano View Breakfast</li>
         <li>Sebatu Waterfalls</li>
-        <li>Campuhan Ridgewalk </li>
+        <li>Campuhan Ridgewalk</li>
         <li>Yoga Barn Ubud Trip</li>
         <li>Melukat Ceremony</li>
         <li>Cacao Ceremony</li>
@@ -54,35 +57,36 @@ const retreatDetails = {
       </ul>
     </div>
   ),
-  expect: `Immerse yourself in a transformative yoga-centered retreat designed to nurture your body, mind, and spirit. Through daily yoga sessions, you’ll work through stress, anxiety, and fear, finding a path to a calmer and more peaceful life. Gain deeper self-awareness and begin to shift old patterns and conditioning that may be affecting your relationships and overall well-being. Experience a profound connection to your body, supported by a healthy, organic diet. Engage in various activities, including spiritual ceremonies, nature excursions, and wellness treatments, all aimed at enhancing your inner peace and emotional healing. Our retreat offers a supportive and guided environment, helping you achieve the personal growth and transformation you desire, leading to a deeper connection with yourself and what truly matters to you.`,
+  expect: `This immersive retreat will embody the essence of yoga to nourish the connection between the mind, body, and spirit. Gain deeper self-awareness and shift old patterns and conditioning that may affect your relationships and overall well-being.  Experience a profound connection to your body with healing wellness treatments supported by a nourishing, organic diet. Together, we will step into a world of sacred practice, cultural adventure, and inner peace with the most breathtaking views as our backdrop. We will explore Balinese traditions and cuisine, adventure through majestic landscapes, and enjoy a unique journey of spiritual awakening and rejuvenation. You will leave this retreat feeling nourished, expanded, and more alive than ever!`,
   whoIsItFor: (
     <div className="flex flex-col gap-2">
       <p>
-        The Tribute Power Yoga Retreat in Bali is designed for those who seek a
-        deeper connection to themselves and the world around them. This retreat
-        is for:
+        The Tribute Yoga Retreat in Bali is for those who seek a deeper
+        connection to themselves and the world around them. This retreat is for:
       </p>
       <ul className="list-disc px-4 text-left text-sm">
         <li>
           <strong>⁠Yoga Enthusiasts:</strong> Whether you are a seasoned yogi or
-          new to the practice, our daily yoga sessions will guide you through a
-          journey of self-discovery, strength, and flexibility.
+          new to the practice, our daily yoga sessions fit for all levels will
+          guide you through a practice of self-discovery and empowerment.
         </li>
         <li>
-          <strong>Mindfulness Seekers:</strong> If you are looking to cultivate
-          inner peace and mindfulness, our guided meditation sessions will help
-          you find balance and clarity amidst the beauty of Bali&apos;s natural
+          <strong>Mindfulness Seekers:</strong> If you want to cultivate inner
+          peace and mindfulness, our guided meditation sessions will help you
+          find balance and clarity amidst the beauty of Bali&apos;s natural
           surroundings.
         </li>
+
         <li>
           <strong>Adventure Lovers:</strong> For those who crave exploration,
-          our excursions will take you beyond the yoga mat to experience Bali’s
-          breathtaking landscapes, vibrant culture, and rich traditions.
+          our excursions will take you beyond the yoga mat to experience
+          Bali&apos;s breathtaking landscapes, vibrant culture, and rich
+          traditions.
         </li>
         <li>
           <strong>⁠Wellness Warriors:</strong> If you are on a path to holistic
-          well-being, this retreat offers a nurturing environment where you can
-          focus on your physical, mental, and spiritual health.
+          well-being, this retreat offers a nurturing environment to focus on
+          your physical, mental, and spiritual health.
         </li>
         <li>
           <strong>Cultural Explorers:</strong> Immerse yourself in the local
@@ -90,9 +94,9 @@ const retreatDetails = {
           Bali, from its lush jungles to its serene beaches.
         </li>
       </ul>
-      <p>
+      <p className="font-bold">
         If you&apos;re ready to rejuvenate your spirit, explore new horizons,
-        and connect with like-minded individuals, this retreat is for you.
+        and connect with like-minded individuals, this retreat is for you!
       </p>
     </div>
   ),
@@ -116,7 +120,8 @@ export default function Page() {
   );
 
   return (
-    <section className="h-full w-full">
+    <section className="relative">
+      <BookNowButton />
       <div
         id="main-image"
         className="h-screen flex justify-center items-center relative overflow-hidden"
@@ -165,14 +170,14 @@ export default function Page() {
             </span>
             <h3>Description</h3>
             <p className="text-sm">
-              Masakali Retreat is located about 8 kilometers outside of Ubud,
-              offering a serene escape that remains conveniently close to the
-              city’s attractions. The land was meticulously chosen for its
-              natural beauty, harmony with nature, and peaceful ambiance.
-              Overlooking lush Balinese rice fields and framed by the majestic
-              backdrop of volcanic mountains, our retreat provides a stunning
-              and tranquil setting for your journey of spiritual awakening and
-              rejuvenation.
+              Experience Masakali Reatreat’s luxury accommodations overlooking
+              the breathtaking jungle of Ubud – the spiritual capital of Bali.
+              Located about 8 kilometers outside Ubud, Masakali Retreat offers a
+              serene escape conveniently close to the city’s attractions.
+              Overlooking lush Balinese rice fields framed by the majestic
+              backdrop of volcanic mountains, our retreat center provides a
+              stunning and tranquil setting for your journey of spiritual
+              awakening and rejuvenation.
             </p>
           </span>
         </div>
@@ -183,14 +188,19 @@ export default function Page() {
       >
         <h2>WHY CHOOSE {retreatDetails.name.toUpperCase()}</h2>
         <p className="max-w-[600px]">
-          Experience a transformative journey at Masakali Retreat with our
-          six-day, five-night yoga retreat, set against the breathtaking
-          backdrop of Balinese mountains, lush forests, and serene rice fields.
-          Practice yoga, connect with nature, and find inner peace as you absorb
-          the tranquility of one of the most spectacular places in the world.
+          Experience a transformative six-day, five-night yoga retreat to
+          nurture your body, mind, and spirit. Enjoy daily yoga among the
+          stunning Balinese landscape, nourishing organic meals, cultural
+          ceremonies, nature adventures, and wellness treatments to enhance
+          inner peace, emotional healing, and overall well-being. Our retreat
+          offers a supportive and guided environment, leading to a deeper
+          connection with yourself and what truly matters to you. Don’t miss
+          this once-in-a-lifetime experience in one of the most spectacular
+          places in the world.
         </p>
       </div>
       <ContentContainer
+        id="contact-form"
         heading="Contact Us to book your retreat"
         content={<ContactForm />}
         imgSrc={ContactFormImage}
@@ -207,6 +217,14 @@ export default function Page() {
         imgAlt="Masakali Yoga Retreat Image"
       />
       <ContentContainer
+        heading={`Activities and Excursions`}
+        content={retreatDetails.activities}
+        // buttonText="See our yoga class schedule"
+        imgSrc={ActivitiesImage}
+        imgPosition="right"
+        imgAlt="Masakali Yoga Retreat Image"
+      />
+      <ContentContainer
         heading={`${retreatDetails.name} Includes`}
         content={retreatDetails.included}
         // buttonText="See our yoga class schedule"
@@ -214,14 +232,7 @@ export default function Page() {
         imgPosition="left"
         imgAlt="Masakali Yoga Retreat Image"
       />
-      <ContentContainer
-        heading={`Include Activities`}
-        content={retreatDetails.activities}
-        // buttonText="See our yoga class schedule"
-        imgSrc={ActivitiesImage}
-        imgPosition="right"
-        imgAlt="Masakali Yoga Retreat Image"
-      />
+
       <ContentContainer
         heading={`WHAT CAN YOU EXPECT DURING YOUR STAY`}
         content={retreatDetails.expect}

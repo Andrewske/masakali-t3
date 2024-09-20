@@ -15,7 +15,7 @@ export const montserrat = localFont({
 export const baskerville = localFont({
   src: [
     {
-      path: './Baskerville-Regular.ttf',
+      path: './LibreBaskerville-Regular.ttf',
       weight: '400',
       style: 'normal',
     },

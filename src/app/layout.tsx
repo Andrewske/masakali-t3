@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <header className="relative md:sticky top-0 z-50">
                   <Header />
                 </header>
-                <main className="min-h-screen flex flex-col justify-between">
+                <main className="min-h-screen flex flex-col justify-between text-baskerville">
                   {children}
                 </main>
                 <Footer />

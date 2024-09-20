@@ -3,6 +3,7 @@ import Image, { type StaticImageData } from 'next/image';
 import type { ReactNode } from 'react';
 
 const ContentContainer = ({
+  id,
   heading,
   content,
   buttonText,
@@ -12,6 +13,7 @@ const ContentContainer = ({
   imgPosition,
   newTab = true,
 }: {
+  id?: string;
   heading: string;
   content: string | ReactNode;
   buttonText?: string;
@@ -53,6 +55,7 @@ const ContentContainer = ({
       className={`relative flex justify-center ${
         imgPosition === 'left' ? 'flex-wrap' : 'flex-wrap-reverse '
       } sm:px-8 py-8 font-baskerville`}
+      id={id}
     >
       {imgPosition === 'left' ? image : contentBox}
       {imgPosition === 'left' ? contentBox : image}

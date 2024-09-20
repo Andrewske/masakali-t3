@@ -5,6 +5,7 @@ import JalaImage from '~/../public/jala/jala-bed.webp';
 import AkashaImage from '~/../public/akasha/akasha-bed.webp';
 import TwinImage3 from '~/../public/lakshmi/lakshmi-bedroom-2a.webp';
 import LumbungImage from '~/../public/lumbungs/lumbung-renders.jpg';
+import ExploreVillasButton from '../ExploreVillasButton';
 
 const packageDetails = [
   {
@@ -107,10 +108,11 @@ const Packages = () => {
           beautiful luxury pool.
         </p>
       </span>
-      <p className="font-bold">
+      {/* <p className="font-bold">
         For booking inquiries, please contact us at{' '}
         <a href="mailto:info@masakaliretreat.com">info@masakaliretreat.com</a>
-      </p>
+      </p> */}
+      <ExploreVillasButton />
 
       <div className="flex flex-wrap w-full justify-evenly">
         {packageDetails.map((packageDetail) => (
