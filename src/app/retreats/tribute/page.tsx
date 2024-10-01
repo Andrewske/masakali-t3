@@ -221,7 +221,7 @@ export default function Page() {
         content={retreatDetails.activities}
         // buttonText="See our yoga class schedule"
         imgSrc={ActivitiesImage}
-        imgPosition="right"
+        imgPosition="left"
         imgAlt="Masakali Yoga Retreat Image"
       />
       <ContentContainer
@@ -229,7 +229,7 @@ export default function Page() {
         content={retreatDetails.included}
         // buttonText="See our yoga class schedule"
         imgSrc={YogaRetreat4}
-        imgPosition="left"
+        imgPosition="right"
         imgAlt="Masakali Yoga Retreat Image"
       />
 
