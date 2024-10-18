@@ -10,7 +10,13 @@ import ExploreVillasButton from '../ExploreVillasButton';
 const packageDetails = [
   {
     title: 'Twin Bed Shared Villa',
-    price1: '$850 (per person)',
+    price1: (
+      <p>
+        <span className="line-through text-red-500">$850</span> $
+        {Math.round(850 * 0.85)}
+        <span> (per person)</span>
+      </p>
+    ),
     listItems: [
       'Shared Villa',
       'Max 3 people',
@@ -22,8 +28,20 @@ const packageDetails = [
   },
   {
     title: 'Upstairs Queen Bed in a Shared Villa',
-    price1: '$1015 (1 person)',
-    price2: '$1675 (2 people)',
+    price1: (
+      <p>
+        <span className="line-through text-red-500">$1015</span> $
+        {Math.round(1015 * 0.85)}
+        <span> (1 person)</span>
+      </p>
+    ),
+    price2: (
+      <p>
+        <span className="line-through text-red-500">$1675</span> $
+        {Math.round(1675 * 0.85)}
+        <span> (2 people)</span>
+      </p>
+    ),
     listItems: [
       'Private Room in shared villa',
       'Max 2 people',
@@ -34,15 +52,39 @@ const packageDetails = [
   },
   {
     title: 'Twin Bed Shared room',
-    price1: '$1,150 (1 person)',
-    price2: '$1,830 (2 people)',
+    price1: (
+      <p>
+        <span className="line-through text-red-500">$1115</span> $
+        {Math.round(1115 * 0.85)}
+        <span> (1 person)</span>
+      </p>
+    ),
+    price2: (
+      <p>
+        <span className="line-through text-red-500">$1830</span> $
+        {Math.round(1830 * 0.85)}
+        <span> (2 people)</span>
+      </p>
+    ),
     listItems: ['Shared Room', 'Max 2 people', 'Communal Pool'],
     image: TwinImage3,
   },
   {
     title: 'Private Room with King Bed',
-    price1: '$1325 (1 person)',
-    price2: '$2030 (2 people)',
+    price1: (
+      <p>
+        <span className="line-through text-red-500">$1325</span> $
+        {Math.round(1325 * 0.85)}
+        <span> (1 person)</span>
+      </p>
+    ),
+    price2: (
+      <p>
+        <span className="line-through text-red-500">$2030</span> $
+        {Math.round(2030 * 0.85)}
+        <span> (2 people)</span>
+      </p>
+    ),
     listItems: [
       'Private Room in shared villa',
       'Max 2 people',
@@ -53,8 +95,20 @@ const packageDetails = [
   },
   {
     title: '2 story private villa with queen bed',
-    price1: '$1325 (1 person)',
-    price2: '$2030 (2 people)',
+    price1: (
+      <p>
+        <span className="line-through text-red-500">$1325</span> $
+        {Math.round(1235 * 0.85)}
+        <span> (1 person)</span>
+      </p>
+    ),
+    price2: (
+      <p>
+        <span className="line-through text-red-500">$2030</span> $
+        {Math.round(2030 * 0.85)}
+        <span> (2 people)</span>
+      </p>
+    ),
     listItems: [
       'Private Villa',
       'Max 2 people',
@@ -65,15 +119,39 @@ const packageDetails = [
   },
   {
     title: 'Private Villa with queen bed and private pool',
-    price1: '$1387 (1 person)',
-    price2: '$2047 (2 people)',
+    price1: (
+      <p>
+        <span className="line-through text-red-500">$1387</span> $
+        {Math.round(1387 * 0.85)}
+        <span> (1 person)</span>
+      </p>
+    ),
+    price2: (
+      <p>
+        <span className="line-through text-red-500">$2047</span> $
+        {Math.round(2047 * 0.85)}
+        <span> (2 people)</span>
+      </p>
+    ),
     listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
     image: JalaImage,
   },
   {
     title: 'Private Villa with king bed and private pool',
-    price1: '$1480 (1 person)',
-    price2: '$2140 (2 people)',
+    price1: (
+      <p>
+        <span className="line-through text-red-500">$1480</span> $
+        {Math.round(1480 * 0.85)}
+        <span> (1 person)</span>
+      </p>
+    ),
+    price2: (
+      <p>
+        <span className="line-through text-red-500">$2014</span> $
+        {Math.round(2014 * 0.85)}
+        <span> (2 people)</span>
+      </p>
+    ),
     listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
     image: SuryaImage,
   },
@@ -115,6 +193,9 @@ const Packages = () => {
       <ExploreVillasButton />
 
       <div className="flex flex-wrap w-full justify-evenly">
+        <span className="w-full flex justify-center text-lg text-red-700 underline">
+          <p>All packages 15% off until Nov 20th</p>
+        </span>
         {packageDetails.map((packageDetail) => (
           <div
             key={packageDetail.title}
@@ -131,10 +212,10 @@ const Packages = () => {
             </span>
             <span className="flex flex-col gap-8 p-4">
               <h3 className="text-xl">{packageDetail.title}</h3>
-              {/* <span className="font-bold">
+              <span className="font-bold">
                 <p>{packageDetail.price1}</p>
                 {packageDetail.price2 && <p>{packageDetail.price2}</p>}
-              </span> */}
+              </span>
               <ul>
                 {packageDetail.listItems.map((item, index) => (
                   <li key={index}>{item}</li>
