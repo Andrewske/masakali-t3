@@ -20,22 +20,30 @@ const retreatDetails = {
   endDate: '2025-04-11',
   whyChose:
     'Experience a transformative journey at Masakali Retreat with our six-day, five-night yoga retreat, set against the breathtaking backdrop of Balinese mountains, lush forests, and serene rice fields. Practice yoga, connect with nature, and find inner peace as you absorb the tranquility of one of the most spectacular places in the world',
-  details: `At the Tribute Yoga Retreat from April 6-11, you’ll immerse yourself in a harmonious blend of yoga, adventure, and cultural experiences. Each day begins with invigorating yoga sessions and a healthy breakfast, setting the tone for the day. You will explore the vibrant town of Ubud, visit the Yoga Barn, and embark on nature excursions to the Tegallalang Rice Fields and Sebatu Waterfalls. The retreat includes spiritual experiences such as a traditional Malukat ceremony and a heart-opening cacao ceremony. You’ll also have the opportunity to participate in an ecstatic dance session, trek to Mount Batur for a stunning sunrise, and visit the Pyramids of Chi for meditation and sound healing. Enjoy relaxing spa services, including acupuncture & massages, and savor delicious meals, with a special welcome dinner and closing dinner to bookend your transformative journey. Additional highlights include the Campuhan Ridge walk and a trip to Ubud’s renowned attractions. Join us for a retreat that nurtures your body, mind, and spirit in the serene beauty of Bali.`,
+  details: `At the Tribute Yoga Retreat from April 6-11, you’ll immerse yourself in a harmonious blend of yoga, adventure, and cultural experiences. Each day begins with invigorating yoga and meditation sessions and a healthy breakfast, setting the tone for the day. You will explore the vibrant town of Ubud, visit the Yoga Barn, and embark on nature excursions to the Tegallalng Rice Fields and Sebatu Waterfalls to name a few. The retreat includes spiritual experiences such as a traditional Melukat ceremony and a heart-opening Cacao ceremony. You’ll also have the opportunity to participate in an ecstatic dance session, trek to Mount Batur for a stunning sunrise, and visit the Pyramids of Chi for meditation and sound healing. Enjoy relaxing spa services, including acupuncture & massages, and savor delicious meals, with a special welcome dinner and closing dinner to bookend your transformative journey. Additional highlights include the Campuhan Ridge walk and a trip to Ubud’s renowned attractions. Join us for a retreat that nurtures your body, mind, and spirit in the serene beauty of Bali.`,
   included: (
     <div>
       <ul>
         <li>6 days, 5 nights accommodation</li>
         <li>Welcome massage</li>
+        <li>Melukat water cleansing ceremony</li>
         <li>Daily yoga and meditation</li>
-        <li>Organic breakfast</li>
+        <li>Daily healthy organic breakfast buffet</li>
+        <li>Sharing circles</li>
+        <li>Acupuncture sessions</li>
         <li>Opening & Closing Dinner</li>
-        <li>Daily Activities (Tours + Healing Experiences)</li>
+        <li>Daily transport to and from activities</li>
+        <li>Cacao ceremony</li>
+        <li>Fire ceremony</li>
+        <li>Ecstatic Dance</li>
+        <li>Swag Bag</li>
       </ul>
       <br />
       <ul>
-        <li className="font-bold">Extras Include:</li>
+        <li className="font-bold">Extra costs include:</li>
         <li>Airport transfer</li>
-        <li>Full butler service</li>
+        <li>Lunch and other offsite meals</li>
+        <li>Entry fees/guides for offsite activities</li>
         <li>Additional Spa treatments</li>
       </ul>
     </div>
@@ -44,31 +52,34 @@ const retreatDetails = {
     <div>
       <ul className="list-disc px-4 text-left ">
         <li>Welcome massage</li>
-        <li>Ubud Trip (add what this trip includes: monkeys, etc.)</li>
-        <li>Pyramids of Chi</li>
+        <li>Yoga Barn Empowerment Flow Class</li>
+        <li>Pyramids of Chi Sound Healing</li>
+        <li>Tegallalang Rice Terrace Visit</li>
         <li>Mount Batur Sunrise Trek/ Volcano View Breakfast</li>
         <li>Sebatu Waterfalls</li>
         <li>Campuhan Ridgewalk</li>
-        <li>Yoga Barn Ubud Trip</li>
         <li>Melukat Ceremony</li>
         <li>Cacao Ceremony</li>
-        <li>Acupuncture</li>
+        <li>Fire Ceremony</li>
+        <li>Acupuncture and Moksha Session </li>
         <li>Ecstatic Dance</li>
       </ul>
     </div>
   ),
-  expect: `This immersive retreat will embody the essence of yoga to nourish the connection between the mind, body, and spirit. Gain deeper self-awareness and shift old patterns and conditioning that may affect your relationships and overall well-being.  Experience a profound connection to your body with healing wellness treatments supported by a nourishing, organic diet. Together, we will step into a world of sacred practice, cultural adventure, and inner peace with the most breathtaking views as our backdrop. We will explore Balinese traditions and cuisine, adventure through majestic landscapes, and enjoy a unique journey of spiritual awakening and rejuvenation. You will leave this retreat feeling nourished, expanded, and more alive than ever!`,
+  expect: `Immerse yourself in a transformative yoga retreat designed to nurture your body, mind, and spirit. Through daily yoga and meditation sessions, you’ll work through stress, anxiety, and fear, finding a path to a calmer and more peaceful life. Gain deeper self-awareness and begin to shift old patterns and conditioning that may be affecting your relationships and overall well-being. Experience a profound connection to your body, supported by a healthy, organic diet. Engage in various activities, including spiritual ceremonies, nature excursions, and wellness treatments, all aimed at enhancing your inner peace and emotional well being. Our retreat offers a supportive and guided environment, helping you achieve the personal growth and transformation you desire, leading to a deeper connection with yourself and nature and what truly matters to you.`,
   whoIsItFor: (
     <div className="flex flex-col gap-2">
       <p>
         The Tribute Yoga Retreat in Bali is for those who seek a deeper
-        connection to themselves and the world around them. This retreat is for:
+        connection to themselves, nature and the world around them. This retreat
+        is for:
       </p>
       <ul className="list-disc px-4 text-left text-sm">
         <li>
           <strong>⁠Yoga Enthusiasts:</strong> Whether you are a seasoned yogi or
-          new to the practice, our daily yoga sessions fit for all levels will
-          guide you through a practice of self-discovery and empowerment.
+          new to the practice, our daily yoga sessions are fit for all levels
+          and will guide you through a practice of self-discovery and
+          empowerment.
         </li>
         <li>
           <strong>Mindfulness Seekers:</strong> If you want to cultivate inner
@@ -90,8 +101,9 @@ const retreatDetails = {
         </li>
         <li>
           <strong>Cultural Explorers:</strong> Immerse yourself in the local
-          culture through authentic experiences that connect you to the heart of
-          Bali, from its lush jungles to its serene beaches.
+          culture through authentic spiritual practices and culinary experiences
+          that connect you to the heart of Bali, from its lush jungles to its
+          serene beaches.
         </li>
       </ul>
       <p className="font-bold">
@@ -168,16 +180,16 @@ export default function Page() {
               <p>Br. Ayah Kelusa Payangan</p>
               <p>Gianyar Bali 80572</p>
             </span>
-            <h3>Description</h3>
+            <h3>The Location</h3>
             <p className="text-sm">
-              Experience Masakali Reatreat’s luxury accommodations overlooking
-              the breathtaking jungle of Ubud – the spiritual capital of Bali.
-              Located about 8 kilometers outside Ubud, Masakali Retreat offers a
-              serene escape conveniently close to the city’s attractions.
-              Overlooking lush Balinese rice fields framed by the majestic
-              backdrop of volcanic mountains, our retreat center provides a
-              stunning and tranquil setting for your journey of spiritual
-              awakening and rejuvenation.
+              Experience Masakali Reatreat’s luxury accommodations amidst the
+              breathtaking tropical jungles of Ubud – the spiritual capital of
+              Bali. Located about 8 kilometers north of Ubud, Masakali Retreat
+              offers a serene escape conveniently close to the city’s
+              attractions. Overlooking lush Balinese rice fields framed by the
+              majestic backdrop of volcanic mountains, our retreat center
+              provides a stunning and tranquil setting for your journey of
+              spiritual awakening and rejuvenation.
             </p>
           </span>
         </div>
@@ -194,9 +206,9 @@ export default function Page() {
           ceremonies, nature adventures, and wellness treatments to enhance
           inner peace, emotional healing, and overall well-being. Our retreat
           offers a supportive and guided environment, leading to a deeper
-          connection with yourself and what truly matters to you. Don’t miss
-          this once-in-a-lifetime experience in one of the most spectacular
-          places in the world.
+          connection with yourself and nature. Don’t miss this
+          once-in-a-lifetime experience in one of the most spectacular places in
+          the world.
         </p>
       </div>
       <ContentContainer
@@ -225,7 +237,7 @@ export default function Page() {
         imgAlt="Masakali Yoga Retreat Image"
       />
       <ContentContainer
-        heading={`${retreatDetails.name} Includes`}
+        heading={`${retreatDetails.name} Includes The Following`}
         content={retreatDetails.included}
         // buttonText="See our yoga class schedule"
         imgSrc={YogaRetreat4}
