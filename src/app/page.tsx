@@ -1,24 +1,24 @@
 // Components
 
 import HeroSlideShow from '~/app/(home)/HeroSlideShow';
-import Availability from '~/app/(home)/Availability';
+// import Availability from '~/app/(home)/Availability';
 import About from '~/app/(home)/About';
 import WhyChoose from '~/app/(home)/WhyChoose';
 import Villas from '~/app/(home)/Villas';
-import { getAllBlockedDates } from '~/actions/reservations';
+// import { getAllBlockedDates } from '~/actions/reservations';
 
 import Reviews from './(home)/Reviews';
 import VideoContainer from '~/components/VideoContainer';
 
-const Page = async () => {
-  const disabledDates = await getAllBlockedDates();
+const Page = () => {
+  // const disabledDates = await getAllBlockedDates();
 
   return (
     <>
       {/* <Header /> */}
 
       <HeroSlideShow />
-      <Availability disabledDates={disabledDates} />
+      {/* <Availability disabledDates={disabledDates} /> */}
       <About />
       <WhyChoose />
       <Villas />

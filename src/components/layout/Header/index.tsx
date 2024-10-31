@@ -27,7 +27,7 @@ const Header = () => {
             </span>
 
             <GoToPageButton
-              path="/villas"
+              path="https://www.booking.com/hotel/id/masakali-retreat-gianyar.html"
               callToAction="Book Now"
               isWhite={true}
             />

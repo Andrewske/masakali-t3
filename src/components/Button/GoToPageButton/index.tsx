@@ -21,6 +21,8 @@ export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
           : 'bg-purple text-white hover:bg-white hover:text-purple border-purple'
       } font-montserrat uppercase border border-solid `}
       href={path}
+      target="_blank"
+      rel="noreferrer"
     >
       {callToAction}
     </Link>

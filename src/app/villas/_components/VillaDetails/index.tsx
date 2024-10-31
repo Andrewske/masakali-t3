@@ -199,7 +199,7 @@ const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
         </div>
       </div>
 
-      <div className="bg-gray w-full py-8">
+      {/* <div className="bg-gray w-full py-8">
         <h2 className="font-montserrat uppercase w-full text-center py-16">
           Explore Our Other Villas
         </h2>
@@ -213,7 +213,7 @@ const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
             ) : null;
           })}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
