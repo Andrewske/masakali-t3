@@ -22,7 +22,7 @@ function Page() {
             <span className="flex justify-center">
               <GoToPageButton
                 path={`/villas/${villa.name}`}
-                callToAction={`Book ${villa.name}`}
+                callToAction={`View ${villa.name}`}
                 isWhite={true}
               />
             </span>
