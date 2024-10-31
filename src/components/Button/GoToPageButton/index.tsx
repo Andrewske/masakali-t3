@@ -6,12 +6,14 @@ type GoToPageButtonProps = {
   callToAction: string;
   isWhite?: boolean;
   path: string;
+  target?: string;
 };
 
 export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
   callToAction,
   isWhite = true,
   path,
+  target = '',
 }) => {
   return (
     <Link
@@ -21,7 +23,7 @@ export const GoToPageButton: React.FC<GoToPageButtonProps> = ({
           : 'bg-purple text-white hover:bg-white hover:text-purple border-purple'
       } font-montserrat uppercase border border-solid `}
       href={path}
-      target="_blank"
+      target={target}
       rel="noreferrer"
     >
       {callToAction}
