@@ -56,6 +56,7 @@ const DateRangePicker = ({
 
   const handleSelect = (newRange: DateRange | undefined) => {
     // Check if the new range is undefined or if either the start or end date is missing
+    console.log(newRange);
     if (!newRange?.from || !newRange?.to) {
       // Update the date range with the new range's start and end dates, or undefined if not present
       setDateRange({ from: newRange?.from, to: newRange?.to });
@@ -95,7 +96,10 @@ const DateRangePicker = ({
           isActive ? 'transform translate-x-0' : ''
         } text-purple`}
     >
-      <div ref={dayPickerRef}>
+      <div
+        ref={dayPickerRef}
+        className="flex flex-col items-center justify-center"
+      >
         <DayPicker
           id="date-range-picker"
           mode="range"

@@ -25,18 +25,9 @@ const retreatDetails = {
     <div>
       <ul>
         <li>6 days, 5 nights accommodation</li>
-        <li>Welcome massage</li>
-        <li>Melukat water cleansing ceremony</li>
         <li>Daily yoga and meditation</li>
-        <li>Daily healthy organic breakfast buffet</li>
-        <li>Sharing circles</li>
-        <li>Acupuncture sessions</li>
+        <li>Daily organic breakfast buffet</li>
         <li>Opening & Closing Dinner</li>
-        <li>Daily transport to and from activities</li>
-        <li>Cacao ceremony</li>
-        <li>Fire ceremony</li>
-        <li>Ecstatic Dance</li>
-        <li>Swag Bag</li>
       </ul>
       <br />
       <ul>
@@ -51,8 +42,7 @@ const retreatDetails = {
   activities: (
     <div>
       <ul className="list-disc px-4 text-left ">
-        <li>Welcome massage</li>
-        <li>Yoga Barn Empowerment Flow Class</li>
+        <li>Special class at Yoga Barn</li>
         <li>Pyramids of Chi Sound Healing</li>
         <li>Tegallalang Rice Terrace Visit</li>
         <li>Mount Batur Sunrise Trek/ Volcano View Breakfast</li>
@@ -61,7 +51,7 @@ const retreatDetails = {
         <li>Melukat Ceremony</li>
         <li>Cacao Ceremony</li>
         <li>Fire Ceremony</li>
-        <li>Acupuncture and Moksha Session </li>
+        <li>Acupuncture and Moksha Session</li>
         <li>Ecstatic Dance</li>
       </ul>
     </div>
@@ -132,22 +122,25 @@ export default function Page() {
   );
 
   return (
-    <section className="relative">
-      <BookNowButton />
+    <>
       <div
         id="main-image"
-        className="h-screen flex justify-center items-center relative overflow-hidden"
+        className="w-full grid grid-cols-1 xl:grid-cols-5 justify-center items-center relative overflow-hidden"
       >
-        <Image
-          src={MainImage}
-          alt="Akasha Pool"
-          fill={true}
-          className="object-cover object-bottom"
-        />
-        <div className="relative text-center bg-purple z-10 md:py-16 py-4 px-8 md:px-24 text-white grid place-items-center gap-8">
-          <h2 className="text-xl md:text-3xl">Join Us</h2>
-          <h1 className="text-xl md:text-3xl">{retreatDetails.name}</h1>
+        <div className="h-[calc(100vh-132px)] w-full xl:col-span-4">
+          <Image
+            src={MainImage}
+            alt="Akasha Pool"
+            // fill={true}
+            className="h-full w-full object-cover object-center"
+          />
         </div>
+
+        <span className="text-white bg-purple w-auto h-full flex flex-col px-4 gap-8 xl:col-span-1 justify-center items-center text-center">
+          <h2 className="text-xl xl:text-3xl text-nowrap">Join Us</h2>
+          <h1 className="text-xl xl:text-3xl ">{retreatDetails.name}</h1>
+          <BookNowButton />
+        </span>
       </div>
       <div
         id="details"
@@ -211,14 +204,7 @@ export default function Page() {
           the world.
         </p>
       </div>
-      <ContentContainer
-        id="contact-form"
-        heading="Contact Us to book your retreat"
-        content={<ContactForm />}
-        imgSrc={ContactFormImage}
-        imgPosition="left"
-        imgAlt="Masakali Yoga Retreat Image"
-      />
+
       {/* <About /> */}
       <ContentContainer
         heading="The Details"
@@ -281,8 +267,15 @@ export default function Page() {
           living.
         </p>
       </div>
-
+      <ContentContainer
+        id="contact-form"
+        heading="Contact Us to book your retreat"
+        content={<ContactForm />}
+        imgSrc={ContactFormImage}
+        imgPosition="left"
+        imgAlt="Masakali Yoga Retreat Image"
+      />
       <Packages />
-    </section>
+    </>
   );
 }

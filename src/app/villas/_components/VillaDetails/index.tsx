@@ -1,7 +1,7 @@
 import React from 'react';
 import { villaDetails, type VillaNamesType } from '~/lib/villas';
 
-import VillaImage from '~/components/VillaImage';
+// import VillaImage from '~/components/VillaImage';
 
 const Item = ({ className, text }: { className: string; text: string }) => {
   return (

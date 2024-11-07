@@ -1,4 +1,3 @@
-// import { Montserrat, Baskervville } from 'next/font/google';
 import localFont from 'next/font/local';
 
 // export const montserrat = Montserrat({
@@ -18,15 +17,6 @@ export const baskerville = localFont({
       path: './LibreBaskerville-Regular.ttf',
       weight: '400',
       style: 'normal',
-    },
-    {
-      path: './LibreBaskerville-Bold.ttf',
-      weight: '700',
-    },
-    {
-      path: './LibreBaskerville-Italic.ttf',
-      weight: '400',
-      style: 'italic',
     },
   ],
   variable: '--font-baskerville',

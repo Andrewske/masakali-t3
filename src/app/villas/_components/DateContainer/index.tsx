@@ -33,7 +33,6 @@ const DateContainer = ({
   );
   const villaName = getVillaName(villaId);
 
-  console.log({ villaName });
   useEffect(() => {
     if (reservationId) {
       const fetchReservation = async () => {
@@ -76,6 +75,28 @@ const DateContainer = ({
     !isNaN(dateRange.from.getTime())
       ? format(dateRange.from, "MMM d',' yyyy")
       : 'Choose Dates';
+
+  // const ArrivalDateDisplay = useMemo(() => {
+  //   const formattedDate =
+  //     dateRange.from &&
+  //     dateRange.from instanceof Date &&
+  //     !isNaN(dateRange.from.getTime())
+  //       ? format(dateRange.from, "MMM d',' yyyy")
+  //       : 'Choose Dates';
+
+  //   return <p>{formattedDate}</p>;
+  // }, [dateRange]);
+
+  // const DepartureDateDisplay = useMemo(() => {
+  //   const formattedDate =
+  //     dateRange.to &&
+  //     dateRange.to instanceof Date &&
+  //     !isNaN(dateRange.to.getTime())
+  //       ? format(dateRange.to, "MMM d',' yyyy")
+  //       : 'Choose Dates';
+
+  //   return <p>{formattedDate}</p>;
+  // }, [dateRange]);
 
   const departureDate =
     dateRange.to &&
@@ -128,14 +149,14 @@ const DateContainer = ({
           onClick={() => setIsActive(true)}
         >
           <h3 className="text-xl ">Arrival Date</h3>
-          <p>{arrivalDate}</p>
+          {arrivalDate}
         </span>
         <span
           className="flex-grow w-content font-montserrat"
           onClick={() => setIsActive(true)}
         >
           <h3 className="text-xl ">Departure Date</h3>
-          <p>{departureDate}</p>
+          {departureDate}
         </span>
         {renderConvertedAmount('Price per night', pricePerNight)}
         {renderConvertedAmount('Subtotal', subTotal)}

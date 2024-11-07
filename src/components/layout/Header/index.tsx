@@ -2,11 +2,17 @@
 import Image from 'next/image';
 
 import HeaderLinks from '~/components/layout/Header/Links';
-import { GoToPageButton } from '~/components/Button/GoToPageButton';
 import { useState } from 'react';
+
+import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
+
+const RetreatButton = dynamic(() => import('./RetreatButton'), { ssr: false });
+const VillasButton = dynamic(() => import('./VillasButton'), { ssr: false });
 
 const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const pathName = usePathname();
 
   return (
     <nav>
@@ -26,12 +32,11 @@ const Header = () => {
               <HeaderLinks />
             </span>
 
-            <GoToPageButton
-              path="https://www.booking.com/hotel/id/masakali-retreat-gianyar.html"
-              callToAction="Book Now"
-              isWhite={true}
-              target="_blank"
-            />
+            {pathName === '/retreats/tribute' ? (
+              <RetreatButton />
+            ) : (
+              <VillasButton />
+            )}
           </span>
 
           <span className="block md:hidden">

@@ -1,5 +1,4 @@
 'use client';
-import styles from './styles.module.scss';
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { useMemo } from 'react';
 import { formatCurrency } from '~/utils/helpers';
@@ -9,6 +8,8 @@ import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import CountryDropdown from '~/components/CountryDropdown';
 import { getCurrentDateInBali } from '~/utils';
 import { type CountryType } from '~/actions/countries';
+import { consoleIntegration } from '@sentry/nextjs';
+import { format } from 'date-fns';
 
 type CartDetailsProps = {
   villaId: VillaIdsType;
@@ -30,33 +31,32 @@ const CartDetails = ({
     throw new Error('Date range is not set');
   }
 
-  const checkinString = dateRange.from?.toISOString().split('T')[0] ?? '';
-  const checkoutString = dateRange.to?.toISOString().split('T')[0] ?? '';
+  const checkinString = format(dateRange.from, 'yyyy-MM-dd');
+
+  const checkoutString = format(dateRange.to, 'yyyy-MM-dd');
+
   const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
     useMemo(() => {
+      if (!dateRange?.from || !dateRange?.to) {
+        throw new Error('Date range is not set');
+      }
       return createPricingObject({
         villaPricing,
-        checkin: dateRange.from ?? getCurrentDateInBali(),
-        checkout: dateRange.to ?? getCurrentDateInBali(),
+        checkin: dateRange?.from, // ?? getCurrentDateInBali(),
+        checkout: dateRange?.to, // ?? getCurrentDateInBali(),
         conversionRate,
       });
     }, [dateRange, villaPricing, conversionRate]);
 
   const renderDetail = (label: string, value: string | number | null) => (
-    <span
-      className={styles.line}
-      key={label}
-    >
+    <span key={label}>
       <h3>{label}</h3>
       <p>{value}</p>
     </span>
   );
 
   const renderConvertedAmount = (label: string, amount: number) => (
-    <span
-      className={styles.line}
-      key={label}
-    >
+    <span key={label}>
       <h3>{label}</h3>
       <p>{formatCurrency(amount, currency)}</p>
     </span>

@@ -2,15 +2,17 @@ import NextVilla from '~/app/villas/_components/NextVilla';
 import GridGallery from '~/app/villas/_components/GridGallery';
 
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
-// import dynamic from 'next/dynamic';
-// import { getDisabledDatesForVilla } from '~/actions/smoobu';
-// import { prisma } from '~/db/prisma';
-// import { type VillaPricingType } from '~/utils/pricing';
-// import { getCountries } from '~/actions/countries';
+import dynamic from 'next/dynamic';
+import { getDisabledDatesForVilla } from '~/actions/smoobu';
+import { prisma } from '~/db/prisma';
+import { type VillaPricingType } from '~/utils/pricing';
+import { getCountries } from '~/actions/countries';
 
 import VillaDetails from '../VillaDetails';
 import ContentContainer from '~/components/ContentContainer';
 import VillaImage from '~/components/VillaImage';
+
+import DateContainer from '~/app/villas/_components/DateContainer';
 
 // const DateContainer = dynamic(
 //   () => import('~/app/villas/_components/DateContainer'),
@@ -21,30 +23,30 @@ export type VillaDataType = {
   villaId: VillaIdsType;
 };
 
-function Template({ villaId }: VillaDataType) {
+async function Template({ villaId }: VillaDataType) {
   const villaName = getVillaName(villaId);
 
-  // const { disabledDates } = await getDisabledDatesForVilla(villaId);
+  const { disabledDates } = await getDisabledDatesForVilla(villaId);
 
-  // const villaPricing = (await prisma.villa_pricing.findMany({
-  //   where: {
-  //     villa_id: Number(villaId),
-  //     price: {
-  //       not: null,
-  //     },
-  //   },
-  //   select: {
-  //     date: true,
-  //     price: true,
-  //     available: true,
-  //   },
-  // })) as VillaPricingType[];
+  const villaPricing = (await prisma.villa_pricing.findMany({
+    where: {
+      villa_id: Number(villaId),
+      price: {
+        not: null,
+      },
+    },
+    select: {
+      date: true,
+      price: true,
+      available: true,
+    },
+  })) as VillaPricingType[];
 
-  // const countries = await getCountries();
+  const countries = await getCountries();
   return (
     <section className="flex flex-col gap-16">
       <div className="w-full grid grid-cols-1 lg:grid-cols-4">
-        {/* <div
+        <div
           className="flex p-4 sm:p-8 lg:col-span-1 w-full bg-white flex-col gap-4 justify-center items-center relative"
           id="villa-info"
         >
@@ -56,11 +58,11 @@ function Template({ villaId }: VillaDataType) {
             countries={countries}
             villaId={villaId}
           />
-        </div> */}
-        <div className="col-span-2 max-h-screen">
+        </div>
+        <div className="col-span-3 h-[calc(100vh-132px)]">
           <GridGallery villaName={villaName} />
         </div>
-        <div className="col-span-2 ">
+        <div className="col-span-4 ">
           <ContentContainer
             heading=""
             content={

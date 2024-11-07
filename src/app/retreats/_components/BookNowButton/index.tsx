@@ -21,7 +21,7 @@ const BookNowButton = () => {
 
   return (
     <button
-      className="fixed bottom-4 right-4 hover:scale-105 z-10 uppercase font-montserrat text-xl px-8 py-2 mx-auto bg-purple text-white"
+      className="hover:scale-105 z-10 uppercase font-montserrat text-xl px-8 py-2 mx-auto bg-white text-black text-invert-0 text-nowrap"
       onClick={handleScroll}
       type="button"
     >

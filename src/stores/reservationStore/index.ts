@@ -20,8 +20,9 @@ export type ReservationActions = {
 
 export type ReservationStore = ReservationState & ReservationActions;
 
+const today = getCurrentDateInBali();
+
 export const initReservationStore = (): ReservationState => {
-  const today = getCurrentDateInBali();
   return {
     dateRange: {
       from: today,
@@ -34,8 +35,8 @@ export const initReservationStore = (): ReservationState => {
 
 export const defaultInitialState: ReservationState = {
   dateRange: {
-    from: getCurrentDateInBali(),
-    to: addDays(getCurrentDateInBali(), 1),
+    from: undefined,
+    to: undefined,
   },
   villaName: 'surya',
   reservationId: null,

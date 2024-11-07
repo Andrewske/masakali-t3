@@ -24,7 +24,7 @@ export const sendRetreatInquiry = async ({
     const templateId = retreatInquiryEmailTemplate;
 
     const msg = {
-      to: 'info@masakaliretreat.com',
+      to: ['info@masakaliretreat.com', 'michelle@masakaliretreat.com'],
       from: 'admin@masakaliretreat.com',
       templateId,
       dynamicTemplateData: data,

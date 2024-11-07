@@ -1,5 +1,3 @@
-import styles from './styles.module.scss';
-
 import { villaDetails } from '~/lib/villas';
 import VillaImage from '~/components/VillaImage';
 
@@ -10,7 +8,7 @@ const Villas = () => {
       className="relative flex flex-col items-center justify-center w-full h-auto py-16 px-4 md:px-16 gap-8"
     >
       {/* <ScrollOffset id="villas" /> */}
-      <h2 className={styles.title}>Villas</h2>
+      <h2 className="w-full text-center">Villas</h2>
       <div className="w-full max-w-[600px] text-center">
         <p>
           All the villas have their own private infinity pools overlooking the

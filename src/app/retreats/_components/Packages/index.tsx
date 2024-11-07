@@ -213,8 +213,8 @@ const Packages = () => {
             <span className="flex flex-col gap-8 p-4">
               <h3 className="text-xl">{packageDetail.title}</h3>
               <span className="font-bold">
-                <p>{packageDetail.price1}</p>
-                {packageDetail.price2 && <p>{packageDetail.price2}</p>}
+                {packageDetail.price1}
+                {packageDetail.price2 && packageDetail.price2}
               </span>
               <ul>
                 {packageDetail.listItems.map((item, index) => (
