@@ -57,7 +57,7 @@ const getChangedVillaPricing = (
 
 export async function batchVillaPricing(data: SmoobuRatesResponse) {
   console.log('Starting batchVillaPricing');
-  console.log('data:', data);
+  // console.log('data:', data);
 
   // Transform incoming data to new villa pricing
   const newVillaPricing = transformSmoobuRatesResponse(data);

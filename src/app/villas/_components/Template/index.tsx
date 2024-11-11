@@ -2,7 +2,6 @@ import NextVilla from '~/app/villas/_components/NextVilla';
 import GridGallery from '~/app/villas/_components/GridGallery';
 
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
-import dynamic from 'next/dynamic';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import { prisma } from '~/db/prisma';
 import { type VillaPricingType } from '~/utils/pricing';

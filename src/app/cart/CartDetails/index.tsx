@@ -6,9 +6,7 @@ import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import CountryDropdown from '~/components/CountryDropdown';
-import { getCurrentDateInBali } from '~/utils';
 import { type CountryType } from '~/actions/countries';
-import { consoleIntegration } from '@sentry/nextjs';
 import { format } from 'date-fns';
 
 type CartDetailsProps = {

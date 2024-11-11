@@ -32,7 +32,7 @@ const HeroCarousel = ({
         // }
         // dynamicHeight={true}
         showStatus={false}
-        // showThumbs={false}
+        showThumbs={false}
         useKeyboardArrows={true}
         showArrows={showArrows}
         showIndicators={false}
