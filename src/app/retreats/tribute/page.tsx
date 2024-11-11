@@ -139,7 +139,7 @@ export default function Page() {
           />
         </div>
 
-        <span className="text-white bg-purple w-auto h-full flex flex-col px-4 gap-8 xl:col-span-1 justify-center items-center text-center">
+        <span className="text-white bg-purple w-auto h-full flex flex-col py-8 px-4 gap-8 xl:col-span-1 justify-center items-center text-center">
           <h2 className="text-xl xl:text-3xl text-nowrap">Join Us</h2>
           <h1 className="text-xl xl:text-3xl ">{retreatDetails.name}</h1>
           <BookNowButton />

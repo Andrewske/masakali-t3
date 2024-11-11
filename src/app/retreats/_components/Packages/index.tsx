@@ -452,7 +452,7 @@ const Packages = () => {
           key={villa.title}
           className="flex flex-wrap w-full justify-center sm:px-8 py-8 font-baskerville"
         >
-          <div className="w-[600px] h-[600px] relative">
+          <div className="w-[600px] max-h-[600px] relative">
             <HeroCarousel showArrows={true}>
               {villa.images.map((image) => (
                 <div
@@ -464,7 +464,7 @@ const Packages = () => {
                     alt={image.alt}
                     key={image.alt}
                     fill={true}
-                    className="object-cover"
+                    className="object-cover h-full"
                   />
                 </div>
               ))}
