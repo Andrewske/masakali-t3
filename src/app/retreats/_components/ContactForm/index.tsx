@@ -11,6 +11,14 @@ import {
   FormLabel,
   FormMessage,
 } from '~/components/ui/form';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
+
 import { Input } from '~/components/ui/input';
 import GuestsForm from '../GuestsForm';
 import { Button } from '~/components/ui/button';
@@ -24,6 +32,7 @@ const formDefaultValues = {
   fullName: '',
   email: '',
   phone: '',
+  villa: '',
   adults: 2,
   notes: '',
 };
@@ -32,6 +41,7 @@ const formSchema = z.object({
   fullName: z.string().min(1, 'Full name is required'),
   email: z.string().email('Invalid email address'),
   phone: z.string().min(10, 'Phone number is required'),
+  villa: z.string(),
   adults: z.number().min(1, 'At least one adult is required'),
   notes: z.string(),
 });
@@ -136,19 +146,44 @@ const ContactForm = () => {
               />
               <GuestsForm form={form} />
             </span>
-
+            <FormField
+              control={form.control}
+              name="villa"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="font-montserrat uppercase">
+                    Villa Preference
+                  </FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="villa" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="surya">Surya</SelectItem>
+                      <SelectItem value="chandra">Chandra</SelectItem>
+                      <SelectItem value="jala">Jala</SelectItem>
+                      <SelectItem value="isvara">Isvara</SelectItem>
+                      <SelectItem value="priya">Priya</SelectItem>
+                      <SelectItem value="lumbung">Lumbung</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="notes"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="font-montserrat uppercase">
-                    Which villa do you prefer?
+                    Notes
                   </FormLabel>
-                  <p className="text-sm">
-                    We will do our best to accommodate your preference based on
-                    availability, who wants to share a bed or room, etc
-                  </p>
                   <FormControl>
                     <Textarea {...field} />
                   </FormControl>

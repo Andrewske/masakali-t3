@@ -8,6 +8,7 @@ export type LeadDataValues = {
   fullName: string;
   email: string;
   phone: string;
+  villa: string;
   adults: number;
   notes: string;
 };
@@ -15,17 +16,17 @@ export type LeadDataValues = {
 const GOOGLE_SERVICE_KEY = env.GOOGLE_SERVICE_KEY;
 
 function prepareGoogleSheetData(data: LeadDataValues): string[] {
-  const { date, fullName, email, phone, adults, notes } = data;
+  const { date, fullName, email, phone, adults, notes, villa } = data;
 
   return [
     date,
     fullName,
     email,
     phone,
-    '',
+    villa,
     String(adults),
     '',
-    '',
+    'Tribute',
     '',
     '',
     notes,
@@ -64,9 +65,9 @@ export async function POST(request: Request) {
       },
     });
     console.log(result.data);
+    return new Response(null, { status: 200 });
   } catch (error) {
     console.error(error);
+    return new Response(null, { status: 402 });
   }
-
-  return new Response(null, { status: 402 });
 }
