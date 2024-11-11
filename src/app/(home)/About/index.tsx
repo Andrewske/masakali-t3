@@ -5,7 +5,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="flex flex-wrap"
+      className="flex flex-wrap relative"
     >
       <div className="px-4 py-16 md:px-16 flex flex-col text-center justify-center gap-8 md:basis-6/12 ">
         <h1>Masakali Retreat</h1>
@@ -36,13 +36,12 @@ const About = () => {
         </span>
       </div>
 
-      <div className="md:basis-6/12 grid place-items-center">
+      <div className="md:basis-6/12 grid place-items-center relative">
         <Image
           src={suryaNameImage.src}
           alt={suryaNameImage.alt}
-          width={0}
-          height={0}
-          className="w-full h-full object-cover"
+          fill={true}
+          className="object-cover"
         />
       </div>
     </section>
