@@ -1,65 +1,68 @@
 import Image from 'next/image';
 
-import styles from './styles.module.scss';
-
-import AkashaFront from '~/../public/hero-images/akasha-front.webp';
-import AkashaPool from '~/../public/hero-images/akasha-pool.webp';
-import AkashaKitchen from '~/../public/hero-images/akasha-kitchen.webp';
-import AkashaBed from '~/../public/hero-images/akasha-bed.webp';
-import AkashaBathroom from '~/../public/hero-images/akasha-bathroom.webp';
-
 import Logo from '~/../public/FullOffWhiteLogo.svg';
 
 import HeroCarousel from './Carousel';
+import {
+  akashaFront,
+  akashaPool,
+  akashaKitchen,
+  akashaBed,
+  akashaBathroom,
+} from '~/lib/images';
 
 const images = [
   {
-    src: AkashaFront,
-    alt: 'Akasha at Masakali view from the front',
+    src: akashaFront.src,
+    alt: akashaFront.alt,
   },
   {
-    src: AkashaPool,
-    alt: 'Akasha at Masakali view of the pool',
+    src: akashaPool.src,
+    alt: akashaPool.alt,
   },
   {
-    src: AkashaKitchen,
-    alt: 'Akasha at Masakali view of the kitchen',
+    src: akashaKitchen.src,
+    alt: akashaKitchen.alt,
   },
   {
-    src: AkashaBed,
-    alt: 'Akasha at Masakali view of the bed',
+    src: akashaBathroom.src,
+    alt: akashaBathroom.alt,
   },
   {
-    src: AkashaBathroom,
-    alt: 'Akasha at Masakali view of the bathroom',
+    src: akashaBed.src,
+    alt: akashaBed.alt,
   },
 ];
 
 const renderImages = () => {
-  return images.map(({ src, alt }, index) => (
-    <Image
-      priority={index === 0}
-      className={styles.image}
-      key={alt}
-      src={src}
-      alt={alt}
-    />
+  return images.map((image) => (
+    <div
+      className="h-[calc(100vh-132px)]"
+      key={image.alt}
+    >
+      <Image
+        src={image.src}
+        alt={image.alt}
+        fill={true}
+        className="object-cover"
+      />
+    </div>
   ));
 };
-
 const HeroSlideShow = () => {
   return (
     <section
       id="home"
-      className={styles.wrapper}
+      className="h-[calc(100vh-132px)] w-full relative flex"
     >
       <HeroCarousel>{renderImages()}</HeroCarousel>
-      <div className={styles.logoContainer}>
+
+      <div className="absolute bottom-0 left-0 right-0 top-0 grid place-items-center">
         <Image
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           src={Logo}
           alt="Masakali Retreat Logo"
-          className={styles.logo}
+          className="w-[min(600px,80%)] h-full"
         />
       </div>
     </section>

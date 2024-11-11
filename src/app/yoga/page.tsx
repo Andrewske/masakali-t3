@@ -1,16 +1,19 @@
 import ContentContainer from '~/components/ContentContainer';
-import YogaMain from '../../../public/hero-images/masakali-yoga-tiny.jpeg';
-import YogaClasses from '../../../public/yoga/yoga-retreat-1.jpg';
-import YogaRetreats from '../../../public/yoga/yoga-retreat-2.jpg';
 import HeroImage from '~/components/HeroImage';
 import VideoContainer from '~/components/VideoContainer';
+
+import {
+  masakaliYogaMainImage,
+  yogaClasses,
+  yogaRetreatMeditation,
+} from '~/lib/images';
 
 export default function Page() {
   return (
     <section className=" w-full grid place-items-center">
       <HeroImage
-        imgSrc={YogaMain}
-        imgAlt="Akasha at Masakali view of the pool"
+        imgSrc={masakaliYogaMainImage.src}
+        imgAlt={masakaliYogaMainImage.alt}
         topText="Embrace"
         bottomText="Serenity And Wellness"
       />
@@ -27,17 +30,17 @@ export default function Page() {
         heading="Yoga Classes"
         content="Whether you are a seasoned yogi or just beginning your journey, our experienced instructors guide you through each pose with care and expertise. Our classes are designed to accommodate all skill levels, ensuring a nurturing and inclusive environment."
         // buttonText="See our yoga class schedule"
-        imgSrc={YogaClasses}
+        imgSrc={yogaClasses.src}
         imgPosition="left"
-        imgAlt="Masakali Yoga Retreat Image"
+        imgAlt={yogaClasses.alt}
       />
       <ContentContainer
         heading="Yoga Retreats"
         content="Immerse yourself in a transformative experience with our yoga retreats. Our retreats are thoughtfully curated to provide a perfect blend of yoga, meditation, and relaxation amidst the lush landscapes of Bali."
         // buttonText="Explore our upcoming retreats"
-        imgSrc={YogaRetreats}
+        imgSrc={yogaRetreatMeditation.src}
         imgPosition="right"
-        imgAlt="Masakali Yoga Retreat Image 2"
+        imgAlt={yogaRetreatMeditation.alt}
       />
       <VideoContainer
         title="Your Journey to wellness"

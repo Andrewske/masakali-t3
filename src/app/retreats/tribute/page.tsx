@@ -3,15 +3,18 @@ import Image from 'next/image';
 import Packages from '../_components/Packages';
 import { format } from 'date-fns';
 import ContentContainer from '~/components/ContentContainer';
-import MainImage from '~/../public/hero-images/masakali_arial.jpg';
-import MeditationDroneImage from '~/../public/yoga/Meditation-drone1.jpg';
-import YogaRetreat4 from '~/../public/yoga/yoga-retreat-4.jpg';
-import ExpectImage from '~/../public/retreats/tribute/expect.jpeg';
-import ActivitiesImage from '~/../public/retreats/tribute/sacred_monkey_forest.jpg';
-// import YogaRetreat5 from '~/../public/yoga/yoga-retreat-5.jpg';
-import ContactFormImage from '~/../public/retreats/tribute/yoge_shala_jungle.jpg';
+
+import {
+  masakaliArial,
+  meditationDrone,
+  cacaoCeremony,
+  monkeyForest,
+  yogaRetreatPose,
+  retreatGroupPhoto,
+  yogaShalaJungle,
+} from '~/lib/images';
+
 import ContactForm from '../_components/ContactForm';
-import GroupPhoto from '~/../public/retreats/tribute/group_photo.jpg';
 import BookNowButton from '~/app/retreats/_components/BookNowButton';
 
 const retreatDetails = {
@@ -127,12 +130,12 @@ export default function Page() {
         id="main-image"
         className="w-full grid grid-cols-1 xl:grid-cols-5 justify-center items-center relative overflow-hidden"
       >
-        <div className="h-[calc(100vh-132px)] w-full xl:col-span-4">
+        <div className="h-[calc(100vh-132px)] xl:col-span-4 relative">
           <Image
-            src={MainImage}
-            alt="Akasha Pool"
-            // fill={true}
-            className="h-full w-full object-cover object-center"
+            src={masakaliArial.src}
+            alt={masakaliArial.alt}
+            fill={true}
+            className=" object-cover object-center"
           />
         </div>
 
@@ -210,42 +213,42 @@ export default function Page() {
         heading="The Details"
         content={retreatDetails.details}
         // buttonText="See our yoga class schedule"
-        imgSrc={MeditationDroneImage}
+        imgSrc={meditationDrone.src}
         imgPosition="right"
-        imgAlt="Masakali Yoga Retreat Image"
+        imgAlt={meditationDrone.alt}
       />
       <ContentContainer
         heading={`Activities and Excursions`}
         content={retreatDetails.activities}
         // buttonText="See our yoga class schedule"
-        imgSrc={ActivitiesImage}
+        imgSrc={monkeyForest.src}
         imgPosition="left"
-        imgAlt="Masakali Yoga Retreat Image"
+        imgAlt={monkeyForest.alt}
       />
       <ContentContainer
         heading={`${retreatDetails.name} Includes The Following`}
         content={retreatDetails.included}
         // buttonText="See our yoga class schedule"
-        imgSrc={YogaRetreat4}
+        imgSrc={yogaRetreatPose.src}
         imgPosition="right"
-        imgAlt="Masakali Yoga Retreat Image"
+        imgAlt={yogaRetreatPose.alt}
       />
 
       <ContentContainer
         heading={`WHAT CAN YOU EXPECT DURING YOUR STAY`}
         content={retreatDetails.expect}
         // buttonText="See our yoga class schedule"
-        imgSrc={ExpectImage}
+        imgSrc={cacaoCeremony.src}
         imgPosition="left"
-        imgAlt="Masakali Yoga Retreat Image"
+        imgAlt={cacaoCeremony.alt}
       />
       <ContentContainer
         heading={`Who is this retreat for?`}
         content={retreatDetails.whoIsItFor}
         // buttonText="See our yoga class schedule"
-        imgSrc={GroupPhoto}
+        imgSrc={retreatGroupPhoto.src}
         imgPosition="right"
-        imgAlt="Masakali Yoga Retreat Image"
+        imgAlt={retreatGroupPhoto.alt}
       />
       <div
         id="the-space"
@@ -271,9 +274,9 @@ export default function Page() {
         id="contact-form"
         heading="Contact Us to book your retreat"
         content={<ContactForm />}
-        imgSrc={ContactFormImage}
+        imgSrc={yogaShalaJungle.src}
         imgPosition="left"
-        imgAlt="Masakali Yoga Retreat Image"
+        imgAlt={yogaShalaJungle.alt}
       />
       <Packages />
     </>

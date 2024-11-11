@@ -1,11 +1,14 @@
 import Image from 'next/image';
 
-import SuryaImage from '~/../public/surya/surya-bed.webp';
-import JalaImage from '~/../public/jala/jala-bed.webp';
-import AkashaImage from '~/../public/akasha/akasha-bed.webp';
-import TwinImage3 from '~/../public/lakshmi/lakshmi-bedroom-2a.webp';
-import LumbungImage from '~/../public/lumbungs/lumbung-renders.jpg';
 import ExploreVillasButton from '../ExploreVillasButton';
+
+import {
+  lumbungRenders,
+  suryaBed,
+  jalaBed,
+  akashaBed,
+  lakshmiBedroom1,
+} from '~/lib/images';
 
 const packageDetails = [
   {
@@ -24,7 +27,7 @@ const packageDetails = [
       '1 Pullout sofa downstairs',
       'Communal Pool',
     ],
-    image: TwinImage3,
+    image: lakshmiBedroom1.src,
   },
   {
     title: 'Upstairs Queen Bed in a Shared Villa',
@@ -48,7 +51,7 @@ const packageDetails = [
       '1 queen bed',
       'Communal Pool',
     ],
-    image: LumbungImage,
+    image: lumbungRenders.src,
   },
   {
     title: 'Twin Bed Shared room',
@@ -67,7 +70,7 @@ const packageDetails = [
       </p>
     ),
     listItems: ['Shared Room', 'Max 2 people', 'Communal Pool'],
-    image: TwinImage3,
+    image: lakshmiBedroom1.src,
   },
   {
     title: 'Private Room with King Bed',
@@ -91,7 +94,7 @@ const packageDetails = [
       '1 king bed',
       'Communal Pool',
     ],
-    image: AkashaImage,
+    image: akashaBed.src,
   },
   {
     title: '2 story private villa with queen bed',
@@ -115,7 +118,7 @@ const packageDetails = [
       '1 queen bed',
       'Communal Pool',
     ],
-    image: LumbungImage,
+    image: lumbungRenders.src,
   },
   {
     title: 'Private Villa with queen bed and private pool',
@@ -134,7 +137,7 @@ const packageDetails = [
       </p>
     ),
     listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
-    image: JalaImage,
+    image: jalaBed.src,
   },
   {
     title: 'Private Villa with king bed and private pool',
@@ -153,7 +156,7 @@ const packageDetails = [
       </p>
     ),
     listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
-    image: SuryaImage,
+    image: suryaBed.src,
   },
 ];
 

@@ -1,4 +1,4 @@
-import Image, { type StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 const HeroImage = ({
   imgSrc,
@@ -6,7 +6,7 @@ const HeroImage = ({
   topText,
   bottomText,
 }: {
-  imgSrc: StaticImageData;
+  imgSrc: string;
   imgAlt: string;
   topText: string;
   bottomText: string;
@@ -17,6 +17,7 @@ const HeroImage = ({
         src={imgSrc}
         alt={imgAlt}
         className="object-cover md:object-cover w-full h-full z-0"
+        fill={true}
       />
       <span className="absolute left-0 right-0 bottom-32 w-full flex justify-center">
         <span className="text-white bg-black bg-opacity-65 py-8 px-32 z-10 w-auto flex flex-col gap-8">

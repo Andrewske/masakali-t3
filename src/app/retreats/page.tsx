@@ -1,15 +1,15 @@
 import HeroImage from '~/components/HeroImage';
-import MainImage from '~/../public/yoga/yoga-shala-landscape-2.jpg';
 
 import ContentContainer from '~/components/ContentContainer';
-import YogaClasses from '../../../public/yoga/yoga-retreat-3.jpg';
+
+import { masakaliYogaShala, yogaRetreatPose } from '~/lib/images';
 
 export default function Page() {
   return (
     <section className="h-full w-full">
       <HeroImage
-        imgSrc={MainImage}
-        imgAlt="Akasha at Masakali view of the pool"
+        imgSrc={masakaliYogaShala.src}
+        imgAlt={masakaliYogaShala.alt}
         topText="Masakali"
         bottomText="Yoga Retreats"
       />
@@ -27,9 +27,9 @@ export default function Page() {
         <ContentContainer
           heading="Tribute Yoga Retreat"
           content={`Experience a transformative journey at Masakali Retreat with our six-day, five-night yoga retreat, set against the breathtaking backdrop of Balinese mountains, lush forests, and serene rice fields. Practice yoga, connect with nature, and find inner peace as you absorb the tranquility of one of the most spectacular places in the world`}
-          imgSrc={YogaClasses}
+          imgSrc={yogaRetreatPose.src}
           imgPosition="left"
-          imgAlt="Masakali Yoga Retreat Image"
+          imgAlt={yogaRetreatPose.alt}
           buttonText="Learn More"
           buttonLink="/retreats/tribute"
           newTab={false}

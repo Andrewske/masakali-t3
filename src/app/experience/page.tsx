@@ -2,15 +2,18 @@ import ContentContainer from '~/components/ContentContainer';
 
 import HeroImage from '~/components/HeroImage';
 
-import AkashaPhoto from '../../../public/hero-images/akasha-front.webp';
-import DiningPhoto from '../../../public/home/dining.jpg';
 import Availability from '../(home)/Availability';
-import SpaImage from '../../../public/experience/masakali_spa.jpg';
-import YogaShalaImage from '../../../public/yoga/masakali_yoga_shala.jpg';
-import ExperienceImage from '../../../public/experience/masakali_experience.jpg';
-import RomanceImage from '../../../public/experience/flower_pool.jpg';
 
 import { getAllBlockedDates } from '~/actions/reservations';
+
+import {
+  akashaFront,
+  masakaliSpaImage,
+  masakaliExperienceImage,
+  masakaliYogaShala,
+  masakaliDining,
+  masakaliFlowerPool,
+} from '~/lib/images';
 
 export default async function Page() {
   const disabledDates = await getAllBlockedDates();
@@ -18,8 +21,8 @@ export default async function Page() {
   return (
     <section className=" w-full grid place-items-center">
       <HeroImage
-        imgSrc={AkashaPhoto}
-        imgAlt="Akasha at Masakali view of the pool"
+        imgSrc={akashaFront.src}
+        imgAlt={akashaFront.alt}
         topText="Experience"
         bottomText="Our resort"
       />
@@ -50,25 +53,25 @@ export default async function Page() {
       <ContentContainer
         heading="Yoga"
         content="We invite you to embrace tranquility and balance through yoga and breathwork sessions at Masakali’s very own yoga shala. Immerse yourself in the spiritual essence of Bali with our Morning Flow class at 8:15 am, a perfect way to awaken and energize your body and spirit with the first light of day. As dusk settles, join us for our Evening Flow class at 6:00 pm, designed to help you unwind and reflect, promoting a sense of peace as the day draws to a close. Both classes are led by experienced instructors who integrate the beauty of Balinese nature and philosophy into their teaching, offering a harmonious blend of local tradition and yoga practice. These sessions allow you to enhance your health and wellness in the privacy and comfort of our yoga shala, set against the backdrop of Bali's breathtaking landscapes. Additionally, we are and will be scheduling various yoga retreats and workshops for guests to attend."
-        imgSrc={YogaShalaImage}
+        imgSrc={masakaliYogaShala.src}
         imgPosition="left"
-        imgAlt="Masakali Yoga Shala"
+        imgAlt={masakaliYogaShala.alt}
       />
       <ContentContainer
         heading="Tour Packages"
         content="At Masakali Retreat, we offer a range of curated tour packages that showcase the best of Bali's natural beauty and cultural heritage. Each tour package is designed to provide a unique and immersive experience, perfect for adventurers and culture enthusiasts alike."
-        imgSrc={ExperienceImage}
+        imgSrc={masakaliExperienceImage.src}
         imgPosition="right"
-        imgAlt="Masakali Yoga Shala"
+        imgAlt={masakaliExperienceImage.alt}
         buttonText="Explore our tour packages"
         buttonLink={'/pdf/tour_packages.pdf'}
       />
       <ContentContainer
         heading="Romance Packages"
         content="At Masakali Retreat, we specialize in creating unforgettable romantic experiences for couples. Our exclusive romance packages are designed to offer the perfect blend of luxury and, intimacy, ensuring that your stay is truly special. Enjoy a private candlelight dinner under the stars, relax and rejuvenate with our signature spa treatments designed for couples, delight in a unique and enchanting experience with our flower-filled pool or bath service or floating breakfast .Let us take care of all the details while you focus on enjoying quality time together. Our romance packages are designed to cater to your every need, creating an idyllic setting for love and connection."
-        imgSrc={RomanceImage}
+        imgSrc={masakaliFlowerPool.src}
         imgPosition="left"
-        imgAlt="Masakali Yoga Shala"
+        imgAlt={masakaliFlowerPool.alt}
         buttonText="Explore our romance packages"
         buttonLink={'/pdf/romance_packages.pdf'}
       />
@@ -76,18 +79,18 @@ export default async function Page() {
         heading="Spa Services"
         content="Let our accomplished therapists work their magic and pamper you from head to toe with the vast variety of spa treatments we have on offer. From luxury manicures and pedicures to full body therapeutic massages, no matter what indulgent experience you’re chasing, we can help provide it. Our spa services are set up in the privacy of your own villa - where we can set up treatment beds in your room or private deck overlooking the Balinese rice fields. We strive to deliver divine experiences in stunning surroundings, making for a sublime place to relax, heal and nurture."
         buttonText="Browse spa services menu"
-        imgSrc={SpaImage}
+        imgSrc={masakaliSpaImage.src}
         imgPosition="right"
-        imgAlt="Masakali Yoga Retreat Image 2"
+        imgAlt={masakaliSpaImage.alt}
         buttonLink={'/pdf/spa_services.pdf'}
       />
       <ContentContainer
         heading="Dining"
         content="Masakali offers a full range of options for dining, all with the taste and charm of fresh Balinese ingredients. Our curated selection of savory cuisine includes many local Balinese dishes as well as international dishes. Our staff will prepare you breakfast which is included in the price of your villa from select items on the menu as well as offer beverages, lunch and dinner so you can enjoy your meal in the privacy of your own villa."
         // buttonText="Browse food and cocktail menu"
-        imgSrc={DiningPhoto}
+        imgSrc={masakaliDining.src}
         imgPosition="left"
-        imgAlt="Masakali Dining Photo"
+        imgAlt={masakaliDining.alt}
       />
     </section>
   );

@@ -1,5 +1,5 @@
 'use client';
-import Image, { type StaticImageData } from 'next/image';
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 
 const ContentContainer = ({
@@ -18,7 +18,7 @@ const ContentContainer = ({
   content: string | ReactNode;
   buttonText?: string;
   buttonLink?: string;
-  imgSrc: StaticImageData;
+  imgSrc: string;
   imgAlt: string;
   imgPosition: 'left' | 'right';
   newTab?: boolean;
@@ -47,6 +47,8 @@ const ContentContainer = ({
         className="object-cover  h-full"
         src={imgSrc}
         alt={imgAlt}
+        width={600}
+        height={600}
       />
     </div>
   );

@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import DiningImage from '../../../../public/hero-images/akasha-pool.webp';
 import ScrollOffset from '~/components/ScrollOffset';
+
+import { akashaPool } from '~/lib/images';
 
 const Amenities = () => {
   return (
@@ -41,8 +42,8 @@ const Amenities = () => {
       <div className="h-[600px] w-full md:max-w-[450px] bg-gray flex  flex-wrap items-center">
         <Image
           className="object-cover w-full h-full"
-          src={DiningImage}
-          alt="Photo of breakfast on Surya's porch"
+          src={akashaPool.src}
+          alt={akashaPool.alt}
         />
       </div>
     </section>

@@ -20,13 +20,12 @@ const GridGallery = ({ villaName }: { villaName: VillaNamesType }) => {
           priority={index === 0}
           className={`${styles.image ?? ''} ${
             index === indexOfExpandedImage ? styles.expanded ?? '' : ''
-          }`}
+          } object-cover object-center`}
           src={src}
           alt={alt}
-          width={800}
-          height={800}
+          width={1600}
+          height={1600}
           onClick={() => setIndexOfExpandedImage(index)}
-          placeholder="blur"
         />
       ))}
     </div>

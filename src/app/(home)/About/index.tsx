@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import PoolImg from '../../../../public/home/masakali-surya-pool-walk.webp';
+import { suryaNameImage } from '~/lib/images';
 
 const About = () => {
   return (
@@ -38,8 +38,8 @@ const About = () => {
 
       <div className="md:basis-6/12 grid place-items-center">
         <Image
-          src={PoolImg}
-          alt="Masakali Surya pool view"
+          src={suryaNameImage.src}
+          alt={suryaNameImage.alt}
           width={0}
           height={0}
           className="w-full h-full object-cover"

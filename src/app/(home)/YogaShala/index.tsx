@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import YogaShalaImage from '~/../public/hero-images/akasha-pool.webp';
 
 import ScrollOffset from '~/components/ScrollOffset';
+
+import { yogaShalaJungle } from '~/lib/images';
 
 const YogaShala = () => {
   return (
@@ -13,8 +14,8 @@ const YogaShala = () => {
       <div className="h-min-[450px] w-full md:max-w-[450px] bg-gray flex  flex-wrap items-center">
         <Image
           className="object-cover w-full h-full"
-          src={YogaShalaImage}
-          alt="Photo of breakfast on Surya's porch"
+          src={yogaShalaJungle.src}
+          alt={yogaShalaJungle.alt}
         />
       </div>
       <div className="md:min-h-[450px]  w-full md:max-w-[450px] bg-gray flex flex-col gap-4  p-8 ">
