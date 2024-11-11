@@ -134,8 +134,12 @@ export default function Page() {
           <Image
             src={masakaliArial.src}
             alt={masakaliArial.alt}
-            fill={true}
-            className=" object-cover object-center"
+            // fill={true}
+            width={7403}
+            height={5552}
+            className="object-cover object-center"
+            priority={true}
+            sizes="(min-width: 1280px) 80vw, 100vw"
           />
         </div>
 

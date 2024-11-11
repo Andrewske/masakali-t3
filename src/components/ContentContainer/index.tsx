@@ -44,7 +44,7 @@ const ContentContainer = ({
   const image = (
     <div className="max-h-[600px] max-w-[600px] w-full aspect-[1/1] bg-gray flex  flex-wrap items-center">
       <Image
-        className="object-cover  h-full"
+        className="object-cover"
         src={imgSrc}
         alt={imgAlt}
         width={600}
