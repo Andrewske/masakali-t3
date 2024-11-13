@@ -68,11 +68,11 @@ const villas = [
   {
     title: 'Surya',
     details: [
-      'Private 1 Bedroom',
-      'Max. 3 People',
-      'King or Twin Beds',
-      'Private Kitchen',
-      'Private Infinity Pool',
+      'Private 1-bedroom villa',
+      'Sleeps 3',
+      'King bed, pullout sofa',
+      // 'Private Kitchen',
+      // 'Private Infinity Pool',
     ],
     packages: [
       {
@@ -96,12 +96,13 @@ const villas = [
   {
     title: 'Chandra',
     details: [
-      'Max. 2 People',
-      'King or Twin Beds',
-      'Private Kitchen',
-      'Bathtub',
-      'Private Infinity Pool',
-      'Hammock over the rice fields',
+      'Private 1-bedroom villa',
+      'King Bed',
+      'Sleeps 2',
+      'Rice field view',
+      'Tropical jungle',
+      'Mountain view',
+      // 'Hammock over the rice fields',
     ],
     packages: [
       {
@@ -120,9 +121,9 @@ const villas = [
   {
     title: 'Jala',
     details: [
-      'Private 1 Bedroom',
-      'Max. 2 People',
+      'Private 1-bedroom villa',
       'Queen Bed',
+      'Sleeps 2',
       'Private Kitchen',
       'Private Infinity Pool',
     ],
@@ -143,12 +144,12 @@ const villas = [
   {
     title: 'Priya',
     details: [
-      'Max. 2 People',
-      'Shared Room',
-      'King or Twin Bed',
-      'TV, fridge, and A/C',
-      'Bathtub',
-      'Communal Pool',
+      'Private room',
+      'Deck/patio',
+      'King or Twin configuration',
+      // 'TV, fridge, and A/C',
+      // 'Bathtub',
+      // 'Communal Pool',
     ],
     packages: [
       {
@@ -167,11 +168,11 @@ const villas = [
   {
     title: 'Isvara',
     details: [
-      'Max. 2 People',
-      'Shared Room',
-      'King or Twin Bed',
-      'TV, fridge, and A/C',
-      'Communal Pool',
+      'Private room',
+      'Patio',
+      'King or Twin configuration',
+      // 'TV, fridge, and A/C',
+      // 'Communal Pool',
     ],
     packages: [
       {
@@ -190,11 +191,12 @@ const villas = [
   {
     title: 'Lumbung',
     details: [
-      'Max. 3 People',
-      'Shared Villa',
-      'King or Twin Bed',
-      'Minibar',
-      'Communal Pool',
+      'Private 2 story villa',
+      'Pool view',
+      'King or Twin configuration upstairs',
+      'Pullout sofa downstairs',
+      // 'Minibar',
+      // 'Communal Pool',
     ],
     packages: [
       {
@@ -387,24 +389,41 @@ const Packages = () => {
       <h2>PACKAGES</h2>
       <span className="flex flex-col gap-8 max-w-[800px]">
         <p>
-          Each room is a comfortable and luxurious choice for relaxation and
-          rejuvenation during the retreat.
+          We know that everyone is different. So are all of our villas/rooms -
+          designed to meet your particular preferences and allow you to tap into
+          full relaxation during your retreat.
         </p>
         <p>
-          We recommend booking a private room (Surya or Jala) if you are
-          traveling with a partner or friend whom you do not mind sharing a bed
-          with. These two villas are also great for singles who prefer privacy
-          and extra luxuries during their stay. Surya and Jala both have their
-          own private infinity pools and kitchenettes in addition to the shared
-          spaces you may use to mingle with other retreat guests.
+          We recommend booking a private villa (Surya, Chandra or Jala) if you
+          are traveling with a partner or a friend whom you do not mind sharing
+          a room or bed with (Surya and Chandra have King beds and Jala has a
+          Queen bed).
         </p>
         <p>
-          If you are traveling solo and would like to make new friends or if you
-          are traveling with a friend and don’t want to share a bed, we
-          recommend choosing one of our shared rooms (Priya or Isvara) which has
-          twin configurations. These rooms have their own gardens and easy
-          access to communal spaces with a kitchen, living room, dining, and a
-          beautiful luxury pool.
+          These three villas are also great for singles who prefer privacy and
+          extra luxuries during their stay.
+        </p>
+        <p>
+          All three villas have their own private infinity pool with a view of
+          lush rice fields, the tropical jungle and the mountains and
+          kitchenettes in addition to the shared spaces you may use to mingle
+          with other retreat guests.
+        </p>
+        <p>
+          If you are traveling solo and would like to share a room, we recommend
+          choosing our rooms (Priya or Isvara) which can either be a King or
+          Twin configuration or one of our Lumbungs (Vayu, Pritvi or Tara) which
+          are currently being constructed. Isvara and Priya have their own
+          patios/gardens and easy access to the communal space which includes a
+          spacious kitchen, bar, living room, dining room, entertainment room
+          and a luxury communal pool with waterfalls and sunbeds overlooking the
+          rice fields, jungle and mountains. Vayu, Pritvi and Tara also have a
+          separate communal pool directly in front of these lumbung two story
+          villas.
+        </p>
+        <p>
+          Of course, all rooms have access to the communal areas and the yoga
+          shala to relax and commune with your fellow yogis.
         </p>
       </span>
       {/* <p className="font-bold">
@@ -446,59 +465,65 @@ const Packages = () => {
           </div>
         ))}
       </div> */}
-
-      {villas.map((villa) => (
-        <div
-          key={villa.title}
-          className="flex flex-wrap w-full justify-center sm:px-8 py-8 font-baskerville"
-        >
-          <div className="w-[600px] max-h-[600px] relative">
-            <HeroCarousel showArrows={true}>
-              {villa.images.map((image) => (
-                <div
-                  key={image.alt}
-                  className="max-h-[600px] max-w-[600px] w-full aspect-[1/1] relative"
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
+      <div className="flex flex-wrap w-full justify-evenly">
+        {villas.map((villa) => (
+          <div
+            key={villa.title}
+            className="flex flex-col justify-center sm:px-8 py-8 font-baskerville"
+          >
+            <div className="w-[400px] h-[400px] relative">
+              <HeroCarousel showArrows={true}>
+                {villa.images.map((image) => (
+                  <div
                     key={image.alt}
-                    fill={true}
-                    className="object-cover h-full"
-                  />
-                </div>
-              ))}
-            </HeroCarousel>
-          </div>
-          <div className="w-full sm:max-h-[600px] max-w-[600px] bg-white flex flex-col gap-8  px-4 py-8 sm:px-8 text-left ">
-            <span className="w-full flex flex-col gap-4">
-              <h2 className="text-3xl">{villa.title}</h2>
-              <span className="flex flex-wrap gap-2 justify-evenly w-full">
-                {villa.details.map((item, index) => (
-                  <p key={index}>{item}</p>
+                    className="max-h-[400px] max-w-[400px] w-full aspect-[1/1] relative"
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      key={image.alt}
+                      fill={true}
+                      className="object-cover h-full"
+                    />
+                  </div>
+                ))}
+              </HeroCarousel>
+            </div>
+            <div className="w-[400px] h-full bg-white flex flex-col gap-8  px-4 py-8 sm:px-8 text-left ">
+              <span className="w-full flex flex-col gap-4">
+                <h2 className="text-xl">{villa.title}</h2>
+                <span className="flex flex-wrap gap-2 justify-stretch  w-full">
+                  {villa.details.map((item, index) => (
+                    <p
+                      className="text-xs bg-gray border border-light-purple-700 p-2 grow text-center uppercase"
+                      key={index}
+                    >
+                      {item}
+                    </p>
+                  ))}
+                </span>
+              </span>
+              <span className="flex-grow flex flex-col justify-evenly gap-1">
+                <h3>Packages</h3>
+                {villa.packages.map((villaPackage) => (
+                  <ContactButton key={villaPackage.title}>
+                    <span
+                      key={`${villa.title} ${villaPackage.title}`}
+                      className="border-2 border-gray p-2 ml-4 flex justify-between hover:scale-105"
+                    >
+                      <p>{villaPackage.title}</p>
+                      <p>
+                        {`$${villaPackage.discount}`}{' '}
+                        <span className="line-through text-red-500">{`$${villaPackage.price}`}</span>
+                      </p>
+                    </span>
+                  </ContactButton>
                 ))}
               </span>
-            </span>
-            <span className="flex-grow flex flex-col justify-evenly">
-              <h3>Packages</h3>
-              {villa.packages.map((villaPackage) => (
-                <ContactButton key={villaPackage.title}>
-                  <span
-                    key={`${villa.title} ${villaPackage.title}`}
-                    className="border-2 border-gray p-4 ml-4 flex justify-between hover:scale-105"
-                  >
-                    <p>{villaPackage.title}</p>
-                    <p>
-                      {`$${villaPackage.discount}`}{' '}
-                      <span className="line-through text-red-500">{`$${villaPackage.price}`}</span>
-                    </p>
-                  </span>
-                </ContactButton>
-              ))}
-            </span>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
