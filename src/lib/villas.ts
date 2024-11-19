@@ -94,6 +94,7 @@ export type VillaDetail = {
   sanskrit: string;
   details: string;
   shortDescription: string;
+  videoSrc?: string;
   defaultImage: string;
   beds: string;
   baths: string;
@@ -136,6 +137,8 @@ export const villaDetails: VillaDetailsType = {
     details: `Spend your days in the infinity pool and your evenings watching the sun sink into the mountainous landscape from your private deck. Villa Surya offers a luxurious experience with a spacious bedroom, an en-suite bathroom, and a comfortable couch that can be used as an additional bed. The villa also features a kitchenette for your convenience, a private infinity pool with breathtaking views, and an outdoor deck perfect for soaking in the serene surroundings.`,
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
     defaultImage: suryaMainImage.src,
+    videoSrc:
+      'https://utfs.io/f/9ccX0s0IirBPf3p5lP6OQW2HdyAsbJiBvZ4F59X7k0NqngcR',
     beds: '1-2',
     baths: '1',
     adults: '3',
@@ -226,6 +229,8 @@ export const villaDetails: VillaDetailsType = {
     details: `Designed for romantic getaways, Villa Chandra offers an intimate retreat surrounded by nature. This one-bedroom villa features an outdoor hammock hanging over the forest and a luxurious bathtub that can be filled with flowers. The villa includes a spacious bedroom, en-suite bathroom, kitchenette, private infinity pool with stunning views, and an outdoor lounging area perfect for relaxation.`,
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
     defaultImage: chandraFront.src,
+    videoSrc:
+      'https://utfs.io/f/9ccX0s0IirBPHwcTj7ovofQantyw1BVMWshubg5GPS4DrlOe',
     beds: '1',
     baths: '1',
     adults: '2',
@@ -315,6 +320,8 @@ export const villaDetails: VillaDetailsType = {
     details: `Villa Jala is a quaint and cozy retreat, ideal for those seeking a homely and intimate experience. This one-bedroom villa includes a comfortable bedroom, en-suite bathroom with modern amenities, kitchenette for preparing light meals, private infinity pool offering serene views, and an outdoor seating area for enjoying the tranquil surroundings.`,
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
     defaultImage: jalaFront.src,
+    videoSrc:
+      'https://utfs.io/f/9ccX0s0IirBP2m1TyPLqVbLrjW3EcCpGAJYg1t0oiNnamdqR',
     beds: '1',
     baths: '1',
     adults: '2',
@@ -389,6 +396,8 @@ export const villaDetails: VillaDetailsType = {
     details: `Akasha, in Sanskrit, translates to “ether” or “spirit.” This villa is named to embody the essence of space and boundless energy. Just as the vastness of the sky knows no limits, Akasha Villa invites you to expand your horizons, connect with your inner self, and find serenity in the limitless possibilities of your journey.`,
     shortDescription: '3-bedroom villa up to 6 adults and 2 children',
     defaultImage: akashaFront.src,
+    videoSrc:
+      'https://utfs.io/f/9ccX0s0IirBPxetTMIZ81SkravWBH0q5Y3XleARMpJmujGQw',
     beds: '3-5',
     baths: '3.5',
     adults: '8',

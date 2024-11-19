@@ -62,6 +62,20 @@ async function Template({ villaId }: VillaDataType) {
           <GridGallery villaName={villaName} />
         </div>
         <div className="col-span-4 ">
+          {villaDetails[villaName].videoSrc && (
+            <div className="flex justify-center p-16 bg-purple">
+              <video
+                src={villaDetails[villaName].videoSrc}
+                width={1200}
+                autoPlay={true}
+                muted={true}
+                loop={true}
+                playsInline={true}
+                className="shadow-lg"
+                controls={true}
+              />
+            </div>
+          )}
           <ContentContainer
             heading=""
             content={

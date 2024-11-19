@@ -15,7 +15,7 @@ const VideoContainer = ({
           {text}
         </p>
       </div>
-      <iframe
+      {/* <iframe
         height={480}
         src={`https://www.youtube.com/embed/${videoId}`}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -23,6 +23,16 @@ const VideoContainer = ({
         title={title}
         className="md:col-start-3 md:col-end-4 w-full h-[480px] md:w-[853px]"
         loading="lazy"
+      /> */}
+      <video
+        src={`https://utfs.io/f/9ccX0s0IirBP2awIzUqVbLrjW3EcCpGAJYg1t0oiNnamdqRz`}
+        width={853}
+        autoPlay={true}
+        muted={true}
+        loop={true}
+        playsInline={true}
+        className="shadow-lg md:col-start-3 md:col-end-4 w-full h-[480px] md:w-[853px]"
+        controls={true}
       />
     </div>
   );
