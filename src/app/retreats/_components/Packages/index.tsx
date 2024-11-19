@@ -4,62 +4,133 @@ import Image from 'next/image';
 
 import {
   lumbungRenders,
-  suryaFront,
-  suryaPool,
-  suryaKitchen,
-  suryaBed,
-  suryaBathroom,
-  chandraBathroom,
-  chandraBed,
-  chandraFront,
-  chandraPool,
-  chandraHammock,
-  chandraKitchen,
-  jalaBathroom,
-  jalaBed,
-  jalaKitchen,
-  jalaFront,
-  jalaPool,
-  lakshmiBedroom1,
-  lakshmiBedroom2,
-  lakshmiBathroom,
-  lakshmiKitchen,
-  lakshmiPool,
+  tributeSurya1,
+  tributeSurya2,
+  tributeSurya3,
+  tributeSurya4,
+  tributeSurya5,
+  tributeSurya6,
+  tributeSurya7,
+  tributeSurya8,
+  tributeSurya9,
+  tributeSurya10,
+  tributeSurya11,
+  tributeChandra1,
+  tributeChandra2,
+  tributeChandra3,
+  tributeChandra4,
+  tributeChandra5,
+  tributeChandra6,
+  tributeChandra7,
+  tributeChandra8,
+  tributeChandra9,
+  tributeChandra10,
+  tributeChandra11,
+  tributeChandra12,
+  tributeChandra13,
+  tributeJala1,
+  tributeJala2,
+  tributeJala3,
+  tributeJala4,
+  tributeJala5,
+  tributeJala6,
+  tributeJala7,
+  tributeJala8,
+  tributeJala9,
+  tributeJala10,
+  tributeCommunalBath,
+  tributeCommunalDining,
+  tributeCommunalKitchen,
+  tributeCommunalLivingRoom2,
+  tributeCommunalLivingRoom,
+  tributeCommunalPoolDetail,
+  tributeCommunalPoolHangout,
+  tributeCommunalPool,
+  tributeIsvara1,
+  tributeIsvara2,
+  tributeIsvara3,
+  tributeIsvara4,
+  tributePriya1,
+  tributePriya2,
+  tributePriya3,
+  tributePriya4,
+  tributePriya5,
 } from '~/lib/images';
 import HeroCarousel from '~/app/(home)/HeroSlideShow/Carousel';
 import ContactButton from './ContactButton';
 
 const suryaImages = [
-  suryaFront,
-  suryaPool,
-  suryaKitchen,
-  suryaBed,
-  suryaBathroom,
+  tributeSurya1,
+  tributeSurya2,
+  tributeSurya3,
+  tributeSurya4,
+  tributeSurya5,
+  tributeSurya6,
+  tributeSurya7,
+  tributeSurya8,
+  tributeSurya9,
+  tributeSurya10,
+  tributeSurya11,
 ];
 
 const chandraImages = [
-  chandraFront,
-  chandraPool,
-  chandraHammock,
-  chandraKitchen,
-  chandraBathroom,
-  chandraBed,
+  tributeChandra1,
+  tributeChandra2,
+  tributeChandra3,
+  tributeChandra4,
+  tributeChandra5,
+  tributeChandra6,
+  tributeChandra7,
+  tributeChandra8,
+  tributeChandra9,
+  tributeChandra10,
+  tributeChandra11,
+  tributeChandra12,
+  tributeChandra13,
 ];
 
-const jalaImages = [jalaFront, jalaPool, jalaKitchen, jalaBed, jalaBathroom];
+const jalaImages = [
+  tributeJala1,
+  tributeJala2,
+  tributeJala3,
+  tributeJala4,
+  tributeJala5,
+  tributeJala6,
+  tributeJala7,
+  tributeJala8,
+  tributeJala9,
+  tributeJala10,
+];
 
 const isvaraImages = [
-  lakshmiBedroom1,
-  lakshmiPool,
-  lakshmiKitchen,
-  lakshmiBathroom,
+  tributeIsvara1,
+  tributeIsvara2,
+  tributeIsvara3,
+  tributeIsvara4,
+  tributeCommunalBath,
+  tributeCommunalDining,
+  tributeCommunalKitchen,
+  tributeCommunalLivingRoom2,
+  tributeCommunalLivingRoom,
+  tributeCommunalPoolDetail,
+  tributeCommunalPoolHangout,
+  tributeCommunalPool,
 ];
 
 const priyaImages = [
-  lakshmiBedroom2,
-  lakshmiPool,
-  lakshmiKitchen,
-  lakshmiBathroom,
+  tributePriya1,
+  tributePriya2,
+  tributePriya3,
+  tributePriya4,
+  tributePriya5,
+  tributeCommunalBath,
+  tributeCommunalDining,
+  tributeCommunalKitchen,
+  tributeCommunalLivingRoom2,
+  tributeCommunalLivingRoom,
+  tributeCommunalPoolDetail,
+  tributeCommunalPoolHangout,
+  tributeCommunalPool,
 ];
 
 const lumbungImages = [lumbungRenders];
@@ -69,10 +140,10 @@ const villas = [
     title: 'Surya',
     details: [
       'Private 1-bedroom villa',
-      'Sleeps 3',
+      'Max. 3 people',
       'King bed, pullout sofa',
-      // 'Private Kitchen',
-      // 'Private Infinity Pool',
+      'Private Kitchen',
+      'Private Infinity Pool',
     ],
     packages: [
       {
@@ -98,11 +169,11 @@ const villas = [
     details: [
       'Private 1-bedroom villa',
       'King Bed',
-      'Sleeps 2',
+      'Max. 2 people',
       'Rice field view',
       'Tropical jungle',
       'Mountain view',
-      // 'Hammock over the rice fields',
+      'Hammock over the rice fields',
     ],
     packages: [
       {
@@ -123,7 +194,7 @@ const villas = [
     details: [
       'Private 1-bedroom villa',
       'Queen Bed',
-      'Sleeps 2',
+      'Max. 2 people',
       'Private Kitchen',
       'Private Infinity Pool',
     ],
@@ -147,9 +218,9 @@ const villas = [
       'Private room',
       'Deck/patio',
       'King or Twin configuration',
-      // 'TV, fridge, and A/C',
-      // 'Bathtub',
-      // 'Communal Pool',
+      'TV, fridge, and A/C',
+      'Bathtub',
+      'Communal Pool',
     ],
     packages: [
       {
@@ -171,8 +242,8 @@ const villas = [
       'Private room',
       'Patio',
       'King or Twin configuration',
-      // 'TV, fridge, and A/C',
-      // 'Communal Pool',
+      'TV, fridge, and A/C',
+      'Communal Pool',
     ],
     packages: [
       {
@@ -195,8 +266,8 @@ const villas = [
       'Pool view',
       'King or Twin configuration upstairs',
       'Pullout sofa downstairs',
-      // 'Minibar',
-      // 'Communal Pool',
+      'Minibar',
+      'Communal Pool',
     ],
     packages: [
       {
@@ -219,167 +290,23 @@ const villas = [
   },
 ];
 
-// const packageDetails = [
-//   {
-//     title: 'Pullout sofa',
-//     price1: (
-//       <p>
-//         <span className="line-through text-red-500">$850</span> $
-//         {Math.round(850 * 0.85)}
-//         <span> (per person)</span>
-//       </p>
-//     ),
-//     listItems: ['available in Surya & Lumbung', 'Shared Villa'],
-//     image: lakshmiBedroom1.src,
-//   },
-//   {
-//     title: 'Upstairs Queen Bed in a Shared Villa',
-//     price1: (
-//       <p>
-//         <span className="line-through text-red-500">$1015</span> $
-//         {Math.round(1015 * 0.85)}
-//         <span> (1 person)</span>
-//       </p>
-//     ),
-//     price2: (
-//       <p>
-//         <span className="line-through text-red-500">$1675</span> $
-//         {Math.round(1675 * 0.85)}
-//         <span> (2 people)</span>
-//       </p>
-//     ),
-//     listItems: [
-//       'Private Room in shared villa',
-//       'Max 2 people',
-//       '1 queen bed',
-//       'Communal Pool',
-//     ],
-//     image: lumbungRenders.src,
-//   },
-//   {
-//     title: 'Twin Bed Shared room',
-//     price1: (
-//       <p>
-//         <span className="line-through text-red-500">$1115</span> $
-//         {Math.round(1115 * 0.85)}
-//         <span> (1 person)</span>
-//       </p>
-//     ),
-//     price2: (
-//       <p>
-//         <span className="line-through text-red-500">$1830</span> $
-//         {Math.round(1830 * 0.85)}
-//         <span> (2 people)</span>
-//       </p>
-//     ),
-//     listItems: ['Shared Room', 'Max 2 people', 'Communal Pool'],
-//     image: lakshmiBedroom1.src,
-//   },
-//   {
-//     title: 'Private Room with King Bed',
-//     price1: (
-//       <p>
-//         <span className="line-through text-red-500">$1325</span> $
-//         {Math.round(1325 * 0.85)}
-//         <span> (1 person)</span>
-//       </p>
-//     ),
-//     price2: (
-//       <p>
-//         <span className="line-through text-red-500">$2030</span> $
-//         {Math.round(2030 * 0.85)}
-//         <span> (2 people)</span>
-//       </p>
-//     ),
-//     listItems: [
-//       'Private Room in shared villa',
-//       'Max 2 people',
-//       '1 king bed',
-//       'Communal Pool',
-//     ],
-//     image: akashaBed.src,
-//   },
-//   {
-//     title: '2 story private villa with queen bed',
-//     price1: (
-//       <p>
-//         <span className="line-through text-red-500">$1325</span> $
-//         {Math.round(1235 * 0.85)}
-//         <span> (1 person)</span>
-//       </p>
-//     ),
-//     price2: (
-//       <p>
-//         <span className="line-through text-red-500">$2030</span> $
-//         {Math.round(2030 * 0.85)}
-//         <span> (2 people)</span>
-//       </p>
-//     ),
-//     listItems: [
-//       'Private Villa',
-//       'Max 2 people',
-//       '1 queen bed',
-//       'Communal Pool',
-//     ],
-//     image: lumbungRenders.src,
-//   },
-//   {
-//     title: 'Private Villa with queen bed and private pool',
-//     price1: (
-//       <p>
-//         <span className="line-through text-red-500">$1387</span> $
-//         {Math.round(1387 * 0.85)}
-//         <span> (1 person)</span>
-//       </p>
-//     ),
-//     price2: (
-//       <p>
-//         <span className="line-through text-red-500">$2047</span> $
-//         {Math.round(2047 * 0.85)}
-//         <span> (2 people)</span>
-//       </p>
-//     ),
-//     listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
-//     image: jalaBed.src,
-//   },
-//   {
-//     title: 'Private Villa with king bed and private pool',
-//     price1: (
-//       <p>
-//         <span className="line-through text-red-500">$1480</span> $
-//         {Math.round(1480 * 0.85)}
-//         <span> (1 person)</span>
-//       </p>
-//     ),
-//     price2: (
-//       <p>
-//         <span className="line-through text-red-500">$2014</span> $
-//         {Math.round(2014 * 0.85)}
-//         <span> (2 people)</span>
-//       </p>
-//     ),
-//     listItems: ['Private Villa', 'Max 2 people', '1 queen bed', 'Private Pool'],
-//     image: suryaBed.src,
-//   },
-// ];
+// const scrollIntoViewWithOffset = (selector: string, offset: number) => {
+//   const element = document.querySelector<HTMLElement>(selector);
+//   if (!element) {
+//     throw new Error(`Element with selector "${selector}" not found`);
+//   }
 
-const scrollIntoViewWithOffset = (selector: string, offset: number) => {
-  const element = document.querySelector<HTMLElement>(selector);
-  if (!element) {
-    throw new Error(`Element with selector "${selector}" not found`);
-  }
-
-  const top = element.getBoundingClientRect().top;
-  window.scrollTo({
-    behavior: 'smooth',
-    top: top - document.body.getBoundingClientRect().top - offset,
-  });
-};
+//   const top = element.getBoundingClientRect().top;
+//   window.scrollTo({
+//     behavior: 'smooth',
+//     top: top - document.body.getBoundingClientRect().top - offset,
+//   });
+// };
 
 const Packages = () => {
-  const handleScroll = () => {
-    scrollIntoViewWithOffset('#contact-form', 132);
-  };
+  // const handleScroll = () => {
+  //   scrollIntoViewWithOffset('#contact-form', 132);
+  // };
 
   return (
     <div
@@ -426,45 +353,7 @@ const Packages = () => {
           shala to relax and commune with your fellow yogis.
         </p>
       </span>
-      {/* <p className="font-bold">
-        For booking inquiries, please contact us at{' '}
-        <a href="mailto:info@masakaliretreat.com">info@masakaliretreat.com</a>
-      </p> */}
-      {/* <ExploreVillasButton /> */}
 
-      {/* <div className="flex flex-wrap w-full justify-evenly">
-        <span className="w-full flex justify-center text-lg text-red-700 underline">
-          <p>All packages 15% off until Nov 20th</p>
-        </span>
-        {packageDetails.map((packageDetail) => (
-          <div
-            key={packageDetail.title}
-            className="flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300 max-w-[300px] my-4"
-          >
-            <span className="w-full h-[300px]">
-              <Image
-                src={packageDetail.image}
-                alt={packageDetail.title}
-                width={300}
-                height={300}
-                className="object-cover h-full"
-              />
-            </span>
-            <span className="flex flex-col gap-8 p-4">
-              <h3 className="text-xl">{packageDetail.title}</h3>
-              <span className="font-bold">
-                {packageDetail.price1}
-                {packageDetail.price2 && packageDetail.price2}
-              </span>
-              <ul>
-                {packageDetail.listItems.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </span>
-          </div>
-        ))}
-      </div> */}
       <div className="flex flex-wrap w-full justify-evenly">
         {villas.map((villa) => (
           <div
@@ -509,12 +398,12 @@ const Packages = () => {
                   <ContactButton key={villaPackage.title}>
                     <span
                       key={`${villa.title} ${villaPackage.title}`}
-                      className="border-2 border-gray p-2 ml-4 flex justify-between hover:scale-105"
+                      className="border-2  border-gray p-2 ml-4 flex justify-between hover:scale-105"
                     >
                       <p>{villaPackage.title}</p>
                       <p>
-                        {`$${villaPackage.discount}`}{' '}
-                        <span className="line-through text-red-500">{`$${villaPackage.price}`}</span>
+                        <span className="text-red-500">{`$${villaPackage.discount}`}</span>{' '}
+                        <span className="line-through ">{`$${villaPackage.price}`}</span>
                       </p>
                     </span>
                   </ContactButton>

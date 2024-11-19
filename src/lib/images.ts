@@ -248,11 +248,306 @@ export const retreatGroupPhoto = {
 };
 
 export const yogaShalaJungle = {
-  src: 'https://utfs.io/f/9ccX0s0IirBPneAVOUyABQr4xNViYTDHkUbuX7qe25nv9p8y',
+  src: 'https://utfs.io/f/9ccX0s0IirBPT8ZXdwUZrghN7FOHXWiyfm8KMcJtw4eUvlA5',
   alt: 'Masakali Yoga Shala Jungle',
 };
 
 export const lumbungRenders = {
   src: 'https://utfs.io/f/9ccX0s0IirBP7r9OU8XpW1Y6gEjJPak0roRHVTFei5xQIZNd',
   alt: 'Masakali Lumbung Renders',
+};
+
+// Tribute
+
+export const tribueActivities1 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPEEaZrZgje3g8dSTcaqFlR1LnCtWubzvrIQ46',
+  alt: 'Masakali Tribute Ceremony',
+};
+
+export const tribueActivities2 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPzkFhW627kzoY1FlxKIEuSLqvJsNn3yVABhaC',
+  alt: 'Masakali Tribute Waterfall',
+};
+
+export const tribueActivities3 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPeXzJ15hu4Qj5JDcGAl7x1zPMiSuZy6BdhfnI',
+  alt: 'Masakali Tribute Mountain Scenery',
+};
+
+export const tribueActivities4 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPfhhrtZ6OQW2HdyAsbJiBvZ4F59X7k0NqngcR',
+  alt: 'Masakali Tribute Dancing',
+};
+
+export const tribueActivities5 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPwKJBfYNlUNVbzyqtrjLYJn451su2aHSAxioQ',
+  alt: 'Masakali Tribute Hiking',
+};
+
+export const tribueActivities6 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPXeJimUMNI7n0rG2Q3C8AeptKJhqxOguDcsdv',
+  alt: 'Masakali Tribute Waterfall',
+};
+
+export const tributeChandra1 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPPfp2j5Gx94yHCYiv62VlZ7ThSWOrpd8Kj3u1',
+  alt: 'Masakali Tribute Chandra 1',
+};
+export const tributeChandra2 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPdiiJe1DGmAo1MVTaNq8S49kByYweL37x5uXh',
+  alt: 'Masakali Tribute Chandra 2',
+};
+export const tributeChandra3 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPgbKvEh0OJXfq7Ci0BeQtd3Dh4IFkTlKxvzyo',
+  alt: 'Masakali Tribute Chandra 3',
+};
+
+export const tributeChandra4 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPqQlv2E64IvyuiVUF4NgQfYP9xL8eWRh3mA1T',
+  alt: 'Masakali Tribute Chandra 4',
+};
+
+export const tributeChandra5 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBP6EtyEBJxG0n1sPaJEYK4NTQ7MlkfqedUWIhH',
+  alt: 'Masakali Tribute Chandra 5',
+};
+
+export const tributeChandra6 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBP6g5iApxG0n1sPaJEYK4NTQ7MlkfqedUWIhHR',
+  alt: 'Masakali Tribute Chandra 6',
+};
+
+export const tributeChandra7 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPH5ohIOvofQantyw1BVMWshubg5GPS4DrlOeI',
+  alt: 'Masakali Tribute Chandra 7',
+};
+
+export const tributeChandra8 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPQJYLsvE5putHOofnBWJKLRrmMkEVX29c3Z7S',
+  alt: 'Masakali Tribute Chandra 8',
+};
+
+export const tributeChandra9 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPFwxZnaO1cypvSnBjTxZleaGhsYCDJkdqwONX',
+  alt: 'Masakali Tribute Chandra 9',
+};
+export const tributeChandra10 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBP6NjvSvxG0n1sPaJEYK4NTQ7MlkfqedUWIhHR',
+  alt: 'Masakali Tribute Chandra 10',
+};
+
+export const tributeChandra11 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPtjxn8EHl1X2rhUTx0kR9dWVf6DLIjoKMZagG',
+  alt: 'Masakali Tribute Chandra 11',
+};
+
+export const tributeChandra12 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPfu0W3o6OQW2HdyAsbJiBvZ4F59X7k0NqngcR',
+  alt: 'Masakali Tribute Chandra 12',
+};
+
+export const tributeChandra13 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPdiiJe1DGmAo1MVTaNq8S49kByYweL37x5uXh',
+  alt: 'Masakali Tribute Chandra 13',
+};
+
+export const tributeCommunalBath = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPeSq2Uou4Qj5JDcGAl7x1zPMiSuZy6BdhfnIX',
+  alt: 'Masakali Tribute Communal Bath',
+};
+
+export const tributeCommunalDining = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPdACoIckDGmAo1MVTaNq8S49kByYweL37x5uX',
+  alt: 'Masakali Tribute Communal Dining',
+};
+export const tributeCommunalKitchen = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPxgaH7t6Z81SkravWBH0q5Y3XleARMpJmujGQ',
+  alt: 'Masakali Tribute Communal Kitchen',
+};
+export const tributeCommunalLivingRoom2 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBP4pzNxFmsKtQFzLj7mw1Zlx3RrpUhe6vB0HYO',
+  alt: 'Masakali Tribute Communal LivingRoom2',
+};
+export const tributeCommunalLivingRoom = {
+  src: 'https://utfs.io/f/9ccX0s0IirBP4h9pujmsKtQFzLj7mw1Zlx3RrpUhe6vB0HYO',
+  alt: 'Masakali Tribute Communal LivingRoom',
+};
+export const tributeCommunalPoolDetail = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPSj0EpNht9L6FcoqKky48xXuGn2IZSfTlJdrE',
+  alt: 'Masakali Tribute Communal PoolDetail',
+};
+
+export const tributeCommunalPoolHangout = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPDMvKuaCUtrhWLPVJg4GKeH6a3Xx9k7wifRzd',
+  alt: 'Masakali Tribute Communal Pool Hangout',
+};
+
+export const tributeCommunalPool = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPFoPg1YO1cypvSnBjTxZleaGhsYCDJkdqwONX',
+  alt: 'Masakali Tribute Communal Pool',
+};
+
+export const tributeIsvara1 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPQhBnTf5putHOofnBWJKLRrmMkEVX29c3Z7SG',
+  alt: 'Masakali Tribute Isvara 1',
+};
+
+export const tributeIsvara2 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPVTDGTrRMN26nqtX7VLc1UbpCY3EzesmJuwkg',
+  alt: 'Masakali Tribute Isvara 2',
+};
+
+export const tributeIsvara3 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPCarIJSANeF7zBRW1UrvEO5QTsgnhjILAoYXM',
+  alt: 'Masakali Tribute Isvara 3',
+};
+
+export const tributeIsvara4 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPUtfMjsLXeYjSFqxbnWPhBsCDQzHiym65gIwV',
+  alt: 'Masakali Tribute Isvara 4',
+};
+
+export const tributeJala1 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPJ3o14BW1hGb6UpKaTdCsVXSwLogkujz7YDH8',
+  alt: 'Masakali Tribute Jala 1',
+};
+
+export const tributeJala2 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBP4AEqPEmsKtQFzLj7mw1Zlx3RrpUhe6vB0HYO',
+  alt: 'Masakali Tribute Jala 2',
+};
+
+export const tributeJala3 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBP3CPgA2fftOc7uZBkrmn9woL5YAgN8qSMFV6H',
+  alt: 'Masakali Tribute Jala 3',
+};
+
+export const tributeJala4 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPNLIkVVJTOiq1eVrQ0zbo6mpI8dG4kBxjfWAD',
+  alt: 'Masakali Tribute Jala 4',
+};
+
+export const tributeJala5 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPKiuXD4zGM1l3ABrPmEWejNvJzhQyZFXSLk7T',
+  alt: 'Masakali Tribute Jala 5',
+};
+
+export const tributeJala6 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPT13m0uUZrghN7FOHXWiyfm8KMcJtw4eUvlA5',
+  alt: 'Masakali Tribute Jala 6',
+};
+
+export const tributeJala7 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPV41g8ERMN26nqtX7VLc1UbpCY3EzesmJuwkg',
+  alt: 'Masakali Tribute Jala 7',
+};
+
+export const tributeJala8 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPOxikTTbcFWuL23nb4to1NXSEygZaClRT8eUG',
+  alt: 'Masakali Tribute Jala 8',
+};
+
+export const tributeJala9 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBP5QgRJDrDEG4ncLxNtCFordKgqh7ZMBQYpJuV',
+  alt: 'Masakali Tribute Jala 9',
+};
+
+export const tributeJala10 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPF4xgzuO1cypvSnBjTxZleaGhsYCDJkdqwONX',
+  alt: 'Masakali Tribute Jala 10',
+};
+
+export const tributePriya1 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPFkqQrlO1cypvSnBjTxZleaGhsYCDJkdqwONX',
+  alt: 'Masakali Tribute Priya 1',
+};
+
+export const tributePriya2 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPxxBitbZ81SkravWBH0q5Y3XleARMpJmujGQw',
+  alt: 'Masakali Tribute Priya 2',
+};
+
+export const tributePriya3 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPgD9hrVG0OJXfq7Ci0BeQtd3Dh4IFkTlKxvzy',
+  alt: 'Masakali Tribute Priya 3',
+};
+
+export const tributePriya4 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPeVGb9ou4Qj5JDcGAl7x1zPMiSuZy6BdhfnIX',
+  alt: 'Masakali Tribute Priya 4',
+};
+
+export const tributePriya5 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPZ0drGx2EMkirSX1KOLcWPbNQ9G4BmvgYEzeR',
+  alt: 'Masakali Tribute Priya 5',
+};
+
+export const tributeSurya1 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPi7hDyQVjkAXuNzJUCcy396YKgforFlTv5ixZ',
+  alt: 'Masakali Tribute Surya 1',
+};
+
+export const tributeSurya2 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBP0ypZHudRGaXhHuAewLqJdv1fMxFgND5K2TUk',
+  alt: 'Masakali Tribute Surya 2',
+};
+
+export const tributeSurya3 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPukk4nO7IXUGJvDHl19Nj3O8AEY4C56fBbpes',
+  alt: 'Masakali Tribute Surya 3',
+};
+
+export const tributeSurya4 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPl2zQMDYCGz8EHXn3YVQ92RBewblTxLtWokA7',
+  alt: 'Masakali Tribute Surya 4',
+};
+
+export const tributeSurya5 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPYO0QaD354bH7gNGFcmVjwpOaldQB0yfWeSJD',
+  alt: 'Masakali Tribute Surya 5',
+};
+
+export const tributeSurya6 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPxn8q7yZ81SkravWBH0q5Y3XleARMpJmujGQw',
+  alt: 'Masakali Tribute Surya 6',
+};
+
+export const tributeSurya7 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPjhud4on96nm7uz0Z5FqfWbrtp3CHsoalAySQ',
+  alt: 'Masakali Tribute Surya 7',
+};
+
+export const tributeSurya8 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPgFPKMe0OJXfq7Ci0BeQtd3Dh4IFkTlKxvzyo',
+  alt: 'Masakali Tribute Surya 8',
+};
+
+export const tributeSurya9 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPDSAJTLoCUtrhWLPVJg4GKeH6a3Xx9k7wifRz',
+  alt: 'Masakali Tribute Surya 9',
+};
+
+export const tributeSurya10 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPPn68CgxGx94yHCYiv62VlZ7ThSWOrpd8Kj3u',
+  alt: 'Masakali Tribute Surya 10',
+};
+
+export const tributeSurya11 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPbvVUHLerzYBI30MGbPmRTf8w9UoyHshpva2X',
+  alt: 'Masakali Tribute Surya 11',
+};
+
+export const tributeYoga1 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPwUIOg1wNlUNVbzyqtrjLYJn451su2aHSAxio',
+  alt: 'Masakali Tribute Yoga 1',
+};
+
+export const tributeYoga2 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPzmVciA27kzoY1FlxKIEuSLqvJsNn3yVABhaC',
+  alt: 'Masakali Tribute Yoga 2',
+};
+
+export const tributeYoga3 = {
+  src: 'https://utfs.io/f/9ccX0s0IirBPe6ab7Fu4Qj5JDcGAl7x1zPMiSuZy6BdhfnIX',
+  alt: 'Masakali Tribute Yoga 3',
 };

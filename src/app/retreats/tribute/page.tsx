@@ -12,6 +12,23 @@ import {
   yogaRetreatPose,
   retreatGroupPhoto,
   yogaShalaJungle,
+  tributeYoga1,
+  tributeYoga2,
+  tributeYoga3,
+  tribueActivities1,
+  tribueActivities2,
+  tribueActivities3,
+  tribueActivities4,
+  tribueActivities5,
+  tribueActivities6,
+  tributeCommunalBath,
+  tributeCommunalDining,
+  tributeCommunalKitchen,
+  tributeCommunalLivingRoom2,
+  tributeCommunalLivingRoom,
+  tributeCommunalPoolDetail,
+  tributeCommunalPoolHangout,
+  tributeCommunalPool,
 } from '~/lib/images';
 
 import ContactForm from '../_components/ContactForm';
@@ -132,6 +149,21 @@ const retreatDetails = {
         and connect with like-minded individuals, this retreat is for you!
       </p>
     </div>
+  ),
+  space: (
+    <p className="max-w-[600px]">
+      Located near Ubud, Masakali Retreat offers the perfect blend of
+      tranquility and accessibility. Far enough from the bustling city to
+      provide peace and serenity, yet close enough to enjoy local attractions
+      and exquisite cuisine, our retreat is designed to help you connect deeply
+      with yourself. The space is purposefully built to support the practice of
+      yoga, focusing on spiritual awakening and rejuvenation. Every element of
+      Masakali Retreat embodies the idea of balance, creating an environment
+      that nurtures personal growth and inner harmony. Surrounded by the natural
+      beauty of Bali, our retreat provides a sanctuary where you can immerse
+      yourself in the transformative power of yoga and rediscover a balanced,
+      mindful way of living.
+    </p>
   ),
 };
 
@@ -259,17 +291,23 @@ export default function Page() {
         heading={`Activities and Excursions`}
         content={retreatDetails.activities}
         // buttonText="See our yoga class schedule"
-        imgSrc={monkeyForest.src}
+        images={[
+          tribueActivities1,
+          tribueActivities2,
+          tribueActivities3,
+          tribueActivities4,
+          tribueActivities5,
+          tribueActivities6,
+        ]}
         imgPosition="left"
-        imgAlt={monkeyForest.alt}
       />
       <ContentContainer
         heading={`${retreatDetails.name} Includes The Following`}
         content={retreatDetails.included}
         // buttonText="See our yoga class schedule"
         imgSrc={yogaRetreatPose.src}
-        imgPosition="right"
         imgAlt={yogaRetreatPose.alt}
+        imgPosition="right"
       />
 
       <ContentContainer
@@ -288,7 +326,7 @@ export default function Page() {
         imgPosition="right"
         imgAlt={retreatGroupPhoto.alt}
       />
-      <div
+      {/* <div
         id="the-space"
         className="w-full flex flex-col justify-center items-center gap-8 px-4 py-16 bg-purple text-white text-center font-montserrat"
       >
@@ -307,13 +345,32 @@ export default function Page() {
           transformative power of yoga and rediscover a balanced, mindful way of
           living.
         </p>
-      </div>
+      </div> */}
+      <ContentContainer
+        id="the-space"
+        heading="The Space"
+        content={retreatDetails.space}
+        images={[
+          tributeYoga1,
+          tributeYoga2,
+          tributeYoga3,
+          tributeCommunalBath,
+          tributeCommunalDining,
+          tributeCommunalKitchen,
+          tributeCommunalLivingRoom2,
+          tributeCommunalLivingRoom,
+          tributeCommunalPoolDetail,
+          tributeCommunalPoolHangout,
+          tributeCommunalPool,
+        ]}
+        imgPosition="left"
+      />
       <ContentContainer
         id="contact-form"
         heading="Contact Us to book your retreat"
         content={<ContactForm />}
         imgSrc={yogaShalaJungle.src}
-        imgPosition="left"
+        imgPosition="right"
         imgAlt={yogaShalaJungle.alt}
       />
       <Packages />

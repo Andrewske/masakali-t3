@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
+import HeroCarousel from '~/app/(home)/HeroSlideShow/Carousel';
 
 const ContentContainer = ({
   id,
@@ -10,6 +11,7 @@ const ContentContainer = ({
   buttonLink,
   imgSrc,
   imgAlt,
+  images,
   imgPosition,
   newTab = true,
 }: {
@@ -18,8 +20,9 @@ const ContentContainer = ({
   content: string | ReactNode;
   buttonText?: string;
   buttonLink?: string;
-  imgSrc: string;
-  imgAlt: string;
+  imgSrc?: string;
+  imgAlt?: string;
+  images?: { src: string; alt: string }[];
   imgPosition: 'left' | 'right';
   newTab?: boolean;
 }) => {
@@ -43,15 +46,34 @@ const ContentContainer = ({
 
   const image = (
     <div className="max-h-[600px] max-w-[600px] w-full aspect-[1/1] bg-gray flex  flex-wrap items-center">
-      <Image
-        className="object-cover h-full"
-        src={imgSrc}
-        alt={imgAlt}
-        width={600}
-        height={600}
-      />
+      {images ? (
+        <HeroCarousel showArrows={true}>
+          {images.map((image) => (
+            <div
+              key={image.alt}
+              className="max-h-[600px] max-w-[600px] w-full aspect-[1/1] relative"
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill={true}
+                className="object-cover h-full"
+              />
+            </div>
+          ))}
+        </HeroCarousel>
+      ) : (
+        <Image
+          className="object-cover h-full"
+          src={imgSrc ?? ''}
+          alt={imgAlt ?? ''}
+          width={600}
+          height={600}
+        />
+      )}
     </div>
   );
+
   return (
     <section
       className={`relative flex justify-center ${
