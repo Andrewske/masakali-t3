@@ -25,7 +25,6 @@ const Page = () => {
       <VideoContainer
         title="Take a Tour"
         text="When it comes to Masakali Retreat’s design, customer service, location, and overall atmosphere, no detail is overlooked. We have meticulously crafted every aspect to ensure a perfect balance between luxury and nature, providing you with top-tier service and amenities amidst the stunning natural beauty of Bali. Discover the serene elegance and exceptional comfort that awaits you at Masakali Retreat, where every moment is designed to offer an unforgettable experience."
-        videoId="in8GqtSGIJ0"
       />
       <Reviews />
       {/* <Dining />

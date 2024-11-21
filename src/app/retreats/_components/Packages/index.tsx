@@ -402,8 +402,8 @@ const Packages = () => {
                     >
                       <p>{villaPackage.title}</p>
                       <p>
-                        <span className="text-red-500">{`$${villaPackage.discount}`}</span>{' '}
-                        <span className="line-through ">{`$${villaPackage.price}`}</span>
+                        {/* <span className="text-red-500">{`$${villaPackage.discount}`}</span>{' '} */}
+                        <span className=" ">{`$${villaPackage.price}`}</span>
                       </p>
                     </span>
                   </ContactButton>

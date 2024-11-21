@@ -1,12 +1,4 @@
-const VideoContainer = ({
-  title,
-  text,
-  videoId,
-}: {
-  title: string;
-  text: string;
-  videoId: string;
-}) => {
+const VideoContainer = ({ title, text }: { title: string; text: string }) => {
   return (
     <div className="w-full bg-gray relative flex flex-col md:grid md:grid-col-5 py-16 md:px-16">
       <div className="md:absolute md:top-1/2 md:left-1/3 md:transform md:-translate-x-1/2 md:-translate-y-1/2 bg-purple py-16 px-8 flex flex-col align-center gap-8 text-white">
