@@ -144,22 +144,25 @@ const villas = [
       'King bed, pullout sofa',
       'Private Kitchen',
       'Private Infinity Pool',
+      'Rice field view',
+      'Tropical jungle',
+      'Mountain view',
     ],
     packages: [
       {
         title: '1 person',
-        discount: Math.round(1550 * 0.85),
+        discount: Math.round(1400),
         price: 1550,
       },
       {
         title: '2 people',
-        discount: Math.round(2368 * 0.85),
+        discount: Math.round(2068),
         price: 2368,
       },
       {
         title: 'Pullout Sofa',
-        discount: Math.round(850 * 0.85),
-        price: 850,
+        discount: Math.round(850),
+        price: 950,
       },
     ],
     images: suryaImages,
@@ -168,6 +171,8 @@ const villas = [
     title: 'Chandra',
     details: [
       'Private 1-bedroom villa',
+      'Private Infinity Pool',
+      'Private Kitchen',
       'King Bed',
       'Max. 2 people',
       'Rice field view',
@@ -178,12 +183,12 @@ const villas = [
     packages: [
       {
         title: '1 person',
-        discount: Math.round(1550 * 0.85),
+        discount: Math.round(1400),
         price: 1550,
       },
       {
         title: '2 people',
-        discount: Math.round(2368 * 0.85),
+        discount: Math.round(2068),
         price: 2368,
       },
     ],
@@ -197,16 +202,19 @@ const villas = [
       'Max. 2 people',
       'Private Kitchen',
       'Private Infinity Pool',
+      'Rice field view',
+      'Tropical jungle',
+      'Mountain view',
     ],
     packages: [
       {
         title: '1 person',
-        discount: Math.round(1425 * 0.85),
+        discount: Math.round(1270),
         price: 1425,
       },
       {
         title: '2 people',
-        discount: Math.round(2245 * 0.85),
+        discount: Math.round(1935),
         price: 2245,
       },
     ],
@@ -216,6 +224,7 @@ const villas = [
     title: 'Priya',
     details: [
       'Private room',
+      'Max. 2 people',
       'Deck/patio',
       'King or Twin configuration',
       'TV, fridge, and A/C',
@@ -225,12 +234,12 @@ const villas = [
     packages: [
       {
         title: '1 person',
-        discount: Math.round(1268 * 0.85),
+        discount: Math.round(1120),
         price: 1268,
       },
       {
         title: '2 people',
-        discount: Math.round(2090 * 0.85),
+        discount: Math.round(1794),
         price: 2090,
       },
     ],
@@ -240,6 +249,7 @@ const villas = [
     title: 'Isvara',
     details: [
       'Private room',
+      'Max. 2 people',
       'Patio',
       'King or Twin configuration',
       'TV, fridge, and A/C',
@@ -248,12 +258,12 @@ const villas = [
     packages: [
       {
         title: '1 person',
-        discount: Math.round(1205 * 0.85),
+        discount: Math.round(1050),
         price: 1205,
       },
       {
         title: '2 people',
-        discount: Math.round(2028 * 0.85),
+        discount: Math.round(1718),
         price: 2028,
       },
     ],
@@ -263,6 +273,7 @@ const villas = [
     title: 'Lumbung',
     details: [
       'Private 2 story villa',
+      'Max. 3 people',
       'Pool view',
       'King or Twin configuration upstairs',
       'Pullout sofa downstairs',
@@ -272,18 +283,18 @@ const villas = [
     packages: [
       {
         title: '1 person (Upstairs)',
-        discount: Math.round(1396 * 0.85),
+        discount: Math.round(1250),
         price: 1396,
       },
       {
         title: '2 people (Upstairs)',
-        discount: Math.round(2219 * 0.85),
+        discount: Math.round(1927),
         price: 2219,
       },
       {
         title: 'Pullout Sofa (Downstairs)',
-        discount: Math.round(850 * 0.85),
-        price: 850,
+        discount: Math.round(850),
+        price: 950,
       },
     ],
     images: lumbungImages,
@@ -402,8 +413,8 @@ const Packages = () => {
                     >
                       <p>{villaPackage.title}</p>
                       <p>
-                        {/* <span className="text-red-500">{`$${villaPackage.discount}`}</span>{' '} */}
-                        <span className=" ">{`$${villaPackage.price}`}</span>
+                        <span className="text-red-500">{`$${villaPackage.discount}`}</span>{' '}
+                        <span className="line-through">{`$${villaPackage.price}`}</span>
                       </p>
                     </span>
                   </ContactButton>
