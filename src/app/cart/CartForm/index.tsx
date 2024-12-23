@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BeatLoader } from 'react-spinners';
 import AddressForm from './AddressForm';
 
@@ -29,6 +29,8 @@ export default function CartForm({
 }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [adminDiscount, setAdminDiscount] = useState(false);
+  const [checkin, setCheckin] = useState<Date>(new Date());
+  const [checkout, setCheckout] = useState<Date>(new Date());
 
   const { currency } = useCurrencyStore((state) => state);
   const { dateRange } = useReservationStore((state) => state);
@@ -36,13 +38,18 @@ export default function CartForm({
 
   const { step, nextStep, setStep } = useFormSteps(1);
 
-  const { from: checkin, to: checkout } = dateRange;
+  useEffect(() => {
+    if (dateRange.from && dateRange.to) {
+      setCheckin(dateRange.from);
+      setCheckout(dateRange.to);
+    }
+  }, [dateRange]);
 
   const villaName = getVillaName(villaId);
 
-  if (!checkin || !checkout) {
-    throw new Error('Date range is not set');
-  }
+  // if (!checkin || !checkout) {
+  //   throw new Error('Date range is not set');
+  // }
 
   const pricing = useVillaPricing({
     villaPricing,

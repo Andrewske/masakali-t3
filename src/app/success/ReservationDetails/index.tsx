@@ -24,12 +24,7 @@ const ReservationDetails = ({
   const villaName = getVillaName(villa_id as VillaIdsType);
   const villa = villaDetails[villaName];
 
-  const formatDate = (date: Date) =>
-    date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
+  const formatDate = (date: Date) => date.toISOString().split('T')[0];
 
   return (
     <div className="flex flex-col justify-evenly items-center p-8">

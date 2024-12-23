@@ -25,18 +25,17 @@ const CartDetails = ({
   const { dateRange } = useReservationStore((state) => state);
   const villaName = getVillaName(villaId);
 
-  if (!dateRange.to || !dateRange.from) {
-    throw new Error('Date range is not set');
-  }
-
-  const checkinString = format(dateRange.from, 'yyyy-MM-dd');
-
-  const checkoutString = format(dateRange.to, 'yyyy-MM-dd');
-
   const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
     useMemo(() => {
       if (!dateRange?.from || !dateRange?.to) {
-        throw new Error('Date range is not set');
+        return {
+          pricePerNight: 0,
+          subTotal: 0,
+          discount: 0,
+          taxes: 0,
+          finalPrice: 0,
+          numNights: 0,
+        };
       }
       return createPricingObject({
         villaPricing,
@@ -45,6 +44,9 @@ const CartDetails = ({
         conversionRate,
       });
     }, [dateRange, villaPricing, conversionRate]);
+
+  const checkinString = dateRange.from && format(dateRange.from, 'yyyy-MM-dd');
+  const checkoutString = dateRange.to && format(dateRange.to, 'yyyy-MM-dd');
 
   const renderDetail = (label: string, value: string | number | null) => (
     <span key={label}>

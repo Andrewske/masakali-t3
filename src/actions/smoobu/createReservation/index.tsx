@@ -38,8 +38,8 @@ export const createReservation = async ({
         'Cache-Control': 'no-cache',
       },
       body: JSON.stringify({
-        arrivalDate: checkin.toISOString().split('T')[0],
-        departureDate: checkout.toISOString().split('T')[0],
+        arrivalDate: checkin,
+        departureDate: checkout,
         apartmentId: villaId,
         channelId: channelIds.website,
         firstName: firstName,

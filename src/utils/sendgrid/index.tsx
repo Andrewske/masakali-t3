@@ -6,12 +6,19 @@ import { formatCurrency } from '../helpers';
 export const createBookingConfirmationData = ({
   user,
   paymentData,
+  conversionRate = 1,
+  isAdmin = false,
 }: {
   user: UserState['user'];
   paymentData: PaymentData;
+  conversionRate?: number;
+  isAdmin?: boolean;
 }) => {
-  //   console.log({ user, paymentData });
-  const currency = paymentData.currency;
+  const currency = isAdmin ? 'IDR' : paymentData.currency;
+
+  const calculatePrice = (price: number, factor: number) =>
+    isAdmin ? price : price * factor;
+
   return {
     name: user.fullName,
     email: user.email,
@@ -20,9 +27,21 @@ export const createBookingConfirmationData = ({
     startDate: format(paymentData.checkin, 'MMMM d yyyy'),
     endDate: format(paymentData.checkout, 'MMMM d yyyy'),
     numDays: paymentData.numNights,
-    pricePerNight: formatCurrency(paymentData.pricePerNight, currency),
-    discount: formatCurrency(paymentData.discount, currency),
-    taxes: formatCurrency(paymentData.taxes, currency),
-    total: formatCurrency(paymentData.finalPrice, currency),
+    pricePerNight: formatCurrency(
+      calculatePrice(paymentData.pricePerNight, conversionRate),
+      currency
+    ),
+    discount: formatCurrency(
+      calculatePrice(paymentData.discount, conversionRate),
+      currency
+    ),
+    taxes: formatCurrency(
+      calculatePrice(paymentData.taxes, conversionRate),
+      currency
+    ),
+    total: formatCurrency(
+      calculatePrice(paymentData.finalPrice, conversionRate),
+      currency
+    ),
   };
 };

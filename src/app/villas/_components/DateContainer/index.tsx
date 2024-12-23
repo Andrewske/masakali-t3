@@ -76,27 +76,6 @@ const DateContainer = ({
       ? format(dateRange.from, "MMM d',' yyyy")
       : 'Choose Dates';
 
-  // const ArrivalDateDisplay = useMemo(() => {
-  //   const formattedDate =
-  //     dateRange.from &&
-  //     dateRange.from instanceof Date &&
-  //     !isNaN(dateRange.from.getTime())
-  //       ? format(dateRange.from, "MMM d',' yyyy")
-  //       : 'Choose Dates';
-
-  //   return <p>{formattedDate}</p>;
-  // }, [dateRange]);
-
-  // const DepartureDateDisplay = useMemo(() => {
-  //   const formattedDate =
-  //     dateRange.to &&
-  //     dateRange.to instanceof Date &&
-  //     !isNaN(dateRange.to.getTime())
-  //       ? format(dateRange.to, "MMM d',' yyyy")
-  //       : 'Choose Dates';
-
-  //   return <p>{formattedDate}</p>;
-  // }, [dateRange]);
 
   const departureDate =
     dateRange.to &&
@@ -108,14 +87,13 @@ const DateContainer = ({
   const handleBooking = async () => {
     try {
       if (dateRange.from && dateRange.to) {
-        const userTimezoneOffset = new Date().getTimezoneOffset() * 60000;
         if (reservationId) {
           await updateReservation({
             reservationId,
             data: {
               villa_id: Number(villaId),
-              arrival: new Date(dateRange.from.getTime() - userTimezoneOffset),
-              departure: new Date(dateRange.to.getTime() - userTimezoneOffset),
+              arrival: format(dateRange.from, 'yyyy-MM-dd'),
+              departure: format(dateRange.to, 'yyyy-MM-dd'),
             },
           });
 
@@ -123,8 +101,8 @@ const DateContainer = ({
         } else {
           const newResId = await createReservation({
             villaId,
-            checkin: dateRange.from,
-            checkout: dateRange.to,
+            arrival: format(dateRange.from, 'yyyy-MM-dd'),
+            departure: format(dateRange.to, 'yyyy-MM-dd'),
           });
           setReservationId(newResId);
           router.push(`/cart?reservationId=${String(newResId)}`);

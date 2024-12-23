@@ -22,6 +22,7 @@ import { createBookingConfirmationData } from '~/utils/sendgrid';
 import { updateReservation } from '~/actions/reservations/updateReservation';
 import { createReservationData } from '~/utils/smoobu/createReservationData';
 import { useToast } from '~/components/ui/use-toast';
+import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 
 export type PaymentData = {
   user: UserStore['user']; // Replace UserType with the actual type of your user object
@@ -50,11 +51,10 @@ const useFetchPaymentData = ({
   reservationId,
 }: useFetchPaymentProps) => {
   const { token, setToken, setPaymentSuccess } = useXenditStore();
+  const { conversionRate } = useCurrencyStore((state) => state);
   const { user } = useUserStore((state) => state);
   const router = useRouter();
   const { toast } = useToast();
-
-  // const previousPaymentData = usePrevious(paymentData);
 
   const fetchPayment = useCallback(
     async ({ token, user }: { token: string; user: UserStore['user'] }) => {
@@ -65,19 +65,7 @@ const useFetchPaymentData = ({
           const payment = await confirmXenditPayment({
             token,
             user,
-            reservation: {
-              villaId: paymentData.villaId,
-              villaName: paymentData.villaName,
-              checkin: paymentData.checkin,
-              checkout: paymentData.checkout,
-              numNights: paymentData.numNights,
-              finalPrice: paymentData.finalPrice,
-              pricePerNight: paymentData.pricePerNight,
-              discount: paymentData.discount,
-              taxes: paymentData.taxes,
-              totalIDR: paymentData.totalIDR,
-              currency: paymentData.currency,
-            },
+            totalIDR: paymentData.totalIDR,
           });
           setPaymentSuccess(payment.success);
           setToken(null); // Reset the token after successful payment
@@ -96,15 +84,20 @@ const useFetchPaymentData = ({
               reservationId,
             });
 
-            // Send the booking confirmation
-            const bookingConfirmationData = createBookingConfirmationData({
-              user,
-              paymentData,
+            await sendBookingConfirmation({
+              data: createBookingConfirmationData({
+                user,
+                paymentData,
+                conversionRate,
+              }),
             });
 
-            await sendBookingConfirmation({ data: bookingConfirmationData });
             await sendAdminBookingConfirmation({
-              data: bookingConfirmationData,
+              data: createBookingConfirmationData({
+                user,
+                paymentData,
+                isAdmin: true,
+              }),
             });
 
             await updateReservation({
@@ -146,6 +139,7 @@ const useFetchPaymentData = ({
       reservationId,
       router,
       toast,
+      conversionRate,
     ]
   );
 

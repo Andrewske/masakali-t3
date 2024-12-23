@@ -4,8 +4,8 @@ import { prisma } from '~/db/prisma';
 type ReservationDataType = {
   smoobu_id?: number | null;
   villa_id?: number;
-  arrival?: Date;
-  departure?: Date;
+  arrival?: string;
+  departure?: string;
   guest_name?: string;
   email?: string;
   phone?: string;
@@ -28,7 +28,11 @@ export const updateReservation = async ({
       where: {
         id: reservationId,
       },
-      data,
+      data: {
+        ...data,
+        arrival: new Date(data.arrival ?? ''),
+        departure: new Date(data.departure ?? ''),
+      },
       select: {
         id: true,
       },

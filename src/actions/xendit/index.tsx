@@ -3,24 +3,10 @@ import { env } from '~/env.mjs';
 import type { UserState } from '~/stores/userStore';
 import type { XenditChargeResponse } from '~/types/xendit';
 
-import type { VillaIdsType } from '~/lib/villas';
-
 type ConfirmXenditPaymentProps = {
   token: string;
   user: UserState['user'];
-  reservation: {
-    villaId: VillaIdsType;
-    checkin: Date;
-    checkout: Date;
-    totalIDR: number;
-    villaName: string;
-    pricePerNight: number;
-    numNights: number;
-    discount: number;
-    taxes: number;
-    finalPrice: number;
-    currency: string;
-  };
+  totalIDR: number;
 };
 
 // Configuration for Xendit API
@@ -36,7 +22,7 @@ const xenditConfig = {
 export const confirmXenditPayment = async ({
   token,
   user,
-  reservation,
+  totalIDR,
 }: ConfirmXenditPaymentProps): Promise<{
   success: boolean;
   paymentId: string | null;
@@ -44,8 +30,8 @@ export const confirmXenditPayment = async ({
   console.log('Confirming Xendit payment...');
   console.log('Token:', token);
   console.log('User:', user);
-  console.log('Reservation:', reservation);
-  const { totalIDR } = reservation;
+  // console.log('Reservation:', reservation);
+  // const { totalIDR } = reservation;
 
   const body = createRequestBody(token, user, totalIDR);
   const headers = createRequestHeaders();

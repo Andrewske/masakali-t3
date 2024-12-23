@@ -5,19 +5,19 @@ import type { VillaIdsType } from '~/lib/villas';
 
 export const createReservation = async ({
   villaId,
-  checkin,
-  checkout,
+  arrival,
+  departure,
 }: {
   villaId: VillaIdsType;
-  checkin: Date;
-  checkout: Date;
+  arrival: string;
+  departure: string;
 }) => {
   try {
     const reservation = await prisma.reservation.create({
       data: {
         villa_id: Number(villaId),
-        arrival: checkin,
-        departure: checkout,
+        arrival: new Date(arrival),
+        departure: new Date(departure),
         channel_id: Number(env.SMOOBU_SETTINGS_CHANNEL_ID),
       },
       select: {
