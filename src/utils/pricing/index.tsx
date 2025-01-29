@@ -1,4 +1,4 @@
-import { WEBSITE_DISCOUNT, VAT_TAX } from '~/lib/constants';
+import { WEBSITE_DISCOUNT, SPECIAL_DISCOUNT, VAT_TAX } from '~/lib/constants';
 
 export type VillaPricingType = {
   date: Date;
@@ -6,13 +6,14 @@ export type VillaPricingType = {
   available: boolean;
 };
 
-const calculatePricing = (prices: number[]) => {
+const calculatePricing = (prices: number[], specialDiscount = false) => {
   const numNights = prices.length;
   const subTotal = prices.reduce((acc, price) => acc + price, 0);
   const pricePerNight = subTotal / numNights;
 
   // Calculate discount
-  const discount = subTotal * WEBSITE_DISCOUNT;
+  const discount =
+    subTotal * (specialDiscount ? SPECIAL_DISCOUNT : WEBSITE_DISCOUNT);
   // Calculate taxes
   const taxes = (subTotal - discount) * VAT_TAX;
 
@@ -72,7 +73,7 @@ export const createPricingObject = ({
   }
 
   const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
-    calculatePricing(pricesConverted);
+    calculatePricing(pricesConverted, checkout < new Date('2025-03-01'));
   const priceObjIdr = calculatePricing(pricesIDR);
 
   return {

@@ -60,12 +60,27 @@ const DateContainer = ({
     }, [dateRange, villaPricing, conversionRate]);
 
   const renderConvertedAmount = (label: string, amount: number) => (
-    <span
-      className="flex justify-between w-full text-sm font-montserrat"
-      key={label}
-    >
-      <h3 className="text-sm">{label}</h3>
-      <p>{amount > 0 && formatCurrency(amount, currency)}</p>
+    <span>
+      <span
+        className="flex justify-between w-full text-sm font-montserrat"
+        key={label}
+      >
+        <h3 className="text-sm">{label}</h3>
+        <p>{amount > 0 && formatCurrency(amount, currency)}</p>
+      </span>
+      {label === 'Discount' &&
+        (dateRange.to && dateRange.to < new Date('2025-03-01') ? (
+          <p className="text-xs">
+            <span className="text-red-500">LIMITED TIME </span>
+            <span className="opacity-75">
+              20% discount for booking directly
+            </span>
+          </p>
+        ) : (
+          <p className="text-xs opacity-75">
+            10% discount for booking directly
+          </p>
+        ))}
     </span>
   );
 
@@ -75,7 +90,6 @@ const DateContainer = ({
     !isNaN(dateRange.from.getTime())
       ? format(dateRange.from, "MMM d',' yyyy")
       : 'Choose Dates';
-
 
   const departureDate =
     dateRange.to &&
@@ -139,6 +153,7 @@ const DateContainer = ({
         {renderConvertedAmount('Price per night', pricePerNight)}
         {renderConvertedAmount('Subtotal', subTotal)}
         {renderConvertedAmount('Discount', discount)}
+
         {renderConvertedAmount('Taxes', taxes)}
         {renderConvertedAmount('Total', finalPrice)}
         <CountryDropdown countries={countries} />
