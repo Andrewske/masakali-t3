@@ -54,6 +54,8 @@ export const env = createEnv({
     NEXT_PUBLIC_XENDIT_PUBLIC_KEY: z.string(),
     NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY: z.string(),
     NEXT_PUBLIC_IS_PRODUCTION: z.string(),
+    NEXT_PUBLIC_POSTHOG_HOST: z.string(),
+    NEXT_PUBLIC_POSTHOG_KEY: z.string(),
 
   },
   /**
@@ -99,5 +101,7 @@ export const env = createEnv({
     SMOOBU_SETTINGS_CHANNEL_ID: process.env.SMOOBU_SETTINGS_CHANNEL_ID,
     GOOGLE_SERVICE_KEY: process.env.GOOGLE_SERVICE_KEY,
     RETREAT_LEADS_SPREADSHEET_ID: process.env.RETREAT_LEADS_SPREADSHEET_ID,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
   },
 });
