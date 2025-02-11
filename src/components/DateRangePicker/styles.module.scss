@@ -1,4 +1,4 @@
-@import '~/styles/vars';
+@use '~/styles/vars';
 
 .dayPicker {
   width: max-content;
@@ -7,16 +7,16 @@
 }
 
 .button:hover {
-  background-color: $light-purple-7;
+  background-color: var(--light-purple-7);
   color: white;
 }
 
 .day_selected {
-  background-color: $purple;
+  background-color: var(--purple);
   color: white;
 
   &.day_disabled {
-    color: $gray;
+    color: var(--gray);
   }
 }
 
@@ -25,18 +25,18 @@
 }
 
 .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
-  background-color: $light-purple-7;
+  background-color: var(--light-purple-7);
 }
 
 .dayPickerSelected {
-  background-color: $purple;
+  background-color: var(--purple);
   &:hover {
-    background-color: $purple;
+    background-color: var(--purple);
   }
 }
 
 .dayPickerDay {
   &:hover {
-    background-color: $light-purple-7;
+    background-color: var(--light-purple-7);
   }
 }

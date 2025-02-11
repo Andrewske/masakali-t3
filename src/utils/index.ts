@@ -1,4 +1,4 @@
-import { utcToZonedTime } from 'date-fns-tz';
+import { toZonedTime } from 'date-fns-tz';
 import { addDays } from 'date-fns';
 
 export const normalizeDate = (date: Date) => {
@@ -30,5 +30,5 @@ export function getCurrentDateInBali(): Date {
   const baliTimeZone = 'Asia/Jakarta';
 
   // Convert the current UTC time to Bali time
-  return utcToZonedTime(nowUtc, baliTimeZone);
+  return toZonedTime(nowUtc, baliTimeZone);
 }

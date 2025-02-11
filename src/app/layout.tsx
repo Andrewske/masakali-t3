@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import '~/styles/globals.scss';
+import '~/styles/globals.css';
 import 'react-day-picker/dist/style.css';
 import { montserrat, baskerville } from '~/fonts';
 import { Toaster } from '~/components/ui/toaster';

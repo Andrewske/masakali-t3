@@ -1,4 +1,4 @@
-@import '~/styles/vars';
+@use '~/styles/vars';
 
 .wrapper {
   display: flex;
@@ -8,7 +8,7 @@
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
-  padding: $default-wrapper-padding;
+  padding: var(--default-wrapper-padding);
 }
 
 .container {
@@ -29,7 +29,8 @@
   border-radius: 0.25rem;
   padding: 0rem 0.75rem;
   font-size: 1rem;
-  box-shadow: $light-purple-5 0px 1px 2px, $light-purple-5 0px 0px 0px 2px;
+  box-shadow: var(--light-purple-5) 0px 1px 2px,
+    var(--light-purple-5) 0px 0px 0px 2px;
 
   &:focus-visible {
     outline: none;
@@ -38,7 +39,8 @@
 
 .error {
   border: none;
-  box-shadow: rgba($red, 0.5) 0px 1px 4px, rgba($red, 0.5) 0px 0px 0px 3px;
+  box-shadow: rgba(var(--red), 0.5) 0px 1px 4px,
+    rgba(var(--red), 0.5) 0px 0px 0px 3px;
 }
 
 .phoneInputContainer {
