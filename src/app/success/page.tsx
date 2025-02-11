@@ -1,13 +1,19 @@
 import { prisma } from '~/db/prisma';
 import ReservationDetails from './ReservationDetails';
 
-export default async function Page({
-  searchParams: { reservationId },
-}: {
-  searchParams: {
-    reservationId: string;
-  };
-}) {
+export default async function Page(
+  props: {
+    searchParams: Promise<{
+      reservationId: string;
+    }>;
+  }
+) {
+  const searchParams = await props.searchParams;
+
+  const {
+    reservationId
+  } = searchParams;
+
   const reservation = await prisma.reservation.findFirst({
     where: {
       id: reservationId,

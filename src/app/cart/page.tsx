@@ -6,14 +6,15 @@ import CartImage from './CartImage';
 import { getCountries } from '~/actions/countries';
 import { prisma } from '~/db/prisma';
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: {
-    villaId: string;
-    reservationId: string;
-  };
-}) {
+export default async function Page(
+  props: {
+    searchParams: Promise<{
+      villaId: string;
+      reservationId: string;
+    }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const reservation = await prisma.reservation.findUnique({
     where: {
       id: searchParams.reservationId,

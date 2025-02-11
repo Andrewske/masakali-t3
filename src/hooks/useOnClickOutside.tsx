@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { supportsPassiveEvents } from 'detect-it';
 
-type Ref<T> = React.RefObject<T>;
+type Ref<T> = React.RefObject<T | null>;
 
 type EventHandler = (event: Event) => void;
 
