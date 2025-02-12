@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-function Page() {
+async function Page() {
   return <Template villaId={jalaId} />;
 }
 export default Page;
