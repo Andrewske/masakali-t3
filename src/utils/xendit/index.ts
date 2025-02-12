@@ -29,7 +29,7 @@ export const xenditCreateToken = async (data: XenditCreateTokenProps) => {
     env.NEXT_PUBLIC_IS_PRODUCTION == 'true'
       ? env.NEXT_PUBLIC_XENDIT_PUBLIC_KEY
       : env.NEXT_PUBLIC_XENDIT_PUBLIC_TEST_KEY;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+
   window.Xendit.setPublishableKey(key);
 
   console.log(data.amount);

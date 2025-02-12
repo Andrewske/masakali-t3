@@ -35,9 +35,9 @@ const images = [
 ];
 
 const renderImages = () => {
-  return images.map((image, index) => (
+  return images.map((image) => (
     <div
-      className="h-[calc(100vh-132px)]"
+      className="h-[calc(100vh-132px)] relative"
       key={image.alt}
     >
       <Image
@@ -45,7 +45,7 @@ const renderImages = () => {
         alt={image.alt}
         fill={true}
         className="object-cover"
-        priority={index === 0}
+        // priority={index === 0}
       />
     </div>
   ));

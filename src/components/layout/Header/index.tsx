@@ -2,17 +2,18 @@
 import Image from 'next/image';
 
 import HeaderLinks from '~/components/layout/Header/Links';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
-import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 
-const RetreatButton = dynamic(() => import('./RetreatButton'), { ssr: false });
-const VillasButton = dynamic(() => import('./VillasButton'), { ssr: false });
+import RetreatButton from './RetreatButton';
+import VillasButton from './VillasButton';
 
 const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const pathName = usePathname();
+
+  const memoizedHeaderLinks = useMemo(() => <HeaderLinks />, []);
 
   return (
     <nav>
@@ -24,12 +25,12 @@ const Header = () => {
               width={150}
               height={100}
               alt="Masakali Retreat Logo in white with transparent background"
-              priority={true}
+              // priority={true}
             />
           </span>
           <span className="flex items-center justify-end p-4 gap-16 flex-1 ">
             <span className="hidden md:flex flex-wrap items-center justify-center p-4 gap-16 ">
-              <HeaderLinks />
+              {memoizedHeaderLinks}
             </span>
 
             {pathName === '/retreats/tribute' ? (
@@ -60,8 +61,8 @@ const Header = () => {
                   : 'hidden'
               }
             >
-              <div className="flex  flex-wrap items-center gap-4 text-center justify-center font-montserrat uppercase px-8">
-                <HeaderLinks />
+              <div className="flex flex-wrap items-center gap-4 text-center justify-center font-montserrat uppercase px-8">
+                {memoizedHeaderLinks}
               </div>
               <div
                 className="absolute top-0 right-0 p-2"

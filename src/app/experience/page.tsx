@@ -28,7 +28,7 @@ export default async function Page() {
       />
       <Availability disabledDates={disabledDates} />
 
-      <div className="flex flex-col gap-8 w-full p-16">
+      <div className="flex flex-col items-center gap-8 w-full p-16">
         <p className="w-full max-w-[885px] text-center font-baskerville m-auto">
           Perched in Kelusa Village with breathtaking panoramic views of the
           rice fields, mountains and tropical jungle, you&apos;ll feel instantly

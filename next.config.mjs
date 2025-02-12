@@ -4,6 +4,7 @@
  * for Docker builds.
  */
 import { withSentryConfig } from "@sentry/nextjs";
+import MillionLint from "@million/lint";
 // import withBundleAnalyzer from '@next/bundle-analyzer'
 
 // import { env } from "./src/env.mjs";
@@ -65,4 +66,4 @@ const sentryWebpackPluginOptions = {
   disableLogger: true,
 }
 
-export default withSentryConfig(nextConfig, sentryWebpackPluginOptions)
+export default MillionLint.next({ rsc: true })(withSentryConfig(nextConfig, sentryWebpackPluginOptions))

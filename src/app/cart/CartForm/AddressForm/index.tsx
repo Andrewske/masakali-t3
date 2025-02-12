@@ -10,6 +10,7 @@ import {
 import { Input } from '~/components/ui/input';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import type { FormData, FieldName } from '../getFormSchema';
+import React, { memo, useCallback, useMemo } from 'react';
 interface AddressFormProps {
   form: UseFormReturn<FormData>;
 }
@@ -41,10 +42,8 @@ const Field = ({ name, label, placeholder, value, setValue }: FieldProps) => (
   />
 );
 
-const AddressForm = ({ form }: AddressFormProps) => {
-  const { watch } = form;
-  const setValue: (name: FieldName, value: string | undefined) => void =
-    form.setValue;
+const AddressForm = memo(({ form }: AddressFormProps) => {
+  const { watch, setValue }: UseFormReturn<FormData> = form;
 
   const address1 = watch('address.address1');
   const address2 = watch('address.address2');
@@ -53,6 +52,52 @@ const AddressForm = ({ form }: AddressFormProps) => {
   const region = watch('address.region');
   const zip_code = watch('address.zip_code');
 
+  const handleCountryChange = useCallback(
+    (val: string) => setValue('address.country', val),
+    [setValue]
+  );
+
+  const handleRegionChange = useCallback(
+    (val: string) => setValue('address.region', val),
+    [setValue]
+  );
+
+  const renderCountryField = useCallback(
+    () => (
+      <FormItem className="col-span-1">
+        <FormLabel className="font-montserrat uppercase">Country</FormLabel>
+        <FormControl>
+          <CountryDropdown
+            valueType="short"
+            value={country}
+            className="bg-white w-full border-0 rounded p-2"
+            onChange={handleCountryChange}
+          />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    ),
+    [country, handleCountryChange]
+  );
+
+  const renderRegionField = useCallback(
+    () => (
+      <FormItem className="col-span-1">
+        <FormLabel className="font-montserrat uppercase">Region</FormLabel>
+        <FormControl>
+          <RegionDropdown
+            countryValueType="short"
+            country={country}
+            value={region}
+            className="bg-white w-full border-0 rounded p-2"
+            onChange={handleRegionChange}
+          />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    ),
+    [country, region, handleRegionChange]
+  );
   return (
     <div>
       <Field
@@ -80,46 +125,13 @@ const AddressForm = ({ form }: AddressFormProps) => {
 
         <FormField
           name="address.country"
-          render={() => (
-            <FormItem className="col-span-1">
-              <FormLabel className="font-montserrat uppercase">
-                Country
-              </FormLabel>
-              <FormControl>
-                <CountryDropdown
-                  valueType="short"
-                  value={country}
-                  classes="w-full border-0 rounded p-2"
-                  onChange={(val: string) => setValue('address.country', val)}
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
+          render={renderCountryField}
         />
       </span>
       <span className="grid grid-cols-2 gap-1 py-2">
         <FormField
           name="address.region"
-          render={() => (
-            <FormItem className="col-span-1">
-              <FormLabel className="font-montserrat uppercase">
-                Region
-              </FormLabel>
-              <FormControl>
-                <RegionDropdown
-                  countryValueType="short"
-                  country={country}
-                  value={region}
-                  classes="w-full border-0 rounded p-2"
-                  onChange={(val: string) => setValue('address.region', val)}
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
+          render={renderRegionField}
         />
         <Field
           name="address.zip_code"
@@ -131,6 +143,6 @@ const AddressForm = ({ form }: AddressFormProps) => {
       </span>
     </div>
   );
-};
+});
 
-export default AddressForm;
+export default memo(AddressForm);

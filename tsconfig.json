@@ -6,6 +6,7 @@
     "checkJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -28,18 +29,14 @@
     ]
   },
   "include": [
-    ".eslintrc.cjs",
+    "src/**/*",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.cjs",
-    "**/*.mjs",
+    "eslint.config.mts",
+    "prettier.config.mjs",
     ".next/types/**/*.ts",
-    "src/lib/countryparse.js",
-    "./types/*.d.ts",
-    "tailwind.config.js",
-    "src/lib/getAlpha2.js",
-    "src/lib/getAlpha2.js"
+    "tailwind.config.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", ".next", "public"]
 }

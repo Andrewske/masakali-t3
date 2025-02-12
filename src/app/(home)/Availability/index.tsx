@@ -20,7 +20,6 @@ const Availability = ({
 }: {
   disabledDates: Set<string | undefined>;
 }) => {
-  1;
   const [datePickerActive, setDatePickerActive] = useState(false);
   const { dateRange } = useReservationStore((state) => state);
   const [villasAvailable, setVillasAvailable] = useState<

@@ -1,5 +1,4 @@
 'use client';
-import styles from './styles.module.scss';
 
 import { UpdateReservationsButton } from '~/components/Button/UpdateReservations';
 
@@ -23,7 +22,7 @@ export default function Page() {
   //   return;
   // };
   return (
-    <main className={styles.main}>
+    <main className="h-screen w-full grid place-items-center">
       <UpdateReservationsButton />
       {/* <Button
         isWhite={false}

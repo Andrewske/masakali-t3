@@ -8,7 +8,6 @@ import {
   masakaliArial,
   meditationDrone,
   cacaoCeremony,
-  monkeyForest,
   yogaRetreatPose,
   retreatGroupPhoto,
   yogaShalaJungle,

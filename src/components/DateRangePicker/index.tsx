@@ -1,9 +1,12 @@
 'use client';
 import { useRef, useEffect, type SetStateAction, type Dispatch } from 'react';
-import styles from './styles.module.scss';
 
 import { addDays, isBefore, format } from 'date-fns';
-import { DayPicker, type DateRange } from 'react-day-picker';
+import {
+  DayPicker,
+  type DateRange,
+  getDefaultClassNames,
+} from 'react-day-picker';
 
 import useOnClickOutside from '~/hooks/useOnClickOutside';
 import { useReservationStore } from '~/providers/ReservationStoreProvider';
@@ -23,6 +26,7 @@ const DateRangePicker = ({
   const dayPickerRef = useRef(null);
   useOnClickOutside(dayPickerRef, () => setIsActive(false));
   const { dateRange, setDateRange } = useReservationStore((state) => state);
+  const defaultClassNames = getDefaultClassNames();
 
   useEffect(() => {
     const date = findFirstAvailableDate(disabledDates);
@@ -106,10 +110,12 @@ const DateRangePicker = ({
           defaultMonth={new Date()}
           selected={dateRange}
           onSelect={handleSelect}
-          classNames={styles}
+          classNames={{
+            disabled: `${defaultClassNames.disabled} text-red-500`,
+          }}
           disabled={isDayDisabled}
           hidden={(day) => isBefore(day, addDays(new Date(), -1))}
-          min={2}
+          min={1}
         />
       </div>
     </div>

@@ -44,9 +44,9 @@ async function Template({ villaId }: VillaDataType) {
   const countries = await getCountries();
   return (
     <section className="flex flex-col gap-16">
-      <div className="w-full grid grid-cols-1 lg:grid-cols-4">
+      <div className="w-full grid grid-cols-4">
         <div
-          className="flex p-4 sm:p-8 lg:col-span-1 w-full bg-white flex-col gap-4 justify-center items-center relative"
+          className="flex p-4 sm:p-8 col-span-4 xl:col-span-1 w-full bg-white flex-col gap-4 justify-center items-center relative"
           id="villa-info"
         >
           <NextVilla currentVillaName={villaName} />
@@ -58,7 +58,7 @@ async function Template({ villaId }: VillaDataType) {
             villaId={villaId}
           />
         </div>
-        <div className="col-span-3 h-[calc(100vh-132px)]">
+        <div className="col-span-4 xl:col-span-3 xl:h-[calc(100vh-132px)]">
           <GridGallery villaName={villaName} />
         </div>
         <div className="col-span-4 ">

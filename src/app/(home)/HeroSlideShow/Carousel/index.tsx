@@ -7,7 +7,7 @@ const HeroCarousel = ({
   children,
   showArrows = false,
 }: {
-  children?: ReactElement<any>[];
+  children?: ReactElement[];
   showArrows?: boolean;
 }) => {
   return (
