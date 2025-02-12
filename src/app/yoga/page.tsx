@@ -38,8 +38,8 @@ export default function Page() {
         bottomText="Serenity And Wellness"
       />
 
-      <div>
-        <p className="w-full max-w-[885px] text-center p-16 font-baskerville m-auto">
+      <div className="py-16 px-4">
+        <p className="w-full max-w-[885px] text-center font-baskerville m-auto">
           At Masakali Retreat, nestled in the heart of Bali’s stunning natural
           beauty, we offer more than just a place to stay. Our yoga shala is a
           sanctuary of peace and rejuvenation, designed to help you find
