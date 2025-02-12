@@ -322,7 +322,7 @@ const Packages = () => {
   return (
     <div
       id="packages"
-      className="w-full flex flex-col justify-center bg-gray items-center gap-8 px-4 py-16 bg-gray-100 text-gray-800 text-center font-montserrat"
+      className="w-full flex flex-col justify-center bg-gray items-center gap-8 px-4 py-16  text-gray-800 text-center font-montserrat"
     >
       <h2>PACKAGES</h2>
       <span className="flex flex-col gap-8 max-w-[800px]">

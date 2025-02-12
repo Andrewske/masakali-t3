@@ -17,7 +17,7 @@ const VideoContainer = ({ title, text }: { title: string; text: string }) => {
         loading="lazy"
       /> */}
       <video
-        src={`https://utfs.io/f/9ccX0s0IirBP2awIzUqVbLrjW3EcCpGAJYg1t0oiNnamdqRz`}
+        src={`https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPwOTQHRNlUNVbzyqtrjLYJn451su2aHSAxioQ`}
         width={853}
         autoPlay={true}
         muted={true}

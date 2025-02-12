@@ -15,6 +15,7 @@ import {
   jalaFront,
   jalaPool,
   jalaKitchen,
+  jalaViews,
   jalaBed,
   jalaBathroom,
   jalaNameImage,
@@ -230,7 +231,7 @@ export const villaDetails: VillaDetailsType = {
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
     defaultImage: chandraFront.src,
     videoSrc:
-      'https://utfs.io/f/9ccX0s0IirBPHwcTj7ovofQantyw1BVMWshubg5GPS4DrlOe',
+      'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPATtsT4S2sI5Op6cThwJ8rPSZdDE3VnoubqAW',
     beds: '1',
     baths: '1',
     adults: '2',
@@ -321,7 +322,7 @@ export const villaDetails: VillaDetailsType = {
     shortDescription: '1-bedroom villa with a luxury king-sized bed',
     defaultImage: jalaFront.src,
     videoSrc:
-      'https://utfs.io/f/9ccX0s0IirBP2m1TyPLqVbLrjW3EcCpGAJYg1t0oiNnamdqR',
+      'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPO6afHVbcFWuL23nb4to1NXSEygZaClRT8eUG',
     beds: '1',
     baths: '1',
     adults: '2',
@@ -329,6 +330,10 @@ export const villaDetails: VillaDetailsType = {
       {
         src: jalaFront.src,
         alt: jalaFront.alt,
+      },
+      {
+        src: jalaViews.src,
+        alt: jalaViews.alt,
       },
       { src: jalaPool.src, alt: jalaPool.alt },
       { src: jalaKitchen.src, alt: jalaKitchen.alt },
@@ -407,6 +412,7 @@ export const villaDetails: VillaDetailsType = {
       { src: akashaKitchen.src, alt: akashaKitchen.alt },
       { src: akashaBed.src, alt: akashaBed.alt },
       { src: akashaBathroom.src, alt: akashaBathroom.alt },
+      { src: akashaNameImage.src, alt: akashaNameImage.alt },
     ],
     nameImage: akashaNameImage.src,
     maxGuests: {
@@ -477,6 +483,7 @@ export const villaDetails: VillaDetailsType = {
       { src: lakshmiBedroom1.src, alt: lakshmiBedroom1.alt },
       { src: lakshmiBedroom2.src, alt: lakshmiBedroom2.alt },
       { src: lakshmiBathroom.src, alt: lakshmiBathroom.alt },
+      { src: lakshmiNameImage.src, alt: lakshmiNameImage.alt },
     ],
     nameImage: lakshmiNameImage.src,
     maxGuests: {
