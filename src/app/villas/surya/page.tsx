@@ -1,4 +1,3 @@
-'use server';
 import Template from '../_components/Template';
 import { suryaId } from '~/lib/villas';
 
