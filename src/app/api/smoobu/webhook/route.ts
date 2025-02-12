@@ -97,9 +97,9 @@ export async function POST(request: Request) {
     }
   } catch (error) {
     console.error(error);
-  } finally {
-    return new Response('OK', { status: 200 });
   }
+
+  return new Response('OK', { status: 200 });
 }
 
 function isSmoobuRatesResponse(obj: unknown): obj is SmoobuRatesResponse {
@@ -117,5 +117,5 @@ function isSmoobuRatesResponse(obj: unknown): obj is SmoobuRatesResponse {
 }
 
 function isSmoobuReservation(obj: unknown): obj is SmoobuReservation {
-  return !!obj && typeof obj === 'object' && obj.hasOwnProperty('reference-id');
+  return !!obj && typeof obj === 'object' && 'reference-id' in obj;
 }

@@ -84,9 +84,12 @@ export default function CartForm({
 
   return (
     <>
-      <div className="relative w-full">
+      <div className="relative w-full h-[600px] flex flex-col">
+        <div className="p-4 w-full text-center bg-purple text-white">
+          <h2>Checkout</h2>
+        </div>
         <Form {...form}>
-          <form className="w-full p-4 bg-gray flex-col justify-center items-center gap-2">
+          <form className="flex w-full  p-4 bg-gray flex-col justify-center gap-2 grow ">
             {step === 1 && (
               <GuestDetailsForm
                 form={form}

@@ -1,6 +1,5 @@
 import type { UpdateReservationsResponse } from '~/types/smoobu';
-
-import styles from '../styles.module.scss';
+import Button from '..';
 
 export const UpdateReservationsButton = ({
   isWhite,
@@ -29,22 +28,16 @@ export const UpdateReservationsButton = ({
 
   return (
     <>
-      <button
-        className={`${styles.container ?? ''} ${
-          isWhite ? `${styles.white ?? ''}` : ''
-        }`}
-        onClick={() => void handleClick()}
-      >
-        Update Reservations
-      </button>
-      <button
-        className={`${styles.container ?? ''} ${
-          isWhite ? `${styles.white ?? ''}` : ''
-        }`}
-        onClick={() => void handleRatesClick()}
-      >
-        Update Rates
-      </button>
+      <Button
+        handleClick={() => void handleClick()}
+        callToAction="Update Reservations"
+        isWhite={isWhite}
+      />
+      <Button
+        handleClick={() => void handleRatesClick()}
+        callToAction="Update Rates"
+        isWhite={isWhite}
+      />
     </>
   );
 };

@@ -60,7 +60,7 @@ const DateContainer = ({
     }, [dateRange, villaPricing, conversionRate]);
 
   const renderConvertedAmount = (label: string, amount: number) => (
-    <span>
+    <span key={label}>
       <span
         className="flex justify-between w-full text-sm font-montserrat"
         key={label}
@@ -150,12 +150,21 @@ const DateContainer = ({
           <h3 className="text-xl ">Departure Date</h3>
           {departureDate}
         </span>
-        {renderConvertedAmount('Price per night', pricePerNight)}
-        {renderConvertedAmount('Subtotal', subTotal)}
-        {renderConvertedAmount('Discount', discount)}
-
-        {renderConvertedAmount('Taxes', taxes)}
-        {renderConvertedAmount('Total', finalPrice)}
+        {['Price per night', 'Subtotal', 'Discount', 'Taxes', 'Total'].map(
+          (label, index) => {
+            const amount = [
+              pricePerNight,
+              subTotal,
+              discount,
+              taxes,
+              finalPrice,
+            ][index];
+            return useMemo(
+              () => renderConvertedAmount(label, amount ?? 0),
+              [amount]
+            );
+          }
+        )}
         <CountryDropdown countries={countries} />
       </div>
       <Button

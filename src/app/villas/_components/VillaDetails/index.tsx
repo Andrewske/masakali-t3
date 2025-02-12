@@ -144,7 +144,7 @@ const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
             Included Amenities
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {villaDetails[villaName].amenities.map((item) => {
+            {villaDetails[villaName].amenities.map((item, index) => {
               const amenity = amenities[item];
               if (!amenity) {
                 return null;
@@ -152,7 +152,7 @@ const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
 
               return (
                 <Item
-                  key={amenity.icon}
+                  key={`${amenity.icon}-${index}`}
                   className={amenity.icon}
                   text={amenity.text}
                 />

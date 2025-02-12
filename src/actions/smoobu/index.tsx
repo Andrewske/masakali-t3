@@ -134,6 +134,7 @@ const groupByDateAndFilter = (
 
   // Step 2: Filter groups where the count is exactly 5
   const filteredDates = Array.from(groupedByDate.entries())
+
     .filter(([_, group]) => group.length === numVillas)
     .map(([dateString, _]) => dateString);
 

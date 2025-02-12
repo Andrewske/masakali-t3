@@ -13,7 +13,7 @@ const LinkWithUnderline: React.FC<LinkWithUnderlineProps> = ({
   return (
     <Link
       href={href}
-      className="text-white text-center relative group font-montserrat uppercase"
+      className="text-white! text-center relative group font-montserrat uppercase"
     >
       {children}
       <div className="absolute bottom-0 left-0 w-full h-px bg-white transform scale-x-0 transition-transform duration-250 ease-in-out group-hover:scale-x-100"></div>

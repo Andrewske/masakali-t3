@@ -28,7 +28,7 @@ export const getCountries = async (): Promise<CountryType[]> => {
       .then((countries) =>
         countries.map((country) => ({
           ...country,
-          flag: country.flag.toString('base64'),
+          flag: Buffer.from(country.flag).toString('base64'),
         }))
       );
     return countries;

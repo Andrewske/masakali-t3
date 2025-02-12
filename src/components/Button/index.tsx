@@ -14,15 +14,16 @@ const Button = ({
   className,
 }: ButtonStyle) => {
   return (
-    <button
-      className={`uppercase font-montserrat text-2xl px-8 py-2 mx-auto ${
-        isWhite ? 'bg-white text-purple' : 'bg-purple text-white'
-      } ${className ?? ''}`}
+    <a
+      className={`uppercase font-montserrat text-xl px-8 py-4 mx-auto cursor-pointer ${
+        isWhite
+          ? 'bg-white text-purple hover:bg-purple hover:text-white'
+          : 'bg-purple text-white hover:bg-white hover:text-purple'
+      } ${className ?? ''} border border-purple`}
       onClick={() => handleClick()}
-      type="button"
     >
       {callToAction}
-    </button>
+    </a>
   );
 };
 

@@ -10,8 +10,6 @@ const XenditProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const initializeXendit = () => {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-
         window?.Xendit?.setPublishableKey(
           env.NEXT_PUBLIC_IS_PRODUCTION == 'true'
             ? env.NEXT_PUBLIC_XENDIT_PUBLIC_KEY

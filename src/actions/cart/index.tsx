@@ -1,20 +1,30 @@
 'use server';
 
-import { villaDetails, type VillaIdsType } from '~/lib/villas';
+import {
+  type VillaDetail,
+  villaDetails,
+  type VillaIdsType,
+} from '~/lib/villas';
 
 import { prisma } from '~/db/prisma';
 import type { VillaPricingType } from '~/utils/pricing';
 
-export const getVillaDetails = (villaId: VillaIdsType) => {
+export async function getVillaDetails(
+  villaId: VillaIdsType
+): Promise<VillaDetail> {
   try {
-    return Object.values(villaDetails).find((villa) => {
-      return villa.id === villaId;
-    });
+    const villa = Object.values(villaDetails).find(
+      (villa) => villa.id === villaId
+    );
+    if (!villa) {
+      throw new Error(`Villa not found: ${villaId}`);
+    }
+    return villa;
   } catch (error) {
-    console.log(error);
-    throw new Error(`Villa not found: ${villaId}`);
+    console.error('Error fetching villa details:', error);
+    throw error;
   }
-};
+}
 
 export const getVillaPricing = async (villaId: VillaIdsType) => {
   try {
