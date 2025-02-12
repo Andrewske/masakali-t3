@@ -8,6 +8,26 @@ import {
   yogaRetreatMeditation,
 } from '~/lib/images';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Yoga Classes and Retreats at Masakali Retreat | Wellness in Bali',
+  description:
+    'Discover the yoga classes and retreats at Masakali Retreat. Experience a transformative journey of yoga, meditation, and relaxation amidst the lush landscapes of Bali.',
+  keywords: [
+    'yoga classes Bali',
+    'yoga retreats Bali',
+    'wellness retreats',
+    'meditation retreats Bali',
+    'Kelusa village yoga',
+  ],
+  openGraph: {
+    title: 'Yoga Classes and Retreats at Masakali Retreat | Wellness in Bali',
+    description:
+      'Discover the yoga classes and retreats at Masakali Retreat. Experience a transformative journey of yoga, meditation, and relaxation amidst the lush landscapes of Bali.',
+  },
+};
+
 export default function Page() {
   return (
     <section className=" w-full grid place-items-center">

@@ -2,6 +2,38 @@ import { villaDetails } from '~/lib/villas';
 import { GoToPageButton } from '~/components/Button/GoToPageButton';
 import VillaImage from '~/components/VillaImage';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Luxury Villas at Masakali Retreat | Private Infinity Pools in Bali',
+  description:
+    'Explore the luxury villas at Masakali Retreat in Kelusa, Bali. Each villa features a private infinity pool, outdoor showers, fully equipped kitchenettes, and stunning views of rice fields and lush jungles.',
+  keywords: [
+    'Masakali Retreat villas',
+    'private infinity pools',
+    'luxury accommodations Bali',
+    'outdoor showers',
+    'rice field views',
+    'Kelusa village villas',
+    'Ubud villa rentals',
+  ],
+  openGraph: {
+    title: 'Luxury Villas at Masakali Retreat | Private Infinity Pools in Bali',
+    description:
+      'Discover the serene elegance of Masakali Retreat’s villas. Enjoy private pools, luxurious amenities, and breathtaking views in the heart of Kelusa, Bali.',
+    // images: [
+    //   {
+    //     url: 'https://www.masakaliretreat.com/villas-og-image.jpg',
+    //     width: 1200,
+    //     height: 630,
+    //     alt: 'Luxury Villa at Masakali Retreat with Infinity Pool and Rice Field Views',
+    //   },
+    // ],
+    locale: 'en_US',
+    type: 'website',
+  },
+};
+
 // make sure villa image fills
 function Page() {
   return (

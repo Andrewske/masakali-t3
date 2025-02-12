@@ -15,6 +15,39 @@ import {
   masakaliFlowerPool,
 } from '~/lib/images';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Experience Masakali Retreat | Yoga, Spa, and Luxury in Bali',
+  description:
+    'Discover unforgettable experiences at Masakali Retreat. Enjoy daily yoga classes, spa services, romantic packages, and breathtaking views in Kelusa Village, Bali.',
+  keywords: [
+    'Masakali Retreat',
+    'Bali luxury resort',
+    'yoga retreats',
+    'spa services',
+    'romantic packages',
+    'Ubud activities',
+    'rice field views',
+    'Kelusa Village',
+  ],
+  openGraph: {
+    title: 'Experience Masakali Retreat - Yoga, Spa & Luxury in Bali',
+    description:
+      'Explore yoga classes, spa indulgence, and romance packages at Masakali Retreat. Nestled in Kelusa Village near Ubud, it’s your haven for relaxation and adventure.',
+    // images: [
+    //   {
+    //     url: 'https://www.masakaliretreat.com/experience-og-image.jpg',
+    //     width: 1200,
+    //     height: 630,
+    //     alt: 'Masakali Retreat Experience - Yoga and Spa with Scenic Views',
+    //   },
+    // ],
+    locale: 'en_US',
+    type: 'website',
+  },
+};
+
 export default async function Page() {
   const disabledDates = await getAllBlockedDates();
 

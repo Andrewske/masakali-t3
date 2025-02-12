@@ -4,6 +4,37 @@ import ContentContainer from '~/components/ContentContainer';
 
 import { masakaliYogaShala, yogaRetreatPose } from '~/lib/images';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Yoga Retreats at Masakali Retreat | Serenity in Bali',
+  description:
+    'Immerse yourself in tranquility at Masakali Retreat’s yoga retreats. Experience six-day transformative journeys with yoga, meditation, and nature in the heart of Bali’s stunning landscapes.',
+  keywords: [
+    'yoga retreats Bali',
+    'Masakali Retreat',
+    'yoga shala Bali',
+    'wellness retreats',
+    'meditation retreats Bali',
+    'Kelusa village yoga',
+  ],
+  openGraph: {
+    title: 'Yoga Retreats at Masakali Retreat | Serenity in Bali',
+    description:
+      'Join our yoga retreats at Masakali Retreat for a transformative experience. Practice yoga, connect with nature, and rejuvenate your mind and body amidst Bali’s breathtaking beauty.',
+    // images: [
+    //   {
+    //     url: 'https://www.masakaliretreat.com/retreats/retreats-og-image.jpg', // Replace with actual image URL
+    //     width: 1200,
+    //     height: 630,
+    //     alt: 'Yoga Shala at Masakali Retreat with Balinese Landscape',
+    //   },
+    // ],
+    locale: 'en_US',
+    type: 'website',
+  },
+};
+
 export default function Page() {
   return (
     <section className="h-full w-full">
