@@ -170,6 +170,65 @@ export const lakshmiNameImage = {
   alt: 'Lakshmi at Masakali view of dining table',
 };
 
+// Priya Images
+
+export const priyaBed = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPRv7kBFGJtn3mpKrWuLheFEQ1dYHCAlT8ZO9f',
+  alt: 'Priya at Masakali',
+};
+
+export const priyaBed2 = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPC4XkmhANeF7zBRW1UrvEO5QTsgnhjILAoYXM',
+  alt: 'Priya at Masakali',
+};
+
+export const priyaBath = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPw4RP8KNlUNVbzyqtrjLYJn451su2aHSAxioQ',
+  alt: 'Priya at Masakali',
+};
+
+export const priyaBath2 = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBP2mPAVb8qVbLrjW3EcCpGAJYg1t0oiNnamdqR',
+  alt: 'Priya at Masakali',
+};
+
+export const priyaRoom = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPFe4XTweO1cypvSnBjTxZleaGhsYCDJkdqwON',
+  alt: 'Priya at Masakali',
+};
+
+export const priyaView = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPXX10GsMNI7n0rG2Q3C8AeptKJhqxOguDcsdv',
+  alt: 'Priya at Masakali',
+};
+
+// Isvara Images
+
+export const isvaraBed = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPKq2ZwqyzGM1l3ABrPmEWejNvJzhQyZFXSLk7',
+  alt: 'Isvara at Masakali',
+};
+
+export const isvaraBed2 = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPfZvp9Ta6OQW2HdyAsbJiBvZ4F59X7k0Nqngc',
+  alt: 'Isvara at Masakali',
+};
+
+export const isvaraChair = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPDV36J3CUtrhWLPVJg4GKeH6a3Xx9k7wifRzd',
+  alt: 'Isvara at Masakali',
+};
+
+export const isvaraRoom = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPxgERyI9Z81SkravWBH0q5Y3XleARMpJmujGQ',
+  alt: 'Isvara at Masakali',
+};
+
+export const isvaraBath = {
+  src: 'https://67rl3g15b4.ufs.sh/f/9ccX0s0IirBPjviPzin96nm7uz0Z5FqfWbrtp3CHsoalAySQ',
+  alt: 'Isvara at Masakali',
+};
+
 // Other Images
 
 export const masakaliSpaImage = {
