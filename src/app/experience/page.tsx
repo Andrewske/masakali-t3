@@ -56,8 +56,6 @@ export default async function Page() {
       <HeroImage
         imgSrc={akashaFront.src}
         imgAlt={akashaFront.alt}
-        topText="Experience"
-        bottomText="Our resort"
       />
       <Availability disabledDates={disabledDates} />
 

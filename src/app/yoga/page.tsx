@@ -34,8 +34,6 @@ export default function Page() {
       <HeroImage
         imgSrc={masakaliYogaMainImage.src}
         imgAlt={masakaliYogaMainImage.alt}
-        topText="Embrace"
-        bottomText="Serenity And Wellness"
       />
 
       <div className="py-16 px-4">

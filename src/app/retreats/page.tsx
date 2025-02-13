@@ -41,8 +41,6 @@ export default function Page() {
       <HeroImage
         imgSrc={masakaliYogaShala.src}
         imgAlt={masakaliYogaShala.alt}
-        topText="Masakali"
-        bottomText="Yoga Retreats"
       />
       <div className="w-full flex justify-center py-16 px-4">
         <p className="w-full max-w-[885px]  text-center font-baskerville m-auto">
