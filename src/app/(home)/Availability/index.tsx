@@ -105,7 +105,7 @@ const Availability = ({
               <h3 className="text-sm font-montserrat text-left">
                 ARRIVAL DATE
               </h3>
-              <div className="w-[235px] h-[45px] bg-white text-purple text-xl flex  px-4">
+              <div className="w-[235px] h-[45px] bg-white text-purple text-xl flex items-center  px-4">
                 <p className="my-auto font-montserrat">
                   {dateRange.from && format(dateRange.from, 'MMM dd, yyyy')}
                 </p>
@@ -115,7 +115,7 @@ const Availability = ({
               <h3 className="text-sm font-montserrat text-left">
                 DEPARTURE DATE
               </h3>
-              <div className="w-[235px] h-[45px] bg-white text-purple text-xl flex align-center px-4">
+              <div className="w-[235px] h-[45px] bg-white text-purple text-xl flex items-center px-4">
                 <p className="my-auto font-montserrat">
                   {dateRange.to && format(dateRange.to, 'MMM dd, yyyy')}
                 </p>
@@ -174,17 +174,15 @@ const Availability = ({
                 key={villaId}
                 href={`/villas/${villaName}`}
               >
-                <div className=" h-full w-content relative z-10 shadow-light-purple hover:bg-purple hover:text-white ">
-                  <span className="h-full">
-                    <span className="bg-white text-purple py-2 px-4 w-full h-full grid grid-col-1 place-items-center">
-                      <h3 className="uppercase text-2xl">{villa.name}</h3>
-                      <p className="text-xs">{villa.shortDescription}</p>
-                      {/* <GoToPageButton
+                <div className=" w-content relative z-10 shadow-light-purple hover:bg-purple hover:text-white ">
+                  <span className="px-8 py-4 bg-white text-purple w-full h-full grid grid-col-1 place-items-center">
+                    <h3 className="uppercase text-2xl">{villa.name}</h3>
+                    <p className="text-xs">{villa.shortDescription}</p>
+                    {/* <GoToPageButton
                       callToAction="Book Now"
                       isWhite={false}
                       path={`/villas/${villa.name}`}
                     /> */}
-                    </span>
                   </span>
                 </div>
               </Link>
