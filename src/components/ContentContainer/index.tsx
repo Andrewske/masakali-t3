@@ -78,7 +78,7 @@ const ContentContainer = ({
     <section
       className={`relative flex justify-center ${
         imgPosition === 'left' ? 'flex-wrap' : 'flex-wrap-reverse '
-      } sm:px-8 py-8 font-baskerville`}
+      } sm:px-8 sm:py-8 font-baskerville`}
       id={id}
     >
       {imgPosition === 'left' ? image : contentBox}

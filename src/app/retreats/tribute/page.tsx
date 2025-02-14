@@ -210,48 +210,48 @@ export default function Page() {
       </div>
       <div
         id="details"
-        className="flex flex-wrap justify-center sm:px-4"
+        className="flex flex-wrap justify-center bg-gray-100 text-gray-800 py-16"
       >
         <div
           id="when"
-          className="flex flex-col gap-4 items-center sm:items-end w-[50%] min-w-[312px] px-4 py-16 bg-gray-100 text-gray-800"
+          className="flex flex-col gap-4 items-center sm:items-end w-[50%] min-w-[312px] px-4 mb-4 text-left sm:text-right"
         >
-          <h2 className="">When</h2>
-          <span className="flex gap-2">
-            <p className="text-5xl whitespace-nowrap font-montserrat">
-              {dates}
-            </p>
-            <span className="font-montserrat">
-              <p>{month}</p>
-              <p>{year}</p>
-            </span>
-          </span>
+          <h2 className="w-full">When</h2>
+
+          <p className="w-full text-lg! whitespace-nowrap font-montserrat">
+            Jun 29 - Jul 6 2025
+          </p>
         </div>
         <div
           id="where"
-          className="flex flex-col gap-4  items-start w-[50%] min-w-[312px] px-4 py-16 bg-gray-100 text-gray-800"
+          className="flex flex-col gap-4  items-start w-[50%] min-w-[312px] px-4 "
         >
           <h2>Where</h2>
-          <span className="flex flex-col gap-2 max-w-[600px]">
-            <h3 className="">Resort address</h3>
-            <span className="text-sm">
-              <p>Masakali Retreat</p>
-              <p>Br. Ayah Kelusa Payangan</p>
-              <p>Gianyar Bali 80572</p>
+          <span className="flex flex-col gap-8 max-w-[600px]">
+            <span className="flex flex-col gap-2">
+              <h3 className="">Resort address</h3>
+              <span className="text-sm">
+                <p>Masakali Retreat</p>
+                <p>Br. Ayah Kelusa Payangan</p>
+                <p>Gianyar Bali 80572</p>
+              </span>
             </span>
-            <h3>The Location</h3>
-            <p className="text-sm">
-              Discover the magic of Masakali , where luxury meets the lush
-              beauty of Ubud’s most serene landscapes– the spiritual capital of
-              Bali. Ubud literally means “medicine” and is where you want to be
-              to start or perhaps continue your journey towards healing and a
-              connection with your higher self. Just a short 8 kilometers from
-              Ubud’s lively center, Masakali offers a peaceful hideaway
-              that&apos;s close enough to explore but feels like a world away.
-              Here, you&apos;ll wake up to sweeping views of rice fields,
-              tropical jungles and mountains, a breathtaking backdrop for your
-              journey to inner peace, restoration, and spiritual discovery.
-            </p>
+            <span className="flex flex-col gap-2">
+              <h3>The Location</h3>
+              <p className="text-sm!">
+                Discover the magic of Masakali, where luxury meets the lush
+                beauty of Ubud’s most serene landscapes– the spiritual capital
+                of Bali. Ubud literally means “medicine” and is where you want
+                to be to start or perhaps continue your journey towards healing
+                and a connection with your higher self. Just a short 8
+                kilometers from Ubud’s lively center, Masakali offers a peaceful
+                hideaway that&apos;s close enough to explore but feels like a
+                world away. Here, you&apos;ll wake up to sweeping views of rice
+                fields, tropical jungles and mountains, a breathtaking backdrop
+                for your journey to inner peace, restoration, and spiritual
+                discovery.
+              </p>
+            </span>
           </span>
         </div>
       </div>
