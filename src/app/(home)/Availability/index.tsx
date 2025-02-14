@@ -127,7 +127,9 @@ const Availability = ({
                 id="adults"
                 className="w-[235px] h-[45px] font-montserrat bg-white text-purple px-4 text-xl"
                 onChange={(e) => {
-                  setUser(updateUserAdults(user, parseInt(e.target.value)));
+                  setUser(
+                    updateUserAdults(user, parseInt(e.target.value ?? 2))
+                  );
                 }}
                 value={adults}
                 type="number"
@@ -139,7 +141,9 @@ const Availability = ({
                 id="children"
                 className="w-[235px] h-[45px] bg-white text-purple px-4 text-xl normal-nums align-middle font-montserrat"
                 onChange={(e) => {
-                  setUser(updateUserChildren(user, parseInt(e.target.value)));
+                  setUser(
+                    updateUserChildren(user, parseInt(e.target.value ?? 0))
+                  );
                 }}
                 value={children}
                 type="number"

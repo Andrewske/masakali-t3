@@ -61,9 +61,9 @@ async function Template({ villaId }: VillaDataType) {
         <div className="col-span-4 xl:col-span-3 xl:h-[calc(100vh-132px)]">
           <GridGallery villaName={villaName} />
         </div>
-        <div className="col-span-4 ">
+        <div className="col-span-4">
           {villaDetails[villaName].videoSrc && (
-            <div className="flex justify-center p-16 bg-purple">
+            <div className="flex justify-center py-8 md:p-16 bg-purple">
               <video
                 src={villaDetails[villaName].videoSrc}
                 width={1200}

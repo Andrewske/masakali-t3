@@ -109,6 +109,13 @@ const amenities: Amenities = {
   },
 };
 
+const availableExtras = [
+  'Laundry Services',
+  'Spa Services',
+  'Private Tours',
+  'Personal Driver',
+];
+
 const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
   return (
     <div className="flex justify-center w-full flex-wrap ">
@@ -164,19 +171,17 @@ const VillaDetails = ({ villaName }: { villaName: VillaNamesType }) => {
           <p className="font-montserrat uppercase text-lg text-light-purple-7 font-semibold">
             Available Extras
           </p>
-          <div className="flex flex-wrap justify-center items gap-4">
-            <p className="bg-gray py-2 px-4 border border-solid border-light-purple-7 font-montserrat uppercase">
-              Laundry Services
-            </p>
-            <p className="bg-gray py-2 px-4 border border-solid border-light-purple-7 font-montserrat uppercase">
-              Spa Services
-            </p>
-            <p className="bg-gray py-2 px-4 border border-solid border-light-purple-7 font-montserrat uppercase">
-              Private Tours
-            </p>
-            <p className="bg-gray py-2 px-4 border border-solid border-light-purple-7 font-montserrat uppercase">
-              Personal Driver
-            </p>
+          <div className="flex flex-wrap  gap-4">
+            {availableExtras.map((item) => {
+              return (
+                <p
+                  className="bg-light-purple-7 py-2! px-4! border border-solid border-light-purple-5 font-montserrat uppercase"
+                  key={item}
+                >
+                  {item}
+                </p>
+              );
+            })}
           </div>
         </div>
       </div>
