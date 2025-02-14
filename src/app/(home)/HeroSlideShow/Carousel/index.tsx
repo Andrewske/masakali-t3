@@ -13,7 +13,7 @@ const HeroCarousel = ({
   return (
     children && (
       <Carousel
-        className="w-full h-full m-auto [&>div>button]:!bg-purple "
+        className="w-full h-full m-auto [&>div>button]:hover:!bg-purple "
         // autoFocus={true}
         infiniteLoop={true}
         autoPlay={true}

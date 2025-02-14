@@ -41,6 +41,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: '67rl3g15b4.ufs.sh',
+        port: '',
+        pathname: '/**',
+      },
     ],
 
   },

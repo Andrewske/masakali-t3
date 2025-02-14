@@ -61,6 +61,8 @@ import {
 } from '~/lib/images';
 import HeroCarousel from '~/app/(home)/HeroSlideShow/Carousel';
 import ContactButton from './ContactButton';
+import Link from 'next/link';
+import Button from '~/components/Button';
 
 const suryaImages = [
   tributeSurya1,
@@ -164,6 +166,7 @@ const villas = [
       },
     ],
     images: suryaImages,
+    video: 'https://www.youtube.com/watch?v=_ecx4KfFdus',
   },
   {
     title: 'Chandra',
@@ -191,6 +194,7 @@ const villas = [
       },
     ],
     images: chandraImages,
+    video: 'https://youtu.be/pP6KGyBhRsE',
   },
   {
     title: 'Jala',
@@ -217,6 +221,7 @@ const villas = [
       },
     ],
     images: jalaImages,
+    video: 'https://youtu.be/tfK632zOX-g',
   },
   {
     title: 'Priya',
@@ -242,6 +247,7 @@ const villas = [
       },
     ],
     images: priyaImages,
+    video: 'https://youtu.be/DM8bRX-lgzU',
   },
   {
     title: 'Isvara',
@@ -266,6 +272,7 @@ const villas = [
       },
     ],
     images: isvaraImages,
+    video: 'https://youtu.be/EuTO9Wscg9g',
   },
   {
     title: 'Lumbung',
@@ -296,6 +303,7 @@ const villas = [
       },
     ],
     images: lumbungImages,
+    video: null,
   },
 ];
 
@@ -361,39 +369,44 @@ const Packages = () => {
           Of course, all rooms have access to the communal areas and the yoga
           shala to relax and commune with your fellow yogis.
         </p>
+        <p className="text-red-500 font-bold! text-xl! ">
+          Don't miss out on our exclusive offer, available until April 30, 2025!
+        </p>
       </span>
 
-      <div className="flex flex-wrap w-full justify-evenly">
+      <div className="flex flex-wrap w-full justify-evenly gap-4 ">
         {villas.map((villa) => (
           <div
             key={villa.title}
-            className="flex flex-col justify-center sm:px-8 py-8 font-baskerville"
+            className="flex flex-col justify-center font-baskerville max-w-[400px]"
           >
-            <div className="w-[400px] h-[400px] relative">
+            <div>
               <HeroCarousel showArrows={true}>
                 {villa.images.map((image) => (
                   <div
                     key={image.alt}
-                    className="max-h-[400px] max-w-[400px] w-full aspect-[1/1] relative"
+                    className="w-full aspect-[1/1] relative"
                   >
                     <Image
                       src={image.src}
                       alt={image.alt}
                       key={image.alt}
-                      fill={true}
+                      width={400}
+                      height={400}
                       className="object-cover h-full"
                     />
                   </div>
                 ))}
               </HeroCarousel>
             </div>
-            <div className="w-[400px] h-full bg-white flex flex-col gap-8  px-4 py-8 sm:px-8 text-left ">
+
+            <div className="w-full h-full bg-white flex flex-col gap-8  px-4 py-8 sm:px-8 text-left ">
               <span className="w-full flex flex-col gap-4">
                 <h2 className="text-xl">{villa.title}</h2>
                 <span className="flex flex-wrap gap-2 justify-stretch  w-full">
                   {villa.details.map((item, index) => (
                     <p
-                      className="text-xs bg-gray border border-light-purple-700 p-2 grow text-center uppercase"
+                      className="text-xs! bg-light-purple-5 border border-light-purple-7  p-1! grow text-center uppercase font-montserrat"
                       key={index}
                     >
                       {item}
@@ -418,6 +431,15 @@ const Packages = () => {
                   </ContactButton>
                 ))}
               </span>
+              {villa.video && (
+                <Link
+                  href={villa.video}
+                  target="_blank"
+                  className="uppercase font-montserrat text-xl px-8 py-4 mx-auto cursor-pointer bg-purple text-white hover:bg-white hover:text-purple"
+                >
+                  <p>Tour {villa.title}</p>
+                </Link>
+              )}
             </div>
           </div>
         ))}
