@@ -21,7 +21,7 @@ export const getAvailableVillas = ({
   // Populate the Set with IDs of villas that are blocked within the specified timeframe
   villaPricing.forEach(({ date, villa_id }) => {
     if (date >= arrivalDate && date < departureDate) {
-      blockedVillasSet.add(villa_id);
+      blockedVillasSet.add(villa_id as VillaIdsType);
     }
   });
 

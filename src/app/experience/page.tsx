@@ -16,6 +16,7 @@ import {
 } from '~/lib/images';
 
 import type { Metadata } from 'next';
+import { prisma } from '~/db/prisma';
 
 export const metadata: Metadata = {
   title: 'Experience Masakali Retreat | Yoga, Spa, and Luxury in Bali',
@@ -50,6 +51,18 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const disabledDates = await getAllBlockedDates();
+  const villaPricing = await prisma.villa_pricing.findMany({
+    where: {
+      date: {
+        gte: new Date(),
+      },
+    },
+    select: {
+      date: true,
+      villa_id: true,
+      price: true,
+    },
+  });
 
   return (
     <section className=" w-full grid place-items-center">
@@ -57,7 +70,10 @@ export default async function Page() {
         imgSrc={akashaFront.src}
         imgAlt={akashaFront.alt}
       />
-      <Availability disabledDates={disabledDates} />
+      <Availability
+        disabledDates={disabledDates}
+        villaPricing={villaPricing}
+      />
 
       <div className="flex flex-col items-center gap-8 w-full p-16">
         <p className="w-full max-w-[885px] text-center font-baskerville m-auto">

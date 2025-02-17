@@ -12,6 +12,7 @@ export const getAvailableVillas = async ({
 }) => {
   const blockedVillas = await prisma.reservation.findMany({
     where: {
+      cancelled: false,
       AND: [
         { arrival: { lt: new Date(to) } },
         { departure: { gt: new Date(from) } },
@@ -21,6 +22,8 @@ export const getAvailableVillas = async ({
     //   villaId: true,
     // },
   });
+
+  console.log(blockedVillas);
 
   const blockedVillaIds = blockedVillas.map(({ villa_id }) => villa_id);
 
@@ -89,4 +92,24 @@ function getValueCounts<T>(array: T[]): Map<T, number> {
     acc.set(value, (acc.get(value) || 0) + 1);
     return acc;
   }, new Map<T, number>());
+}
+
+export async function getVillaPricing(
+  villaId: VillaIdsType,
+  startDate: Date,
+  endDate: Date
+) {
+  const pricing = await prisma.villa_pricing.findFirst({
+    where: {
+      villa_id: villaId,
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+    },
+  });
+
+  return {
+    perNight: pricing?.price || null,
+  };
 }
