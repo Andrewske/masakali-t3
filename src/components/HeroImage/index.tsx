@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const HeroImage = ({ imgSrc, imgAlt }: { imgSrc: string; imgAlt: string }) => {
   return (
-    <div className="relative w-screen h-screen">
+    <div className="relative w-full h-screen">
       <Image
         src={imgSrc}
         alt={imgAlt}

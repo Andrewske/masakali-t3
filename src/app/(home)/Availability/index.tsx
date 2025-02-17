@@ -125,16 +125,16 @@ const Availability = ({
   return (
     <section
       id="availability"
-      className="bg-purple text-white  h-full w-full py-16 md:py-0"
+      className="bg-purple  text-white  h-full w-full py-16 md:py-0"
     >
-      <div className="relative flex h-auto min-h-[350px]">
+      <div className="relative flex h-auto min-h-[350px] px-4">
         <DateRangePicker
           isActive={datePickerActive}
           setIsActive={setDatePickerActive}
           disabledDates={disabledDates}
         />
-        <span className="flex flex-col justify-center align-middle w-full gap-8">
-          <span className="flex flex-wrap justify-center  gap-4 h-content">
+        <span className="flex flex-col justify-center align-middle w-full gap-4">
+          <span className="flex flex-wrap justify-center  gap-8 h-content">
             <div onClick={() => setDatePickerActive(!datePickerActive)}>
               <h3 className="text-sm font-montserrat text-left">
                 ARRIVAL DATE

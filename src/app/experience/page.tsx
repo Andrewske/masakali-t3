@@ -75,7 +75,10 @@ export default async function Page() {
         villaPricing={villaPricing}
       />
 
-      <div className="flex flex-col items-center gap-8 w-full p-16">
+      <div className="flex flex-col items-center gap-8 w-full p-16 bg-gray">
+        <h1 className="font-baskerville text-xl">
+          Experience Masakali Retreat
+        </h1>
         <p className="w-full max-w-[885px] text-center font-baskerville m-auto">
           Perched in Kelusa Village with breathtaking panoramic views of the
           rice fields, mountains and tropical jungle, you&apos;ll feel instantly
