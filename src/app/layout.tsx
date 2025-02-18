@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/masakali_logo.ico',
   },
 };
 
