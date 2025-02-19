@@ -38,7 +38,7 @@ const retreatDetails = {
   startDate: '2025-06-29',
   endDate: '2025-07-06',
   whyChose:
-    'Experience a transformative journey at Masakali Retreat with our six-day, five-night yoga retreat, set against the breathtaking backdrop of Balinese mountains, lush forests, and serene rice fields. Practice yoga, connect with nature, and find inner peace as you absorb the tranquility of one of the most spectacular places in the world',
+    'Experience a transformative journey at Masakali Retreat with our six-day, five-night yoga retreat, set against the breathtaking backdrop of Balinese mountains, lush forests, and serene rice fields. Practice yoga, connect with nature, and find inner peace as you absorb the tranquility of one of the most spectacular places in the world.',
   details: (
     <div className="flex flex-col gap-2">
       <p>
