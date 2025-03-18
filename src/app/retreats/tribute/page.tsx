@@ -222,7 +222,7 @@ export default function Page() {
           <h2 className="w-full">When</h2>
 
           <p className="w-full text-lg! whitespace-nowrap font-montserrat">
-            Jun 29 - Jul 6 2025
+            Jun 29 - Jul 4 2025
           </p>
         </div>
         <div
