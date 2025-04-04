@@ -1,9 +1,9 @@
 'use server';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 
 export const lookupReservation = async (reservationId: string) => {
   try {
-    const reservation = await prisma.reservation.findFirst({
+    const reservation = await db.reservation.findFirst({
       where: {
         id: reservationId,
       },

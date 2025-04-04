@@ -5,7 +5,7 @@ import type {
 } from '~/types/smoobu';
 import { areDatesEqual } from '~/utils/helpers';
 import transformSmoobuRatesResponse from '../transformSmoobuRatesResponse';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 import upsertPricingData from '../upsertPricingData';
 
 const getChangedVillaPricing = (
@@ -64,7 +64,7 @@ export async function batchVillaPricing(data: SmoobuRatesResponse) {
 
   // Retrieve current villa pricing from the database
   const currentVillaPricing: CurrentVillaPricingType[] =
-    await prisma.villa_pricing.findMany();
+    await db.villa_pricing.findMany();
 
   // Determine pricing changes
   const changedVillaPricing = getChangedVillaPricing(

@@ -17,7 +17,7 @@ const __dirname = dirname(__filename);
 
 // /** @type {import('eslint').Linter.Config[]} */
 // export default [
-//   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"], ignores: ["node_modules/", ".next/", "public/", "env.mjs"] },
+//   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"], ignores: ["node_modules/", ".next/", "public/", "env"] },
 //   { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
 //   pluginJs.configs.recommended,
 //   ...tseslint.configs.recommended,
@@ -30,16 +30,16 @@ export default tseslint.config(
   // ...tseslint.configs.recommended.map((config) => ({
   //   ...config,
   //   files: ['**/*.ts', '**/*.tsx'],
-  //   ignores: ['node_modules/**', '.next/**', 'public/**', 'env.mjs'],
+  //   ignores: ['node_modules/**', '.next/**', 'public/**', 'env'],
   // })),
   // ...tseslint.configs.stylistic.map((config) => ({
   //   ...config,
   //   files: ['**/*.ts', '**/*.tsx'],
-  //   ignores: ['node_modules/**', '.next/**', 'public/**', 'env.mjs'],
+  //   ignores: ['node_modules/**', '.next/**', 'public/**', 'env'],
   // })),
   // ...pluginQuery.configs["flat/recommended"],
   // {
-  //   ignores: ['node_modules/', '.next/', 'public/', 'env.mjs', '*.mjs', '*.js'],
+  //   ignores: ['node_modules/', '.next/', 'public/', 'env', '*.mjs', '*.js'],
   // },
   // { files: ['src/**/*.ts', 'src/**/*.tsx'] },
   // {
@@ -58,7 +58,7 @@ export default tseslint.config(
     ],
   },
   {
-    ignores: ['node_modules/', '.next/', 'public/', 'env.mjs', '*.mjs', '*.js'],
+    ignores: ['node_modules/', '.next/', 'public/', 'env', '*.mjs', '*.js'],
     files: ['src/**/*.ts', 'src/**/*.tsx'],
     plugins: {
       // 'unused-imports': unusedImports,

@@ -1,6 +1,6 @@
 'use server';
 import sgMail from '@sendgrid/mail';
-import { env } from '~/env.mjs';
+import { env } from '~/env';
 
 const retreatBookingEmailTemplate = 'd-60fce1dc0ea0423c92948e59fb505a6e';
 const villaBookingEmailTemplate = 'd-df670819866341e3b360ea6a373e429e';
@@ -69,5 +69,37 @@ export const sendAdminBookingConfirmation = async ({
   console.log({ msg });
   const response = await sgMail.send(msg);
   console.log(response);
+  return;
+};
+
+export type DirectBookingTemplateData = {
+  email: string;
+  name: string;
+  villa: string;
+  checkIn: string;
+  checkOut: string;
+  total: string;
+};
+
+export const sendDirectBookingConfirmation = async (
+  data: DirectBookingTemplateData
+) => {
+  sgMail.setApiKey(env.SENDGRID_API_KEY);
+
+  const templateId = 'd-1c83fd31688c40f3b920d826b8c1c1d3';
+
+  const msg = {
+    to: data.email,
+    from: 'admin@masakaliretreat.com',
+    templateId,
+    dynamicTemplateData: data,
+  };
+
+  try {
+    await sgMail.send(msg);
+  } catch (error) {
+    console.error(error);
+  }
+
   return;
 };

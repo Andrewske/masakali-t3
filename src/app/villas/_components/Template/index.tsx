@@ -3,7 +3,7 @@ import GridGallery from '~/app/villas/_components/GridGallery';
 
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 import { type VillaPricingType } from '~/utils/pricing';
 import { getCountries } from '~/actions/countries';
 
@@ -27,7 +27,7 @@ async function Template({ villaId }: VillaDataType) {
 
   const { disabledDates } = await getDisabledDatesForVilla(villaId);
 
-  const villaPricing = (await prisma.villa_pricing.findMany({
+  const villaPricing = (await db.villa_pricing.findMany({
     where: {
       villa_id: Number(villaId),
       price: {

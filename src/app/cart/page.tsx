@@ -4,7 +4,7 @@ import { type VillaIdsType } from '~/lib/villas';
 import { getVillaDetails, getVillaPricing } from '~/actions/cart';
 import CartImage from './CartImage';
 import { getCountries } from '~/actions/countries';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 
 export default async function Page(props: {
   searchParams: Promise<{
@@ -13,7 +13,7 @@ export default async function Page(props: {
   }>;
 }) {
   const searchParams = await props.searchParams;
-  const reservation = await prisma.reservation.findUnique({
+  const reservation = await db.reservation.findUnique({
     where: {
       id: searchParams.reservationId,
     },

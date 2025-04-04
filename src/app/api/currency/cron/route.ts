@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 
 type ExchangeRatesResponse = {
   meta: {
@@ -17,7 +17,7 @@ interface RateInfo {
 
 const updateCurrency = async (code: string, rate_from_idr: number) => {
   try {
-    const currency = await prisma.currency.findFirst({
+    const currency = await dbcurrency.findFirst({
       where: {
         code,
       },
@@ -31,7 +31,7 @@ const updateCurrency = async (code: string, rate_from_idr: number) => {
       return;
     }
 
-    return await prisma.currency.update({
+    return await dbcurrency.update({
       where: {
         id: currency.id,
       },
@@ -45,7 +45,7 @@ const updateCurrency = async (code: string, rate_from_idr: number) => {
 };
 
 async function getExchangeRates() {
-  const currencies = await prisma.currency
+  const currencies = await dbcurrency
     .findMany({
       select: {
         code: true,

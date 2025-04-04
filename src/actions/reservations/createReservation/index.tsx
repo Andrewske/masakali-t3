@@ -1,6 +1,6 @@
 'use server';
-import { env } from '~/env.mjs';
-import { prisma } from '~/db/prisma';
+import { env } from '~/env';
+import { db } from '~/server/db';
 import type { VillaIdsType } from '~/lib/villas';
 
 export const createReservation = async ({
@@ -13,7 +13,7 @@ export const createReservation = async ({
   departure: string;
 }) => {
   try {
-    const reservation = await prisma.reservation.create({
+    const reservation = await db.reservation.create({
       data: {
         villa_id: Number(villaId),
         arrival: new Date(arrival),

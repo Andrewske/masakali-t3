@@ -1,5 +1,5 @@
 'use server';
-import { env } from '~/env.mjs';
+import { env } from '~/env';
 import { channelIds } from '~/lib/smoobu';
 import type { CreateReservationPropsType } from '~/utils/smoobu/createReservationData';
 

@@ -6,7 +6,7 @@ import {
   type VillaIdsType,
 } from '~/lib/villas';
 
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 import type { VillaPricingType } from '~/utils/pricing';
 
 export async function getVillaDetails(
@@ -28,7 +28,7 @@ export async function getVillaDetails(
 
 export const getVillaPricing = async (villaId: VillaIdsType) => {
   try {
-    return (await prisma.villa_pricing.findMany({
+    return (await db.villa_pricing.findMany({
       where: {
         villa_id: Number(villaId),
         price: {

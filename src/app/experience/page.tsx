@@ -16,7 +16,7 @@ import {
 } from '~/lib/images';
 
 import type { Metadata } from 'next';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 
 export const metadata: Metadata = {
   title: 'Experience Masakali Retreat | Yoga, Spa, and Luxury in Bali',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const disabledDates = await getAllBlockedDates();
-  const villaPricing = await prisma.villa_pricing.findMany({
+  const villaPricing = await db.villa_pricing.findMany({
     where: {
       date: {
         gte: new Date(),

@@ -1,5 +1,5 @@
 'use server';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 
 export type CountryType = {
   name: string;
@@ -12,7 +12,7 @@ export type CountryType = {
 
 export const getCountries = async (): Promise<CountryType[]> => {
   try {
-    const countries = await prisma.country
+    const countries = await db.country
       .findMany({
         select: {
           name: true,

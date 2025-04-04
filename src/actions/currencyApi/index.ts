@@ -1,7 +1,7 @@
 'use server';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 
-// import { env } from '~/env.mjs';
+// import { env } from '~/env';
 
 // import type { CountryCodeType } from '~/lib/countryCurrencies';
 // type Currency = {
@@ -23,7 +23,7 @@ export const getRateFromIdr = async (
   currency = 'USD'
 ): Promise<number | null> => {
   try {
-    const rate = await prisma.currency.findFirst({
+    const rate = await dbcurrency.findFirst({
       where: {
         code: currency,
       },

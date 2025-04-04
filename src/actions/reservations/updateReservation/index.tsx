@@ -1,5 +1,5 @@
 'use server';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 
 type ReservationDataType = {
   smoobu_id?: number | null;
@@ -24,7 +24,7 @@ export const updateReservation = async ({
   data: ReservationDataType;
 }) => {
   try {
-    const reservation = await prisma.reservation.update({
+    const reservation = await db.reservation.update({
       where: {
         id: reservationId,
       },

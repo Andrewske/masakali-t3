@@ -1,4 +1,4 @@
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 import { villaIdsArray, type VillaIdsType } from '~/lib/villas';
 
 import type { SmoobuReservation, SmoobuRatesResponse } from '~/types/smoobu';
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
 
       // check if dbReservation exists
 
-      const res = await prisma.reservation.findFirst({
+      const res = await dbreservation.findFirst({
         where: {
           smoobu_id: data.id,
         },

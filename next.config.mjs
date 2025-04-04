@@ -6,7 +6,8 @@
 import { withSentryConfig } from "@sentry/nextjs";
 import MillionLint from "@million/lint";
 // import withBundleAnalyzer from '@next/bundle-analyzer'
-import { env } from "./src/env.mjs";
+import "./src/env.js";
+
 
 
 

@@ -1,48 +1,43 @@
 {
   "compilerOptions": {
+    /* Base Options: */
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "target": "es2020",
+    "target": "es2022",
     "allowJs": true,
     "resolveJsonModule": true,
+    "moduleDetection": "force",
     "isolatedModules": true,
-    "checkJs": true,
     "verbatimModuleSyntax": true,
+
+    /* Strictness: */
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "checkJs": true,
+
+    "lib": ["dom", "dom.iterable", "es2022"],
     "noEmit": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "es2022"
-    ],
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "paths": {
-      "~/*": [
-        "./src/*"
-      ]
-    },
+    "module": "ESnext",
+    "moduleResolution": "Bundler",
+    "jsx": "preserve",
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "jsx": "preserve"
+    "incremental": true,
+
+    /* Other Options: */
+    "noImplicitOverride": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

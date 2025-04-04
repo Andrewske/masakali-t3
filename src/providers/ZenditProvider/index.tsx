@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useXenditStore } from '~/stores/xenditStore';
-import { env } from '~/env.mjs'; // Ensure this path is correct
+import { env } from '~/env'; // Ensure this path is correct
 
 const XenditProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
