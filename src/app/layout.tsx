@@ -16,6 +16,7 @@ import '~/styles/icomoon.css';
 import SuspendedPostHogPageView from '~/components/PostHogPageView';
 
 import type { Metadata } from 'next';
+import HeaderWrapper from '~/components/layout/HeaderWrapper';
 
 export const metadata: Metadata = {
   title: 'Masakali Retreat | Luxury Villas in Bali',
@@ -65,9 +66,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <CurrencyStoreProvider>
                 <ReservationStoreProvider>
                   <SuspendedPostHogPageView />
-                  {/* <header className="relative md:sticky top-0 z-50">
-                    <Header />
-                  </header> */}
+                  <header className="relative md:sticky top-0 z-50">
+                    <HeaderWrapper />
+                  </header>
                   <main className="min-h-screen flex flex-col justify-between text-baskerville">
                     {children}
                   </main>

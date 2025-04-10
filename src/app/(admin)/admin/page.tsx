@@ -11,7 +11,7 @@ export default async function Page() {
   }
 
   return (
-    <main className="h-screen w-full grid place-items-center">
+    <main className="h-screen w-full flex flex-col items-center justify-center">
       {/* <UpdateReservationsButton /> */}
       {/* <Button
         isWhite={false}

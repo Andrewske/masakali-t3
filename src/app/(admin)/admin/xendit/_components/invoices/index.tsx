@@ -58,7 +58,10 @@ export default function XenditInvoices({ data }: { data: Invoice[] }) {
                 type="single"
                 collapsible
               >
-                <AccordionItem value={invoice.id ?? ''}>
+                <AccordionItem
+                  value={invoice.id ?? ''}
+                  className="mr-4"
+                >
                   <AccordionTrigger>
                     <CardHeader className="grid grid-cols-1 sm:grid-cols-5 w-full text-left">
                       <div className="font-semibold">

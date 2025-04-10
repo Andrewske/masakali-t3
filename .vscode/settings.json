@@ -1,5 +1,6 @@
 {
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "search.useIgnoreFiles": true,
-  "terminal.integrated.enablePersistentSessions": false
+  "terminal.integrated.enablePersistentSessions": false,
+  "python.terminal.activateEnvironment": false
 }
