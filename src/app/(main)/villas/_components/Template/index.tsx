@@ -1,5 +1,5 @@
-import NextVilla from '~/app/villas/_components/NextVilla';
-import GridGallery from '~/app/villas/_components/GridGallery';
+import NextVilla from '~/app/(main)/villas/_components/NextVilla';
+import GridGallery from '~/app/(main)/villas/_components/GridGallery';
 
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
@@ -11,10 +11,10 @@ import VillaDetails from '../VillaDetails';
 import ContentContainer from '~/components/ContentContainer';
 import VillaImage from '~/components/VillaImage';
 
-import DateContainer from '~/app/villas/_components/DateContainer';
+import DateContainer from '~/app/(main)/villas/_components/DateContainer';
 
 // const DateContainer = dynamic(
-//   () => import('~/app/villas/_components/DateContainer'),
+//   () => import('~/app/(main)/villas/_components/DateContainer'),
 //   { ssr: false }
 // );
 

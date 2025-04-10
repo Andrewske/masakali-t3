@@ -138,6 +138,9 @@ dependencies:
   posthog-js:
     specifier: ^1.216.1
     version: 1.216.1
+  posthog-node:
+    specifier: ^4.11.3
+    version: 4.11.3
   prisma:
     specifier: ^6.3.1
     version: 6.3.1(typescript@5.7.3)
@@ -4737,6 +4740,16 @@ packages:
       - debug
     dev: false
 
+  /axios@1.8.4:
+    resolution: {integrity: sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==}
+    dependencies:
+      follow-redirects: 1.15.9
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
     engines: {node: '>= 0.4'}
@@ -7726,6 +7739,15 @@ packages:
       fflate: 0.4.8
       preact: 10.25.4
       web-vitals: 4.2.4
+    dev: false
+
+  /posthog-node@4.11.3:
+    resolution: {integrity: sha512-Ye7d9ZJX1reWP9084Gm9+O7NnvlW7LnbU09GzlsSdD0HzGTfxeKTQZsl9h1+CDHhfvpdWJRm8uc91/aDmXzaCA==}
+    engines: {node: '>=15.0.0'}
+    dependencies:
+      axios: 1.8.4
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /preact-render-to-string@5.2.3(preact@10.11.3):

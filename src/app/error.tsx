@@ -22,7 +22,7 @@ export default function GlobalError({
   // }, [error.digest]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col items-center justify-center">
       <h1>Error</h1>
       {/* <p>{error.message}</p> */}
       <button onClick={reset}>Reset</button>

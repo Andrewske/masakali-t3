@@ -1,4 +1,4 @@
-import PostHogClient from '~/lib/posthog';
+import PostHogClient from '~/app/posthog';
 
 type TryCatchOptions = {
   captureError?: boolean;

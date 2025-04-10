@@ -1,4 +1,7 @@
 'use server';
+import { Invoice } from 'xendit-node';
+import { env } from '~/env';
+
 export type XenditInvoiceData = {
   external_id: string;
   amount: number;
@@ -21,7 +24,7 @@ export type XenditInvoiceData = {
     name: string;
     quantity: number;
     price: number;
-  };
+  }[];
   fees: {
     type: 'tax' | 'discount';
     value: number;
@@ -38,31 +41,46 @@ type PaymentLinkData = {
   pricePerNight: number;
   discount: boolean;
   tax: boolean;
+  discountAmount: number;
+  taxAmount: number;
 };
 
-// export const createPaymentLink = async (data: PaymentLinkData) => {
+export const createPaymentLink = async (data: PaymentLinkData) => {
+  const xendit = new Invoice({ secretKey: env.XENDIT_TEST_SECRET_KEY });
 
-//     const invoiceData: XenditInvoiceData = {
-//         external_id: data.email,
-//         amount: data.pricePerNight * data.nights,
-//         customer: {
-//             email: data.email,
-//         },
-//         customer_notification_preference: {
-//             invoice_created: ['email'],
-//             invoice_reminder: ['email'],
-//             invoice_paid: ['email'],
-//         },
-//         invoice_duration: 172800,
-//         payment_methods: ['CREDIT_CARD'],
-//         currency: 'IDR',
-//         locale: 'en',
-//         items: [{
-//             name: data.villa,
-//             quantity: data.nights,
-//             price: data.pricePerNight,
-//         }],
-//     }
+  const invoiceData = {
+    externalId: data.email,
+    amount: data.pricePerNight * data.nights,
+    customer: {
+      email: data.email,
+    },
+    customer_notification_preference: {
+      invoice_created: ['email'],
+      invoice_reminder: ['email'],
+      invoice_paid: ['email'],
+    },
+    invoice_duration: 172800,
+    payment_methods: ['CREDIT_CARD'],
+    currency: 'IDR',
+    locale: 'en',
+    items: [
+      {
+        name: data.villa,
+        quantity: data.nights,
+        price: data.pricePerNight,
+      },
+    ],
+    fees: [
+      {
+        type: 'tax',
+        value: data.tax ? data.taxAmount : 0,
+      },
+      {
+        type: 'discount',
+        value: data.discount ? data.discountAmount : 0,
+      },
+    ],
+  };
 
-//     return
-// }
+  return await xendit.createInvoice({ data: invoiceData });
+};

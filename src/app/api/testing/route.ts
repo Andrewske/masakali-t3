@@ -184,7 +184,7 @@ export function GET() {
   //     (currency) => currency['code']
   //   );
 
-  //   const dbCurrencies = await dbcurrency
+  //   const dbCurrencies = await db.currency
   //     .findMany({
   //       select: { code: true },
   //     })

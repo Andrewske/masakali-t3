@@ -22,7 +22,7 @@ export async function importCountries() {
   for (const country of countries) {
     try {
       // Create a new currency entry if it doesn't already exist
-      const currency = await dbcurrency.upsert({
+      const currency = await db.currency.upsert({
         where: { code: country.currency.code },
         update: {
           code: country.currency.code,

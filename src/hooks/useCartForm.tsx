@@ -6,7 +6,7 @@ import { submitToXendit } from '~/actions/xendit/submitToXendit';
 import { zodResolver } from '@hookform/resolvers/zod';
 import getFormSchema, {
   type FormData,
-} from '~/app/cart/CartForm/getFormSchema';
+} from '~/app/(main)/cart/CartForm/getFormSchema';
 import { type VillaNamesType } from '~/lib/villas';
 
 // const formDefaultValues = {

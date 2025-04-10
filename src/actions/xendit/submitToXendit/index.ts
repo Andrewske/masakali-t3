@@ -1,4 +1,4 @@
-import type { FormData } from '~/app/cart/CartForm/getFormSchema';
+import type { FormData } from '~/app/(main)/cart/CartForm/getFormSchema';
 import { xenditCreateToken } from '~/utils/xendit';
 
 type SubmitToXenditProps = {

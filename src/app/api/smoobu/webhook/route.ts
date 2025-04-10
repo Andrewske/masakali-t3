@@ -82,7 +82,7 @@ export async function POST(request: Request) {
 
       // check if dbReservation exists
 
-      const res = await dbreservation.findFirst({
+      const res = await db.reservation.findFirst({
         where: {
           smoobu_id: data.id,
         },

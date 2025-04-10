@@ -23,7 +23,7 @@ export const getRateFromIdr = async (
   currency = 'USD'
 ): Promise<number | null> => {
   try {
-    const rate = await dbcurrency.findFirst({
+    const rate = await db.currency.findFirst({
       where: {
         code: currency,
       },

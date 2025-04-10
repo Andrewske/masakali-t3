@@ -31,7 +31,7 @@ import {
 } from '~/lib/images';
 
 import ContactForm from '../_components/ContactForm';
-import BookNowButton from '~/app/retreats/_components/BookNowButton';
+import BookNowButton from '~/app/(main)/retreats/_components/BookNowButton';
 
 const retreatDetails = {
   name: 'Tribute Yoga Retreat',

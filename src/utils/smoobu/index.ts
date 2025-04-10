@@ -53,7 +53,7 @@ export async function createReservation(smoobuReservation: SmoobuReservation) {
   // Use Prisma to create a new reservation in the database
   const { villa_id, ...otherReservationData } = reservationData;
 
-  const newReservation = await dbreservation.create({
+  const newReservation = await db.reservation.create({
     data: {
       ...otherReservationData,
       villa: {
@@ -85,7 +85,7 @@ export async function updateReservation(smoobuReservation: SmoobuReservation) {
 
   const { villa_id, ...otherReservationData } =
     parseSmoobuReservation(smoobuReservation);
-  await dbreservation.upsert({
+  await db.reservation.upsert({
     where: {
       smoobu_id: smoobuId, // Use the smoobuId from the function argument
     },
@@ -131,7 +131,7 @@ export async function updateReservation(smoobuReservation: SmoobuReservation) {
 
 export async function cancelReservation(smoobu_id: number) {
   // First, find the reservation by smoobuId to get its id
-  const reservation = await dbreservation.findUnique({
+  const reservation = await db.reservation.findUnique({
     where: {
       smoobu_id,
     },
@@ -142,7 +142,7 @@ export async function cancelReservation(smoobu_id: number) {
   }
 
   // Then, use the id to update the reservation
-  return await dbreservation.update({
+  return await db.reservation.update({
     where: {
       id: reservation.id, // Use the id obtained from the previous query
     },
@@ -154,7 +154,7 @@ export async function cancelReservation(smoobu_id: number) {
 
 export async function deleteReservation(smoobu_id: number) {
   // First, find the reservation by smoobuId to get its id
-  const reservation = await dbreservation.findUnique({
+  const reservation = await db.reservation.findUnique({
     where: {
       smoobu_id,
     },
@@ -165,7 +165,7 @@ export async function deleteReservation(smoobu_id: number) {
   }
 
   // Then, use the id to delete the reservation
-  return await dbreservation.delete({
+  return await db.reservation.delete({
     where: {
       id: reservation.id, // Use the id obtained from the previous query
     },
@@ -233,7 +233,7 @@ export async function blockVilla(
 
     const { id: smoobu_id } = (await response.json()) as CreateBookingResponse;
 
-    await dbreservation.create({
+    await db.reservation.create({
       data: {
         arrival: data.arrivalDate,
         departure: data.departureDate,

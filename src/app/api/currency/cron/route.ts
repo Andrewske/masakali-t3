@@ -17,7 +17,7 @@ interface RateInfo {
 
 const updateCurrency = async (code: string, rate_from_idr: number) => {
   try {
-    const currency = await dbcurrency.findFirst({
+    const currency = await db.currency.findFirst({
       where: {
         code,
       },
@@ -31,7 +31,7 @@ const updateCurrency = async (code: string, rate_from_idr: number) => {
       return;
     }
 
-    return await dbcurrency.update({
+    return await db.currency.update({
       where: {
         id: currency.id,
       },
@@ -45,7 +45,7 @@ const updateCurrency = async (code: string, rate_from_idr: number) => {
 };
 
 async function getExchangeRates() {
-  const currencies = await dbcurrency
+  const currencies = await db.currency
     .findMany({
       select: {
         code: true,

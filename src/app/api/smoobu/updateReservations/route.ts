@@ -116,12 +116,12 @@ function transformReservationData(
 async function upsertReservationToDatabase(
   reservationData: TransformedReservation
 ): Promise<{ smoobu_id: number | null }> {
-  const currentReservation = await dbreservation.findUnique({
+  const currentReservation = await db.reservation.findUnique({
     where: { smoobu_id: reservationData.smoobu_id },
   });
 
   if (!currentReservation) {
-    return await dbreservation.create({
+    return await db.reservation.create({
       data: reservationData,
       select: {
         smoobu_id: true,
@@ -138,7 +138,7 @@ async function upsertReservationToDatabase(
     }
   }
   if (numberOfChanges > 0) {
-    return await dbreservation.update({
+    return await db.reservation.update({
       where: { smoobu_id: reservationData.smoobu_id },
       data: reservationData,
       select: {
@@ -148,7 +148,7 @@ async function upsertReservationToDatabase(
   }
 
   return { smoobu_id: reservationData.smoobu_id };
-  // return await dbreservation.upsert({
+  // return await db.reservation.upsert({
   //   where: { smoobu_id: reservationData.smoobu_id ?? '' },
   //   create: reservationData,
   //   update: reservationData,
