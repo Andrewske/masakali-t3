@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
-import HeroCarousel from '~/app/(home)/HeroSlideShow/Carousel';
+import HeroCarousel from '~/app/(main)/(home)/HeroSlideShow/Carousel';
 
 const ContentContainer = ({
   id,

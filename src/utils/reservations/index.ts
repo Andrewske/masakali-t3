@@ -2,7 +2,7 @@ import { type reservation } from '@prisma/client';
 import { type VillaIdsType, villaIdsArray } from '~/lib/villas';
 // import { format, parseISO } from 'date-fns';
 import { getDatesBetweenDates } from '..';
-import type { VillaPricing } from '~/app/(home)/Availability';
+import type { VillaPricing } from '~/app/(main)/(home)/Availability';
 
 type getBlockedDatesAllVillasType = {
   villaPricing: VillaPricing[];

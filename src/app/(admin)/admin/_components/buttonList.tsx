@@ -17,7 +17,7 @@ export default function ButtonList() {
       <Button onClick={() => router.push('/admin/email/send_confirmation')}>
         Send A Confirmation Email
       </Button>
-      <Button onClick={() => signOut()}>Logout</Button>
+      <Button onClick={() => signOut({ callbackUrl: '/' })}>Logout</Button>
     </div>
   );
 }

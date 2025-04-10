@@ -2,7 +2,7 @@ import ContentContainer from '~/components/ContentContainer';
 
 import HeroImage from '~/components/HeroImage';
 
-import Availability from '../(main)/(home)/Availability';
+import Availability from '~/app/(main)/(home)/Availability';
 
 import { getAllBlockedDates } from '~/actions/reservations';
 

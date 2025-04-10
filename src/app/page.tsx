@@ -1,13 +1,12 @@
 // Components
 
-import HeroSlideShow from '~/app/(home)/HeroSlideShow';
-// import Availability from '~/app/(home)/Availability';
-import About from '~/app/(home)/About';
-import WhyChoose from '~/app/(home)/WhyChoose';
-import Villas from '~/app/(home)/Villas';
-// import { getAllBlockedDates } from '~/actions/reservations';
+import HeroSlideShow from '~/app/(main)/(home)/HeroSlideShow';
 
-import Reviews from './(home)/Reviews';
+import About from '~/app/(main)/(home)/About';
+import WhyChoose from '~/app/(main)/(home)/WhyChoose';
+import Villas from '~/app/(main)/(home)/Villas';
+
+import Reviews from '~/app/(main)/(home)/Reviews';
 import VideoContainer from '~/components/VideoContainer';
 
 const Page = () => {

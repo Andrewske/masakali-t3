@@ -9,7 +9,7 @@ import { CurrencyStoreProvider } from '~/providers/CurrencyStoreProvider/index';
 import { UserStoreProvider } from '~/providers/UserStoreProvider';
 import { PostHogProvider } from '~/providers/PostHogProvider';
 import Script from 'next/script';
-import Header from '~/components/layout/Header';
+
 import Footer from '~/components/layout/Footer';
 
 import '~/styles/icomoon.css';
@@ -65,9 +65,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <CurrencyStoreProvider>
                 <ReservationStoreProvider>
                   <SuspendedPostHogPageView />
-                  <header className="relative md:sticky top-0 z-50">
+                  {/* <header className="relative md:sticky top-0 z-50">
                     <Header />
-                  </header>
+                  </header> */}
                   <main className="min-h-screen flex flex-col justify-between text-baskerville">
                     {children}
                   </main>

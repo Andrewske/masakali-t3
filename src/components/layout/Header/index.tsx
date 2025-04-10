@@ -9,11 +9,14 @@ import { usePathname } from 'next/navigation';
 import RetreatButton from './RetreatButton';
 import VillasButton from './VillasButton';
 
-const Header = () => {
+const Header = ({ isAdmin }: { isAdmin?: boolean }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const pathName = usePathname();
 
-  const memoizedHeaderLinks = useMemo(() => <HeaderLinks />, []);
+  const memoizedHeaderLinks = useMemo(
+    () => <HeaderLinks isAdmin={isAdmin} />,
+    [isAdmin]
+  );
 
   return (
     <nav>
