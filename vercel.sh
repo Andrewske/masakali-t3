@@ -9,7 +9,7 @@ if [[ $VERCEL_ENV == "production" || $VERCEL_ENV == "preview" ]] ; then
 
   # Login to PostHog if not already logged in
   if [ ! -f "/vercel/.posthog/credentials.json" ]; then
-    /vercel/.posthog/posthog-cli --host https://us.posthog.com login --personal-api-key $NEXT_PUBLIC_POSTHOG_KEY
+    /vercel/.posthog/posthog-cli --host https://us.posthog.com login 
   fi
 
   # Upload sourcemaps
