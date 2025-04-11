@@ -106,6 +106,7 @@ export const createPaymentLink = async (data: PaymentLinkData) => {
   const { error } = await tryCatch(
     xendit.createInvoice({ data: invoiceData }),
     {
+      captureError: true,
       context: {
         location: 'createPaymentLink',
       },
