@@ -3,7 +3,7 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
-import { withSentryConfig } from "@sentry/nextjs";
+
 import MillionLint from "@million/lint";
 // import withBundleAnalyzer from '@next/bundle-analyzer'
 import "./src/env.js";
@@ -72,18 +72,4 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
 }
 
-const sentryWebpackPluginOptions = {
-  // For all available options, see:
-  // https://github.com/getsentry/sentry-webpack-plugin#options
-
-  // Suppresses source map uploading logs during build
-  silent: true,
-  org: "andrewske",
-  project: "masakali",
-  authToken: process.env.SENTRY_AUTH_TOKEN,
-  hideSourceMaps: true,
-  automaticVercelMonitors: true,
-  disableLogger: true,
-}
-
-export default MillionLint.next({ rsc: true })(withSentryConfig(nextConfig, sentryWebpackPluginOptions))
+export default MillionLint.next({ rsc: true })(nextConfig)

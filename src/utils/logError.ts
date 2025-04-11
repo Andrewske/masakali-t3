@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/nextjs';
-
 /**
  * Logs an error message and details, and reports it to Sentry.
  *
@@ -76,10 +74,4 @@ function reportToSentry(
 ) {
   // Default to Error if level is not recognized
   console.log('reportToSentry', error, level, data);
-  Sentry.setContext('context', data);
-  Sentry.withScope((scope) => {
-    scope.setLevel(level);
-
-    Sentry.captureException(error);
-  });
 }
