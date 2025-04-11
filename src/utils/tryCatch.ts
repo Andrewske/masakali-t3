@@ -43,14 +43,18 @@ export const tryCatch = async <T>(
     // Handle other errors
     if (error instanceof Error) {
       if (options.captureError) {
-        const posthog = PostHogClient();
-        posthog.captureException(error, undefined, {
-          message: error.message,
-          stack: error.stack,
-          ...options.context,
-          ...xenditOptions,
-        });
-        await posthog.shutdown();
+        try {
+          const posthog = PostHogClient();
+          posthog.captureException(error, undefined, {
+            message: error.message,
+            stack: error.stack,
+            ...options.context,
+            ...xenditOptions,
+          });
+          await posthog.shutdown();
+        } catch (error) {
+          console.error('Error sending error to PostHog:', error);
+        }
       }
       return { data: null, error };
     }
