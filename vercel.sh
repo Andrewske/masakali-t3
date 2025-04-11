@@ -1,6 +1,6 @@
 if [[ $VERCEL_ENV == "production" || $VERCEL_ENV == "preview" ]] ; then
   # Build with sourcemaps
-  NEXT_PUBLIC_POSTHOG_KEY=$NEXT_PUBLIC_POSTHOG_KEY npm run build
+  npm run build
 
   # Install PostHog CLI if not already installed
   if [ ! -f "/vercel/.posthog/posthog-cli" ]; then
