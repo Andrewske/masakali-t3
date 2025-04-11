@@ -116,12 +116,13 @@ export default function XenditInvoices({ data }: { data: Invoice[] }) {
                       {invoice.status !== 'EXPIRED' &&
                         invoice.status !== 'PAID' && (
                           <Button
-                            onClick={() => handleVoidPayment(invoice.id ?? '')}
+                            callToAction={'Void Payment Link'}
+                            handleClick={() =>
+                              handleVoidPayment(invoice.id ?? '')
+                            }
                             className="mt-4 bg-red-600 hover:bg-red-700"
-                            disabled={loading}
-                          >
-                            {loading ? 'Voiding...' : 'Void Payment Link'}
-                          </Button>
+                            isLoadingText={'Voiding...'}
+                          />
                         )}
                     </CardContent>
                   </AccordionContent>

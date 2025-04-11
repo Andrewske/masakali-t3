@@ -82,7 +82,7 @@ const CountryDropdown = ({ countries }: { countries: CountryType[] }) => {
         variant="outline"
         role="combobox"
         aria-expanded={isOpen}
-        className="w-[200px] justify-between"
+        className=""
       >
         {country.currency.code}{' '}
         <Image

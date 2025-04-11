@@ -165,7 +165,9 @@ const DateContainer = ({
             );
           }
         )}
-        <CountryDropdown countries={countries} />
+        <div className="flex justify-end w-full">
+          <CountryDropdown countries={countries} />
+        </div>
       </div>
       <Button
         handleClick={handleBooking}

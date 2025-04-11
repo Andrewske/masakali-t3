@@ -18,6 +18,8 @@ const buttonVariants = cva(
           'uppercase font-montserrat text-xl mx-auto text-center transition-colors duration-50 bg-gray-400 text-white !cursor-progress',
         disabled:
           '!bg-red-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
+        outline:
+          'bg-white text-purple border-gray-300 hover:bg-gray-100 hover:border-white gap-4 !px-2 !mx-0 text-md',
       },
       size: {
         default: 'px-8 py-2',
