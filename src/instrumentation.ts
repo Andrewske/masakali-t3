@@ -1,4 +1,4 @@
-import PostHogClient from './app/posthog';
+import PostHogClient from './posthog';
 
 // instrumentation.js
 export function register() {
