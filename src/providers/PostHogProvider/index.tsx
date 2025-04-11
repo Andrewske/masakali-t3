@@ -1,23 +1,51 @@
 'use client';
 
 import posthog from 'posthog-js';
-import { PostHogProvider as PHProvider } from 'posthog-js/react';
-import { useEffect } from 'react';
+import { PostHogProvider as PHProvider, usePostHog } from 'posthog-js/react';
+import { useEffect, Suspense } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { env } from '~/env';
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    if (
-      !window.location.host.includes('127.0.0.1') ||
-      !window.location.host.includes('localhost')
-    ) {
-      posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY ?? '', {
-        api_host: env.NEXT_PUBLIC_POSTHOG_HOST,
-        capture_pageview: false, // Disable automatic pageview capture, as we capture manually
-        capture_pageleave: true,
-      });
-    }
+    posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY ?? '', {
+      api_host: env.NEXT_PUBLIC_POSTHOG_HOST,
+      capture_pageview: false, // We capture pageviews manually
+      capture_pageleave: false, // Maybe?,
+    });
   }, []);
 
-  return <PHProvider client={posthog}>{children}</PHProvider>;
+  return (
+    <PHProvider client={posthog}>
+      <SuspendedPostHogPageView />
+      {children}
+    </PHProvider>
+  );
+}
+
+function PostHogPageView() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const posthogClient = usePostHog();
+
+  useEffect(() => {
+    if (pathname && posthogClient) {
+      let url = window.origin + pathname;
+      const search = searchParams.toString();
+      if (search) {
+        url += '?' + search;
+      }
+      posthogClient.capture('$pageview', { $current_url: url });
+    }
+  }, [pathname, searchParams, posthogClient]);
+
+  return null;
+}
+
+function SuspendedPostHogPageView() {
+  return (
+    <Suspense fallback={null}>
+      <PostHogPageView />
+    </Suspense>
+  );
 }

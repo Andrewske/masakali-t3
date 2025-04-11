@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     'luxury villas',
     'infinity pools',
     'Ubud',
-    'rice field views',
+    'rice field views'
   ],
   openGraph: {
     title: 'Masakali Retreat - Luxury Villas in Bali',
@@ -42,15 +42,15 @@ export const metadata: Metadata = {
     //   },
     // ],
     locale: 'en_US',
-    type: 'website',
+    type: 'website'
   },
   robots: {
     index: true,
-    follow: true,
+    follow: true
   },
   icons: {
-    icon: '/masakali_logo.ico',
-  },
+    icon: '/masakali_logo.ico'
+  }
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

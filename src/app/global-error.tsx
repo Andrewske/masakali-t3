@@ -1,19 +1,23 @@
 'use client';
-
-import * as Sentry from '@sentry/nextjs';
-import Error from 'next/error';
 import { useEffect } from 'react';
+import type Error from 'next/error';
+import posthog from 'posthog-js';
 
-export default function GlobalError({ error }: { error: Error }) {
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
   useEffect(() => {
-    Sentry.captureException(error);
+    posthog.captureException(error);
   }, [error]);
 
   return (
-    <html>
-      <body>
-        <Error statusCode={500} />
-      </body>
-    </html>
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <h1>Error</h1>
+      <button onClick={reset}>Reset</button>
+    </div>
   );
 }

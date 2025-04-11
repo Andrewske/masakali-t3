@@ -73,18 +73,21 @@ export const createPaymentLink = async (data: PaymentLinkData) => {
     });
   }
 
-  const invoiceData = {
+  const invoiceData: XenditInvoiceData = {
     externalId: uuidv4(),
     amount: withTax,
-    payerEmail: data.email,
-    shouldSendEmail: true,
     customer: {
-      givenNames: data.firstName,
-      surname: data.lastName,
+      given_names: data.firstName,
+      surname: '',
       email: data.email,
     },
-    invoiceDuration: '172800',
-    paymentMethods: ['CREDIT_CARD'],
+    customer_notification_preference: {
+      invoice_created: ['email'],
+      invoice_reminder: ['email'],
+      invoice_paid: ['email'],
+    },
+    invoice_duration: 172800,
+    payment_methods: ['CREDIT_CARD'],
     description: data.description,
     currency: 'IDR',
     locale: 'en',
@@ -100,11 +103,16 @@ export const createPaymentLink = async (data: PaymentLinkData) => {
 
   console.log('Sending to Xendit:', JSON.stringify(invoiceData, null, 2));
 
-  const { error } = await tryCatch(xendit.createInvoice({ data: invoiceData }));
+  const { error } = await tryCatch(
+    xendit.createInvoice({ data: invoiceData }),
+    {
+      context: {
+        location: 'createPaymentLink',
+      },
+    }
+  );
 
   if (error) {
     throw error;
   }
-
-  return;
 };

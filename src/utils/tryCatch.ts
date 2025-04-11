@@ -5,33 +5,59 @@ type TryCatchOptions = {
   context?: Record<string, unknown>;
 };
 
-export async function tryCatch<T>(
+const isXenditError = (error: unknown) => {
+  // Handle Xendit errors
+  if (error && typeof error === 'object') {
+    const xenditError = error as {
+      errorCode?: string;
+      errorMessage?: string;
+      status?: number;
+      errors?: Array<{ field: string; message: string }>;
+    };
+
+    if (xenditError.errorCode) {
+      return {
+        xenditError: {
+          code: xenditError.errorCode,
+          message: xenditError.errorMessage,
+          status: xenditError.status,
+          errors: xenditError.errors,
+        },
+      };
+    }
+  }
+
+  return {};
+};
+
+export const tryCatch = async <T>(
   promise: Promise<T>,
   options: TryCatchOptions = { captureError: true }
-): Promise<{ data: T | null; error: Error | null }> {
+): Promise<{ data: T | null; error: Error | null }> => {
   try {
     const data = await promise;
     return { data, error: null };
   } catch (error) {
-    if (options.captureError) {
-      const posthog = PostHogClient();
-      posthog.capture({
-        distinctId: 'server',
-        event: 'error',
-        properties: {
-          error: error instanceof Error ? error.message : 'Unknown error',
-          stack: error instanceof Error ? error.stack : undefined,
+    const xenditOptions = isXenditError(error);
+
+    // Handle other errors
+    if (error instanceof Error) {
+      if (options.captureError) {
+        const posthog = PostHogClient();
+        posthog.captureException(error, undefined, {
+          message: error.message,
+          stack: error.stack,
           ...options.context,
-        },
-      });
-      await posthog.shutdown();
+          ...xenditOptions,
+        });
+        await posthog.shutdown();
+      }
+      return { data: null, error };
     }
-    return {
-      data: null,
-      error: error instanceof Error ? error : new Error('Unknown error'),
-    };
+
+    return { data: null, error: new Error('Unknown error occurred') };
   }
-}
+};
 
 // Example usage:
 /*
