@@ -1,4 +1,4 @@
-import PostHogClient from '~/posthog';
+import PostHogClient from '~/app/posthog';
 
 type TryCatchOptions = {
   captureError?: boolean;
@@ -43,7 +43,7 @@ export const tryCatch = async <T>(
     // Handle other errors
     if (error instanceof Error) {
       if (options.captureError) {
-        const posthog = PostHogClient();
+        const posthog = await PostHogClient();
         posthog.captureException(error, undefined, {
           message: error.message,
           stack: error.stack,

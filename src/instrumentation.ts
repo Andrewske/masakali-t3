@@ -1,17 +1,16 @@
-import PostHogClient from './posthog';
-
 // instrumentation.js
 export function register() {
   // No-op for initialization
 }
 
-export const onRequestError = (
+export const onRequestError = async (
   err: Error,
   request: Request,
   context: Record<string, string>
 ) => {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const posthog = PostHogClient();
+    const PostHogClient = (await import('~/app/posthog')).default;
+    const posthog = await PostHogClient();
 
     let distinctId = null;
     if (request.headers.get('cookie')) {
