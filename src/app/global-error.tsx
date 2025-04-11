@@ -2,12 +2,13 @@
 import { useEffect } from 'react';
 import type Error from 'next/error';
 import posthog from 'posthog-js';
+import NextError from 'next/error';
 
 export default function GlobalError({
   error,
   reset,
 }: {
-  error: Error;
+  error: Error & { digest?: string };
   reset: () => void;
 }) {
   useEffect(() => {
@@ -15,9 +16,10 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <h1>Error</h1>
-      <button onClick={reset}>Reset</button>
-    </div>
+    <html>
+      <body>
+        <NextError statusCode={0} />
+      </body>
+    </html>
   );
 }

@@ -52,24 +52,43 @@ const nextConfig = {
     locales: ['en'],
     defaultLocale: 'en'
   },
-  rewrites: async () => {
-    return [
-      {
-        source: "/ingest/static/:path*",
-        destination: "https://us-assets.i.posthog.com/static/:path*",
-      },
-      {
-        source: "/ingest/:path*",
-        destination: "https://us.i.posthog.com/:path*",
-      },
-      {
-        source: "/ingest/decide",
-        destination: "https://us.i.posthog.com/decide",
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/ingest/static/:path*",
+  //       destination: "https://us-assets.i.posthog.com/static/:path*",
+  //       has: [
+  //         {
+  //           type: 'header',
+  //           key: 'Origin',
+  //           value: 'http://localhost:3000',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       source: "/ingest/:path*",
+  //       destination: "https://us.i.posthog.com/:path*",
+  //     },
+  //     {
+  //       source: "/ingest/decide",
+  //       destination: "https://us.i.posthog.com/decide",
+  //     },
+  //   ];
+  // },
+
   // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
+  // webpack: (config, { isServer }) => {
+  //   if (!isServer) {
+  //     config.resolve.fallback = {
+  //       ...config.resolve.fallback,
+  //       fs: false,
+  //       path: false,
+  //       crypto: false,
+  //     };
+  //   }
+  //   return config;
+  // },
 }
 
 export default MillionLint.next({ rsc: true })(nextConfig)

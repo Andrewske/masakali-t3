@@ -43,7 +43,7 @@ export const tryCatch = async <T>(
     // Handle other errors
     if (error instanceof Error) {
       if (options.captureError) {
-        const posthog = await PostHogClient();
+        const posthog = PostHogClient();
         posthog.captureException(error, undefined, {
           message: error.message,
           stack: error.stack,

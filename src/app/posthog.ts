@@ -1,11 +1,12 @@
 import { env } from '~/env';
+import { PostHog } from 'posthog-node';
 
-export default async function PostHogClient() {
-  const { PostHog } = await import('posthog-node');
-  const posthogClient = new PostHog(env.NEXT_PUBLIC_POSTHOG_KEY, {
-    host: 'https://us.i.posthog.com',
+export default function PostHogClient() {
+  const posthogInstance = new PostHog(env.NEXT_PUBLIC_POSTHOG_KEY, {
+    host: env.NEXT_PUBLIC_POSTHOG_HOST,
     flushAt: 1,
     flushInterval: 0,
   });
-  return posthogClient;
+
+  return posthogInstance;
 }

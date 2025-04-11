@@ -1,5 +1,4 @@
 'use client';
-
 import posthog from 'posthog-js';
 import { PostHogProvider as PHProvider, usePostHog } from 'posthog-js/react';
 import { useEffect, Suspense } from 'react';
@@ -8,7 +7,7 @@ import { env } from '~/env';
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY ?? '', {
+    posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: env.NEXT_PUBLIC_POSTHOG_HOST,
       capture_pageview: false, // We capture pageviews manually
       capture_pageleave: false, // Maybe?,
