@@ -169,22 +169,22 @@ const retreatDetails = {
   ),
 };
 
-const parseDates = (startDate: string, endDate: string) => {
-  const [startYear, startMonth, startDay] = startDate.split('-');
-  const endDay = endDate.slice(-2);
+// const parseDates = (startDate: string, endDate: string) => {
+//   const [startYear, startMonth, startDay] = startDate.split('-');
+//   const endDay = endDate.slice(-2);
 
-  const dates = `${startDay ?? ''}-${endDay ?? ''}`;
-  const month = `${format(new Date(0, parseInt(startMonth ?? ''), 0), 'MMMM')}`;
-  const year = `${startYear ?? ''}`;
+//   const dates = `${startDay ?? ''}-${endDay ?? ''}`;
+//   const month = `${format(new Date(0, parseInt(startMonth ?? ''), 0), 'MMMM')}`;
+//   const year = `${startYear ?? ''}`;
 
-  return { dates, month, year };
-};
+//   return { dates, month, year };
+// };
 
 export default function Page() {
-  const { dates, month, year } = parseDates(
-    retreatDetails.startDate,
-    retreatDetails.endDate
-  );
+  // const { dates, month, year } = parseDates(
+  //   retreatDetails.startDate,
+  //   retreatDetails.endDate
+  // );
 
   return (
     <>

@@ -8,7 +8,7 @@ import { env } from '~/env';
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (
-      !window.location.host.includes('127.0.0.1') &&
+      !window.location.host.includes('127.0.0.1') ||
       !window.location.host.includes('localhost')
     ) {
       posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY ?? '', {

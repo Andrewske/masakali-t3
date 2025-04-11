@@ -10,9 +10,8 @@ const HeaderLinks = ({ isAdmin }: { isAdmin?: boolean }) => {
   ];
 
   const adminLinks = [
-    { name: 'Dashboard', href: `/admin` },
     { name: 'Invoices', href: `/admin/xendit/invoices` },
-    { name: 'Confirmation Email', href: `/admin/email/send_confirmation` },
+    { name: 'Email', href: `/admin/email/send_confirmation` },
   ];
 
   const links = isAdmin ? adminLinks : mainLinks;

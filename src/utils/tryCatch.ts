@@ -6,11 +6,11 @@ type TryCatchOptions = {
 };
 
 export async function tryCatch<T>(
-  fn: () => Promise<T>,
+  promise: Promise<T>,
   options: TryCatchOptions = { captureError: true }
 ): Promise<{ data: T | null; error: Error | null }> {
   try {
-    const data = await fn();
+    const data = await promise;
     return { data, error: null };
   } catch (error) {
     if (options.captureError) {

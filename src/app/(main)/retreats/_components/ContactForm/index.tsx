@@ -21,7 +21,7 @@ import {
 
 import { Input } from '~/components/ui/input';
 import GuestsForm from '../GuestsForm';
-import { Button } from '~/components/ui/button';
+import Button from '~/components/Button';
 import { Textarea } from '~/components/ui/textarea';
 import { sendRetreatInquiry } from '~/actions/sendgrid/retreat';
 import { useToast } from '~/components/ui/use-toast';
@@ -84,7 +84,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div>
+    <div id="contact-form">
       <Form {...form}>
         <form className="w-full bg-gray flex-col justify-center items-center gap-2">
           <div>
@@ -193,13 +193,10 @@ const ContactForm = () => {
             />
           </div>
           <Button
-            type="button"
-            onClick={form.handleSubmit(onSubmit)}
-            className="bg-purple my-4 w-full"
-            disabled={isProcessing}
-          >
-            Submit
-          </Button>
+            callToAction="Submit"
+            handleClick={form.handleSubmit(onSubmit)}
+            className="my-4 w-full"
+          />
         </form>
       </Form>
     </div>

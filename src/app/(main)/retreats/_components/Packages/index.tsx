@@ -432,13 +432,10 @@ const Packages = () => {
                 ))}
               </span>
               {villa.video && (
-                <Link
+                <Button
+                  callToAction={`Tour ${villa.title}`}
                   href={villa.video}
-                  target="_blank"
-                  className="uppercase font-montserrat text-xl px-8 py-4 mx-auto cursor-pointer bg-purple text-white hover:bg-white hover:text-purple"
-                >
-                  <p>Tour {villa.title}</p>
-                </Link>
+                />
               )}
             </div>
           </div>

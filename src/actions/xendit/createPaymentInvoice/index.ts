@@ -1,9 +1,12 @@
 'use server';
 import { Invoice } from 'xendit-node';
 import { env } from '~/env';
+import { v4 as uuidv4 } from 'uuid';
+import { tryCatch } from '~/utils/tryCatch';
+import type { NotificationChannel } from 'xendit-node/invoice/models';
 
 export type XenditInvoiceData = {
-  external_id: string;
+  externalId: string;
   amount: number;
   customer: {
     given_names?: string;
@@ -48,19 +51,41 @@ type PaymentLinkData = {
 export const createPaymentLink = async (data: PaymentLinkData) => {
   const xendit = new Invoice({ secretKey: env.XENDIT_TEST_SECRET_KEY });
 
+  const total = data.pricePerNight * data.nights;
+  const discount = data.discount ? (data.discountAmount / 100) * total : 0;
+  const withDiscount = total - discount;
+  const tax = data.tax ? (data.taxAmount / 100) * withDiscount : 0;
+  const withTax = withDiscount + tax;
+
+  const fees: { type: 'tax' | 'discount'; value: number }[] = [];
+
+  if (data.discount) {
+    fees.push({
+      type: 'discount',
+      value: discount,
+    });
+  }
+
+  if (data.tax) {
+    fees.push({
+      type: 'tax',
+      value: tax,
+    });
+  }
+
   const invoiceData = {
-    externalId: data.email,
-    amount: data.pricePerNight * data.nights,
+    externalId: uuidv4(),
+    amount: withTax,
+    payerEmail: data.email,
+    shouldSendEmail: true,
     customer: {
+      givenNames: data.firstName,
+      surname: data.lastName,
       email: data.email,
     },
-    customer_notification_preference: {
-      invoice_created: ['email'],
-      invoice_reminder: ['email'],
-      invoice_paid: ['email'],
-    },
-    invoice_duration: 172800,
-    payment_methods: ['CREDIT_CARD'],
+    invoiceDuration: '172800',
+    paymentMethods: ['CREDIT_CARD'],
+    description: data.description,
     currency: 'IDR',
     locale: 'en',
     items: [
@@ -70,17 +95,16 @@ export const createPaymentLink = async (data: PaymentLinkData) => {
         price: data.pricePerNight,
       },
     ],
-    fees: [
-      {
-        type: 'tax',
-        value: data.tax ? data.taxAmount : 0,
-      },
-      {
-        type: 'discount',
-        value: data.discount ? data.discountAmount : 0,
-      },
-    ],
+    fees,
   };
 
-  return await xendit.createInvoice({ data: invoiceData });
+  console.log('Sending to Xendit:', JSON.stringify(invoiceData, null, 2));
+
+  const { error } = await tryCatch(xendit.createInvoice({ data: invoiceData }));
+
+  if (error) {
+    throw error;
+  }
+
+  return;
 };

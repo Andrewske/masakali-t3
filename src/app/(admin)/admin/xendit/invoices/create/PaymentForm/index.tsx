@@ -1,10 +1,12 @@
 'use client';
 import { useForm } from '@tanstack/react-form';
 import type { AnyFieldApi } from '@tanstack/react-form';
+import { resolve } from 'path';
 import { useState } from 'react';
 import { z } from 'zod';
 
 import { createPaymentLink } from '~/actions/xendit/createPaymentInvoice';
+import Button from '~/components/Button';
 import { Input } from '~/components/ui/input';
 import { Textarea } from '~/components/ui/textarea';
 import { toast } from '~/components/ui/use-toast';
@@ -146,7 +148,7 @@ export default function PaymentForm() {
       onChange: z.object({
         email: z.string().email(),
         firstName: z.string().min(1, 'First Name is required'),
-        lastName: z.string().min(1, 'Last Name is required'),
+        lastName: z.string(),
         description: z.string(),
         villa: z.string().min(1, 'Villa is required'),
         nights: z.number().min(1, 'Nights is required'),
@@ -162,18 +164,16 @@ export default function PaymentForm() {
         if (total < 5000) {
           throw new Error('Total amount must be at least Rp. 5.000');
         }
-        const paymentLinkData = {
-          ...value,
-          total,
-          nights: value.nights,
-          pricePerNight: value.pricePerNight,
-        };
+        // const paymentLinkData = {
+        //   ...value,
+        //   amount: total,
+        // };
 
-        await createPaymentLink(paymentLinkData);
+        await createPaymentLink(value);
         toast({
           title: 'Payment link sent',
         });
-        form.reset();
+        // form.reset();
       } catch (error) {
         console.error(error);
         toast({
@@ -215,11 +215,11 @@ export default function PaymentForm() {
 
   return (
     <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        await form.handleSubmit();
-      }}
+      // onSubmit={async (e) => {
+      //   e.preventDefault();
+      //   e.stopPropagation();
+      //   await form.handleSubmit();
+      // }}
       className="max-w-[600px] md:w-[90%] w-[95%] mx-auto p-6 bg-white shadow-lg rounded-lg border border-gray-200"
     >
       <h1 className="text-2xl! font-extrabold my-4! text-center text-purple">
@@ -392,24 +392,14 @@ export default function PaymentForm() {
 
         <form.Subscribe
           selector={(state) => [state.canSubmit, state.isSubmitting]}
-          children={([canSubmit, isSubmitting]) => (
+          children={([canSubmit]) => (
             <div className="flex justify-between items-center">
-              <button
-                type="submit"
+              <Button
+                callToAction="Submit"
+                handleClick={() => form.handleSubmit()}
+                isLoadingText="Processing..."
                 disabled={!canSubmit}
-                className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
-                  !canSubmit ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
-              >
-                {isSubmitting ? '...' : 'Submit'}
-              </button>
-              <button
-                type="reset"
-                onClick={() => form.reset()}
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Reset
-              </button>
+              />
             </div>
           )}
         />

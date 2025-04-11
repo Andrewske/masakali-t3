@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect } from 'react';
-import { Button } from '~/components/ui/button';
+import Button from '~/components/Button';
 
 export default function Error({
   error,
@@ -19,10 +19,16 @@ export default function Error({
     <div className="grid place-items-center gap-4">
       <h2>Uh oh! Something went wrong</h2>
 
-      <Button onClick={() => reset()}>Try Again</Button>
-      <Button>
-        <Link href="/villas">Back to villas</Link>
-      </Button>
+      <Button
+        handleClick={() => reset()}
+        callToAction="Try Again"
+        isWhite={false}
+      />
+      <Button
+        href="/villas"
+        callToAction="Back to villas"
+        isWhite={false}
+      />
     </div>
   );
 }

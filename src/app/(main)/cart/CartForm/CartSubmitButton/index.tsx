@@ -1,12 +1,12 @@
 import React from 'react';
 import type { SubmitHandler, UseFormReturn } from 'react-hook-form';
-import { Button } from '~/components/ui/button';
+import Button from '~/components/Button';
+
 import type { FormData } from '../getFormSchema';
 
 type CartSubmitButtonProps = {
   step: number;
   nextStep: () => void;
-  isProcessing: boolean;
   form: UseFormReturn<FormData>;
   onSubmit: SubmitHandler<FormData>;
 };
@@ -14,31 +14,24 @@ type CartSubmitButtonProps = {
 const CartSubmitButton = ({
   step,
   nextStep,
-  isProcessing,
   form,
   onSubmit,
 }: CartSubmitButtonProps) => {
   if (step === 3) {
     return (
       <Button
-        type="button"
-        onClick={form.handleSubmit(onSubmit)}
-        className="bg-purple my-4 w-full"
-        disabled={isProcessing}
-      >
-        Submit
-      </Button>
+        callToAction="Submit"
+        handleClick={form.handleSubmit(onSubmit)}
+        isLoadingText="Processing..."
+      />
     );
   }
+
   return (
     <Button
-      type="button"
-      onClick={nextStep}
-      className="bg-purple my-4 w-full"
-      disabled={isProcessing}
-    >
-      Next Step
-    </Button>
+      callToAction="Next Step"
+      handleClick={nextStep}
+    />
   );
 };
 

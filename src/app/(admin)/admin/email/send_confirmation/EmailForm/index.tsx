@@ -3,6 +3,7 @@ import { useForm } from '@tanstack/react-form';
 import type { AnyFieldApi } from '@tanstack/react-form';
 import { z } from 'zod';
 import type { DirectBookingTemplateData } from '~/actions/sendgrid';
+import Button from '~/components/Button';
 import { Input } from '~/components/ui/input';
 import { formatCurrency } from '~/utils/helpers';
 function FieldInfo({ field }: { field: AnyFieldApi }) {
@@ -237,20 +238,17 @@ export default function EmailForm({
           selector={(state) => [state.canSubmit, state.isSubmitting]}
           children={([canSubmit, isSubmitting]) => (
             <div className="flex justify-between items-center">
-              <button
-                type="submit"
-                disabled={!canSubmit}
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                {isSubmitting ? '...' : 'Submit'}
-              </button>
-              <button
-                type="reset"
-                onClick={() => form.reset()}
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Reset
-              </button>
+              <Button
+                callToAction={'Submit'}
+                handleClick={() =>
+                  new Promise((resolve) => setTimeout(resolve, 5000))
+                }
+                isLoadingText="Submitting..."
+              />
+              <Button
+                callToAction="Reset"
+                handleClick={() => form.reset()}
+              />
             </div>
           )}
         />

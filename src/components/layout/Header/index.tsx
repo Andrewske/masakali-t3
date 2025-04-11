@@ -6,8 +6,7 @@ import { useState, useMemo } from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import RetreatButton from './RetreatButton';
-import VillasButton from './VillasButton';
+import Button from '~/components/Button';
 
 const Header = ({ isAdmin }: { isAdmin?: boolean }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -31,15 +30,29 @@ const Header = ({ isAdmin }: { isAdmin?: boolean }) => {
               // priority={true}
             />
           </span>
-          <span className="flex items-center justify-end p-4 gap-16 flex-1 ">
-            <span className="hidden md:flex flex-wrap items-center justify-center p-4 gap-16 ">
+          <span className="flex items-center justify-end p-4 gap-16 grow ">
+            <span className="hidden md:flex flex-wrap items-center justify-end grow p-4 gap-4 lg:gap-16 ">
               {memoizedHeaderLinks}
             </span>
 
-            {pathName === '/retreats/tribute' ? (
-              <RetreatButton />
+            {isAdmin ? (
+              <Button
+                href="/admin"
+                callToAction="Dashboard"
+                isWhite={true}
+              />
+            ) : pathName === '/retreats/tribute' ? (
+              <Button
+                href="/retreats/tribute"
+                callToAction="Retreats"
+                isWhite={true}
+              />
             ) : (
-              <VillasButton />
+              <Button
+                href="/villas"
+                callToAction="Book Now"
+                isWhite={true}
+              />
             )}
           </span>
 

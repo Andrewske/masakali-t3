@@ -84,12 +84,12 @@ export default function CartForm({
 
   return (
     <>
-      <div className="relative w-full h-[600px] flex flex-col">
+      <div className="relative w-full h-[600px] flex flex-col justify-between bg-gray ">
         <div className="p-4 w-full text-center bg-purple text-white">
           <h2>Checkout</h2>
         </div>
         <Form {...form}>
-          <form className="flex w-full  p-4 bg-gray flex-col justify-center gap-2 grow ">
+          <form className="flex w-full  p-4 flex-col justify-center gap-2 grow">
             {step === 1 && (
               <GuestDetailsForm
                 form={form}
@@ -104,28 +104,19 @@ export default function CartForm({
                 setAdminDiscount={setAdminDiscount}
               />
             )}
-
-            <CartSubmitButton
-              form={form}
-              step={step}
-              nextStep={nextStep}
-              isProcessing={isProcessing}
-              onSubmit={onSubmit}
-            />
           </form>
           {adminDiscount && (
             <p>Admin Discount Applied total = {pricing.finalPrice}</p>
           )}
         </Form>
-        {isProcessing && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            {/* Spinner */}
-            <BeatLoader
-              color="#fff"
-              size={15}
-            />
-          </div>
-        )}
+        <div className="p-4 w-full text-center">
+          <CartSubmitButton
+            form={form}
+            step={step}
+            nextStep={nextStep}
+            onSubmit={onSubmit}
+          />
+        </div>
       </div>
     </>
   );

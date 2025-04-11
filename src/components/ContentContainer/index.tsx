@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 import HeroCarousel from '~/app/(main)/(home)/HeroSlideShow/Carousel';
+import Button from '../Button';
 
 const ContentContainer = ({
   id,
@@ -32,13 +33,17 @@ const ContentContainer = ({
       <div className="w-full h-content leading-relaxed">{content}</div>
       {buttonText && (
         <span className="w-full py-4 ">
-          <button
-            className="py-3 px-6 border-solid border border-purple  w-auto font-montserrat uppercase text-purple hover:bg-purple hover:text-white"
-            type="button"
-            onClick={() => window.open(buttonLink, newTab ? '_blank' : '_self')}
-          >
-            {buttonText}
-          </button>
+          <Button
+            callToAction={buttonText}
+            href={buttonLink}
+            className="!bg-gray hover:bg-white hover:text-purple border-purple !text-purple !text-lg"
+            handleClick={async () => {
+              return new Promise<void>((resolve) => {
+                window.open(buttonLink, newTab ? '_blank' : '_self');
+                resolve();
+              });
+            }}
+          />
         </span>
       )}
     </div>

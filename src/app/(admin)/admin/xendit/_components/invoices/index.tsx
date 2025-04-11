@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from '~/components/ui/card';
-import { Button } from '~/components/ui/button';
+import Button from '~/components/Button';
 import {
   Accordion,
   AccordionContent,
@@ -13,13 +13,11 @@ import type { Invoice } from 'xendit-node/invoice/models';
 import { formatCurrency } from '~/utils/helpers';
 import { expireInvoice } from '~/actions/xendit/expireInvoice';
 import { getInvoices } from '~/actions/xendit/getInvoices';
-import { useRouter } from 'next/navigation';
 
 export default function XenditInvoices({ data }: { data: Invoice[] }) {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [loading, setLoading] = useState(true);
-  //   //   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
+
   useEffect(() => {
     setInvoices(data);
     setLoading(false);
@@ -45,9 +43,11 @@ export default function XenditInvoices({ data }: { data: Invoice[] }) {
     <div className="container mx-auto py-8 flex flex-col  justify-items-start min-h-screen">
       <div className="flex justify-between items-center mb-6 ">
         <h1 className="text-2xl font-bold">Xendit Invoices</h1>
-        <Button onClick={() => router.push('/admin/xendit/invoices/create')}>
-          Create Invoice
-        </Button>
+        <Button
+          href="/admin/xendit/invoices/create"
+          callToAction="Create Invoice"
+          isWhite={false}
+        />
       </div>
 
       <div className="space-y-4">

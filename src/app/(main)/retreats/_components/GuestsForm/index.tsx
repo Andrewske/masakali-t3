@@ -1,5 +1,5 @@
 import { type UseFormReturn } from 'react-hook-form';
-import { Button } from '~/components/ui/button';
+import Button from '~/components/Button';
 import {
   FormControl,
   FormField,
@@ -32,14 +32,12 @@ const Counter: React.FC<CounterProps> = ({
     render={() => (
       <FormItem className="flex flex-col ">
         <FormLabel className="font-montserrat uppercase">{label}</FormLabel>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <Button
-            type="button"
-            className="w-6 h-6 p-0 bg-purple"
-            onClick={onDecrement}
-          >
-            -
-          </Button>
+            callToAction="-"
+            className="w-6 h-6 !text-sm !p-0 !m-0 bg-purple"
+            handleClick={onDecrement}
+          />
           <FormControl>
             <Input
               placeholder={label}
@@ -49,12 +47,10 @@ const Counter: React.FC<CounterProps> = ({
             />
           </FormControl>
           <Button
-            type="button"
-            className="w-6 h-6 p-0 bg-purple"
-            onClick={onIncrement}
-          >
-            +
-          </Button>
+            callToAction="+"
+            className="w-6 h-6 !text-sm !p-0 !m-0 bg-purple"
+            handleClick={onIncrement}
+          />
           <FormMessage />
         </div>
       </FormItem>
