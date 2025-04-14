@@ -169,8 +169,7 @@ export default function PaymentForm() {
         //   ...value,
         //   amount: total,
         // };
-        throw new Error('Test error');
-        // await createPaymentLink(value);
+        await createPaymentLink(value);
         toast({
           title: 'Payment link sent',
         });

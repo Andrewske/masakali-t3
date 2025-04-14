@@ -108,8 +108,7 @@ export const createPaymentLink = async (data: PaymentLinkData) => {
   if (error) {
     await posthogServerError({
       error,
-      context: { location: 'createPaymentLink' },
+      context: { location: 'createPaymentLink', invoiceData },
     });
-    throw new Error('Failed to create payment link');
   }
 };
