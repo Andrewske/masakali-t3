@@ -1,13 +1,5 @@
-// import MillionLint from '@million/lint';
-/**
- * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
- * for Docker builds.
- */
-
 import MillionLint from "@million/lint";
-// import withBundleAnalyzer from '@next/bundle-analyzer'
 import "./src/env.mjs"
-
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
@@ -45,34 +37,25 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-  }
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: "/ingest/static/:path*",
-  //       destination: "https://us-assets.i.posthog.com/static/:path*",
-  //       has: [
-  //         {
-  //           type: 'header',
-  //           key: 'Origin',
-  //           value: 'http://localhost:3000',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       source: "/ingest/:path*",
-  //       destination: "https://us.i.posthog.com/:path*",
-  //     },
-  //     {
-  //       source: "/ingest/decide",
-  //       destination: "https://us.i.posthog.com/decide",
-  //     },
-  //   ];
-  // },
-
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+      },
+      {
+        source: "/ingest/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
+      {
+        source: "/ingest/decide",
+        destination: "https://us.i.posthog.com/decide",
+      },
+    ];
+  },
   // This is required to support PostHog trailing slash API requests
-  // skipTrailingSlashRedirect: true,
+  skipTrailingSlashRedirect: true,
 }
-
 
 export default nextConfig

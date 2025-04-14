@@ -13,7 +13,6 @@ import Script from 'next/script';
 import Footer from '~/components/layout/Footer';
 
 import '~/styles/icomoon.css';
-import SuspendedPostHogPageView from '~/components/PostHogPageView';
 
 import type { Metadata } from 'next';
 import HeaderWrapper from '~/components/layout/HeaderWrapper';
@@ -65,7 +64,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <UserStoreProvider>
               <CurrencyStoreProvider>
                 <ReservationStoreProvider>
-                  <SuspendedPostHogPageView />
                   <header className="relative md:sticky top-0 z-50">
                     <HeaderWrapper />
                   </header>

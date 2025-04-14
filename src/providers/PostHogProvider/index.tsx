@@ -8,9 +8,10 @@ import { env } from '~/env.mjs';
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
-      api_host: env.NEXT_PUBLIC_POSTHOG_HOST,
+      api_host: '/ingest',
+      ui_host: 'https://us.posthog.com',
       capture_pageview: false, // We capture pageviews manually
-      capture_pageleave: false, // Maybe?,
+      capture_pageleave: true, // Enable pageleave capture
     });
   }, []);
 
@@ -34,7 +35,7 @@ function PostHogPageView() {
       if (search) {
         url += '?' + search;
       }
-      posthogClient.capture('$pageview', { $current_url: url });
+      posthogClient.capture('$pageview', { '$current_url': url });
     }
   }, [pathname, searchParams, posthogClient]);
 
