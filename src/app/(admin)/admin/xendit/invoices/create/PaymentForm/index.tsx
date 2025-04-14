@@ -11,6 +11,7 @@ import { Input } from '~/components/ui/input';
 import { Textarea } from '~/components/ui/textarea';
 import { toast } from '~/components/ui/use-toast';
 import { formatCurrency } from '~/utils/helpers';
+import { logError } from '~/utils/logError';
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -168,21 +169,20 @@ export default function PaymentForm() {
         //   ...value,
         //   amount: total,
         // };
-
-        await createPaymentLink(value);
+        throw new Error('Test error');
+        // await createPaymentLink(value);
         toast({
           title: 'Payment link sent',
         });
         // form.reset();
       } catch (error) {
-        console.error(error);
-        toast({
-          title:
-            error instanceof Error
-              ? error.message
-              : 'Error sending payment link',
-          variant: 'destructive',
-          duration: 5000,
+        logError({
+          message: 'Error sending payment link',
+          error,
+          level: 'error',
+          data: {
+            location: 'PaymentForm',
+          },
         });
       }
     },

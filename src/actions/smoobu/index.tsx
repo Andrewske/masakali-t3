@@ -2,7 +2,7 @@
 import { getVillaName } from '~/lib/villas';
 import type { VillaIdsType } from '~/lib/villas';
 import { db } from '~/server/db';
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 
 export type PricingDataType = {
   villaName: string;

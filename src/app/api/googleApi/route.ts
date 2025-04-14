@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 import { type JWTInput } from 'google-auth-library';
 
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 
 export type LeadDataValues = {
   date: string;

@@ -1,6 +1,6 @@
 'use server';
 import sgMail from '@sendgrid/mail';
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 
 const retreatInquiryEmailTemplate = 'd-4d24facf421a406ea4dc100b57e8905e';
 

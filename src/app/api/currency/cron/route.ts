@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { env } from '~/env.mjs';
 import { db } from '~/server/db';
 
 type ExchangeRatesResponse = {
@@ -59,7 +60,7 @@ async function getExchangeRates() {
     const response = await axios.get(`https://api.currencyapi.com/v3/latest`, {
       headers: {
         'Content-Type': 'application/json',
-        apiKey: process.env.CURRENCY_API_KEY,
+        apiKey: env.CURRENCY_API_KEY,
       },
       params: {
         base_currency: 'IDR',

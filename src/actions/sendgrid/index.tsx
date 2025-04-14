@@ -1,6 +1,6 @@
 'use server';
 import sgMail from '@sendgrid/mail';
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 
 const retreatBookingEmailTemplate = 'd-60fce1dc0ea0423c92948e59fb505a6e';
 const villaBookingEmailTemplate = 'd-df670819866341e3b360ea6a373e429e';

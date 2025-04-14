@@ -3,6 +3,7 @@ import axios from 'axios';
 import type { SmoobuReservation } from '~/types/smoobu';
 import { db } from '~/server/db';
 import { NextResponse } from 'next/server';
+import { env } from '~/env.mjs';
 type TransformedReservation = {
   smoobu_id: number;
   reference_id: string;
@@ -58,13 +59,13 @@ type SmoobuReservationsResponse = {
 async function fetchSmoobuReservations(
   page = 1
 ): Promise<SmoobuReservationsResponse> {
-  const smoobuApiUrl: string = process.env.SMOOBU_API_URL ?? '';
+  const smoobuApiUrl: string = env.SMOOBU_API_URL ?? '';
   const url = smoobuApiUrl + '/reservations';
 
   const headers = {
     'Content-Type': 'application/json',
     'Cache-Control': 'no-cache',
-    'Api-Key': process.env.SMOOBU_API_KEY,
+    'Api-Key': env.SMOOBU_API_KEY,
   };
 
   const params = {

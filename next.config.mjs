@@ -6,8 +6,7 @@
 
 import MillionLint from "@million/lint";
 // import withBundleAnalyzer from '@next/bundle-analyzer'
-import "./src/env.js";
-
+import "./src/env.mjs"
 
 
 /** @type {import("next").NextConfig} */
@@ -46,12 +45,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-
-  },
-  i18n: {
-    locales: ['en'],
-    defaultLocale: 'en'
-  },
+  }
   // async rewrites() {
   //   return [
   //     {
@@ -77,18 +71,8 @@ const nextConfig = {
   // },
 
   // This is required to support PostHog trailing slash API requests
-  skipTrailingSlashRedirect: true,
-  // webpack: (config, { isServer }) => {
-  //   if (!isServer) {
-  //     config.resolve.fallback = {
-  //       ...config.resolve.fallback,
-  //       fs: false,
-  //       path: false,
-  //       crypto: false,
-  //     };
-  //   }
-  //   return config;
-  // },
+  // skipTrailingSlashRedirect: true,
 }
 
-export default MillionLint.next({ rsc: true })(nextConfig)
+
+export default nextConfig

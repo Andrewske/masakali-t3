@@ -1,9 +1,9 @@
 'use server';
 import { Invoice } from 'xendit-node';
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 import { v4 as uuidv4 } from 'uuid';
 import { tryCatch } from '~/utils/tryCatch';
-import type { NotificationChannel } from 'xendit-node/invoice/models';
+import posthogServerError from '~/utils/posthogServerError';
 
 export type XenditInvoiceData = {
   externalId: string;
@@ -103,17 +103,13 @@ export const createPaymentLink = async (data: PaymentLinkData) => {
 
   console.log('Sending to Xendit:', JSON.stringify(invoiceData, null, 2));
 
-  const { error } = await tryCatch(
-    xendit.createInvoice({ data: invoiceData }),
-    {
-      captureError: true,
-      context: {
-        location: 'createPaymentLink',
-      },
-    }
-  );
+  const { error } = await tryCatch(xendit.createInvoice({ data: invoiceData }));
 
   if (error) {
-    throw error;
+    await posthogServerError({
+      error,
+      context: { location: 'createPaymentLink' },
+    });
+    throw new Error('Failed to create payment link');
   }
 };

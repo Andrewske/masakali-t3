@@ -2,6 +2,7 @@ import { db } from '~/server/db';
 import { channelIds } from '~/lib/smoobu';
 import { akashaId, lakshmiId } from '~/lib/villas';
 import type { SmoobuReservation } from '~/types/smoobu';
+import { env } from '~/env.mjs';
 
 function parseSmoobuReservation(smoobuReservation: SmoobuReservation) {
   const {
@@ -198,7 +199,7 @@ export async function blockVilla(
   arrival: string,
   departure: string
 ) {
-  const apiKey = validateApiKey(process.env.SMOOBU_API_KEY);
+  const apiKey = validateApiKey(env.SMOOBU_API_KEY);
 
   const data = {
     arrivalDate: arrival,

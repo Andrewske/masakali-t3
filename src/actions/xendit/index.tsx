@@ -1,5 +1,5 @@
 'use server';
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 import type { UserState } from '~/stores/userStore';
 import type { XenditChargeResponse } from '~/types/xendit';
 

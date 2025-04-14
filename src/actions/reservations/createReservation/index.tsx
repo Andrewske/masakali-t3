@@ -1,5 +1,5 @@
 'use server';
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 import { db } from '~/server/db';
 import type { VillaIdsType } from '~/lib/villas';
 

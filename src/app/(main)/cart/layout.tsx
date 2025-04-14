@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, type ReactNode } from 'react';
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 import Modal from './Modal';
 import XenditProvider from '~/providers/ZenditProvider';
 

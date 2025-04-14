@@ -6,7 +6,7 @@ import type {
   XenditErrorResponse,
   XenditResponseType,
 } from '~/types/xendit';
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 import { useXenditStore } from '~/stores/xenditStore';
 
 type XenditCreateTokenProps = {

@@ -5,63 +5,62 @@ type TryCatchOptions = {
   context?: Record<string, unknown>;
 };
 
-const isXenditError = (error: unknown) => {
-  // Handle Xendit errors
-  if (error && typeof error === 'object') {
-    const xenditError = error as {
-      errorCode?: string;
-      errorMessage?: string;
-      status?: number;
-      errors?: Array<{ field: string; message: string }>;
-    };
-
-    if (xenditError.errorCode) {
-      return {
-        xenditError: {
-          code: xenditError.errorCode,
-          message: xenditError.errorMessage,
-          status: xenditError.status,
-          errors: xenditError.errors,
-        },
-      };
-    }
-  }
-
-  return {};
+// Types for the result object with discriminated union
+type Success<T> = {
+  data: T;
+  error: null;
 };
 
-export const tryCatch = async <T>(
-  promise: Promise<T>,
-  options: TryCatchOptions = { captureError: true }
-): Promise<{ data: T | null; error: Error | null }> => {
+type Failure<E> = {
+  data: null;
+  error: E;
+};
+
+type Result<T, E = Error> = Success<T> | Failure<E>;
+
+export async function tryCatch<T, E = Error>(
+  promise: Promise<T>
+): Promise<Result<T, E>> {
   try {
     const data = await promise;
     return { data, error: null };
   } catch (error) {
-    const xenditOptions = isXenditError(error);
-
-    // Handle other errors
-    if (error instanceof Error) {
-      if (options.captureError) {
-        try {
-          const posthog = PostHogClient();
-          posthog.captureException(error, undefined, {
-            message: error.message,
-            stack: error.stack,
-            ...options.context,
-            ...xenditOptions,
-          });
-          await posthog.shutdown();
-        } catch (error) {
-          console.error('Error sending error to PostHog:', error);
-        }
-      }
-      return { data: null, error };
-    }
-
-    return { data: null, error: new Error('Unknown error occurred') };
+    return { data: null, error: error as E };
   }
-};
+}
+
+// export const tryCatch = async <T>(
+//   promise: Promise<T>,
+//   options: TryCatchOptions = { captureError: true }
+// ): Promise<{ data: T | null; error: Error | null }> => {
+//   try {
+//     const data = await promise;
+//     return { data, error: null };
+//   } catch (error) {
+//     // const { xenditError } = isXenditError(error);
+
+//     // Handle other errors
+//     if (error instanceof Error) {
+//       // // if (options.captureError) {
+//       // try {
+//       //   const posthog = PostHogClient();
+//       //   posthog.captureException(error, undefined, {
+//       //     message: error.message,
+//       //     stack: error.stack,
+//       //     ...options.context,
+//       //     ...xenditError,
+//       //   });
+//       //   await posthog.shutdown();
+//       // } catch (error) {
+//       //   console.error('Error sending error to PostHog:', error);
+//       // }
+//       // // }
+//       return { data: null, error };
+//     }
+
+//     return { data: null, error: new Error('Unknown error occurred') };
+//   }
+// };
 
 // Example usage:
 /*

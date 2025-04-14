@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "postinstall": "prisma generate",
     "lint": "eslint --debug",
     "start": "next start",
@@ -13,7 +13,7 @@
     "clear-cache": "rm -rf node_modules/.cache"
   },
   "engines": {
-    "node": ">=18.x"
+    "node": ">=22.x"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.8.0",
@@ -55,7 +55,7 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.475.0",
     "million": "^3.1.11",
-    "next": "15.1.7",
+    "next": "15.3.0",
     "next-auth": "5.0.0-beta.25",
     "postcss": "^8.5.2",
     "posthog-js": "^1.216.1",
@@ -109,6 +109,19 @@
     "overrides": {
       "@types/react": "19.0.8",
       "@types/react-dom": "19.0.3"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@prisma/client",
+      "@prisma/engines",
+      "@sentry/cli",
+      "core-js",
+      "esbuild",
+      "prisma",
+      "sharp",
+      "tree-sitter",
+      "tree-sitter-javascript",
+      "tree-sitter-typescript"
+    ]
   }
 }

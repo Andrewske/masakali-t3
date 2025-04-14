@@ -1,4 +1,4 @@
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 import { PostHog } from 'posthog-node';
 
 export default function PostHogClient() {

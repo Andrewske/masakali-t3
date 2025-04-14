@@ -8,9 +8,12 @@
  * @param {Object} params.data - Additional data related to the error.
  */
 
+import posthog from 'posthog-js';
+import { toast } from '~/components/ui/use-toast';
+
 type LogErrorParams = {
   message: string;
-  error?: Error | null;
+  error?: unknown;
   level?: 'error' | 'warning' | 'info';
   data?: Record<string, unknown>;
 };
@@ -21,20 +24,28 @@ export const logError = ({
   level = 'error',
   data = {},
 }: LogErrorParams) => {
-  if (!isValidErrorParams(message, error)) {
-    console.error('Invalid parameters for logError');
-    return;
-  }
+  if (error instanceof Error) {
+    if (!isValidErrorParams(message, error)) {
+      console.error('Invalid parameters for logError');
+      return;
+    }
 
-  const timestamp = new Date().toISOString();
-  const errorData = { ...data, message };
-  const dataString = formatErrorData(errorData);
+    const timestamp = new Date().toISOString();
+    const errorData = { ...data, message };
+    const dataString = formatErrorData(errorData);
 
-  try {
-    logToConsole(timestamp, message, dataString, error);
-    reportToSentry(error, level, errorData);
-  } catch (error) {
-    console.error('Error logging error:', error);
+    try {
+      logToConsole(timestamp, message, dataString, error);
+      toast({
+        title:
+          error instanceof Error ? error.message : 'Error sending payment link',
+        variant: 'destructive',
+        duration: 5000,
+      });
+      reportToPosthog({ error, context: { location: message } });
+    } catch (error) {
+      console.error('Error logging error:', error);
+    }
   }
 };
 
@@ -67,11 +78,12 @@ function logToConsole(
   );
 }
 
-function reportToSentry(
-  error: Error | null,
-  level: 'error' | 'warning' | 'info',
-  data: Record<string, unknown>
-) {
-  // Default to Error if level is not recognized
-  console.log('reportToSentry', error, level, data);
+function reportToPosthog({
+  error,
+  context,
+}: {
+  error: Error;
+  context: Record<string, unknown>;
+}) {
+  posthog.captureException(error, context);
 }

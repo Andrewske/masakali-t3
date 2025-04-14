@@ -1,4 +1,4 @@
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 
 export function GET(request: Request) {
   const { searchParams } = new URL(request.url);

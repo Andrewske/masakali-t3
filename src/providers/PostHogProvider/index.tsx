@@ -3,7 +3,7 @@ import posthog from 'posthog-js';
 import { PostHogProvider as PHProvider, usePostHog } from 'posthog-js/react';
 import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { env } from '~/env';
+import { env } from '~/env.mjs';
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
