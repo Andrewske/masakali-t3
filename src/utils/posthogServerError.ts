@@ -35,17 +35,27 @@ export default async function posthogServerError({
   context: Record<string, unknown>;
 }): Promise<void> {
   if (!error) return;
-  const { xenditError } = isXenditError(error);
-  const posthog = PostHogClient();
+  try {
+    const { xenditError } = isXenditError(error);
+    const posthog = PostHogClient();
 
-  const client = new PostHog(
-    env.NEXT_PUBLIC_POSTHOG_KEY,
-    { host: 'https://webhook.site/7fc15cc4-a785-41de-b3a4-3dc2bbd46096' } // Replace with the URL you copied from webhook.site
-  );
+    posthog.captureException(error, undefined, {
+      ...context,
+      ...xenditError,
+    });
+    await posthog.shutdown();
 
-  client.captureException(error, undefined, {
-    ...context,
-    ...xenditError,
-  });
-  await posthog.shutdown();
+    const client = new PostHog(
+      env.NEXT_PUBLIC_POSTHOG_KEY,
+      { host: 'https://webhook.site/7fc15cc4-a785-41de-b3a4-3dc2bbd46096' } // Replace with the URL you copied from webhook.site
+    );
+
+    client.captureException(error, undefined, {
+      ...context,
+      ...xenditError,
+    });
+    await client.shutdown();
+  } catch (error) {
+    console.error(error);
+  }
 }
