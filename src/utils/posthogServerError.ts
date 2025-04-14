@@ -1,5 +1,6 @@
 import { PostHog } from 'posthog-node';
 import PostHogClient from '~/app/posthog';
+import { env } from '~/env.mjs';
 
 const isXenditError = (error: unknown) => {
   // Handle Xendit errors
@@ -38,7 +39,7 @@ export default async function posthogServerError({
   const posthog = PostHogClient();
 
   const client = new PostHog(
-    '_6SG-F7I1vCuZ-HdJL3VZQqjBlaSb1_20hDPwqMNnGI',
+    env.NEXT_PUBLIC_POSTHOG_KEY,
     { host: 'https://webhook.site/7fc15cc4-a785-41de-b3a4-3dc2bbd46096' } // Replace with the URL you copied from webhook.site
   );
 
