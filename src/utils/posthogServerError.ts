@@ -1,3 +1,4 @@
+import { PostHog } from 'posthog-node';
 import PostHogClient from '~/app/posthog';
 
 const isXenditError = (error: unknown) => {
@@ -36,7 +37,12 @@ export default async function posthogServerError({
   const { xenditError } = isXenditError(error);
   const posthog = PostHogClient();
 
-  posthog.captureException(error, undefined, {
+  const client = new PostHog(
+    '_6SG-F7I1vCuZ-HdJL3VZQqjBlaSb1_20hDPwqMNnGI',
+    { host: 'https://webhook.site/7fc15cc4-a785-41de-b3a4-3dc2bbd46096' } // Replace with the URL you copied from webhook.site
+  );
+
+  client.captureException(error, undefined, {
     ...context,
     ...xenditError,
   });
