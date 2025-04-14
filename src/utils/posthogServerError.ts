@@ -50,10 +50,7 @@ export default async function posthogServerError({
       { host: 'https://webhook.site/7fc15cc4-a785-41de-b3a4-3dc2bbd46096' } // Replace with the URL you copied from webhook.site
     );
 
-    client.captureException(error, undefined, {
-      ...context,
-      ...xenditError,
-    });
+    client.captureException(error);
     await client.shutdown();
   } catch (error) {
     console.error(error);

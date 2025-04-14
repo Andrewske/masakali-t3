@@ -1,3 +1,4 @@
+'force-dynamic';
 import Button from '~/components/Button';
 import ButtonList from './_components/buttonList';
 import posthogServerError from '~/utils/posthogServerError';
