@@ -17,7 +17,10 @@ const HeaderLinks = ({ isAdmin }: { isAdmin?: boolean }) => {
   const links = isAdmin ? adminLinks : mainLinks;
 
   return (
-    <>
+    <div
+      key={isAdmin ? 'admin-links' : 'main-links'}
+      className="flex flex-wrap items-center gap-4 text-center justify-center font-montserrat uppercase px-8"
+    >
       {links.map((link) => (
         <LinkWithUnderline
           key={link.name}
@@ -26,7 +29,7 @@ const HeaderLinks = ({ isAdmin }: { isAdmin?: boolean }) => {
           {link.name}
         </LinkWithUnderline>
       ))}
-    </>
+    </div>
   );
 };
 

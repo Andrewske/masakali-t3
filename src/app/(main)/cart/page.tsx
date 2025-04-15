@@ -1,3 +1,4 @@
+'force-dynamic';
 import CartForm from './CartForm';
 import CartDetails from './CartDetails';
 import { type VillaIdsType } from '~/lib/villas';
@@ -13,25 +14,23 @@ const CartError = ({
   message = 'Something went wrong while loading the pricing information.',
 }) => {
   return (
-    <section className="flex flex-grow flex-col items-center h-full relative">
-      <div className="w-full h-full grid place-items-center grow">
-        <span className="w-full md:w-[600px]  px-4 py-8 grid place-items-center bg-white/10  shadow-dark-purple  rounded-lg">
-          <div className="text-center gap-4 flex flex-col">
-            <h2 className="text-2xl font-semibold text-red-500 ">{title}</h2>
-            <p>{message}</p>
-            <p className="!text-sm">
-              Need help? Contact{' '}
-              <a
-                href="mailto:admin@masakaliretreat.com"
-                className="text-purple hover:text-purple/80 underline"
-              >
-                admin@masakaliretreat.com
-              </a>
-            </p>
-          </div>
-        </span>
-      </div>
-    </section>
+    <div className="w-full h-full grid place-items-center min-h-header mt-header">
+      <span className="w-full md:w-[600px]  px-4 py-8 grid place-items-center bg-white/10  shadow-dark-purple  rounded-lg">
+        <div className="text-center gap-4 flex flex-col">
+          <h2 className="text-2xl font-semibold text-red-500 ">{title}</h2>
+          <p>{message}</p>
+          <p className="!text-sm">
+            Need help? Contact{' '}
+            <a
+              href="mailto:admin@masakaliretreat.com"
+              className="text-purple hover:text-purple/80 underline"
+            >
+              admin@masakaliretreat.com
+            </a>
+          </p>
+        </div>
+      </span>
+    </div>
   );
 };
 

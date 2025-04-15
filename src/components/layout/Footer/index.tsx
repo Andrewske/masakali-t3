@@ -79,7 +79,7 @@ const Footer = () => {
       <div className="flex flex-wrap justify-center items-center gap-4 font-montserrat uppercase text-sm">
         {sectionLinks.map((link) => (
           <LinkWithUnderline
-            key={link}
+            key={link + '-' + 'footer'}
             href={`/${link}`}
           >
             {link}

@@ -4,6 +4,10 @@ import { logAndPosthog } from '~/utils/posthogServerError';
 import { tryCatch } from '~/utils/tryCatch';
 
 export const lookupReservation = async (reservationId: string) => {
+  if (!reservationId) {
+    return { data: null, error: 'No reservation ID provided' };
+  }
+
   try {
     const { data: reservation, error: reservationError } = await tryCatch(
       db.reservation.findFirst({

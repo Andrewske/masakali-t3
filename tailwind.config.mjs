@@ -17,6 +17,12 @@ export default {
       },
     },
     extend: {
+      minHeight: {
+        'header': 'calc(100vh - 132px)',
+      },
+      marginTop: {
+        'header': '132px',
+      },
       colors: {
         'purple': '#372137',
         'white': '#ffffff',

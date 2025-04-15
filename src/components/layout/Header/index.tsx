@@ -77,9 +77,8 @@ const Header = ({ isAdmin }: { isAdmin?: boolean }) => {
                   : 'hidden'
               }
             >
-              <div className="flex flex-wrap items-center gap-4 text-center justify-center font-montserrat uppercase px-8">
-                {memoizedHeaderLinks}
-              </div>
+              {memoizedHeaderLinks}
+
               <div
                 className="absolute top-0 right-0 p-2"
                 onClick={() => setIsNavOpen(false)}
