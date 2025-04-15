@@ -8,6 +8,10 @@ import getFormSchema, {
   type FormData,
 } from '~/app/(main)/cart/CartForm/getFormSchema';
 import { type VillaNamesType } from '~/lib/villas';
+import { tryCatch } from '~/utils/tryCatch';
+import { logAndPosthog } from '~/utils/posthogServerError';
+import { logAndToast } from '~/utils/logError';
+import { toast } from '~/components/ui/use-toast';
 
 // const formDefaultValues = {
 //   fullName: 'Kevin Andrews',
@@ -89,20 +93,24 @@ export const useCartForm = ({
 
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setIsProcessing(true);
-    try {
-      // Set the user with the form data
-      const user = formatUserState({ formData });
-      setUser(user);
+    const user = formatUserState({ formData });
+    setUser(user);
 
-      // Submit the form to Xendit and Create a token
-      await submitToXendit({ formData, totalIDR });
-      console.log('Successfully submitted form to Xendit');
-    } catch (error) {
-      console.log('Error submitting form to Xendit:', error);
-      throw new Error('Error submitting form to Xendit');
-    } finally {
-      setIsProcessing(false);
+    const { error } = await tryCatch(submitToXendit({ formData, totalIDR }));
+
+    if (error) {
+      logAndToast({
+        message:
+          'Error submitting payment. Please contact admin@masakaliretreat.com',
+        error,
+        level: 'error',
+      });
     }
+
+    toast({
+      title: 'Successfully submitted form to Xendit',
+    });
+    setIsProcessing(false);
   };
 
   return { form, onSubmit };

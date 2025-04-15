@@ -1,23 +1,70 @@
 'use server';
 import { db } from '~/server/db';
+import { logAndPosthog } from '~/utils/posthogServerError';
+import { tryCatch } from '~/utils/tryCatch';
 
 export const lookupReservation = async (reservationId: string) => {
   try {
-    const reservation = await db.reservation.findFirst({
-      where: {
-        id: reservationId,
-      },
-      select: {
-        smoobu_id: true,
-      },
-    });
-    if (!reservation) {
-      console.log('Could not find reservation');
-      return { smoobuId: null, error: 'Could not find reservation' };
+    const { data: reservation, error: reservationError } = await tryCatch(
+      db.reservation.findFirst({
+        where: {
+          id: reservationId,
+        },
+      })
+    );
+
+    if (reservationError || !reservation) {
+      throw reservationError ?? new Error('Could not find reservation');
     }
-    return { smoobuId: reservation?.smoobu_id, error: null };
+
+    const { data: pricing, error: pricingError } = await tryCatch(
+      db.reservation.findFirst({
+        where: {
+          id: reservationId,
+        },
+        include: {
+          villa: {
+            include: {
+              pricing: {
+                where: {
+                  date: {
+                    gte: new Date(reservation.arrival),
+                    lte: new Date(reservation.departure),
+                  },
+                },
+              },
+            },
+          },
+        },
+      })
+    );
+
+    if (pricingError || !pricing) {
+      throw pricingError ?? new Error('Could not find pricing');
+    }
+
+    console.log(reservation);
+
+    return {
+      data: {
+        ...reservation,
+        ...pricing,
+        arrival: new Date(reservation.arrival)
+          .toISOString()
+          .split('T')[0] as string,
+        departure: new Date(reservation.departure)
+          .toISOString()
+          .split('T')[0] as string,
+      },
+      error: null,
+    };
   } catch (error) {
-    console.log('Error finding reservation:', error);
-    return { smoobuId: null, error: 'Error finding reservation' };
+    await logAndPosthog({
+      message: 'Error finding reservation',
+      error,
+      level: 'error',
+      data: { location: 'lookupReservation', reservationId },
+    });
+    return { data: null, error: 'Could not find reservation' };
   }
 };

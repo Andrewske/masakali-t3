@@ -1,5 +1,7 @@
 'use server';
 import { db } from '~/server/db';
+import { tryCatch } from '~/utils/tryCatch';
+import { logAndPosthog } from '~/utils/posthogServerError';
 
 export type CountryType = {
   name: string;
@@ -10,9 +12,9 @@ export type CountryType = {
   flag: string;
 };
 
-export const getCountries = async (): Promise<CountryType[]> => {
-  try {
-    const countries = await db.country
+export const getCountries = async (): Promise<CountryType[] | null> => {
+  const { data, error } = await tryCatch(
+    db.country
       .findMany({
         select: {
           name: true,
@@ -30,10 +32,15 @@ export const getCountries = async (): Promise<CountryType[]> => {
           ...country,
           flag: Buffer.from(country.flag).toString('base64'),
         }))
-      );
-    return countries;
-  } catch (error) {
-    console.error(error);
-    return [] as CountryType[];
+      )
+  );
+  if (error) {
+    await logAndPosthog({
+      message: 'Error fetching countries',
+      error,
+      level: 'error',
+      data: { location: 'getCountries' },
+    });
   }
+  return data;
 };

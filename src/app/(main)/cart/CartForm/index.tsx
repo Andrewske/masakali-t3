@@ -19,14 +19,22 @@ import { useVillaPricing } from '~/hooks/useVillaPricing';
 import { useFormSteps } from '~/hooks/useFormSteps';
 
 export default function CartForm({
-  villaId,
-  villaPricing,
-  reservationId,
+  reservation: {
+    id: reservationId,
+    villa_id,
+    villa: { pricing: villaPricing },
+  },
 }: {
-  villaId: VillaIdsType;
-  villaPricing: VillaPricingType[];
-  reservationId: string;
+  reservation: {
+    id: string;
+    villa_id: number;
+    villa: { pricing: VillaPricingType[] };
+    arrival: string;
+    departure: string;
+  };
 }) {
+  const villaId = villa_id as VillaIdsType;
+  const villaName = getVillaName(villaId);
   const [isProcessing, setIsProcessing] = useState(false);
   const [adminDiscount, setAdminDiscount] = useState(false);
   const [checkin, setCheckin] = useState<Date>(new Date());
@@ -44,12 +52,6 @@ export default function CartForm({
       setCheckout(dateRange.to);
     }
   }, [dateRange]);
-
-  const villaName = getVillaName(villaId);
-
-  // if (!checkin || !checkout) {
-  //   throw new Error('Date range is not set');
-  // }
 
   const pricing = useVillaPricing({
     villaPricing,

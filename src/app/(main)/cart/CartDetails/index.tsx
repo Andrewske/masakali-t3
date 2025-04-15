@@ -2,52 +2,49 @@
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
 import { useMemo } from 'react';
 import { formatCurrency } from '~/utils/helpers';
-import { createPricingObject, type VillaPricingType } from '~/utils/pricing';
-import { useReservationStore } from '~/providers/ReservationStoreProvider';
+import { createPricingObject } from '~/utils/pricing';
 import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
 import CountryDropdown from '~/components/CountryDropdown';
 import { type CountryType } from '~/actions/countries';
 import { format } from 'date-fns';
 import Link from 'next/link';
+import type { villa, villa_pricing } from '@prisma/client';
 
 type CartDetailsProps = {
-  villaId: VillaIdsType;
-  villaPricing: VillaPricingType[];
+  reservation: {
+    villa_id: number;
+    arrival: string;
+    departure: string;
+    villa: villa & { pricing: villa_pricing[] };
+  };
   countries: CountryType[];
 };
 
 const CartDetails = ({
-  villaId,
-  villaPricing,
+  reservation: {
+    villa: { pricing },
+    villa_id,
+    arrival,
+    departure,
+  },
   countries,
 }: CartDetailsProps) => {
   const { conversionRate, currency } = useCurrencyStore((state) => state);
 
-  const { dateRange } = useReservationStore((state) => state);
-  const villaName = getVillaName(villaId);
+  const villaName = getVillaName(villa_id as VillaIdsType);
 
   const { pricePerNight, subTotal, discount, taxes, finalPrice, numNights } =
     useMemo(() => {
-      if (!dateRange?.from || !dateRange?.to) {
-        return {
-          pricePerNight: 0,
-          subTotal: 0,
-          discount: 0,
-          taxes: 0,
-          finalPrice: 0,
-          numNights: 0,
-        };
-      }
       return createPricingObject({
-        villaPricing,
-        checkin: dateRange?.from, // ?? getCurrentDateInBali(),
-        checkout: dateRange?.to, // ?? getCurrentDateInBali(),
+        villaPricing: pricing,
+        checkin: new Date(arrival),
+        checkout: new Date(departure),
         conversionRate,
       });
-    }, [dateRange, villaPricing, conversionRate]);
+    }, [pricing, conversionRate, arrival, departure]);
 
-  const checkinString = dateRange.from && format(dateRange.from, 'yyyy-MM-dd');
-  const checkoutString = dateRange.to && format(dateRange.to, 'yyyy-MM-dd');
+  const checkinString = format(new Date(arrival), 'yyyy-MM-dd');
+  const checkoutString = format(new Date(departure), 'yyyy-MM-dd');
 
   const renderDetail = (
     label: string,
