@@ -23,7 +23,7 @@ const DateContainer = ({
 }: {
   disabledDates: Set<string | undefined>;
   villaPricing: VillaPricingType[];
-  countries: CountryType[];
+  countries: CountryType[] | null;
   villaId: VillaIdsType;
 }) => {
   const { dateRange } = useReservationStore((state) => state);
@@ -36,8 +36,8 @@ const DateContainer = ({
   useEffect(() => {
     if (reservationId) {
       const fetchReservation = async () => {
-        const { smoobuId, error } = await lookupReservation(reservationId);
-        if (smoobuId || error) {
+        const { data, error } = await lookupReservation(reservationId);
+        if (data?.smoobu_id || error) {
           setReservationId(null);
         }
       };
@@ -166,7 +166,7 @@ const DateContainer = ({
           }
         )}
         <div className="flex justify-end w-full">
-          <CountryDropdown countries={countries} />
+          <CountryDropdown countries={countries ?? []} />
         </div>
       </div>
       <Button

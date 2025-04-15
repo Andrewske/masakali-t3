@@ -1,6 +1,5 @@
 import NextVilla from '~/app/(main)/villas/_components/NextVilla';
 import GridGallery from '~/app/(main)/villas/_components/GridGallery';
-
 import { getVillaName, villaDetails, type VillaIdsType } from '~/lib/villas';
 import { getDisabledDatesForVilla } from '~/actions/smoobu';
 import { db } from '~/server/db';
@@ -12,11 +11,6 @@ import ContentContainer from '~/components/ContentContainer';
 import VillaImage from '~/components/VillaImage';
 
 import DateContainer from '~/app/(main)/villas/_components/DateContainer';
-
-// const DateContainer = dynamic(
-//   () => import('~/app/(main)/villas/_components/DateContainer'),
-//   { ssr: false }
-// );
 
 export type VillaDataType = {
   villaId: VillaIdsType;
@@ -42,6 +36,7 @@ async function Template({ villaId }: VillaDataType) {
   })) as VillaPricingType[];
 
   const countries = await getCountries();
+
   return (
     <section className="flex flex-col gap-16">
       <div className="w-full grid grid-cols-4">

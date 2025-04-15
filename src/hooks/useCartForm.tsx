@@ -9,7 +9,6 @@ import getFormSchema, {
 } from '~/app/(main)/cart/CartForm/getFormSchema';
 import { type VillaNamesType } from '~/lib/villas';
 import { tryCatch } from '~/utils/tryCatch';
-import { logAndPosthog } from '~/utils/posthogServerError';
 import { logAndToast } from '~/utils/logError';
 import { toast } from '~/components/ui/use-toast';
 

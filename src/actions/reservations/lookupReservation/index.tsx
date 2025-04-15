@@ -43,8 +43,6 @@ export const lookupReservation = async (reservationId: string) => {
       throw pricingError ?? new Error('Could not find pricing');
     }
 
-    console.log(reservation);
-
     return {
       data: {
         ...reservation,
