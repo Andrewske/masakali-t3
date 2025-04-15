@@ -1,7 +1,7 @@
 'force-dynamic';
 import Button from '~/components/Button';
 import ButtonList from './_components/buttonList';
-import posthogServerError from '~/utils/posthogServerError';
+import { posthogServerError } from '~/utils/posthogServerError';
 
 import { tryCatch } from '~/utils/tryCatch';
 export default async function Page() {
