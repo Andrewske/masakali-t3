@@ -1,33 +1,33 @@
-import { PostHog } from 'posthog-node';
 import PostHogClient from '~/app/posthog';
-import { env } from '~/env.mjs';
+import { parseXenditError } from './xendit/parseXenditError';
+import { headers } from 'next/headers';
+import { logError, type LogErrorParams } from './logError';
 
-const isXenditError = (error: unknown) => {
-  // Handle Xendit errors
-  if (error && typeof error === 'object') {
-    const xenditError = error as {
-      errorCode?: string;
-      errorMessage?: string;
-      status?: number;
-      errors?: Array<{ field: string; message: string }>;
-    };
+interface PostHogCookie {
+  distinct_id: string;
+}
 
-    if (xenditError.errorCode) {
-      return {
-        xenditError: {
-          code: xenditError.errorCode,
-          message: xenditError.errorMessage,
-          status: xenditError.status,
-          errors: xenditError.errors,
-        },
-      };
+const extractDistinctId = (cookieString: string) => {
+  if (cookieString) {
+    const postHogCookieMatch: RegExpMatchArray | null = cookieString.match(
+      /ph_phc_.*?_posthog=([^;]+)/
+    );
+
+    if (postHogCookieMatch?.[1]) {
+      try {
+        const decodedCookie: string = decodeURIComponent(postHogCookieMatch[1]);
+        const { distinct_id } = JSON.parse(decodedCookie) as PostHogCookie;
+
+        return distinct_id;
+      } catch (e) {
+        console.error('Error parsing PostHog cookie:', e);
+      }
     }
   }
-
-  return {};
+  return undefined;
 };
 
-export default async function posthogServerError({
+export async function posthogServerError({
   error,
   context,
 }: {
@@ -36,23 +36,35 @@ export default async function posthogServerError({
 }): Promise<void> {
   if (!error) return;
   try {
-    const { xenditError } = isXenditError(error);
+    const { xenditError } = parseXenditError(error);
     const posthog = PostHogClient();
 
-    posthog.captureException(error, undefined, {
+    const cookieString: string = (await headers()).get('cookie') ?? '';
+
+    const distinctId = extractDistinctId(cookieString);
+
+    posthog.captureException(error, distinctId, {
       ...context,
       ...xenditError,
     });
     await posthog.shutdown();
-
-    const client = new PostHog(
-      env.NEXT_PUBLIC_POSTHOG_KEY,
-      { host: 'https://webhook.site/7fc15cc4-a785-41de-b3a4-3dc2bbd46096' } // Replace with the URL you copied from webhook.site
-    );
-
-    client.captureException(error);
-    await client.shutdown();
   } catch (error) {
     console.error(error);
   }
+}
+
+export async function logAndPosthog({
+  message,
+  error = null,
+  level = 'error',
+  data = {},
+}: LogErrorParams) {
+  if (error instanceof Error) {
+    logError({ message, error, level, data });
+    await posthogServerError({
+      error: new Error(message),
+      context: { message, level, data },
+    });
+  }
+  throw new Error(message);
 }

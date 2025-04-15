@@ -3,14 +3,14 @@ import { Invoice } from 'xendit-node';
 import { env } from '~/env.mjs';
 import { v4 as uuidv4 } from 'uuid';
 import { tryCatch } from '~/utils/tryCatch';
-import posthogServerError from '~/utils/posthogServerError';
+import { posthogServerError, logAndPosthog } from '~/utils/posthogServerError';
 
 export type XenditInvoiceData = {
   externalId: string;
   amount: number;
   customer: {
-    given_names?: string;
-    surname?: string;
+    given_names: string;
+    surname: string;
     email: string;
   };
   customer_notification_preference: {
@@ -101,14 +101,14 @@ export const createPaymentLink = async (data: PaymentLinkData) => {
     fees,
   };
 
-  console.log('Sending to Xendit:', JSON.stringify(invoiceData, null, 2));
-
   const { error } = await tryCatch(xendit.createInvoice({ data: invoiceData }));
 
   if (error) {
-    await posthogServerError({
+    await logAndPosthog({
+      message: 'Error creating payment link',
       error,
-      context: { location: 'createPaymentLink', invoiceData },
+      level: 'error',
+      data: { location: 'createPaymentLink', invoiceData },
     });
   }
 };

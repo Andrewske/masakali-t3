@@ -1,10 +1,28 @@
 'use server';
 import sgMail from '@sendgrid/mail';
 import { env } from '~/env.mjs';
+import { logError } from '~/utils/logError';
+import { posthogServerError, logAndPosthog } from '~/utils/posthogServerError';
+import { tryCatch } from '~/utils/tryCatch';
 
-const retreatBookingEmailTemplate = 'd-60fce1dc0ea0423c92948e59fb505a6e';
-const villaBookingEmailTemplate = 'd-df670819866341e3b360ea6a373e429e';
-const adminBookingEmailTemplate = 'd-56beee67bc0245539a249c95b72c11a9';
+// Move template IDs to environment variables for better maintainability
+const TEMPLATE_IDS = {
+  RETREAT_BOOKING: 'd-60fce1dc0ea0423c92948e59fb505a6e',
+  VILLA_BOOKING: 'd-df670819866341e3b360ea6a373e429e',
+  ADMIN_BOOKING: 'd-56beee67bc0245539a249c95b72c11a9',
+  DIRECT_BOOKING: 'd-1c83fd31688c40f3b920d826b8c1c1d3',
+} as const;
+
+// Common email configuration
+const EMAIL_CONFIG = {
+  from: {
+    email: 'admin@masakaliretreat.com',
+    name: 'Masakali Retreat',
+  },
+} as const;
+
+// Initialize SendGrid once
+sgMail.setApiKey(env.SENDGRID_API_KEY);
 
 export type EmailTemplateData = {
   name: string;
@@ -27,25 +45,27 @@ export const sendBookingConfirmation = async ({
   data: EmailTemplateData;
   isRetreat?: boolean;
 }) => {
-  sgMail.setApiKey(env.SENDGRID_API_KEY);
-
-  console.log({ data });
-
   const templateId = isRetreat
-    ? retreatBookingEmailTemplate
-    : villaBookingEmailTemplate;
+    ? TEMPLATE_IDS.RETREAT_BOOKING
+    : TEMPLATE_IDS.VILLA_BOOKING;
 
   const msg = {
     to: data.email,
-    from: 'admin@masakaliretreat.com',
+    ...EMAIL_CONFIG,
     templateId,
     dynamicTemplateData: data,
   };
 
-  console.log({ msg });
-  const response = await sgMail.send(msg);
-  console.log(response);
-  return;
+  const { error } = await tryCatch(sgMail.send(msg));
+
+  if (error) {
+    await logAndPosthog({
+      message: 'Error sending booking confirmation',
+      error,
+      level: 'error',
+      data: { location: 'sendBookingConfirmation', data },
+    });
+  }
 };
 
 export const sendAdminBookingConfirmation = async ({
@@ -53,23 +73,23 @@ export const sendAdminBookingConfirmation = async ({
 }: {
   data: EmailTemplateData;
 }) => {
-  sgMail.setApiKey(env.SENDGRID_API_KEY);
-
-  console.log({ data });
-
-  const templateId = adminBookingEmailTemplate;
-
   const msg = {
     to: 'info@masakaliretreat.com',
-    from: 'admin@masakaliretreat.com',
-    templateId,
+    ...EMAIL_CONFIG,
+    templateId: TEMPLATE_IDS.ADMIN_BOOKING,
     dynamicTemplateData: data,
   };
 
-  console.log({ msg });
-  const response = await sgMail.send(msg);
-  console.log(response);
-  return;
+  const { error } = await tryCatch(sgMail.send(msg));
+
+  if (error) {
+    await logAndPosthog({
+      message: 'Error sending admin booking confirmation',
+      error,
+      level: 'error',
+      data: { location: 'sendAdminBookingConfirmation', data },
+    });
+  }
 };
 
 export type DirectBookingTemplateData = {
@@ -84,22 +104,21 @@ export type DirectBookingTemplateData = {
 export const sendDirectBookingConfirmation = async (
   data: DirectBookingTemplateData
 ) => {
-  sgMail.setApiKey(env.SENDGRID_API_KEY);
-
-  const templateId = 'd-1c83fd31688c40f3b920d826b8c1c1d3';
-
   const msg = {
     to: data.email,
-    from: 'admin@masakaliretreat.com',
-    templateId,
+    ...EMAIL_CONFIG,
+    templateId: TEMPLATE_IDS.DIRECT_BOOKING,
     dynamicTemplateData: data,
   };
 
-  try {
-    await sgMail.send(msg);
-  } catch (error) {
-    console.error(error);
-  }
+  const { error } = await tryCatch(sgMail.send(msg));
 
-  return;
+  if (error) {
+    await logAndPosthog({
+      message: 'Error sending direct booking confirmation',
+      error,
+      level: 'error',
+      data: { location: 'sendDirectBookingConfirmation', data },
+    });
+  }
 };

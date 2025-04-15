@@ -8,10 +8,9 @@
  * @param {Object} params.data - Additional data related to the error.
  */
 
-import posthog from 'posthog-js';
 import { toast } from '~/components/ui/use-toast';
 
-type LogErrorParams = {
+export type LogErrorParams = {
   message: string;
   error?: unknown;
   level?: 'error' | 'warning' | 'info';
@@ -36,18 +35,26 @@ export const logError = ({
 
     try {
       logToConsole(timestamp, message, dataString, error);
-      toast({
-        title:
-          error instanceof Error ? error.message : 'Error sending payment link',
-        variant: 'destructive',
-        duration: 5000,
-      });
-      reportToPosthog({ error, context: { location: message } });
     } catch (error) {
       console.error('Error logging error:', error);
     }
   }
 };
+
+export function logAndToast({
+  message,
+  error = null,
+  level = 'error',
+  data = {},
+}: LogErrorParams) {
+  if (error instanceof Error) {
+    logError({ message, error, level, data });
+    toast({
+      title: message,
+      variant: 'destructive',
+    });
+  }
+}
 
 function isValidErrorParams(message: string, error: Error | null): boolean {
   return (
@@ -76,14 +83,4 @@ function logToConsole(
       error?.message ?? ''
     }`
   );
-}
-
-function reportToPosthog({
-  error,
-  context,
-}: {
-  error: Error;
-  context: Record<string, unknown>;
-}) {
-  posthog.captureException(error, context);
 }

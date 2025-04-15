@@ -1,7 +1,6 @@
 'use client';
 import { useForm } from '@tanstack/react-form';
 import type { AnyFieldApi } from '@tanstack/react-form';
-import { resolve } from 'path';
 import { useState } from 'react';
 import { z } from 'zod';
 
@@ -11,7 +10,8 @@ import { Input } from '~/components/ui/input';
 import { Textarea } from '~/components/ui/textarea';
 import { toast } from '~/components/ui/use-toast';
 import { formatCurrency } from '~/utils/helpers';
-import { logError } from '~/utils/logError';
+import { logAndToast } from '~/utils/logError';
+import { tryCatch } from '~/utils/tryCatch';
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -149,7 +149,7 @@ export default function PaymentForm() {
       onChange: z.object({
         email: z.string().email(),
         firstName: z.string().min(1, 'First Name is required'),
-        lastName: z.string(),
+        lastName: z.string().min(1, 'Last Name is required'),
         description: z.string(),
         villa: z.string().min(1, 'Villa is required'),
         nights: z.number().min(1, 'Nights is required'),
@@ -161,27 +161,26 @@ export default function PaymentForm() {
       }),
     },
     onSubmit: async ({ value }) => {
-      try {
-        if (total < 5000) {
-          throw new Error('Total amount must be at least Rp. 5.000');
-        }
-        // const paymentLinkData = {
-        //   ...value,
-        //   amount: total,
-        // };
-        await createPaymentLink(value);
+      if (total < 5000) {
         toast({
-          title: 'Payment link sent',
+          title: 'Total amount must be at least Rp. 5.000',
+          variant: 'destructive',
         });
-        // form.reset();
-      } catch (error) {
-        logError({
+        return;
+      }
+
+      const { error } = await tryCatch(createPaymentLink(value));
+
+      if (error) {
+        logAndToast({
           message: 'Error sending payment link',
           error,
           level: 'error',
-          data: {
-            location: 'PaymentForm',
-          },
+          data: { location: 'PaymentForm' },
+        });
+      } else {
+        toast({
+          title: 'Payment link sent',
         });
       }
     },
@@ -213,14 +212,7 @@ export default function PaymentForm() {
   };
 
   return (
-    <form
-      // onSubmit={async (e) => {
-      //   e.preventDefault();
-      //   e.stopPropagation();
-      //   await form.handleSubmit();
-      // }}
-      className="max-w-[600px] md:w-[90%] w-[95%] mx-auto p-6 bg-white shadow-lg rounded-lg border border-gray-200"
-    >
+    <form className="max-w-[600px] md:w-[90%] w-[95%] mx-auto p-6 bg-white shadow-lg rounded-lg border border-gray-200">
       <h1 className="text-2xl! font-extrabold my-4! text-center text-purple">
         Send Payment Link
       </h1>

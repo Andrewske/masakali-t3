@@ -2,10 +2,13 @@
 import { useForm } from '@tanstack/react-form';
 import type { AnyFieldApi } from '@tanstack/react-form';
 import { z } from 'zod';
-import type { DirectBookingTemplateData } from '~/actions/sendgrid';
 import Button from '~/components/Button';
 import { Input } from '~/components/ui/input';
 import { formatCurrency } from '~/utils/helpers';
+import { sendDirectBookingConfirmation } from '~/actions/sendgrid';
+import { tryCatch } from '~/utils/tryCatch';
+import { logAndToast } from '~/utils/logError';
+
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
     <>
@@ -21,11 +24,7 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
   );
 }
 
-export default function EmailForm({
-  onSubmit,
-}: {
-  onSubmit: (data: DirectBookingTemplateData) => Promise<void>;
-}) {
+export default function EmailForm() {
   const form = useForm({
     defaultValues: {
       email: '',
@@ -46,44 +45,45 @@ export default function EmailForm({
       }),
     },
     onSubmit: async ({ value }) => {
-      try {
-        const startDate = new Date(value.checkIn);
-        const formattedStartDate = new Intl.DateTimeFormat('en-US', {
-          month: 'short',
-          day: '2-digit',
-          year: 'numeric',
-        }).format(startDate);
+      console.log('Submitting...');
 
-        const endDate = new Date(value.checkOut);
-        const formattedEndDate = new Intl.DateTimeFormat('en-US', {
-          month: 'short',
-          day: '2-digit',
-          year: 'numeric',
-        }).format(endDate);
+      const startDate = new Date(value.checkIn);
+      const formattedStartDate = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+      }).format(startDate);
 
-        await onSubmit({
+      const endDate = new Date(value.checkOut);
+      const formattedEndDate = new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+      }).format(endDate);
+
+      const { error } = await tryCatch(
+        sendDirectBookingConfirmation({
           ...value,
           checkIn: formattedStartDate,
           checkOut: formattedEndDate,
           total: formatCurrency(parseFloat(value.total), 'IDR'),
-        });
+        })
+      );
 
-        form.reset();
-      } catch (error) {
-        console.error(error);
+      if (error) {
+        logAndToast({
+          message: 'Error sending direct booking confirmation',
+          error,
+          level: 'error',
+          data: { location: 'EmailForm' },
+        });
       }
+      form.reset();
     },
   });
 
   return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        await form.handleSubmit();
-      }}
-      className="max-w-[600px] md:w-[90%] w-[95%] mx-auto p-6 bg-white shadow-lg rounded-lg border border-gray-200"
-    >
+    <form className="max-w-[600px] md:w-[90%] w-[95%] mx-auto p-6 bg-white shadow-lg rounded-lg border border-gray-200">
       <h1 className="text-2xl! font-extrabold my-4! text-center text-purple">
         Direct Booking Confirmation Email
       </h1>
@@ -236,13 +236,11 @@ export default function EmailForm({
         />
         <form.Subscribe
           selector={(state) => [state.canSubmit, state.isSubmitting]}
-          children={([canSubmit, isSubmitting]) => (
+          children={() => (
             <div className="flex justify-between items-center">
               <Button
                 callToAction={'Submit'}
-                handleClick={() =>
-                  new Promise((resolve) => setTimeout(resolve, 5000))
-                }
+                handleClick={() => form.handleSubmit()}
                 isLoadingText="Submitting..."
               />
               <Button

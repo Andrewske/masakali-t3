@@ -13,30 +13,43 @@ import type { Invoice } from 'xendit-node/invoice/models';
 import { formatCurrency } from '~/utils/helpers';
 import { expireInvoice } from '~/actions/xendit/expireInvoice';
 import { getInvoices } from '~/actions/xendit/getInvoices';
-
-export default function XenditInvoices({ data }: { data: Invoice[] }) {
+import { tryCatch } from '~/utils/tryCatch';
+import { logAndToast } from '~/utils/logError';
+export default function XenditInvoices({ data }: { data: Invoice[] | [] }) {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setInvoices(data);
-    setLoading(false);
   }, [data]);
 
   const handleVoidPayment = async (invoiceId: string) => {
-    setLoading(true);
-    try {
-      console.log('voiding invoice', invoiceId);
-      await expireInvoice(invoiceId);
+    const { error: expireInvoiceError } = await tryCatch(
+      expireInvoice(invoiceId)
+    );
 
-      // Refresh invoices after voiding
-      setInvoices(await getInvoices());
-    } catch (err) {
-      //   setError(err instanceof Error ? err.message : 'Failed to void payment');
-      console.error(err);
-    } finally {
-      setLoading(false);
+    if (expireInvoiceError) {
+      logAndToast({
+        message: 'Error voiding invoice',
+        error: expireInvoiceError,
+        level: 'error',
+        data: { location: 'handleVoidPayment', invoiceId },
+      });
     }
+
+    const { data: invoices, error: getInvoicesError } = await tryCatch(
+      getInvoices()
+    );
+
+    if (getInvoicesError) {
+      logAndToast({
+        message: 'Error getting invoices',
+        error: getInvoicesError,
+        level: 'error',
+        data: { location: 'handleVoidPayment', invoiceId },
+      });
+    }
+
+    setInvoices(invoices ?? []);
   };
 
   return (
@@ -73,8 +86,8 @@ export default function XenditInvoices({ data }: { data: Invoice[] }) {
                           invoice.status === 'PAID'
                             ? 'text-green-600'
                             : invoice.status === 'EXPIRED'
-                              ? 'text-red-600'
-                              : 'text-yellow-600'
+                            ? 'text-red-600'
+                            : 'text-yellow-600'
                         }`}
                       >
                         {invoice.status}
