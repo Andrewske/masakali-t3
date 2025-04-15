@@ -9,7 +9,7 @@ export default async function AdminLayout({
   const session = await auth();
 
   if (!session) {
-    redirect('/api/auth/signin');
+    redirect('/api/auth/signin?callbackUrl=/admin');
   }
   return <>{children}</>;
 }

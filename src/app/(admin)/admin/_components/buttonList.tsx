@@ -9,15 +9,6 @@ export default function ButtonList() {
   return (
     <div className="flex flex-col gap-4 shadow-lg p-8 rounded-lg">
       <Button
-        callToAction="Test Error"
-        isWhite={false}
-        handleClick={() => {
-          throw new Error('Test error');
-        }}
-        className="w-full"
-      />
-
-      <Button
         callToAction="Create Xendit Invoice"
         isWhite={false}
         handleClick={() => router.push('/admin/xendit/invoices/create')}
