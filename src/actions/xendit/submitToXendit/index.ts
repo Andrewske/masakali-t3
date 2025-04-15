@@ -1,6 +1,6 @@
+'use server';
 import type { FormData } from '~/app/(main)/cart/CartForm/getFormSchema';
-import { logError } from '~/utils/logError';
-import { posthogServerError } from '~/utils/posthogServerError';
+import { logAndPosthog } from '~/utils/posthogServerError';
 import { tryCatch } from '~/utils/tryCatch';
 import { xenditCreateToken } from '~/utils/xendit';
 
@@ -31,17 +31,12 @@ export const submitToXendit = async ({
   );
 
   if (error) {
-    logError({
+    await logAndPosthog({
       message: 'Error creating token',
       error,
       level: 'error',
       data: { location: 'submitToXendit' },
     });
-    await posthogServerError({
-      error,
-      context: { location: 'submitToXendit', formData },
-    });
-    throw new Error('Error creating token');
   }
 
   return data;
