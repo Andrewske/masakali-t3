@@ -46,66 +46,54 @@ const CartDetails = ({
   const checkinString = format(new Date(arrival), 'yyyy-MM-dd');
   const checkoutString = format(new Date(departure), 'yyyy-MM-dd');
 
-  const renderDetail = (
-    label: string,
-    value: string | number | null,
-    className?: string
-  ) => (
-    <span
-      key={label}
-      className={`${className} py-2`}
-    >
-      <h3>{label}</h3>
-      <p>{value}</p>
-    </span>
-  );
-
-  const renderConvertedAmount = (
-    label: string,
-    amount: number,
-    className?: string
-  ) =>
-    useMemo(
-      () => (
-        <span
-          key={label}
-          className={`${className} flex justify-between py-2 px-4 col-span-2`}
-        >
-          <h3>{label}</h3>
-          <p>{formatCurrency(amount, currency)}</p>
-        </span>
-      ),
-      [amount]
-    );
-
   return (
     <section className="w-full h-[600px] bg-gray items-center">
       <div className="p-4 w-full text-center bg-purple text-white">
         <h2>{villaName}</h2>
       </div>
       <div className="grid grid-cols-2 gap-2 p-4 text-sm">
-        {renderDetail(
-          'Arrival Date',
-          checkinString ?? '',
-          'bg-white rounded-lg px-4'
-        )}
-        {renderDetail(
-          'Departure Date',
-          checkoutString ?? '',
-          'bg-white rounded-lg px-4'
-        )}
+        {[
+          {
+            label: 'Arrival Date',
+            value: checkinString,
+            className: 'bg-white rounded-lg px-4',
+          },
+          {
+            label: 'Departure Date',
+            value: checkoutString,
+            className: 'bg-white rounded-lg px-4',
+          },
+          { label: 'Number of Nights', value: numNights, className: 'px-4' },
+        ].map(({ label, value, className }) => (
+          <span
+            key={label}
+            className={`${className} py-2`}
+          >
+            <h3>{label}</h3>
+            <p>{value}</p>
+          </span>
+        ))}
         <Link
           className="col-span-2 px-4 hover:text-blue-500 text-xs"
           href={`/villas/${villaName}`}
         >
           {'<< Change Dates'}
         </Link>
-        {renderDetail('Number of Nights', numNights, 'px-4')}
-        {renderConvertedAmount('Price Per Night', pricePerNight, 'col-span-2')}
-        {renderConvertedAmount('Subtotal', subTotal, 'col-span-2')}
-        {renderConvertedAmount('Discount', discount, 'col-span-2 text-red-500')}
-        {renderConvertedAmount('Taxes', taxes, 'col-span-2')}
-        {renderConvertedAmount('Total', finalPrice, 'border-t col-span-2')}
+        {[
+          { label: 'Price Per Night', value: pricePerNight },
+          { label: 'Subtotal', value: subTotal },
+          { label: 'Discount', value: discount, className: 'text-red-500' },
+          { label: 'Taxes', value: taxes },
+          { label: 'Total', value: finalPrice, className: 'border-t' },
+        ].map(({ label, value, className }) => (
+          <span
+            key={label}
+            className={`${className} flex justify-between py-2 px-4 col-span-2`}
+          >
+            <h3>{label}</h3>
+            <p>{formatCurrency(value, currency)}</p>
+          </span>
+        ))}
         <CountryDropdown countries={countries} />
       </div>
     </section>
