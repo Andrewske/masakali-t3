@@ -47,14 +47,14 @@ export default function EmailForm() {
     onSubmit: async ({ value }) => {
       console.log('Submitting...');
 
-      const startDate = new Date(value.checkIn);
+      const startDate = new Date(value.checkIn).getUTCDate();
       const formattedStartDate = new Intl.DateTimeFormat('en-US', {
         month: 'short',
         day: '2-digit',
         year: 'numeric',
       }).format(startDate);
 
-      const endDate = new Date(value.checkOut);
+      const endDate = new Date(value.checkOut).getUTCDate();
       const formattedEndDate = new Intl.DateTimeFormat('en-US', {
         month: 'short',
         day: '2-digit',
