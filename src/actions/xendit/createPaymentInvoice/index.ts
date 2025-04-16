@@ -78,7 +78,7 @@ export const createPaymentLink = async (data: PaymentLinkData) => {
     amount: withTax,
     customer: {
       given_names: data.firstName,
-      surname: '',
+      surname: data.lastName,
       email: data.email,
     },
     customer_notification_preference: {
