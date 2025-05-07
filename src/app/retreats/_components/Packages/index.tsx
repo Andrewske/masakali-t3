@@ -2,42 +2,9 @@ import Image from 'next/image';
 
 // import ExploreVillasButton from '../ExploreVillasButton';
 
+import Link from 'next/link';
+import HeroCarousel from '~/app/(home)/HeroSlideShow/Carousel';
 import {
-  lumbungRenders,
-  tributeSurya1,
-  tributeSurya2,
-  tributeSurya3,
-  tributeSurya4,
-  tributeSurya5,
-  tributeSurya6,
-  tributeSurya7,
-  tributeSurya8,
-  tributeSurya9,
-  tributeSurya10,
-  tributeSurya11,
-  tributeChandra1,
-  tributeChandra2,
-  tributeChandra3,
-  tributeChandra4,
-  tributeChandra5,
-  tributeChandra6,
-  tributeChandra7,
-  tributeChandra8,
-  tributeChandra9,
-  tributeChandra10,
-  tributeChandra11,
-  tributeChandra12,
-  tributeChandra13,
-  tributeJala1,
-  tributeJala2,
-  tributeJala3,
-  tributeJala4,
-  tributeJala5,
-  tributeJala6,
-  tributeJala7,
-  tributeJala8,
-  tributeJala9,
-  tributeJala10,
   // tributeIsvara1,
   // tributeIsvara2,
   // tributeIsvara3,
@@ -52,17 +19,49 @@ import {
   isvaraBed2,
   isvaraChair,
   isvaraRoom,
+  lumbungRenders,
   priyaBath,
   priyaBath2,
   priyaBed,
   priyaBed2,
   priyaRoom,
   priyaView,
+  tributeChandra1,
+  tributeChandra10,
+  tributeChandra11,
+  tributeChandra12,
+  tributeChandra13,
+  tributeChandra2,
+  tributeChandra3,
+  tributeChandra4,
+  tributeChandra5,
+  tributeChandra6,
+  tributeChandra7,
+  tributeChandra8,
+  tributeChandra9,
+  tributeJala1,
+  tributeJala10,
+  tributeJala2,
+  tributeJala3,
+  tributeJala4,
+  tributeJala5,
+  tributeJala6,
+  tributeJala7,
+  tributeJala8,
+  tributeJala9,
+  tributeSurya1,
+  tributeSurya10,
+  tributeSurya11,
+  tributeSurya2,
+  tributeSurya3,
+  tributeSurya4,
+  tributeSurya5,
+  tributeSurya6,
+  tributeSurya7,
+  tributeSurya8,
+  tributeSurya9,
 } from '~/lib/images';
-import HeroCarousel from '~/app/(home)/HeroSlideShow/Carousel';
 import ContactButton from './ContactButton';
-import Link from 'next/link';
-import Button from '~/components/Button';
 
 const suryaImages = [
   tributeSurya1,
@@ -369,9 +368,9 @@ const Packages = () => {
           Of course, all rooms have access to the communal areas and the yoga
           shala to relax and commune with your fellow yogis.
         </p>
-        <p className="text-red-500 font-bold! text-xl! ">
+        {/* <p className="text-red-500 font-bold! text-xl! ">
           Don't miss out on our exclusive offer, available until April 30, 2025!
-        </p>
+        </p> */}
       </span>
 
       <div className="flex flex-wrap w-full justify-evenly gap-4 ">
@@ -424,8 +423,8 @@ const Packages = () => {
                     >
                       <p>{villaPackage.title}</p>
                       <p>
-                        <span className="text-red-500">{`$${villaPackage.discount}`}</span>{' '}
-                        <span className="line-through">{`$${villaPackage.price}`}</span>
+                        {/* <span className="text-red-500">{`$${villaPackage.discount}`}</span>{' '} */}
+                        <span className="">{`$${villaPackage.price}`}</span>
                       </p>
                     </span>
                   </ContactButton>
