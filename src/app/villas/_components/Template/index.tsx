@@ -58,7 +58,7 @@ async function Template({ villaId }: VillaDataType) {
             villaId={villaId}
           />
         </div>
-        <div className="col-span-4 xl:col-span-3 xl:h-[calc(100vh-132px)]">
+        <div className="col-span-4 xl:col-span-3 h-full">
           <GridGallery villaName={villaName} />
         </div>
         <div className="col-span-4">

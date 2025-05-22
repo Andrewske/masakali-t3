@@ -36,9 +36,9 @@ import BookNowButton from '~/app/retreats/_components/BookNowButton';
 const retreatDetails = {
   name: 'Tribute Yoga Retreat',
   startDate: '2025-06-29',
-  endDate: '2025-07-06',
+  endDate: '2025-07-04',
   whyChose:
-    'Experience a transformative journey at Masakali Retreat with our six-day, five-night yoga retreat, set against the breathtaking backdrop of Balinese mountains, lush forests, and serene rice fields. Practice yoga, connect with nature, and find inner peace as you absorb the tranquility of one of the most spectacular places in the world',
+    'Experience a transformative journey at Masakali Retreat with our six-day, five-night yoga retreat, set against the breathtaking backdrop of Balinese mountains, lush forests, and serene rice fields. Practice yoga, connect with nature, and find inner peace as you absorb the tranquility of one of the most spectacular places in the world.',
   details: (
     <div className="flex flex-col gap-2">
       <p>
@@ -75,6 +75,7 @@ const retreatDetails = {
         <li>Daily organic breakfast buffet</li>
         <li>Opening & Closing Dinner</li>
         <li>Welcome spa treatment</li>
+        <li>Transportation to and from the Excursions</li>
       </ul>
       <br />
       <ul>
@@ -83,6 +84,7 @@ const retreatDetails = {
         <li>Lunch and other offsite meals</li>
         <li>Mount Batur Sunrise Trek/ Volcano View Breakfast</li>
         <li>Additional Spa treatments</li>
+        <li>Entry into Activities and Excursions</li>
       </ul>
     </div>
   ),
@@ -95,12 +97,13 @@ const retreatDetails = {
         <li>Mount Batur Sunrise Trek/ Volcano View Breakfast</li>
         <li>Sebatu Waterfalls</li>
         <li>Campuhan Ridgewalk</li>
-        <li>Melukat Ceremony</li>
-        <li>Cacao Ceremony</li>
-        <li>Fire Ceremony</li>
-        <li>Acupuncture and Moksha Session</li>
         <li>Ecstatic Dance</li>
+        <li>Melukat Ceremony*</li>
+        <li>Cacao Ceremony*</li>
+        <li>Fire Ceremony*</li>
+        <li>Acupuncture and Moksha Session*</li>
       </ul>
+      <p className="text-sm">*Included in retreat package pricing</p>
     </div>
   ),
   expect: `Immerse yourself in a transformative yoga retreat designed to nurture your body, mind, and spirit. Through daily yoga and meditation sessions, you’ll work through stress, anxiety, and fear, finding a path to a calmer and more peaceful life. Gain deeper self-awareness and begin to shift old patterns and conditioning that may be affecting your relationships and overall well-being. Experience a profound connection to your body, supported by a healthy, organic diet. Engage in various activities, including spiritual ceremonies, nature excursions, and wellness treatments, all aimed at enhancing your inner peace and emotional well being. Our retreat offers a supportive and guided environment, helping you achieve the personal growth and transformation you desire, leading to a deeper connection with yourself and nature and what truly matters to you.`,
@@ -219,7 +222,7 @@ export default function Page() {
           <h2 className="w-full">When</h2>
 
           <p className="w-full text-lg! whitespace-nowrap font-montserrat">
-            Jun 29 - Jul 6 2025
+            Jun 29 - Jul 4 2025
           </p>
         </div>
         <div
