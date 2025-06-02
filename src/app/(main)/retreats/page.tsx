@@ -53,7 +53,7 @@ export default function Page() {
 
       <div className="flex flex-col gap-8 w-full p-8">
         <h1 className="text-center">Future Yoga Retreats</h1>
-        <ContentContainer
+        {/* <ContentContainer
           heading="Tribute Yoga Retreat"
           content={`Experience a transformative journey at Masakali Retreat with our six-day, five-night yoga retreat, set against the breathtaking backdrop of Balinese mountains, lush forests, and serene rice fields. Practice yoga, connect with nature, and find inner peace as you absorb the tranquility of one of the most spectacular places in the world.`}
           imgSrc={yogaRetreatPose.src}
@@ -62,7 +62,7 @@ export default function Page() {
           buttonText="Learn More"
           buttonLink="/retreats/tribute"
           newTab={false}
-        />
+        /> */}
       </div>
     </section>
   );
