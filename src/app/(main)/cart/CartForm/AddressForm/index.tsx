@@ -1,4 +1,6 @@
 'use client';
+import { memo, useCallback } from 'react';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { type UseFormReturn } from 'react-hook-form';
 import {
   FormControl,
@@ -8,9 +10,7 @@ import {
   FormMessage,
 } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
-import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
-import type { FormData, FieldName } from '../getFormSchema';
-import React, { memo, useCallback, useMemo } from 'react';
+import type { FieldName, FormData } from '../getFormSchema';
 interface AddressFormProps {
   form: UseFormReturn<FormData>;
 }

@@ -1,8 +1,7 @@
 'use server';
 import sgMail from '@sendgrid/mail';
 import { env } from '~/env.mjs';
-import { logError } from '~/utils/logError';
-import { posthogServerError, logAndPosthog } from '~/utils/posthogServerError';
+import { logAndPosthog } from '~/utils/posthogServerError';
 import { tryCatch } from '~/utils/tryCatch';
 
 // Move template IDs to environment variables for better maintainability

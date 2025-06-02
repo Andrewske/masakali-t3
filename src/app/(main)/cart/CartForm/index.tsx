@@ -1,22 +1,21 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
-import { BeatLoader } from 'react-spinners';
 import AddressForm from './AddressForm';
 
 import { Form } from '~/components/ui/form';
+import useFetchPaymentData from '~/hooks/useFetchPaymentData';
 import { getVillaName, type VillaIdsType } from '~/lib/villas';
+import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
+import { useReservationStore } from '~/providers/ReservationStoreProvider';
+import { useUserStore } from '~/providers/UserStoreProvider';
+import { type VillaPricingType } from '~/utils/pricing';
 import GuestDetailsForm from './GuestDetailsForm';
 import PaymentForm from './PaymentForm';
-import { useReservationStore } from '~/providers/ReservationStoreProvider';
-import { type VillaPricingType } from '~/utils/pricing';
-import { useCurrencyStore } from '~/providers/CurrencyStoreProvider';
-import { useUserStore } from '~/providers/UserStoreProvider';
-import useFetchPaymentData from '~/hooks/useFetchPaymentData';
 
-import CartSubmitButton from './CartSubmitButton';
 import { useCartForm } from '~/hooks/useCartForm';
-import { useVillaPricing } from '~/hooks/useVillaPricing';
 import { useFormSteps } from '~/hooks/useFormSteps';
+import { useVillaPricing } from '~/hooks/useVillaPricing';
+import CartSubmitButton from './CartSubmitButton';
 
 export default function CartForm({
   reservation: {
@@ -112,12 +111,16 @@ export default function CartForm({
           )}
         </Form>
         <div className="p-4 w-full text-center">
-          <CartSubmitButton
-            form={form}
-            step={step}
-            nextStep={nextStep}
-            onSubmit={onSubmit}
-          />
+          {isProcessing ? (
+            <span>Processing...</span>
+          ) : (
+            <CartSubmitButton
+              form={form}
+              step={step}
+              nextStep={nextStep}
+              onSubmit={onSubmit}
+            />
+          )}
         </div>
       </div>
     </>

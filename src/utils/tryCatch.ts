@@ -1,10 +1,3 @@
-import PostHogClient from '~/app/posthog';
-
-type TryCatchOptions = {
-  captureError?: boolean;
-  context?: Record<string, unknown>;
-};
-
 // Types for the result object with discriminated union
 type Success<T> = {
   data: T;

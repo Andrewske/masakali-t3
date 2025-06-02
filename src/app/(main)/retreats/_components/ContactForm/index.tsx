@@ -1,8 +1,7 @@
 'use client';
-import React, { useState } from 'react';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type SubmitHandler, useForm } from 'react-hook-form';
+import { z } from 'zod';
 import {
   Form,
   FormControl,
@@ -19,14 +18,14 @@ import {
   SelectValue,
 } from '~/components/ui/select';
 
-import { Input } from '~/components/ui/input';
-import GuestsForm from '../GuestsForm';
-import Button from '~/components/Button';
-import { Textarea } from '~/components/ui/textarea';
-import { sendRetreatInquiry } from '~/actions/sendgrid/retreat';
-import { useToast } from '~/components/ui/use-toast';
-import { sendRetreatDataToGoogleSheets } from '~/actions/googleApi';
 import { format } from 'date-fns';
+import { sendRetreatDataToGoogleSheets } from '~/actions/googleApi';
+import { sendRetreatInquiry } from '~/actions/sendgrid/retreat';
+import Button from '~/components/Button';
+import { Input } from '~/components/ui/input';
+import { Textarea } from '~/components/ui/textarea';
+import { useToast } from '~/components/ui/use-toast';
+import GuestsForm from '../GuestsForm';
 
 const formDefaultValues = {
   fullName: '',
@@ -56,10 +55,10 @@ const ContactForm = () => {
   };
   const form = useForm<FormData>(formOptions);
   const { toast } = useToast();
-  const [isProcessing, setIsProcessing] = useState(false);
+  // const [isProcessing, setIsProcessing] = useState(false);
 
   const onSubmit: SubmitHandler<FormData> = async (formData) => {
-    setIsProcessing(true);
+    // setIsProcessing(true);
     try {
       await sendRetreatInquiry({
         data: {
@@ -80,7 +79,7 @@ const ContactForm = () => {
         description: 'Please contact us directly at info@masakaliretreat.com',
       });
     }
-    setIsProcessing(false);
+    // setIsProcessing(false);
   };
 
   return (

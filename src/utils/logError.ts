@@ -20,7 +20,6 @@ export type LogErrorParams = {
 export const logError = ({
   message,
   error = null,
-  level = 'error',
   data = {},
 }: LogErrorParams) => {
   if (error instanceof Error) {
