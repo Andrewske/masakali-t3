@@ -1,7 +1,7 @@
 // import { getCurrency } from '~/actions/currencyApi';
 // import { NextResponse } from 'next/server';
 
-// import { prisma } from '~/db/prisma';
+// import { db } from '~/server/db'
 
 // const currency_list = [
 //   'JMD',
@@ -184,7 +184,7 @@ export function GET() {
   //     (currency) => currency['code']
   //   );
 
-  //   const dbCurrencies = await prisma.currency
+  //   const dbCurrencies = await db.currency
   //     .findMany({
   //       select: { code: true },
   //     })

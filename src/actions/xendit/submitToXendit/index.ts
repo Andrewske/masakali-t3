@@ -1,4 +1,7 @@
-import type { FormData } from '~/app/cart/CartForm/getFormSchema';
+'use server';
+import type { FormData } from '~/app/(main)/cart/CartForm/getFormSchema';
+import { logAndPosthog } from '~/utils/posthogServerError';
+import { tryCatch } from '~/utils/tryCatch';
 import { xenditCreateToken } from '~/utils/xendit';
 
 type SubmitToXenditProps = {
@@ -16,12 +19,25 @@ export const submitToXendit = async ({
     return;
   }
 
-  return await xenditCreateToken({
-    amount: totalIDR,
-    card_number: formData.cc_number.replace(/\s/g, ''),
-    card_exp_month: cardExpMonth.replace(/\s/g, ''),
-    card_exp_year: '20' + cardExpYear.replace(/\s/g, ''),
-    card_cvn: formData.cc_cvc.replace(/\s/g, ''),
-    is_multiple_use: false,
-  });
+  const { data, error } = await tryCatch(
+    xenditCreateToken({
+      amount: totalIDR,
+      card_number: formData.cc_number.replace(/\s/g, ''),
+      card_exp_month: cardExpMonth.replace(/\s/g, ''),
+      card_exp_year: '20' + cardExpYear.replace(/\s/g, ''),
+      card_cvn: formData.cc_cvc.replace(/\s/g, ''),
+      is_multiple_use: false,
+    })
+  );
+
+  if (error) {
+    await logAndPosthog({
+      message: 'Error creating token',
+      error,
+      level: 'error',
+      data: { location: 'submitToXendit' },
+    });
+  }
+
+  return data;
 };

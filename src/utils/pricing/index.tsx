@@ -2,7 +2,7 @@ import { WEBSITE_DISCOUNT, SPECIAL_DISCOUNT, VAT_TAX } from '~/lib/constants';
 
 export type VillaPricingType = {
   date: Date;
-  price: number;
+  price: number | null;
   available: boolean;
 };
 

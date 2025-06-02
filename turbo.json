@@ -1,0 +1,3 @@
+{
+  "globalDependencies": [".env", "tsconfig.json"]
+}

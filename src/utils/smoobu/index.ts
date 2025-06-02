@@ -1,7 +1,8 @@
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 import { channelIds } from '~/lib/smoobu';
 import { akashaId, lakshmiId } from '~/lib/villas';
 import type { SmoobuReservation } from '~/types/smoobu';
+import { env } from '~/env.mjs';
 
 function parseSmoobuReservation(smoobuReservation: SmoobuReservation) {
   const {
@@ -53,7 +54,7 @@ export async function createReservation(smoobuReservation: SmoobuReservation) {
   // Use Prisma to create a new reservation in the database
   const { villa_id, ...otherReservationData } = reservationData;
 
-  const newReservation = await prisma.reservation.create({
+  const newReservation = await db.reservation.create({
     data: {
       ...otherReservationData,
       villa: {
@@ -85,7 +86,7 @@ export async function updateReservation(smoobuReservation: SmoobuReservation) {
 
   const { villa_id, ...otherReservationData } =
     parseSmoobuReservation(smoobuReservation);
-  await prisma.reservation.upsert({
+  await db.reservation.upsert({
     where: {
       smoobu_id: smoobuId, // Use the smoobuId from the function argument
     },
@@ -131,7 +132,7 @@ export async function updateReservation(smoobuReservation: SmoobuReservation) {
 
 export async function cancelReservation(smoobu_id: number) {
   // First, find the reservation by smoobuId to get its id
-  const reservation = await prisma.reservation.findUnique({
+  const reservation = await db.reservation.findUnique({
     where: {
       smoobu_id,
     },
@@ -142,7 +143,7 @@ export async function cancelReservation(smoobu_id: number) {
   }
 
   // Then, use the id to update the reservation
-  return await prisma.reservation.update({
+  return await db.reservation.update({
     where: {
       id: reservation.id, // Use the id obtained from the previous query
     },
@@ -154,7 +155,7 @@ export async function cancelReservation(smoobu_id: number) {
 
 export async function deleteReservation(smoobu_id: number) {
   // First, find the reservation by smoobuId to get its id
-  const reservation = await prisma.reservation.findUnique({
+  const reservation = await db.reservation.findUnique({
     where: {
       smoobu_id,
     },
@@ -165,7 +166,7 @@ export async function deleteReservation(smoobu_id: number) {
   }
 
   // Then, use the id to delete the reservation
-  return await prisma.reservation.delete({
+  return await db.reservation.delete({
     where: {
       id: reservation.id, // Use the id obtained from the previous query
     },
@@ -198,7 +199,7 @@ export async function blockVilla(
   arrival: string,
   departure: string
 ) {
-  const apiKey = validateApiKey(process.env.SMOOBU_API_KEY);
+  const apiKey = validateApiKey(env.SMOOBU_API_KEY);
 
   const data = {
     arrivalDate: arrival,
@@ -233,7 +234,7 @@ export async function blockVilla(
 
     const { id: smoobu_id } = (await response.json()) as CreateBookingResponse;
 
-    await prisma.reservation.create({
+    await db.reservation.create({
       data: {
         arrival: data.arrivalDate,
         departure: data.departureDate,

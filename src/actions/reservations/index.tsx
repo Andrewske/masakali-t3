@@ -1,5 +1,5 @@
 'use server';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 
 import { villaIdsMap, type VillaIdsType } from '~/lib/villas';
 
@@ -10,7 +10,7 @@ export const getAvailableVillas = async ({
   from: string;
   to: string;
 }) => {
-  const blockedVillas = await prisma.reservation.findMany({
+  const blockedVillas = await db.reservation.findMany({
     where: {
       cancelled: false,
       AND: [
@@ -36,7 +36,7 @@ export const getAvailableVillas = async ({
 };
 
 export const getAllBlockedDates = async () => {
-  const reservations = await prisma.reservation.findMany({
+  const reservations = await db.reservation.findMany({
     where: {
       departure: {
         gte: new Date(),
@@ -99,7 +99,7 @@ export async function getVillaPricing(
   startDate: Date,
   endDate: Date
 ) {
-  const pricing = await prisma.villa_pricing.findFirst({
+  const pricing = await db.villa_pricing.findFirst({
     where: {
       villa_id: villaId,
       date: {

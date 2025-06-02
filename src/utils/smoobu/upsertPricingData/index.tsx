@@ -1,4 +1,4 @@
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 import type { VillaPricingDataType } from '~/types/smoobu';
 
 // Function to split an array into chunks
@@ -18,9 +18,9 @@ const upsertPricingData = async (
 
   try {
     for (const chunk of upsertDataChunks) {
-      await prisma.$transaction(
+      await db.$transaction(
         chunk.map(({ villa_id, date, ...rest }) =>
-          prisma.villa_pricing.upsert({
+          db.villa_pricing.upsert({
             where: { villa_id_date: { villa_id, date: new Date(date) } },
             update: { ...rest },
             create: { villa_id, date: new Date(date), ...rest },

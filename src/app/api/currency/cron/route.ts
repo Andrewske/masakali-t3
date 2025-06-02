@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { prisma } from '~/db/prisma';
+import { env } from '~/env.mjs';
+import { db } from '~/server/db';
 
 type ExchangeRatesResponse = {
   meta: {
@@ -17,7 +18,7 @@ interface RateInfo {
 
 const updateCurrency = async (code: string, rate_from_idr: number) => {
   try {
-    const currency = await prisma.currency.findFirst({
+    const currency = await db.currency.findFirst({
       where: {
         code,
       },
@@ -31,7 +32,7 @@ const updateCurrency = async (code: string, rate_from_idr: number) => {
       return;
     }
 
-    return await prisma.currency.update({
+    return await db.currency.update({
       where: {
         id: currency.id,
       },
@@ -45,7 +46,7 @@ const updateCurrency = async (code: string, rate_from_idr: number) => {
 };
 
 async function getExchangeRates() {
-  const currencies = await prisma.currency
+  const currencies = await db.currency
     .findMany({
       select: {
         code: true,
@@ -59,7 +60,7 @@ async function getExchangeRates() {
     const response = await axios.get(`https://api.currencyapi.com/v3/latest`, {
       headers: {
         'Content-Type': 'application/json',
-        apiKey: process.env.CURRENCY_API_KEY,
+        apiKey: env.CURRENCY_API_KEY,
       },
       params: {
         base_currency: 'IDR',

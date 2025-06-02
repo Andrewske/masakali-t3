@@ -9,13 +9,13 @@ import { CurrencyStoreProvider } from '~/providers/CurrencyStoreProvider/index';
 import { UserStoreProvider } from '~/providers/UserStoreProvider';
 import { PostHogProvider } from '~/providers/PostHogProvider';
 import Script from 'next/script';
-import Header from '~/components/layout/Header';
+
 import Footer from '~/components/layout/Footer';
 
 import '~/styles/icomoon.css';
-import SuspendedPostHogPageView from '~/components/PostHogPageView';
 
 import type { Metadata } from 'next';
+import HeaderWrapper from '~/components/layout/HeaderWrapper';
 
 export const metadata: Metadata = {
   title: 'Masakali Retreat | Luxury Villas in Bali',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     'luxury villas',
     'infinity pools',
     'Ubud',
-    'rice field views',
+    'rice field views'
   ],
   openGraph: {
     title: 'Masakali Retreat - Luxury Villas in Bali',
@@ -41,15 +41,15 @@ export const metadata: Metadata = {
     //   },
     // ],
     locale: 'en_US',
-    type: 'website',
+    type: 'website'
   },
   robots: {
     index: true,
-    follow: true,
+    follow: true
   },
   icons: {
-    icon: '/masakali_logo.ico',
-  },
+    icon: '/masakali_logo.ico'
+  }
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -64,9 +64,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <UserStoreProvider>
               <CurrencyStoreProvider>
                 <ReservationStoreProvider>
-                  <SuspendedPostHogPageView />
                   <header className="relative md:sticky top-0 z-50">
-                    <Header />
+                    <HeaderWrapper />
                   </header>
                   <main className="min-h-screen flex flex-col justify-between text-baskerville">
                     {children}

@@ -1,5 +1,7 @@
+import 'server-only';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
+import { env } from '~/env.mjs';
 import { villaIdsArray } from '~/lib/villas';
 
 import type { SmoobuRatesResponse } from '~/types/smoobu';
@@ -18,7 +20,7 @@ export async function GET() {
 
 async function fetchSmoobuRates(): Promise<SmoobuRatesResponse | null> {
   console.log('fetching smoobu rates');
-  const smoobuApiUrl: string = process.env.SMOOBU_API_URL ?? '';
+  const smoobuApiUrl: string = env.SMOOBU_API_URL ?? '';
   if (!smoobuApiUrl) {
     throw new Error(
       'SMOOBU_API_URL is not defined in the environment variables.'
@@ -26,7 +28,7 @@ async function fetchSmoobuRates(): Promise<SmoobuRatesResponse | null> {
   }
   const url = smoobuApiUrl + '/rates';
 
-  const apiKey = process.env.SMOOBU_API_KEY;
+  const apiKey = env.SMOOBU_API_KEY;
   if (!apiKey) {
     throw new Error(
       'SMOOBU_API_KEY is not defined in the environment variables.'

@@ -82,7 +82,7 @@ const CountryDropdown = ({ countries }: { countries: CountryType[] }) => {
         variant="outline"
         role="combobox"
         aria-expanded={isOpen}
-        className="w-[200px] justify-between"
+        className=""
       >
         {country.currency.code}{' '}
         <Image
@@ -100,9 +100,9 @@ const CountryDropdown = ({ countries }: { countries: CountryType[] }) => {
   const memoizedCountries = useMemo(
     () =>
       countries &&
-      countries.map((country: CountryType) => (
+      countries.map((country: CountryType, index: number) => (
         <CommandItem
-          key={country.name}
+          key={country?.name + '-' + index}
           className="flex justify-between w-full"
           onSelect={() => handleSelect(country)}
         >

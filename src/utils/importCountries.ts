@@ -1,4 +1,4 @@
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 import fs from 'fs';
 
 type Country = {
@@ -22,7 +22,7 @@ export async function importCountries() {
   for (const country of countries) {
     try {
       // Create a new currency entry if it doesn't already exist
-      const currency = await prisma.currency.upsert({
+      const currency = await db.currency.upsert({
         where: { code: country.currency.code },
         update: {
           code: country.currency.code,
@@ -42,7 +42,7 @@ export async function importCountries() {
       }
 
       // Insert the country data into the database
-      await prisma.country.upsert({
+      await db.country.upsert({
         where: {
           iso_alpha2: country.isoAlpha2,
         },

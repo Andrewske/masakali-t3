@@ -1,16 +1,5 @@
-// import MillionLint from '@million/lint';
-/**
- * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
- * for Docker builds.
- */
-import { withSentryConfig } from "@sentry/nextjs";
 import MillionLint from "@million/lint";
-// import withBundleAnalyzer from '@next/bundle-analyzer'
-import { env } from "./src/env.mjs";
-
-
-
-
+import "./src/env.mjs"
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
@@ -48,27 +37,25 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-
   },
-  i18n: {
-    locales: ['en'],
-    defaultLocale: 'en'
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+      },
+      {
+        source: "/ingest/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
+      {
+        source: "/ingest/decide",
+        destination: "https://us.i.posthog.com/decide",
+      },
+    ];
   },
-
+  // This is required to support PostHog trailing slash API requests
+  skipTrailingSlashRedirect: true,
 }
 
-const sentryWebpackPluginOptions = {
-  // For all available options, see:
-  // https://github.com/getsentry/sentry-webpack-plugin#options
-
-  // Suppresses source map uploading logs during build
-  silent: true,
-  org: "andrewske",
-  project: "masakali",
-  authToken: process.env.SENTRY_AUTH_TOKEN,
-  hideSourceMaps: true,
-  automaticVercelMonitors: true,
-  disableLogger: true,
-}
-
-export default MillionLint.next({ rsc: true })(withSentryConfig(nextConfig, sentryWebpackPluginOptions))
+export default nextConfig

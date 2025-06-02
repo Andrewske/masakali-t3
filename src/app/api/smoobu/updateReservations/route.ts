@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 import type { SmoobuReservation } from '~/types/smoobu';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 import { NextResponse } from 'next/server';
+import { env } from '~/env.mjs';
 type TransformedReservation = {
   smoobu_id: number;
   reference_id: string;
@@ -58,13 +59,13 @@ type SmoobuReservationsResponse = {
 async function fetchSmoobuReservations(
   page = 1
 ): Promise<SmoobuReservationsResponse> {
-  const smoobuApiUrl: string = process.env.SMOOBU_API_URL ?? '';
+  const smoobuApiUrl: string = env.SMOOBU_API_URL ?? '';
   const url = smoobuApiUrl + '/reservations';
 
   const headers = {
     'Content-Type': 'application/json',
     'Cache-Control': 'no-cache',
-    'Api-Key': process.env.SMOOBU_API_KEY,
+    'Api-Key': env.SMOOBU_API_KEY,
   };
 
   const params = {
@@ -116,12 +117,12 @@ function transformReservationData(
 async function upsertReservationToDatabase(
   reservationData: TransformedReservation
 ): Promise<{ smoobu_id: number | null }> {
-  const currentReservation = await prisma.reservation.findUnique({
+  const currentReservation = await db.reservation.findUnique({
     where: { smoobu_id: reservationData.smoobu_id },
   });
 
   if (!currentReservation) {
-    return await prisma.reservation.create({
+    return await db.reservation.create({
       data: reservationData,
       select: {
         smoobu_id: true,
@@ -138,7 +139,7 @@ async function upsertReservationToDatabase(
     }
   }
   if (numberOfChanges > 0) {
-    return await prisma.reservation.update({
+    return await db.reservation.update({
       where: { smoobu_id: reservationData.smoobu_id },
       data: reservationData,
       select: {
@@ -148,7 +149,7 @@ async function upsertReservationToDatabase(
   }
 
   return { smoobu_id: reservationData.smoobu_id };
-  // return await prisma.reservation.upsert({
+  // return await db.reservation.upsert({
   //   where: { smoobu_id: reservationData.smoobu_id ?? '' },
   //   create: reservationData,
   //   update: reservationData,

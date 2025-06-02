@@ -1,7 +1,7 @@
 'use server';
 import { getVillaName } from '~/lib/villas';
 import type { VillaIdsType } from '~/lib/villas';
-import { prisma } from '~/db/prisma';
+import { db } from '~/server/db';
 import { env } from '~/env.mjs';
 
 export type PricingDataType = {
@@ -35,7 +35,7 @@ export const getPricing = async ({
   const numNights = Math.ceil(diffInTime / (1000 * 60 * 60 * 24));
 
   try {
-    const villaPricing = (await prisma.villa_pricing.findMany({
+    const villaPricing = (await db.villa_pricing.findMany({
       where: {
         villa_id: Number(villaId),
         date: {
@@ -95,7 +95,7 @@ export const getAllDisabledDates = async (): Promise<
 > => {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  const disabledDates = await prisma.villa_pricing.findMany({
+  const disabledDates = await db.villa_pricing.findMany({
     where: {
       available: false,
       date: {
@@ -159,7 +159,7 @@ export const getDisabledDatesForVilla = async (
 }> => {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  const disabledDates = await prisma.villa_pricing.findMany({
+  const disabledDates = await db.villa_pricing.findMany({
     where: {
       villa_id: villaId,
       available: false,
@@ -191,7 +191,7 @@ export const getDisabledDatesForVilla = async (
 export const getCheckoutDatesForVilla = async (
   villaId: number
 ): Promise<Set<string | undefined>> => {
-  const checkoutDates = await prisma.villa_pricing.findMany({
+  const checkoutDates = await db.villa_pricing.findMany({
     where: {
       villa_id: villaId,
     },

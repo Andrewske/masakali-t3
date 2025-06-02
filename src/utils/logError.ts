@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/nextjs';
-
 /**
  * Logs an error message and details, and reports it to Sentry.
  *
@@ -10,9 +8,11 @@ import * as Sentry from '@sentry/nextjs';
  * @param {Object} params.data - Additional data related to the error.
  */
 
-type LogErrorParams = {
+import { toast } from '~/components/ui/use-toast';
+
+export type LogErrorParams = {
   message: string;
-  error?: Error | null;
+  error?: unknown;
   level?: 'error' | 'warning' | 'info';
   data?: Record<string, unknown>;
 };
@@ -20,25 +20,40 @@ type LogErrorParams = {
 export const logError = ({
   message,
   error = null,
-  level = 'error',
   data = {},
 }: LogErrorParams) => {
-  if (!isValidErrorParams(message, error)) {
-    console.error('Invalid parameters for logError');
-    return;
-  }
+  if (error instanceof Error) {
+    if (!isValidErrorParams(message, error)) {
+      console.error('Invalid parameters for logError');
+      return;
+    }
 
-  const timestamp = new Date().toISOString();
-  const errorData = { ...data, message };
-  const dataString = formatErrorData(errorData);
+    const timestamp = new Date().toISOString();
+    const errorData = { ...data, message };
+    const dataString = formatErrorData(errorData);
 
-  try {
-    logToConsole(timestamp, message, dataString, error);
-    reportToSentry(error, level, errorData);
-  } catch (error) {
-    console.error('Error logging error:', error);
+    try {
+      logToConsole(timestamp, message, dataString, error);
+    } catch (error) {
+      console.error('Error logging error:', error);
+    }
   }
 };
+
+export function logAndToast({
+  message,
+  error = null,
+  level = 'error',
+  data = {},
+}: LogErrorParams) {
+  if (error instanceof Error) {
+    logError({ message, error, level, data });
+    toast({
+      title: message,
+      variant: 'destructive',
+    });
+  }
+}
 
 function isValidErrorParams(message: string, error: Error | null): boolean {
   return (
@@ -67,19 +82,4 @@ function logToConsole(
       error?.message ?? ''
     }`
   );
-}
-
-function reportToSentry(
-  error: Error | null,
-  level: 'error' | 'warning' | 'info',
-  data: Record<string, unknown>
-) {
-  // Default to Error if level is not recognized
-  console.log('reportToSentry', error, level, data);
-  Sentry.setContext('context', data);
-  Sentry.withScope((scope) => {
-    scope.setLevel(level);
-
-    Sentry.captureException(error);
-  });
 }
