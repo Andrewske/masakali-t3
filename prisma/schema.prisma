@@ -63,9 +63,6 @@ model reservation {
 }
 
 
-
-
-
 model currency {
   id                 Int     @id @default(autoincrement())
   code               String  @unique
@@ -84,9 +81,6 @@ model country {
   currency            currency @relation(fields: [currency_id], references: [id])
   flag                Bytes    // Storing the flag as a byte array
 }
-
-
-
 
 
 // Necessary for Next auth
@@ -136,4 +130,15 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+
+model WebhookLog {
+  id            String   @id @default(cuid())
+  action        String
+  data          Json
+  created_at    DateTime @default(now())
+  updated_at    DateTime? @updatedAt
+
+  @@map("webhook_log")
 }

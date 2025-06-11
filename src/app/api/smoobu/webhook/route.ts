@@ -50,9 +50,12 @@ export async function POST(request: Request) {
   try {
     const { action, data, user } = (await request.json()) as WebhookBody;
 
-    // console.log('Webhook action:', action);
-    // console.log('Webhook user:', user);
-    // console.log('Webhook data:', data);
+    await db.webhookLog.create({
+      data: {
+        action,
+        data,
+      },
+    });
 
     if (!actionTypes.includes(action)) {
       return new Response('Invalid action type', { status: 200 });
@@ -102,7 +105,10 @@ export async function POST(request: Request) {
       }
     }
   } catch (error) {
-    console.error(error);
+    await logAndPosthog({
+      message: 'Webhook error',
+      data: { error },
+    });
   }
 
   return new Response('OK', { status: 200 });
