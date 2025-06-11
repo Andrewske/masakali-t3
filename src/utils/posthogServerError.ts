@@ -1,7 +1,7 @@
-import PostHogClient from '~/app/posthog';
-import { parseXenditError } from './xendit/parseXenditError';
 import { headers } from 'next/headers';
+import PostHogClient from '~/app/posthog';
 import { logError, type LogErrorParams } from './logError';
+import { parseXenditError } from './xendit/parseXenditError';
 
 interface PostHogCookie {
   distinct_id: string;
@@ -27,6 +27,32 @@ const extractDistinctId = (cookieString: string) => {
   return undefined;
 };
 
+export async function posthogCaptureMessage({
+  message,
+  context,
+}: {
+  message: string;
+  context: Record<string, unknown>;
+}): Promise<void> {
+  try {
+    const posthog = PostHogClient();
+
+    posthog.capture({
+      distinctId: '111111',
+      event: message,
+      properties: context,
+    });
+
+    await posthog.shutdown();
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(`Error in posthogCaptureMessage: ${error.message}`);
+    } else {
+      console.error('Error in posthogCaptureMessage', error);
+    }
+  }
+}
+
 export async function posthogServerError({
   error,
   context,
@@ -49,7 +75,11 @@ export async function posthogServerError({
     });
     await posthog.shutdown();
   } catch (error) {
-    console.error(error);
+    if (error instanceof Error) {
+      console.error(`Error in posthogServerError: ${error.message}`);
+    } else {
+      console.error('Error in posthogServerError', error);
+    }
   }
 }
 
@@ -59,12 +89,10 @@ export async function logAndPosthog({
   level = 'error',
   data = {},
 }: LogErrorParams) {
-  if (error instanceof Error) {
-    logError({ message, error, level, data });
-    await posthogServerError({
-      error: new Error(message),
-      context: { message, level, data },
-    });
-  }
-  throw new Error(message);
+  logError({ message, error, level, data });
+  await posthogServerError({
+    error: new Error(message),
+    context: { message, level, data },
+  });
+  // throw new Error(message);
 }

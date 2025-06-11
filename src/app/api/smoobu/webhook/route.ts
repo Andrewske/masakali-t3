@@ -1,14 +1,15 @@
-import { db } from '~/server/db';
 import { villaIdsArray, type VillaIdsType } from '~/lib/villas';
+import { db } from '~/server/db';
 
-import type { SmoobuReservation, SmoobuRatesResponse } from '~/types/smoobu';
+import { logAndPosthog } from '~/utils/posthogServerError';
+
+import type { SmoobuRatesResponse, SmoobuReservation } from '~/types/smoobu';
 import {
   cancelReservation,
+  createReservation,
   deleteReservation,
   updateReservation,
-  createReservation,
 } from '~/utils/smoobu';
-import { batchVillaPricing } from '~/utils/smoobu/batchVillaPricing';
 
 type WebhookBody = {
   action: string;
@@ -47,17 +48,18 @@ export async function POST(request: Request) {
   console.log('Webhook hit');
 
   try {
-    const { action, data } = (await request.json()) as WebhookBody;
+    const { action, data, user } = (await request.json()) as WebhookBody;
 
-    console.log('Webhook action:', action);
-    console.log('Webhook data:', data);
+    // console.log('Webhook action:', action);
+    // console.log('Webhook user:', user);
+    // console.log('Webhook data:', data);
 
     if (!actionTypes.includes(action)) {
       return new Response('Invalid action type', { status: 200 });
     }
 
     if (action === 'updateRates' && isSmoobuRatesResponse(data)) {
-      await batchVillaPricing(data);
+      // await batchVillaPricing(data);
     }
 
     if (action === 'updateReservation' && isSmoobuReservation(data)) {
@@ -77,8 +79,13 @@ export async function POST(request: Request) {
     if (action === 'newReservation' && isSmoobuReservation(data)) {
       if (data['guest-name'] === 'Masakali Blocked') {
         console.log('guest-name is Masakali Blocked');
-        return;
+        return new Response('guest-name is Masakali Blocked', { status: 200 });
       }
+
+      await logAndPosthog({
+        message: 'Webhook hit',
+        data: { action, user, data },
+      });
 
       // check if dbReservation exists
 
@@ -90,7 +97,6 @@ export async function POST(request: Request) {
 
       if (res) {
         await updateReservation(data);
-        return;
       } else {
         await createReservation(data);
       }

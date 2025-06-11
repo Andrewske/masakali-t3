@@ -1,14 +1,13 @@
+import Script from 'next/script';
 import type { ReactNode } from 'react';
-import '~/styles/globals.css';
 import 'react-day-picker/dist/style.css';
-import { montserrat, baskerville } from '~/fonts';
 import { Toaster } from '~/components/ui/toaster';
 import ReactQueryProvider from '~/context/ReactQueryProvider';
-import { ReservationStoreProvider } from '~/providers/ReservationStoreProvider/index';
+import { baskerville, montserrat } from '~/fonts';
 import { CurrencyStoreProvider } from '~/providers/CurrencyStoreProvider/index';
+import { ReservationStoreProvider } from '~/providers/ReservationStoreProvider/index';
 import { UserStoreProvider } from '~/providers/UserStoreProvider';
-import { PostHogProvider } from '~/providers/PostHogProvider';
-import Script from 'next/script';
+import '~/styles/globals.css';
 
 import Footer from '~/components/layout/Footer';
 
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
     'luxury villas',
     'infinity pools',
     'Ubud',
-    'rice field views'
+    'rice field views',
   ],
   openGraph: {
     title: 'Masakali Retreat - Luxury Villas in Bali',
@@ -41,15 +40,15 @@ export const metadata: Metadata = {
     //   },
     // ],
     locale: 'en_US',
-    type: 'website'
+    type: 'website',
   },
   robots: {
     index: true,
-    follow: true
+    follow: true,
   },
   icons: {
-    icon: '/masakali_logo.ico'
-  }
+    icon: '/masakali_logo.ico',
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -59,24 +58,22 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${montserrat.variable} ${baskerville.variable} overflow-x-hidden`}
     >
       <body>
-        <PostHogProvider>
-          <ReactQueryProvider>
-            <UserStoreProvider>
-              <CurrencyStoreProvider>
-                <ReservationStoreProvider>
-                  <header className="relative md:sticky top-0 z-50">
-                    <HeaderWrapper />
-                  </header>
-                  <main className="min-h-screen flex flex-col justify-between text-baskerville">
-                    {children}
-                  </main>
-                  <Footer />
-                  <Toaster />
-                </ReservationStoreProvider>
-              </CurrencyStoreProvider>
-            </UserStoreProvider>
-          </ReactQueryProvider>
-        </PostHogProvider>
+        <ReactQueryProvider>
+          <UserStoreProvider>
+            <CurrencyStoreProvider>
+              <ReservationStoreProvider>
+                <header className="relative md:sticky top-0 z-50">
+                  <HeaderWrapper />
+                </header>
+                <main className="min-h-screen flex flex-col justify-between text-baskerville">
+                  {children}
+                </main>
+                <Footer />
+                <Toaster />
+              </ReservationStoreProvider>
+            </CurrencyStoreProvider>
+          </UserStoreProvider>
+        </ReactQueryProvider>
         <Script
           src="https://js.xendit.co/v1/xendit.min.js"
           strategy="afterInteractive"

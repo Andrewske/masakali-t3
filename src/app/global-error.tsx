@@ -1,8 +1,8 @@
-'use client';
-import { useEffect } from 'react';
-import type Error from 'next/error';
-import posthog from 'posthog-js';
+'use client'; // Error boundaries must be Client Components
+
 import NextError from 'next/error';
+import posthog from 'posthog-js';
+import { useEffect } from 'react';
 
 export default function GlobalError({
   error,
@@ -14,8 +14,10 @@ export default function GlobalError({
   }, [error]);
 
   return (
+    // global-error must include html and body tags
     <html>
       <body>
+        {/* `NextError` is the default Next.js error page component */}
         <NextError statusCode={0} />
       </body>
     </html>

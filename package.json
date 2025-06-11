@@ -7,6 +7,7 @@
     "build": "next build",
     "dev": "next dev --turbopack",
     "postinstall": "prisma generate",
+    "postbuild": "sh ./upload-sourcemaps.sh",
     "lint": "eslint --debug",
     "start": "next start",
     "test": "jest",
